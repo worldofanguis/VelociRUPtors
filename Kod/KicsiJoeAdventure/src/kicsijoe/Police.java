@@ -10,6 +10,7 @@ public class Police extends Car {
 
 	public void Arrest(){
 		System.out.println("Police - Arrest");
+		Main.game.GameOver(false);
 	}
 
 	public void Interaction(StopSign sign){
@@ -35,6 +36,17 @@ public class Police extends Car {
 	@Override
 	public boolean Update(){
 		System.out.println("Police - Update");
+		if(!policeModeActivated && Main.game.isBankRobbed())
+			policeModeActivated = true;
+
+		if(policeModeActivated){
+			Road nextRoad = null;
+			Car nextCar;
+			if((nextCar = nextRoad.hasCar()) != null){
+				if(nextCar.canBeArrested())
+					Arrest();
+			}
+		}
 		return super.Update();
 	}
 

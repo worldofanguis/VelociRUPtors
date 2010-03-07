@@ -21,10 +21,12 @@ public class Robber extends Car {
 
 	public void Interaction(Bank bank){
 		System.out.println("Robber - Interaction - Bank");
+		bank.robBank();
 	}
 
 	public void Interaction(Hideout hideout){
 		System.out.println("Robber - Interaction - Hideout");
+		hideout.arrivedToHideout();
 	}
 
 	public void Interaction(Lamp lamp){
@@ -34,6 +36,12 @@ public class Robber extends Car {
 	@Override
 	public boolean Update(){
 		System.out.println("Robber - Update");
+		
+		// Building interaction //
+		Building building;
+		if((building = roadUnderMe.hasBuilding()) != null)
+			building.whatBuilding(this);
+
 		return true;
 	}
 }

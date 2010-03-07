@@ -30,6 +30,12 @@ public abstract class Car {
 
 	public boolean Update(){
 		System.out.println("Car - Update");
+
+		// ExitCar //
+		if(roadUnderMe.getNextRoads() == null){
+			roadUnderMe.removeCar();
+			return false;
+		}
 		return true;
 	}
 
