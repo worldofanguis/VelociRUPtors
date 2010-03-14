@@ -1,15 +1,15 @@
 package kicsijoe;
 
-public class ExitSign implements TrafficController {
+public class ExitSign extends ClassID implements TrafficController {
 
 	public ExitSign(){
 
 	}
 
 	public void whatSign(Car car){
-		Output.methodStarts("ExitSign - whatSign");
+		Output.methodStarts(ID, "whatSign("+car.toString()+")");
 		car.Interaction(this);
-		Output.methodEnds("ExitSign - whatSign");
+		Output.methodEnds(ID, "whatSign("+car.toString()+")");
 	}
 
 }

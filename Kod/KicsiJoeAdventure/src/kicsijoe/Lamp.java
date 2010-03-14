@@ -1,6 +1,6 @@
 package kicsijoe;
 
-public class Lamp implements TrafficController {
+public class Lamp extends ClassID implements TrafficController {
 
 	private boolean state[] = new boolean[4];
 
@@ -8,22 +8,37 @@ public class Lamp implements TrafficController {
 
 	}
 
-	public boolean isGreen(Directions Diretion){
-		Output.methodStarts("Lamp - isGreen");
-		Output.methodEnds("Lamp - isGreen");
-		return false;
+	public boolean isGreen(Directions Direction){
+            String p = new String();
+            switch(Direction){
+                case LEFT: p = "LEFT";
+                case DOWN: p = "DOWN";
+                case RIGHT: p = "RIGHT";
+                case UP: p = "UP";
+            }
+		Output.methodStarts(ID,"isGreen(" + p + ")");
+
+                //...valamivel visszatér
+                boolean ret = false;
+                String p2 = (ret) ? new String("true") : new String("false");
+
+		Output.methodEnds(ID,"isGreen(" + p + ")",p2);
+		return ret;
 	}
 
 	public boolean Update(){
-		Output.methodStarts("Lamp - Update");
-		Output.methodEnds("Lamp - Update");
-		return false;
+		Output.methodStarts(ID,"Update()");
+                boolean ret = false;
+                String p = (ret) ? new String("true") : new String("false");
+
+		Output.methodEnds(ID,"Update()",p);
+		return ret;
 	}
 
 	public void whatSign(Car car){
-		Output.methodStarts("Lamp - whatSign");
+		Output.methodStarts(ID, "whatSign("+car.toString()+")");
 		car.Interaction(this);
-		Output.methodEnds("Lamp - whatSign");
+		Output.methodEnds(ID, "whatSign("+car.toString()+")");
 	}
 
 }

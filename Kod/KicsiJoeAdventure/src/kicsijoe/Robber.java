@@ -8,48 +8,51 @@ public class Robber extends Car {
 
 	@Override
 	public boolean canBeArrested(){
+                Output.methodStarts(ID, "canBeArrested()");
+                Output.methodEnds(ID,"canBeArrested()","true");
 		return true;
 	}
 
 	public void Interaction(StopSign sign){
-		Output.methodStarts("Robber - Interaction - StopSign");
+		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
 
-		Output.methodEnds("Robber - Interaction - StopSign");
+		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 
 	public void Interaction(ExitSign sign){
-		Output.methodStarts("Robber - Interaction - ExitSign");
+		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
 
-		Output.methodEnds("Robber - Interaction - ExitSign");
+		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 
 	public void Interaction(Bank bank){
-		Output.methodStarts("Robber - Interaction - Bank");
+		Output.methodStarts(ID,"Interaction("+bank.toString()+")");
 		bank.robBank();
-		Output.methodEnds("Robber - Interaction - Bank");
+		Output.methodEnds(ID,"Interaction("+bank.toString()+")");
 	}
 
 	public void Interaction(Hideout hideout){
-		Output.methodStarts("Robber - Interaction - Hideout");
+		Output.methodStarts(ID,"Interaction("+hideout.toString()+")");
 		hideout.arrivedToHideout();
-		Output.methodEnds("Robber - Interaction - Hideout");
+		Output.methodEnds(ID,"Interaction("+hideout.toString()+")");
 	}
 
 	public void Interaction(Lamp lamp){
-		Output.methodStarts("Robber - Interaction - Lamp");
+		Output.methodStarts(ID,"Interaction("+lamp.toString()+")");
 		
-		Output.methodEnds("Robber - Interaction - Lamp");
+		Output.methodEnds(ID,"Interaction("+lamp.toString()+")");
 	}
 
 	@Override
 	public boolean Update(){
-		Output.methodStarts("Robber - Update");
+		Output.methodStarts(ID,"Update()");
 		
 		// Building interaction //
 		Building building;
 		if((building = roadUnderMe.hasBuilding()) != null)
 			building.whatBuilding(this);
 
-		return true;
+		Output.methodEnds(ID,"Update()","true");
+                return true;
 	}
 }

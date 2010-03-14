@@ -1,56 +1,77 @@
 package kicsijoe;
 
 /**
- * Class Output
- * It handles the output on the terminal.
+ * Class Output:
+ * A terminálon történő megjelenítést kezelő osztály.
  */
-class Output{
+public class Output{
 
-	// Number of tabs.
+	// Tabulálások (aktuális) száma.
 	public static int tabs = 0;
-	// Enables or disables the output depending on its value.
+	// Engedélyezi vagy letiltja az osztály működését.
 	private static boolean enabled = true;
 
 /*
- * Called whenever a method starts and prints out it's event.
+ * Egy metódus kezdetekor hívódik meg és kiírja a nevét (és paramétereit, ha vannak).
  *
- * @param name Name of the method.
+ * @param id Az objektum neve.
+ * @param name A metódus neve és paraméterei.
  */
-	public static void methodStarts(String name){
+	public static void methodStarts(String id, String name){
 
 	tabs++;
 	if (enabled){
 		for (int i=0; i<tabs; i++)
 			System.out.print("   ");
-		System.out.println("-> " + name);
+		System.out.println("--> " + id + "."+ name);
 	}
 
 	}	
 
 /*
- * Called whenever a method ends and prints out it's event.
+ * Egy metódus befejezésekor hívódik meg (amennyiben nincs
+ * visszatérési értéke), kiírja a nevét.
  *
- * @param name Name of the method.
+ * @param id Az objektum neve.
+ * @param name A metódus neve és paraméterei.
  */
-	public static void methodEnds(String name){
+	public static void methodEnds(String id, String name){
 	if (enabled){
 		for (int i=0; i<tabs; i++)
 			System.out.print("   ");
-		System.out.println("<- " + name);
+		System.out.println("<-- " + id + "." + name);
+	}
+	tabs--;
+
+	}
+
+ /*
+  * Egy metódus befejezésekor hívódik meg, kiírja a nevét és
+  * visszatérési értékét.
+  *
+  * @param id Az objektum neve.
+  * @param name A metódus neve és paraméterei.
+  * @param ret A visszatérési érték.
+ */
+	public static void methodEnds(String id, String name, String ret){
+	if (enabled){
+		for (int i=0; i<tabs; i++)
+			System.out.print("   ");
+		System.out.println("<-- " + name + " : " + ret);
 	}
 	tabs--;
 
 	}
 
 /*
- * Output is stopped until its resumed again.
+ * Az osztály működésének letiltása.
  */
 	public static void ignore(){
 		enabled = false;
 	}
 
 /*
- * Output is resumed.
+ * Az osztály működésének engedélyezése.
  */
 	public static void resume(){
 		enabled = true;

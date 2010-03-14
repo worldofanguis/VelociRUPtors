@@ -1,21 +1,21 @@
 package kicsijoe;
 
-public class Bank implements Building {
+public class Bank extends ClassID implements Building {
 
 	public Bank(){
 
 	}
 
 	public void whatBuilding(Car car){
-		Output.methodStarts("Bank - whatBuilding");
+		Output.methodStarts(ID,"whatBuilding(" + car.toString() + ")");
 		car.Interaction(this);
-		Output.methodEnds("Bank - whatBuilding");
+		Output.methodEnds(ID,"whatBuilding(" + car.toString() + ")");
 	}
 
 	public void robBank(){
-		Output.methodStarts("Bank - robBank");
+		Output.methodStarts(ID,"robBank()");
 		Main.game.bankRobbed();
-		Output.methodEnds("Bank - robBank");
+		Output.methodEnds(ID,"robBank()");
 	}
 
 }

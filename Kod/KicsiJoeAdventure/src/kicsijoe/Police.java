@@ -9,44 +9,44 @@ public class Police extends Car {
 	}
 
 	public void Arrest(){
-		Output.methodStarts("Police - Arrest");
+		Output.methodStarts(ID,"Arrest()");
 		Main.game.GameOver(false);
-		Output.methodEnds("Police - Arrest");
+		Output.methodEnds(ID,"Arrest()");
 	}
 
 	public void Interaction(StopSign sign){
-		Output.methodStarts("Police - Interaction - StopSign");
+		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
 
-		Output.methodEnds("Police - Interaction - StopSign");
+		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 
 	public void Interaction(ExitSign sign){
-		Output.methodStarts("Police - Interaction - ExitSign");
+		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
 
-		Output.methodEnds("Police - Interaction - ExitSign");
+		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 
 	public void Interaction(Bank bank){
-		Output.methodStarts("Police - Interaction - Bank");
+		Output.methodStarts(ID,"Interaction("+bank.toString()+")");
 
-		Output.methodEnds("Police - Interaction - Bank");
+		Output.methodEnds(ID,"Interaction("+bank.toString()+")");
 	}
 
 	public void Interaction(Hideout hideout){
-		Output.methodStarts("Police - Interaction - Hideout");
+		Output.methodStarts(ID,"Interaction("+hideout.toString()+")");
 
-		Output.methodEnds("Police - Interaction - Hideout");
+		Output.methodEnds(ID,"Interaction("+hideout.toString()+")");
 	}
 
 	public void Interaction(Lamp lamp){
-		Output.methodStarts("Police - Interaction - Lamp");
+		Output.methodStarts(ID,"Interaction("+lamp.toString()+")");
 
-		Output.methodEnds("Police - Interaction - Lamp");
+		Output.methodEnds(ID,"Interaction("+lamp.toString()+")");
 	}
 
 	@Override
 	public boolean Update(){
-		Output.methodStarts("Police - Update");
+		Output.methodStarts(ID,"Update()");
 		if(!policeModeActivated && Main.game.isBankRobbed())
 			policeModeActivated = true;
 
@@ -58,7 +58,8 @@ public class Police extends Car {
 					Arrest();
 			}
 		}
-		Output.methodEnds("Police - Update");
+                String p = (super.Update()) ? new String("true") : new String("false");
+		Output.methodEnds(ID,"Update()",p);
 		return super.Update();
 	}
 

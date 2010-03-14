@@ -1,6 +1,6 @@
 package kicsijoe;
 
-public class Road {
+public class Road extends ClassID {
 
 	private Building building;
 	private Car carOnMe;
@@ -15,39 +15,41 @@ public class Road {
 	}
 
 	public AvailableRoads getNextRoads(){
-		Output.methodStarts("Road - getNextRoads");
-		Output.methodEnds("Road - getNextRoads");
-		return new AvailableRoads(next);
+		Output.methodStarts(ID,"getNextRoads()");
+                AvailableRoads ar = new AvailableRoads(next);
+                ar.setID("ar");
+		Output.methodEnds(ID,"getNextRoads()",ar.toString());
+		return ar;
 	}
 
 	public Car hasCar(){
-		Output.methodStarts("Road - hasCar");
-		Output.methodEnds("Road - hasCar");
+		Output.methodStarts(ID,"hasCar()");
+		Output.methodEnds(ID,"hasCar()",carOnMe.toString());
 		return carOnMe;
 	}
 
 	public TrafficController hasTrafficController(){
-		Output.methodStarts("Road - hasTrafficController");
-		Output.methodEnds("Road - hasTrafficController");
+		Output.methodStarts(ID,"hasTrafficController()");
+		Output.methodEnds(ID,"hasTrafficController()",trafficController.toString());
 		return trafficController;
 	}
 
 	public Building hasBuilding(){
-		Output.methodStarts("Road - hasBuilding");
-		Output.methodEnds("Road - hasBuilding");
+		Output.methodStarts(ID,"hasBuilding()");
+		Output.methodEnds(ID,"hasBuilding()", building.toString());
 		return building;
 	}
 
 	public void setCar(Car car){
-		Output.methodStarts("Road - setCar");
+		Output.methodStarts(ID,"setCar(" + car.toString() + ")");
 		carOnMe = car;
-		Output.methodEnds("Road - setCar");
+		Output.methodEnds(ID,"setCar(" + car.toString() + ")");
 	}
 
 	public void removeCar(){
-		Output.methodStarts("Road - removeCar");
+		Output.methodStarts(ID,"removeCar()");
 		carOnMe = null;
-		Output.methodEnds("Road - removeCar");
+		Output.methodEnds(ID,"removeCar()");
 	}
 
 }

@@ -1,6 +1,6 @@
 package kicsijoe;
 
-public abstract class Car {
+public abstract class Car extends ClassID {
 
 	protected Directions plannedDirection;
 	protected Road roadUnderMe;
@@ -12,39 +12,41 @@ public abstract class Car {
 	}
 
 	public boolean canBeArrested(){
+                Output.methodStarts(ID, "canBeArrested()");
+                Output.methodEnds(ID,"canBeArrested()","false");
 		return false;
 	}
 
 	public int getSpeed(){
-		Output.methodStarts("Car - getSpeed");
+		Output.methodStarts(ID,"getSpeed()");
 
 
-		Output.methodEnds(String.format("Car - getSpeed - returns tickCount:%d", tickCount));
+		Output.methodEnds(ID,"getSpeed()","tickCount");
 		return tickCount;
 	}
 
 	public void Move(){
-		Output.methodStarts("Car - Move");
+		Output.methodStarts(ID,"Move()");
 
-		Output.methodEnds("Car - Move");
+		Output.methodEnds(ID,"Move()");
 	}
 
 	public void MoveTo(Road road){
-		Output.methodStarts("Car - MoveTo");
+		Output.methodStarts(toString(),"MoveTo()");
 
-		Output.methodEnds("Car - MoveTo");
+		Output.methodEnds(toString(),"MoveTo()");
 	}
 
 	public boolean Update(){
-		Output.methodStarts("Car - Update");
+		Output.methodStarts(toString(),"Update()");
 
 		// ExitCar //
 		if(roadUnderMe.getNextRoads() == null){
 			roadUnderMe.removeCar();
-			Output.methodEnds("Car - Update");
+			Output.methodEnds(toString(),"Move()","false");
 			return false;
 		}
-		Output.methodEnds("Car - Update");
+		Output.methodEnds(toString(),"Move()","true");
 		return true;
 	}
 

@@ -7,33 +7,33 @@ public class Civil extends Car {
 	}
 
 	public void Interaction(StopSign sign){
-		Output.methodStarts("Civil - Interaction - StopSign");
+		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
 
-		Output.methodEnds("Civil - Interaction - StopSign");
+		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 
 	public void Interaction(ExitSign sign){
-		Output.methodStarts("Civil - Interaction - ExitSign");
+		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
 
-		Output.methodEnds("Civil - Interaction - ExitSign");
+		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 
 	public void Interaction(Bank bank){
-		Output.methodStarts("Civil - Interaction - Bank");
+		Output.methodStarts(ID,"Interaction("+bank.toString()+")");
 
-		Output.methodEnds("Civil - Interaction - Bank");
+		Output.methodEnds(ID,"Interaction("+bank.toString()+")");
 	}
 
 	public void Interaction(Hideout hideout){
-		Output.methodStarts("Civil - Interaction - Hideout");
+		Output.methodStarts(ID,"Interaction("+hideout.toString()+")");
 
-		Output.methodEnds("Civil - Interaction - Hideout");
+		Output.methodEnds(ID,"Interaction("+hideout.toString()+")");
 	}
 
 	public void Interaction(Lamp lamp){
-		Output.methodStarts("Civil - Interaction - Lamp");
+		Output.methodStarts(ID,"Interaction("+lamp.toString()+")");
 		
-		Output.methodEnds("Civil - Interaction - Lamp");
+		Output.methodEnds(ID,"Interaction("+lamp.toString()+")");
 	}
 
 }
