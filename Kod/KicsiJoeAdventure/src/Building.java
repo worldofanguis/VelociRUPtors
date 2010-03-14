@@ -1,4 +1,4 @@
-package kicsijoe;
+
 
 public interface Building {
 
