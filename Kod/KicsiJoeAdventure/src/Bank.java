@@ -1,4 +1,4 @@
-package kicsijoe;
+
 
 public class Bank extends ClassID implements Building {
 

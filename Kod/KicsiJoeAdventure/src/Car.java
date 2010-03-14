@@ -1,4 +1,4 @@
-package kicsijoe;
+
 
 public abstract class Car extends ClassID {
 

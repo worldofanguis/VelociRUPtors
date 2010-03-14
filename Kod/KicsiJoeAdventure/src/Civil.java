@@ -1,4 +1,4 @@
-package kicsijoe;
+
 
 public class Civil extends Car {
 

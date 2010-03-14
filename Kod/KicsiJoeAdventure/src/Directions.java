@@ -1,4 +1,4 @@
-package kicsijoe;
+
 
 public enum Directions {
 	LEFT,

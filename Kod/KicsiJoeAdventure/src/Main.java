@@ -1,5 +1,3 @@
-package kicsijoe;
-
 
 public class Main {
 	public static Game game;

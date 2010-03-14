@@ -1,4 +1,4 @@
-package kicsijoe;
+
 
 public class Lamp extends ClassID implements TrafficController {
 

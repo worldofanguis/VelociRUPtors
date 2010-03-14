@@ -1,4 +1,4 @@
-package kicsijoe;
+
 
 public class Hideout extends ClassID implements Building {
 

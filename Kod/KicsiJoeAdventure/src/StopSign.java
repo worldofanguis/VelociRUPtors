@@ -1,8 +1,8 @@
-package kicsijoe;
 
-public class ExitSign extends ClassID implements TrafficController {
 
-	public ExitSign(){
+public class StopSign extends ClassID implements TrafficController {
+
+	public StopSign(){
 
 	}
 
