@@ -7,7 +7,9 @@ public class ExitSign implements TrafficController {
 	}
 
 	public void whatSign(Car car){
-		System.out.println("ExitSign - whatSign");
+		Output.methodStarts("ExitSign - whatSign");
+		car.Interaction(this);
+		Output.methodEnds("ExitSign - whatSign");
 	}
 
 }

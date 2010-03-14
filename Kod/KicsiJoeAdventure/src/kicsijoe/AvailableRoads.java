@@ -5,6 +5,7 @@ public class AvailableRoads {
 	public Road roads[];
 
 	public AvailableRoads(Road[] road){
+		Output.methodStarts("AvailableRoads constructor");
 		roads = new Road[4];
 
 		roads[0] = road[0];
@@ -12,6 +13,6 @@ public class AvailableRoads {
 		roads[2] = road[2];
 		roads[3] = road[3];
 
-		System.out.println("AvailableRoads created");
+		Output.methodEnds("AvailableRoads constructor");
 	}
 }

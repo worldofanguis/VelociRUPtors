@@ -16,26 +16,35 @@ public abstract class Car {
 	}
 
 	public int getSpeed(){
-		System.out.println("Car - getSpeed");
+		Output.methodStarts("Car - getSpeed");
+
+
+		Output.methodEnds(String.format("Car - getSpeed - returns tickCount:%d", tickCount));
 		return tickCount;
 	}
 
 	public void Move(){
-		System.out.println("Car - Move");
+		Output.methodStarts("Car - Move");
+
+		Output.methodEnds("Car - Move");
 	}
 
 	public void MoveTo(Road road){
-		System.out.println("Car - MoveTo");
+		Output.methodStarts("Car - MoveTo");
+
+		Output.methodEnds("Car - MoveTo");
 	}
 
 	public boolean Update(){
-		System.out.println("Car - Update");
+		Output.methodStarts("Car - Update");
 
 		// ExitCar //
 		if(roadUnderMe.getNextRoads() == null){
 			roadUnderMe.removeCar();
+			Output.methodEnds("Car - Update");
 			return false;
 		}
+		Output.methodEnds("Car - Update");
 		return true;
 	}
 

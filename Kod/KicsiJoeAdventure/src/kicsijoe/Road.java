@@ -15,32 +15,39 @@ public class Road {
 	}
 
 	public AvailableRoads getNextRoads(){
+		Output.methodStarts("Road - getNextRoads");
+		Output.methodEnds("Road - getNextRoads");
 		return new AvailableRoads(next);
 	}
 
 	public Car hasCar(){
-		System.out.println("Road - hasCar");
+		Output.methodStarts("Road - hasCar");
+		Output.methodEnds("Road - hasCar");
 		return carOnMe;
 	}
 
 	public TrafficController hasTrafficController(){
-		System.out.println("Road - hasTrafficController");
+		Output.methodStarts("Road - hasTrafficController");
+		Output.methodEnds("Road - hasTrafficController");
 		return trafficController;
 	}
 
 	public Building hasBuilding(){
-		System.out.println("Road - hasBuilding");
+		Output.methodStarts("Road - hasBuilding");
+		Output.methodEnds("Road - hasBuilding");
 		return building;
 	}
 
 	public void setCar(Car car){
-		System.out.println("Road - setCar");
+		Output.methodStarts("Road - setCar");
 		carOnMe = car;
+		Output.methodEnds("Road - setCar");
 	}
 
 	public void removeCar(){
-		System.out.println("Road - removeCar");
+		Output.methodStarts("Road - removeCar");
 		carOnMe = null;
+		Output.methodEnds("Road - removeCar");
 	}
 
 }

@@ -7,7 +7,9 @@ public class StopSign implements TrafficController {
 	}
 
 	public void whatSign(Car car){
-		System.out.println("StopSign - whatSign");
+		Output.methodStarts("StopSign - whatSign");
+		car.Interaction(this);
+		Output.methodEnds("StopSign - whatSign");
 	}
 
 }

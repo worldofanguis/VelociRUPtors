@@ -7,13 +7,15 @@ public class Bank implements Building {
 	}
 
 	public void whatBuilding(Car car){
-		System.out.println("Bank - whatBuilding");
+		Output.methodStarts("Bank - whatBuilding");
 		car.Interaction(this);
+		Output.methodEnds("Bank - whatBuilding");
 	}
 
 	public void robBank(){
-		System.out.println("Bank - robBank");
+		Output.methodStarts("Bank - robBank");
 		Main.game.bankRobbed();
+		Output.methodEnds("Bank - robBank");
 	}
 
 }

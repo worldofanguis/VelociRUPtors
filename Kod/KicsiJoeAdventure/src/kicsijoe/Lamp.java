@@ -8,17 +8,22 @@ public class Lamp implements TrafficController {
 
 	}
 
-	public void isGreen(Directions Diretion){
-		System.out.println("Lamp - isGreen");
+	public boolean isGreen(Directions Diretion){
+		Output.methodStarts("Lamp - isGreen");
+		Output.methodEnds("Lamp - isGreen");
+		return false;
 	}
 
 	public boolean Update(){
-		System.out.println("Lamp - Update");
+		Output.methodStarts("Lamp - Update");
+		Output.methodEnds("Lamp - Update");
 		return false;
 	}
 
 	public void whatSign(Car car){
-		System.out.println("Lamp - whatSign");
+		Output.methodStarts("Lamp - whatSign");
+		car.Interaction(this);
+		Output.methodEnds("Lamp - whatSign");
 	}
 
 }

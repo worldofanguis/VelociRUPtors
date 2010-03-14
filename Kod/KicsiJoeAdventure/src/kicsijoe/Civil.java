@@ -7,23 +7,33 @@ public class Civil extends Car {
 	}
 
 	public void Interaction(StopSign sign){
-		System.out.println("Civil - Interaction - StopSign");
+		Output.methodStarts("Civil - Interaction - StopSign");
+
+		Output.methodEnds("Civil - Interaction - StopSign");
 	}
 
 	public void Interaction(ExitSign sign){
-		System.out.println("Civil - Interaction - ExitSign");
+		Output.methodStarts("Civil - Interaction - ExitSign");
+
+		Output.methodEnds("Civil - Interaction - ExitSign");
 	}
 
 	public void Interaction(Bank bank){
-		System.out.println("Civil - Interaction - Bank");
+		Output.methodStarts("Civil - Interaction - Bank");
+
+		Output.methodEnds("Civil - Interaction - Bank");
 	}
 
 	public void Interaction(Hideout hideout){
-		System.out.println("Civil - Interaction - Hideout");
+		Output.methodStarts("Civil - Interaction - Hideout");
+
+		Output.methodEnds("Civil - Interaction - Hideout");
 	}
 
 	public void Interaction(Lamp lamp){
-		System.out.println("Civil - Interaction - Lamp");
+		Output.methodStarts("Civil - Interaction - Lamp");
+		
+		Output.methodEnds("Civil - Interaction - Lamp");
 	}
 
 }

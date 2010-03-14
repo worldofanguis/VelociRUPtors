@@ -7,14 +7,16 @@ public class Hideout implements Building {
 	}
 
 	public void whatBuilding(Car car){
-		System.out.println("HideOut - whatBuilding");
+		Output.methodStarts("HideOut - whatBuilding");
 		car.Interaction(this);
+		Output.methodEnds("HideOut - whatBuilding");
 	}
 
 	public void arrivedToHideout(){
-		System.out.println("Hideout - arrivedToHideout");
+		Output.methodStarts("Hideout - arrivedToHideout");
 		if(Main.game.isBankRobbed())
 			Main.game.GameOver(true);
+		Output.methodEnds("Hideout - arrivedToHideout");
 	}
 
 }
