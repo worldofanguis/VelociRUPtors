@@ -320,38 +320,32 @@ public class Game extends ClassID {
 		Output.methodEnds(ID,"TestMap4 - Building interakcio");
 	}
 
-<<<<<<< HEAD
-	/*
-	 * Piroslámpa-Stoptábla interaction tesztelése
-	 */
-=======
         /**
          * Közlekedés / Stop és Piros tábla teszt
          */
->>>>>>> 0602007fd027c5e3f26cc8c253dec11de2690cd7
 	public void TestMap5(){
-//		Output.methodStarts("TestMap5");
 		Output.methodStarts(ID,"TestMap5 - Piros lámpa/Stoptábla interakció");
 		Output.ignore();
 		//Utak létrehozása
 		Road r1 = new Road();
-		r1.setID("startRoad");		
+		r1.setID("startRoad");
 		Road r2 = new Road();
-		r2.setID("roadWithLamp");
+		r2.setID("roadWithTC");
 		Road r3 = new Road();
 		r3.setID("thirdRoad");
 		//Utak összekapcsolása
 		r1.setRoad(Directions.UP,r2);
 		r2.setRoad(Directions.UP, r3);
 		//Rabló elhelyezése
-		Robber t = new Robber();
-		t.setID("robber");
+		Car t = new Civil();
+		t.setID("civil");
 		t.setRoadUnderCar(r1);
 		//TrafficController létrehozása
 		Lamp l = new Lamp();
-		l.setID("Lamp");		
+		l.setID("Lamp");
 		StopSign s = new StopSign();
 		s.setID("StopSign");
+		Output.resume();
 
 		//A felhasználó döntése szerinti TC lerakása
 		System.out.print("p = piros lámpa interaction ; s = stoptábla interaction: ");
@@ -364,27 +358,87 @@ public class Game extends ClassID {
 		if(line.equals("p")){
 			r2.setTrafficController(l);
 		} else if(line.equals("s")){
-			r2.setTrafficController(l);
-			
+			r2.setTrafficController(s);
+
 		}
 
-		//Végül kettőt lépni kell a rablóval
+		//Végül kettőt lépni kell a kocsival
+		t.Update();
+		t.Update();
+		t.Update();
+		t.Update();
 		t.Update();
 		t.Update();
 		Output.resume();
 
-		
-//
-//		Output.methodEnds("TestMap5");
+
+
+		Output.methodEnds(ID,"TestMap5 - Piros lámpa/Stoptábla interakció");
 	}
 
         /**
          * Közlekedés / Exit tábla teszt
          */
 	public void TestMap6(){
-//		Output.methodStarts("TestMap5");
-//
-//		Output.methodEnds("TestMap5");
+		Output.methodStarts(ID,"TestMap6 - Exit tábla interakció");
+		Output.ignore();
+		//Utak létrehozása
+		Road r1 = new Road();
+		r1.setID("startRoad");
+		Road r2 = new Road();
+		r2.setID("secondRoad");
+		Road r3 = new Road();
+		r3.setID("ExitRoad");
+		Road r4 = new Road();
+		r4.setID("FourthRoad");
+		//Utak összekapcsolása
+		r1.setRoad(Directions.UP,r2);
+		r2.setRoad(Directions.RIGHT, r3);
+		r2.setRoad(Directions.UP, r4);
+
+		//Kocsi referencia létrehozása
+		Car c;
+			
+		
+		System.out.print("c = civil interaction ; r = rabló interaction; p = rendőr interakció: ");
+		String line = null;
+		try {
+			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
+		} catch (IOException ex) {
+
+		}
+		if(line.equals("c")){
+			c = new Civil();
+			c.setID("civil");
+			c.setRoadUnderCar(r1);
+		} else if(line.equals("r")){
+			c = new Robber();
+			c.setID("robber");
+			c.setRoadUnderCar(r1);
+		}
+		 else if(line.equals("p")){
+			c = new Police();
+			c.setID("police");
+			c.setRoadUnderCar(r1);
+		}
+		else{return;}
+		
+		
+		//TrafficController létrehozása
+		ExitSign es = new ExitSign();
+		es.setID("ExitSign");
+		r3.setTrafficController(es);
+		Output.resume();
+
+		c.Update();
+		c.Update();
+		c.Update();
+		c.Update();
+		c.Update();
+		
+	    
+
+		Output.methodEnds(ID,"TestMap6 - Exit tábla interakció");
 	}
 
 	/*

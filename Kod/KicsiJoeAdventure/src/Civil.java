@@ -78,14 +78,12 @@ public class Civil extends Car {
 		    return; //A lámpa nincs ránk hatással, az interakciónak vége.
 		}
 		else{
-		    //Csak eggyel növeljük 
+		    //Csak eggyel növeljük
 		    tickCount++;
 		    Output.methodEnds(ID,"Interaction("+lamp.toString()+"):the lamp was Red.");
 		    return;
 		}
 
-
-		
 	}
 
 }

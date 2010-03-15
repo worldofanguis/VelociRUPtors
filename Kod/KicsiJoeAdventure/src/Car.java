@@ -29,6 +29,9 @@ public abstract class Car extends ClassID {
          * A léptetéshez szükséges visszaszámláló
          */
 	protected int tickCount;
+	/**
+         * Ebben tároljuk az elérhető utakat
+         */
 	protected AvailableRoads ar;
 
 	public Car(){
@@ -71,42 +74,18 @@ public abstract class Car extends ClassID {
          */
 	public void Move(){
 		Output.methodStarts(ID,"Move()");
-<<<<<<< HEAD
-=======
 
-		Output.methodEnds(ID,"Move()");
-	}
-
-        /**
-         * Az autót egy konkrét útra helyezi.
-         * @param road Az út, amelyikre áthelyezzük.
-         */
-	public void MoveTo(Road road){
-		Output.methodStarts(ID,"MoveTo("+road.toString()+")");
-		roadUnderMe.removeCar();
-		roadUnderMe = road;
-		road.setCar(this);
-		Output.methodEnds(ID,"MoveTo("+road.toString()+")");
-	}
-
-        /**
-         * A frissítő/léptető függvény
-         * @return A visszatérési érték true, ha az autó még a pályán van.
-         */
-	public boolean Update(){
-		Output.methodStarts(ID,"Update()");
-
->>>>>>> 0602007fd027c5e3f26cc8c253dec11de2690cd7
 		// Mozgatás //
-
 		// plannedDirection beállítása //
-		ar = roadUnderMe.getNextRoads();
+		
+		
 		if(moreThan1AR(ar)){	// több szabad irány van, választunk //
 			System.out.println("Merre akarsz menni? lehetosegek:");
 			if(ar.roads[0] != null) System.out.println("0 - balra");
 			if(ar.roads[1] != null) System.out.println("1 - fel");
 			if(ar.roads[2] != null) System.out.println("2 - jobbra");
 			if(ar.roads[3] != null) System.out.println("3 - le");
+			
 
 			String line = null;
 			try {
@@ -128,20 +107,30 @@ public abstract class Car extends ClassID {
 			}
 		}
 
+		
+
+
 		//Közlekedésirányító ellenőrzése a plannedDirection-ön//
 		//Ez meghívja a megfelelő Interaction fv-t//
 		//Ha egy előző interakció megállította a kocsit, akkor ne nézze meg ezt.
+		TrafficController tc;
 		if(tickCount == 0)
-		    ar.roads[plannedDirection].hasTrafficController().whatSign(this);
-		
+		    if((tc=ar.roads[plannedDirection].hasTrafficController()) != null)
+			tc.whatSign(this);
+
 
 		// Mozgás plannedDirection felé, ha nem kell várnunk //
 		if(tickCount == 0)
 		    MoveTo(ar.roads[plannedDirection]);
 		// Mozgatás - vége //
 		Output.methodEnds(ID,"Move()");
+
 	}
 
+        /**
+         * Az autót egy konkrét útra helyezi.
+         * @param road Az út, amelyikre áthelyezzük.
+         */
 	public void MoveTo(Road road){
 		Output.methodStarts(ID,"MoveTo("+road.toString()+")");
 		roadUnderMe.removeCar();
@@ -150,17 +139,29 @@ public abstract class Car extends ClassID {
 		Output.methodEnds(ID,"MoveTo("+road.toString()+")");
 	}
 
+        /**
+         * A frissítő/léptető függvény
+         * @return A visszatérési érték true, ha az autó még a pályán van.
+         */
 	public boolean Update(){
 		Output.methodStarts(ID,"Update()");
 
-		Move();
-
-				// ExitCar //
-		if(roadUnderMe.getNextRoads() == null){
-			roadUnderMe.removeCar();
-			Output.methodEnds(ID,"Update()","false");
-			return false;
+		if(tickCount > 0) tickCount--;
+		
+		if(tickCount == 0){
+		   ar = roadUnderMe.getNextRoads();
+		   
+		   //ExitCar
+		   if(DeadEnd(ar)){
+		       roadUnderMe.removeCar();
+		       Output.methodEnds(ID,"Update()","false");
+		       return false;
+		   }
+		   //Mozgatás, ha lehetséges
+		   Move(); 
 		}
+		
+		// Mozgatás - vége //
 		Output.methodEnds(ID,"Update()","true");
 		return true;
 	}
@@ -172,13 +173,22 @@ public abstract class Car extends ClassID {
          * @param ar Lehetséges útirányok
          * @return true, ha több lehetséges továbbhaladási irány is van.
          */
-	private boolean moreThan1AR(AvailableRoads ar){
+	protected boolean moreThan1AR(AvailableRoads ar){
 		int arC = 0;
 		for(int i=0;i<4;i++){
 			if(ar.roads[i] != null)
 				arC++;
 		}
 		return (arC > 1);
+	}
+	
+	protected boolean DeadEnd(AvailableRoads ar){
+		int arC = 0;
+		for(int i=0;i<4;i++){
+			if(ar.roads[i] != null)
+				arC++;
+		}
+		return (arC == 0);
 	}
 
 	public abstract void Interaction(StopSign sign);

@@ -66,8 +66,16 @@ public class Road extends ClassID {
          */
 	public TrafficController hasTrafficController(){
 		Output.methodStarts(ID,"hasTrafficController()");
-		Output.methodEnds(ID,"hasTrafficController()",trafficController.toString());
-		return trafficController;
+		if(trafficController != null){
+		    Output.methodEnds(ID,"hasTrafficController()", trafficController.toString());
+		    return trafficController;
+		}
+		else{
+		    Output.methodEnds(ID,"hasTrafficController() -no Traffic Controller found");
+		    return null;
+		}
+		
+		
 	}
 
 	/**
@@ -76,8 +84,15 @@ public class Road extends ClassID {
          */
         public Building hasBuilding(){
 		Output.methodStarts(ID,"hasBuilding()");
-		Output.methodEnds(ID,"hasBuilding()", buildingOnMe.toString());
-		return buildingOnMe;
+		if(buildingOnMe != null){
+		    Output.methodEnds(ID,"hasBuilding()", buildingOnMe.toString());
+		    return buildingOnMe;
+		}		    
+		else{
+		    Output.methodEnds(ID,"hasBuilding() - no building found");
+		    return null;
+		}
+		
 	}
 
         /**
@@ -101,18 +116,15 @@ public class Road extends ClassID {
 		Output.methodEnds(ID,"setCar(" + car.toString() + ")");
 	}
 
-<<<<<<< HEAD
 	public void setTrafficController(TrafficController tc){
 		Output.methodStarts(ID,"setTrafficController(" + tc.toString() + ")");
 		trafficController = tc;
-		Output.methodEnds(ID,"setTrafficController(" + building.toString() + ")");
+		Output.methodEnds(ID,"setTrafficController(" + tc.toString() + ")");
 	}
 
-=======
         /**
          * Eltávolítja az útról az aktuálisan ott lévő autót.
          */
->>>>>>> 0602007fd027c5e3f26cc8c253dec11de2690cd7
 	public void removeCar(){
 		Output.methodStarts(ID,"removeCar()");
 		carOnMe = null;
