@@ -3,6 +3,10 @@
  * A játékos járművét képviselő osztály.
  */
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class Robber extends Car {
 
 	/**
@@ -75,20 +79,28 @@ public class Robber extends Car {
 		Output.methodEnds(ID,"Interaction("+lamp.toString()+")");
 	}
 
-        /**
-         * Frissítő, léptető, ellenőrző függvény.
-         * @return A visszatérési értéke true, mivel nem "halhat meg" (nem hagyja
-         * el a pályát).
-         */
 	@Override
 	public boolean Update(){
-		Output.methodStarts(ID,"Update()");
-		
-		// Building interaction //
+	    Output.methodStarts(ID,"Update()");
+
+	    if(tickCount > 0) tickCount--;
+
+
+		// Mozgás plannedDirection felé //
+		//Épület ellenőrzése - ez a legfontosabb, az ütközés ellenőrzés jöhet ez után
 		Building building;
 		if((building = roadUnderMe.hasBuilding()) != null)
 			building.whatBuilding(this);
 
+		if(tickCount == 0)
+		    Move();
+
+		// ExitCar //
+		if(roadUnderMe.getNextRoads() == null){
+			roadUnderMe.removeCar();
+			Output.methodEnds(ID,"Update()","false");
+			return false;
+		}
 		Output.methodEnds(ID,"Update()","true");
 		return true;
 	}

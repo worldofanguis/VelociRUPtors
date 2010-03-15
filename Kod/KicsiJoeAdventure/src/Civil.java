@@ -21,6 +21,9 @@ public class Civil extends Car {
 	public void Interaction(StopSign sign){
 		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
 
+		tickCount+=5;
+		MoveTo(ar.roads[plannedDirection]);
+
 		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 
@@ -60,8 +63,27 @@ public class Civil extends Car {
          */
 	public void Interaction(Lamp lamp){
 		Output.methodStarts(ID,"Interaction("+lamp.toString()+")");
-		
-		Output.methodEnds(ID,"Interaction("+lamp.toString()+")");
+
+		//Merről érkezünk a lámpához?//
+		int fromDirection=0;
+		switch (plannedDirection){
+		    case 0: fromDirection = 2; //ha balra megyünk, jobbról jövünk
+		    case 1: fromDirection = 3;
+		    case 2: fromDirection = 0;
+		    case 3: fromDirection = 1;
+		}
+		//Leelenőriozzük, hogy zöld-e//
+		if(lamp.isGreen(fromDirection)){
+		    Output.methodEnds(ID,"Interaction("+lamp.toString()+"):the lamp was Green.");
+		    return; //A lámpa nincs ránk hatással, az interakciónak vége.
+		}
+		else{
+		    //Csak eggyel növeljük
+		    tickCount++;
+		    Output.methodEnds(ID,"Interaction("+lamp.toString()+"):the lamp was Red.");
+		    return;
+		}
+
 	}
 
 }
