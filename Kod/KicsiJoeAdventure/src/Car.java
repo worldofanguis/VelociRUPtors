@@ -58,7 +58,7 @@ public abstract class Car extends ClassID {
 			// plannedDirection beállítása //
 		AvailableRoads ar = roadUnderMe.getNextRoads();
 		if(moreThan1AR(ar)){	// több szabad irány van, választunk //
-			System.out.println("Merre akarsz menni? lehetőségek:");
+			System.out.println("Merre akarsz menni? lehetosegek:");
 			if(ar.roads[0] != null) System.out.println("0 - balra");
 			if(ar.roads[1] != null) System.out.println("1 - fel");
 			if(ar.roads[2] != null) System.out.println("2 - jobbra");
