@@ -6,7 +6,7 @@ public class AvailableRoads extends ClassID {
 
 	public AvailableRoads(Road[] road){
 		setID("AvailableRoads");
-		Output.methodStarts(ID,"AvailableRoads(" + road.toString() + ")");
+		Output.methodStarts(ID,"AvailableRoads(r0:"+road[0]+"r1:"+road[1]+"r2:"+road[2]+"r3:"+road[3]+")");
 		roads = new Road[4];
 
 		roads[0] = road[0];
@@ -14,6 +14,6 @@ public class AvailableRoads extends ClassID {
 		roads[2] = road[2];
 		roads[3] = road[3];
 
-		Output.methodEnds(ID,"AvailableRoads(" + road.toString() + ")");
+		Output.methodEnds(ID,"AvailableRoads(r0:"+road[0]+"r1:"+road[1]+"r2:"+road[2]+"r3:"+road[3]+")");
 	}
 }
