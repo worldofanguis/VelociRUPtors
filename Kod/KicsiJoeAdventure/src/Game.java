@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Class Game:
  * Az egész játék vezérléséért felelős osztály.
  * Szkeletonként itt találhatóak a tesztpályák is.
@@ -278,6 +278,7 @@ public class Game extends ClassID {
 	       temp.Update();
 	       temp.Update();
 	   }
+	//A listából való törlés még nem megy//
 
 
 
