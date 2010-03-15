@@ -85,9 +85,9 @@ public class Road extends ClassID {
          * @param building Az út mellé helyezendő épület.
          */
 	public void setBuilding(Building building){
-		Output.methodStarts(ID,"setCar(" + building.toString() + ")");
+		Output.methodStarts(ID,"setBuilding(" + building.toString() + ")");
 		buildingOnMe = building;
-		Output.methodEnds(ID,"setCar(" + building.toString() + ")");	
+		Output.methodEnds(ID,"setBuilding(" + building.toString() + ")");
 	}
 
         /**
@@ -101,9 +101,18 @@ public class Road extends ClassID {
 		Output.methodEnds(ID,"setCar(" + car.toString() + ")");
 	}
 
+<<<<<<< HEAD
+	public void setTrafficController(TrafficController tc){
+		Output.methodStarts(ID,"setTrafficController(" + tc.toString() + ")");
+		trafficController = tc;
+		Output.methodEnds(ID,"setTrafficController(" + building.toString() + ")");
+	}
+
+=======
         /**
          * Eltávolítja az útról az aktuálisan ott lévő autót.
          */
+>>>>>>> 0602007fd027c5e3f26cc8c253dec11de2690cd7
 	public void removeCar(){
 		Output.methodStarts(ID,"removeCar()");
 		carOnMe = null;

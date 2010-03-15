@@ -35,7 +35,11 @@ public class Police extends Car {
          */
 	public void Interaction(StopSign sign){
 		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
-
+		
+		if(policeModeActivated){
+		    tickCount+=5;
+		    MoveTo(ar.roads[plannedDirection]);
+		}
 		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 

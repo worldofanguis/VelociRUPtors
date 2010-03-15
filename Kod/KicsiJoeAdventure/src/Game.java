@@ -320,11 +320,60 @@ public class Game extends ClassID {
 		Output.methodEnds(ID,"TestMap4 - Building interakcio");
 	}
 
+<<<<<<< HEAD
+	/*
+	 * Piroslámpa-Stoptábla interaction tesztelése
+	 */
+=======
         /**
          * Közlekedés / Stop és Piros tábla teszt
          */
+>>>>>>> 0602007fd027c5e3f26cc8c253dec11de2690cd7
 	public void TestMap5(){
 //		Output.methodStarts("TestMap5");
+		Output.methodStarts(ID,"TestMap5 - Piros lámpa/Stoptábla interakció");
+		Output.ignore();
+		//Utak létrehozása
+		Road r1 = new Road();
+		r1.setID("startRoad");		
+		Road r2 = new Road();
+		r2.setID("roadWithLamp");
+		Road r3 = new Road();
+		r3.setID("thirdRoad");
+		//Utak összekapcsolása
+		r1.setRoad(Directions.UP,r2);
+		r2.setRoad(Directions.UP, r3);
+		//Rabló elhelyezése
+		Robber t = new Robber();
+		t.setID("robber");
+		t.setRoadUnderCar(r1);
+		//TrafficController létrehozása
+		Lamp l = new Lamp();
+		l.setID("Lamp");		
+		StopSign s = new StopSign();
+		s.setID("StopSign");
+
+		//A felhasználó döntése szerinti TC lerakása
+		System.out.print("p = piros lámpa interaction ; s = stoptábla interaction: ");
+		String line = null;
+		try {
+			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
+		} catch (IOException ex) {
+
+		}
+		if(line.equals("p")){
+			r2.setTrafficController(l);
+		} else if(line.equals("s")){
+			r2.setTrafficController(l);
+			
+		}
+
+		//Végül kettőt lépni kell a rablóval
+		t.Update();
+		t.Update();
+		Output.resume();
+
+		
 //
 //		Output.methodEnds("TestMap5");
 	}
