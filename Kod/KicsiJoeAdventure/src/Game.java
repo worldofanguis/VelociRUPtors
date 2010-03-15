@@ -7,7 +7,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
+import java.util.*;
 
 public class Game extends ClassID {
 
@@ -50,6 +50,8 @@ public class Game extends ClassID {
          * Konstruktor, alaphelyzet (nem rabolták ki a bankot)
          */
 	public Game(){
+		cars = new LinkedList<Car>();
+		lamps = new LinkedList<Lamp>();
 		bankIsRobbed = false;
                 points = 0;
 	}
@@ -154,6 +156,19 @@ public class Game extends ClassID {
          */
 	public void populateRoad(Road road){
 		Output.methodStarts(ID,"populateRoad("+road.toString()+")");
+
+		//létrehozzuk az autót
+		Car c = new Civil();
+		c.setID("populatedCivil");
+
+		//Betesszük a listába
+		cars.add(c);
+
+		//Autó rátétele a kocsira - 2 irányú asszociáció létrehozása
+		c.setRoadUnderCar(road);
+		road.setCar(c);
+
+
 		Output.methodEnds(ID,"populateRoad("+road.toString()+")");
 	}
 
@@ -237,7 +252,37 @@ public class Game extends ClassID {
 	public void TestMap2(){
 //		Output.methodStarts("TestMap2");
 //
+	    Output.methodStarts(ID,"TestMap2 - Civilgenerálás és eltüntetés");
+
+	    //pálya felépítése
+	    /*
+	     * r2
+	     * |
+	     * r1
+	    */
+	    Road r1 = new Road();
+	    r1.setID("GeneratorRoad");
+	    Road r2 = new Road();
+	    r2.setID("ExitRoad");
+
+	    //pályaelemek összekötése
+	    r1.setRoad(Directions.UP, r2);
+
+	    //civil gerenálása
+	    populateRoad(r1);
+
+	    //civil update
+	   Iterator<Car> i = cars.iterator();
+	   while(i.hasNext()){
+	       Car temp = i.next();
+	       temp.Update();
+	       temp.Update();
+	   }
+
+
+
 //		Output.methodEnds("TestMap2");
+	   Output.methodEnds(ID, "TestMap2 - Civilgenerálás és eltüntetés");
 	}
 
 	/*
