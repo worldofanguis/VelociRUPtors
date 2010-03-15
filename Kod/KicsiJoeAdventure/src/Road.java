@@ -97,6 +97,7 @@ public class Road extends ClassID {
 	public void setCar(Car car){
 		Output.methodStarts(ID,"setCar(" + car.toString() + ")");
 		carOnMe = car;
+                car.setRoadUnderCar(this);
 		Output.methodEnds(ID,"setCar(" + car.toString() + ")");
 	}
 

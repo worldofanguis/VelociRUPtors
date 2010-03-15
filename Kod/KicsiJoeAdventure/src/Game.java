@@ -42,11 +42,25 @@ public class Game extends ClassID {
 	private int maxCarsOnMap;
 
         /**
+         * A játékos pontszáma
+         */
+        private int points;
+
+        /**
          * Konstruktor, alaphelyzet (nem rabolták ki a bankot)
          */
 	public Game(){
 		bankIsRobbed = false;
+                points = 0;
 	}
+
+        /**
+         * Pontszám módosítása.
+         * @param add Az érték, amit hozzáadunk a pontszámhoz.
+         */
+        public void AddPoints(int add) {
+            points += add;
+        }
 
         /**
          * Akkor hívódik meg, ha bankrablás történt, ennek megfelelően
@@ -171,9 +185,50 @@ public class Game extends ClassID {
          * Ütközések tesztpálya
          */
 	public void TestMap1(){
-//		Output.methodStarts("TestMap1");
-//
-//		Output.methodEnds("TestMap1");
+            Output.methodStarts(ID,"Ütközések teszt");
+            /* Pálya felépítése:
+             * r3
+             * r2
+             * r1
+             *
+             * c1 autó r1-n, c2 autó r2-n
+             */
+            Output.ignore();
+            Road r3 = new Road();
+            r3.setID("r3");
+            Road r2 = new Road();
+            r2.setID("r2");
+            Road r1 = new Road();
+            r1.setID("r1");
+
+            r1.setRoad(Directions.UP,r2);
+            r2.setRoad(Directions.UP,r3);
+            Car c1 = new Civil();
+            Car c2 = new Civil();
+            System.out.println("c1 auto nekiutkozik c2-nek. Melyik esetet teszteled? a: c1, c2 = Civil;\t b: c1= Rendor, c2=Rablo;\t c: c1=Rablo, c2=Civil");
+            String line = null;
+		try {
+			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
+		} catch (IOException ex) {
+
+		}
+		if(line.equals("a")){
+                    c1 = new Civil();
+                    c2 = new Civil();
+		} else if(line.equals("b")){
+                    c1 = new Police();
+                    c2 = new Robber();
+		} else if(line.equals("c")){
+                    c1 = new Robber();
+                    c2 = new Civil();
+		}
+            c1.setID("c1");
+            c2.setID("c2");
+            r1.setCar(c1);
+            r2.setCar(c2);
+            Output.resume();
+
+            Output.methodEnds(ID,"Ütközések teszt");
 	}
 
         /**
