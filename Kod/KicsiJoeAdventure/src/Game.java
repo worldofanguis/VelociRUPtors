@@ -1,3 +1,9 @@
+/**
+ * Class Game:
+ * Az egész játék vezérléséért felelős osztály.
+ * Szkeletonként itt találhatóak a tesztpályák is.
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,37 +11,80 @@ import java.util.List;
 
 public class Game extends ClassID {
 
+        /**
+         * A pályán található autók referenciái.
+         */
 	private List<Car> cars;
+
+        /**
+         * A pályán található lámpák referenciái.
+         */
 	private List<Lamp> lamps;
 
-	private boolean bankIsRobbed;
+	/**
+         * Értéke true, ha már kirabolták a bankot, egyébként false.
+         */
+        private boolean bankIsRobbed;
+
+        /**
+         * A játékos autójának referenciája.
+         */
 	private Car me;
+
+        /**
+         * A pálya első útja, amelyből felépül (bejárható) az úthálózat.
+         */
 	private Road roadStart;
+
+        /**
+         * A pályán maximálisan tartózkodható autók száma.
+         */
 	private int maxCarsOnMap;
 
+        /**
+         * Konstruktor, alaphelyzet (nem rabolták ki a bankot)
+         */
 	public Game(){
 		bankIsRobbed = false;
 	}
 
+        /**
+         * Akkor hívódik meg, ha bankrablás történt, ennek megfelelően
+         * változik a játékállapot.
+         */
 	public void bankRobbed(){
 		Output.methodStarts(ID,"bankRobbed()");
 		bankIsRobbed = true;
 		Output.methodEnds(ID,"bankRobbed()");
 	}
 
+        /**
+         * A játék befejezése a paramétertől függően.
+         * @param Success Értéke true, ha a játékos nyert; false, ha a rendőr
+         * elkapta a játékost.
+         */
 	public void GameOver(boolean Success){
-        String p = (Success) ? new String("true") : new String("false");
-		Output.methodStarts(ID,"GameOver[Success](" + p +")");
+            String p = (Success) ? new String("true") : new String("false");
+            Output.methodStarts(ID,"GameOver[Success](" + p +")");
 
-		Output.methodEnds(ID,"GameOver[Success](" + p +")");
+            Output.methodEnds(ID,"GameOver[Success](" + p +")");
 	}
 
+        /**
+         * A játék kezdetkor a pálya elkészítése, az elemek elhelyezése.
+         */
 	public void Initialization(){
 		Output.methodStarts(ID,"Initialization()");
 		loadMapFromFile("map.txt");
 		Output.methodEnds(ID,"Initialization()");
 	}
 
+        /**
+         * A játékállapot lekérdezése.
+         * (Megj.: Szkeletonról lévén szó, ezt most a felhasználó adja meg)
+         * @return A játék aktuális állapota: true, ha már történt bankrablás;
+         * false, ha még nem rabolták ki a bankot.
+         */
 	public boolean isBankRobbed(){
 		Output.methodStarts(ID,"isBankRobbed()");
 
@@ -53,6 +102,13 @@ public class Game extends ClassID {
 		return bankIsRobbed;
 	}
 
+        /**
+         * A külső fájlban tárolt információk alapján a pálya felépítése.
+         * (Megj.: Szkeletonban ez még nincs implementálva, csak imitáljuk
+         * a működését)
+         * @param Filename Azon .txt fájl elérési útvonala, amely alapján
+         * felépítjük a pályát.
+         */
 	public void loadMapFromFile(String Filename){
 		Output.methodStarts(ID,"loadMapFromFile(" + Filename + ")");
 		
@@ -78,16 +134,27 @@ public class Game extends ClassID {
 		Output.methodEnds(ID,"loadMapFromFile(" + Filename + ")");
 	}
 
+        /**
+         * Az úthoz kapcsolódó elemek (autó, épület) elhelyezése rá - inicalizáláskor.
+         * @param road Az út amelyet módosítunk.
+         */
 	public void populateRoad(Road road){
 		Output.methodStarts(ID,"populateRoad("+road.toString()+")");
 		Output.methodEnds(ID,"populateRoad("+road.toString()+")");
 	}
 
+        /**
+         * Eltávolítja az aktuális autót az autók listájáról.
+         */
 	public void removeActualCar(){
 		Output.methodStarts(ID,"removeActualCar()");
 		Output.methodEnds(ID,"removeActualCar()");
 	}
 
+        /**
+         * A frissítő függvény, amely meghívja az összes autóra a frissítést,
+         * így léptetve a játékot.
+         */
 	public void Update(){
 		Output.methodStarts(ID,"Update()");
 
@@ -98,18 +165,29 @@ public class Game extends ClassID {
 	}
 
 
-		/* Test Maps */
+	/* Test Maps */
 
+        /**
+         * Ütközések tesztpálya
+         */
 	public void TestMap1(){
 //		Output.methodStarts("TestMap1");
 //
 //		Output.methodEnds("TestMap1");
 	}
+
+        /**
+         * Civilgenerálás és eltüntetés tesztpálya
+         */
 	public void TestMap2(){
 //		Output.methodStarts("TestMap2");
 //
 //		Output.methodEnds("TestMap2");
 	}
+
+        /**
+         * Mozgatás
+         */
 	public void TestMap3(){
 //		Output.methodStarts("TestMap3");
 //
@@ -153,11 +231,19 @@ public class Game extends ClassID {
 
 		Output.methodEnds(ID,"TestMap4 - Building interakcio");
 	}
+
+        /**
+         * Közlekedés / Stop és Piros tábla teszt
+         */
 	public void TestMap5(){
 //		Output.methodStarts("TestMap5");
 //
 //		Output.methodEnds("TestMap5");
 	}
+
+        /**
+         * Közlekedés / Exit tábla teszt
+         */
 	public void TestMap6(){
 //		Output.methodStarts("TestMap5");
 //

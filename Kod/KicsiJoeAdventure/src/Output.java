@@ -27,7 +27,7 @@ public class Output{
 	tabs++;
 	if (enabled){
 		for (int i=0; i<tabs; i++)
-			System.out.print("   ");
+			System.out.print("\t");
 		System.out.println("--> " + id + "."+ name);
 	}
 
@@ -43,7 +43,7 @@ public class Output{
 	public static void methodEnds(String id, String name){
 	if (enabled){
 		for (int i=0; i<tabs; i++)
-			System.out.print("   ");
+			System.out.print("\t");
 		System.out.println("<-- " + id + "." + name);
 	}
 	tabs--;
@@ -61,7 +61,7 @@ public class Output{
 	public static void methodEnds(String id, String name, String ret){
 	if (enabled){
 		for (int i=0; i<tabs; i++)
-			System.out.print("   ");
+			System.out.print("\t");
 		System.out.println("<-- " + id + "." + name + " : " + ret);
 	}
 	tabs--;

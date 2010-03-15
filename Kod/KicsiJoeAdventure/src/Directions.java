@@ -1,6 +1,8 @@
-
-
-class Directions {
+/**
+ * Class Directions:
+ * Irányok statikus tárolása és egységes kezelésére szolgáló osztály.
+ */
+final class Directions {
 	public static final int LEFT = 0;
 	public static final int UP = 1;
 	public static final int RIGHT = 2;
