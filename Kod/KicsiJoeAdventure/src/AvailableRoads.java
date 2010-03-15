@@ -1,18 +1,18 @@
 /**
  * Class AvailableRoads:
- * A lehetsÃ©ges ÃºtirÃ¡nyokat tÃ¡rolÃ³ osztÃ¡ly.
+ * A lehetséges útirányokat tároló osztály.
  */
 
 public class AvailableRoads extends ClassID {
 
         /**
-         * TÃ¶mb az utak referenciÃ¡nak.
+         * Tömb az utak referenciának.
          */
 	public Road roads[];
 
         /**
-         * Konstruktor, az adott Ãºthoz hozza lÃ©tre a lehetsÃ©ges irÃ¡nyokat.
-         * @param road A kapcsolÃ³dÃ³ utak.
+         * Konstruktor, az adott úthoz hozza létre a lehetséges irányokat.
+         * @param road A kapcsolódó utak.
          */
 	public AvailableRoads(Road[] road){
 		setID("AvailableRoads");
