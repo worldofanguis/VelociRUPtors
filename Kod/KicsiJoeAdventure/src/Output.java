@@ -6,12 +6,17 @@
  */
 public class Output{
 
-	// Tabulálások (aktuális) száma.
+	/** 
+         * Tabulálások (aktuális) száma.
+         */
 	public static int tabs = 0;
-	// Engedélyezi vagy letiltja az osztály működését.
+	/**
+         * 
+         * Engedélyezi vagy letiltja az osztály működését.
+         */
 	private static boolean enabled = true;
 
-/*
+/**
  * Egy metódus kezdetekor hívódik meg és kiírja a nevét (és paramétereit, ha vannak).
  *
  * @param id Az objektum neve.
@@ -28,7 +33,7 @@ public class Output{
 
 	}	
 
-/*
+/**
  * Egy metódus befejezésekor hívódik meg (amennyiben nincs
  * visszatérési értéke), kiírja a nevét.
  *
@@ -45,7 +50,7 @@ public class Output{
 
 	}
 
- /*
+ /**
   * Egy metódus befejezésekor hívódik meg, kiírja a nevét és
   * visszatérési értékét.
   *
@@ -57,20 +62,20 @@ public class Output{
 	if (enabled){
 		for (int i=0; i<tabs; i++)
 			System.out.print("   ");
-		System.out.println("<-- " + name + " : " + ret);
+		System.out.println("<-- " + id + "." + name + " : " + ret);
 	}
 	tabs--;
 
 	}
 
-/*
+/**
  * Az osztály működésének letiltása.
  */
 	public static void ignore(){
 		enabled = false;
 	}
 
-/*
+/**
  * Az osztály működésének engedélyezése.
  */
 	public static void resume(){
