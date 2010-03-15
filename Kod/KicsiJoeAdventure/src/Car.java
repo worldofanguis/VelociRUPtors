@@ -50,10 +50,10 @@ public abstract class Car extends ClassID {
 		// ExitCar //
 		if(roadUnderMe.getNextRoads() == null){
 			roadUnderMe.removeCar();
-			Output.methodEnds(toString(),"Move()","false");
+			Output.methodEnds(toString(),"Update()","false");
 			return false;
 		}
-		Output.methodEnds(toString(),"Move()","true");
+		Output.methodEnds(toString(),"Update()","true");
 		return true;
 	}
 

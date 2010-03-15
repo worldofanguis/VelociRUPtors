@@ -3,7 +3,9 @@
 public class Bank extends ClassID implements Building {
 
 	public Bank(){
-
+		setID("Bank");
+		Output.methodStarts(ID,"constructor");
+		Output.methodEnds(ID,"constructor");
 	}
 
 	public void whatBuilding(Car car){

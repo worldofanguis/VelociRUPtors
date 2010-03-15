@@ -5,6 +5,7 @@ public class AvailableRoads extends ClassID {
 	public Road roads[];
 
 	public AvailableRoads(Road[] road){
+		setID("AvailableRoads");
 		Output.methodStarts(ID,"AvailableRoads(" + road.toString() + ")");
 		roads = new Road[4];
 

@@ -8,13 +8,13 @@ public class Lamp extends ClassID implements TrafficController {
 
 	}
 
-	public boolean isGreen(Directions Direction){
+	public boolean isGreen(int Direction){
             String p = new String();
             switch(Direction){
-                case LEFT: p = "LEFT";
-                case DOWN: p = "DOWN";
-                case RIGHT: p = "RIGHT";
-                case UP: p = "UP";
+                case Directions.LEFT: p = "LEFT";
+                case Directions.DOWN: p = "DOWN";
+                case Directions.RIGHT: p = "RIGHT";
+                case Directions.UP: p = "UP";
             }
 		Output.methodStarts(ID,"isGreen(" + p + ")");
 
