@@ -185,13 +185,52 @@ public class Game extends ClassID {
 //		Output.methodEnds("TestMap2");
 	}
 
+<<<<<<< HEAD
         /**
          * Mozgatás
          */
+=======
+	/*
+	 * Mozgatás teszt
+	 */
+>>>>>>> 540c4db1e1375b688418be47cb58912224fe6c06
 	public void TestMap3(){
-//		Output.methodStarts("TestMap3");
-//
-//		Output.methodEnds("TestMap3");
+		Output.methodStarts(ID,"TestMap3 - Mozgatás");
+		// pálya felépítése //
+		/*
+		 *  r3-r2-r4
+		 *     |
+		 *     r1
+		 *
+		 */
+		Output.ignore();
+		Road r1 = new Road();
+		r1.setID("ut-lent");
+		Road r2 = new Road();
+		r2.setID("keresztezodes");
+		Road r3 = new Road();
+		r3.setID("ut-balra");
+		Road r4 = new Road();
+		r4.setID("ut-jobbra");
+
+		r1.setRoad(Directions.UP,r2);
+		r2.setRoad(Directions.LEFT, r3);
+		r2.setRoad(Directions.RIGHT, r4);
+
+		Car c = new Civil();
+		c.setID("civil");
+
+		r1.setCar(c);
+		c.setRoadUnderCar(r1);
+		Output.resume();
+		// pálya felépítése - vége //
+
+		// 1. lépés //
+		c.Update();
+		// 2. lépés //
+		c.Update();
+
+		Output.methodEnds(ID,"TestMap3 - Mozgatás");
 	}
 
 	/*

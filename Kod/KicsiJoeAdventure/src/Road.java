@@ -8,6 +8,7 @@ public class Road extends ClassID {
 	private TrafficController trafficController;
 
 	public Road(){
+		next = new Road[4];
 		buildingOnMe = null;
 		carOnMe = null;
 		trafficController = null;
@@ -57,9 +58,9 @@ public class Road extends ClassID {
 		Output.methodEnds(ID,"removeCar()");
 	}
 
-	public void setRoad(int Direction,Road road){
+	public void setRoad(Directions Direction,Road road){
 		Output.methodStarts(ID,"setRoad("+road.toString()+")");
-		next[Direction] = road;
+		next[Direction.value] = road;
 		Output.methodEnds(ID,"setRoad("+road.toString()+")");
 	}
 }
