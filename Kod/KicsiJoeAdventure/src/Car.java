@@ -1,34 +1,62 @@
+/**
+ * Class Car:
+ * Absztrakt osztály az összes járműre vonatkozó tulajdonságokkal
+ * és metódusokkal.
+ */
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-
-
 public abstract class Car extends ClassID {
 
+        /**
+         * A tervezett haladási irány (lsd. Directions osztály)
+         */
 	protected int plannedDirection;
+
+        /**
+         * Azon út referenciája, amelyiken található az autó.
+         */
 	protected Road roadUnderMe;
+
+        /**
+         * A kezdetben generált véletlenszerű sebesség
+         */
 	protected int startSpeed;
+
+        /**
+         * A léptetéshez szükséges visszaszámláló
+         */
 	protected int tickCount;
 
 	public Car(){
-
+            tickCount = 0;
 	}
 
-	/*
-	 * Function used for testing to set the roadUnderMe pointer
+	/**
+	 * Teszteléshez szükséges függvény, a pálya felépítésekor az autó
+         * alá rakja az utat.
 	 */
 	public void setRoadUnderCar(Road road){
 		roadUnderMe = road;
 	}
 
+        /**
+         * Le lehet-e tartóztatni? (Rosszfiú?)
+         * @return Alapértelmezésben (civil és rendőr miatt) false
+         * értéket ad vissza.
+         */
 	public boolean canBeArrested(){
                 Output.methodStarts(ID, "canBeArrested()");
                 Output.methodEnds(ID,"canBeArrested()","false");
 		return false;
 	}
 
+        /**
+         * Az autó sebességét adja vissza.
+         * @return Az autó aktuális sebessége (~mikor indul el újra).
+         */
 	public int getSpeed(){
 		Output.methodStarts(ID,"getSpeed()");
 
@@ -37,12 +65,19 @@ public abstract class Car extends ClassID {
 		return tickCount;
 	}
 
+        /**
+         * Autó mozgatása.
+         */
 	public void Move(){
 		Output.methodStarts(ID,"Move()");
 
 		Output.methodEnds(ID,"Move()");
 	}
 
+        /**
+         * Az autót egy konkrét útra helyezi.
+         * @param road Az út, amelyikre áthelyezzük.
+         */
 	public void MoveTo(Road road){
 		Output.methodStarts(ID,"MoveTo("+road.toString()+")");
 		roadUnderMe.removeCar();
@@ -51,6 +86,10 @@ public abstract class Car extends ClassID {
 		Output.methodEnds(ID,"MoveTo("+road.toString()+")");
 	}
 
+        /**
+         * A frissítő/léptető függvény
+         * @return A visszatérési érték true, ha az autó még a pályán van.
+         */
 	public boolean Update(){
 		Output.methodStarts(ID,"Update()");
 
@@ -98,6 +137,13 @@ public abstract class Car extends ClassID {
 		return true;
 	}
 
+        /**
+         * A teszteléshez szükséges segédfüggvény (akkor kérdezzük meg a
+         * felhasználót, hogy merre akar menni, ha több lehetséges útirány
+         * van).
+         * @param ar Lehetséges útirányok
+         * @return true, ha több lehetséges továbbhaladási irány is van.
+         */
 	private boolean moreThan1AR(AvailableRoads ar){
 		int arC = 0;
 		for(int i=0;i<4;i++){

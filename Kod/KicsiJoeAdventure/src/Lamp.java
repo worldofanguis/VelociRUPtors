@@ -1,13 +1,23 @@
-
+/**
+ * A közlekedési lámpát reprezentáló osztály.
+ */
 
 public class Lamp extends ClassID implements TrafficController {
 
+        /**
+         * A lámpa állapota az egyes útszakaszokhoz. (zöld = true)
+         */
 	private boolean state[] = new boolean[4];
 
 	public Lamp(){
 
 	}
 
+        /**
+         * A lámpa állapotát lekérdező függvény.
+         * @param Direction A kérdéses irány
+         * @return true, ha zöld; false, ha piros.
+         */
 	public boolean isGreen(Directions Direction){
 		String p = new String();
         if(Direction == Directions.LEFT){ p = "LEFT"; }
@@ -24,16 +34,21 @@ public class Lamp extends ClassID implements TrafficController {
 		return ret;
 	}
 
-	public boolean Update(){
+        /**
+         * A lámpa állapotát frissítő függvény.
+         */
+	public void Update(){
 		Output.methodStarts(ID,"Update()");
-                boolean ret = false;
-                String p = (ret) ? new String("true") : new String("false");
 
-		Output.methodEnds(ID,"Update()",p);
-		return ret;
+		Output.methodEnds(ID,"Update()");
 	}
 
-	public void whatSign(Car car){
+	/**
+         * Az egységes "forgalomirányító-készülék lekérdező" függvény.
+         * Meghívja az őt megszólító lámpakezelő függvényét.
+         * @param car Aki meghívta.
+         */
+        public void whatSign(Car car){
 		Output.methodStarts(ID, "whatSign("+car.toString()+")");
 		car.Interaction(this);
 		Output.methodEnds(ID, "whatSign("+car.toString()+")");

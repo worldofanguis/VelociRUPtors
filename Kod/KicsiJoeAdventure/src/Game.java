@@ -115,7 +115,7 @@ public class Game extends ClassID {
 		// loop start //
 		// new Road(); //
 		Road r = new Road();
-		r.setID("road");
+		r.setID("r");
 		populateRoad(r/*ide majd a loopban lévő út jön*/);
 		// loop end //
 
@@ -125,11 +125,11 @@ public class Game extends ClassID {
 		bank.setID("bank");
 
 		me = new Robber();
-		me.setID("robber");
+		me.setID("me");
 		hideout.setCar(me);
 
 		Police p = new Police();
-		p.setID("police");
+		p.setID("p");
 		bank.setCar(p);
 		Output.methodEnds(ID,"loadMapFromFile(" + Filename + ")");
 	}
@@ -185,15 +185,9 @@ public class Game extends ClassID {
 //		Output.methodEnds("TestMap2");
 	}
 
-<<<<<<< HEAD
-        /**
-         * Mozgatás
-         */
-=======
 	/*
 	 * Mozgatás teszt
 	 */
->>>>>>> 540c4db1e1375b688418be47cb58912224fe6c06
 	public void TestMap3(){
 		Output.methodStarts(ID,"TestMap3 - Mozgatás");
 		// pálya felépítése //
@@ -205,20 +199,20 @@ public class Game extends ClassID {
 		 */
 		Output.ignore();
 		Road r1 = new Road();
-		r1.setID("ut-lent");
+		r1.setID("r1");
 		Road r2 = new Road();
-		r2.setID("keresztezodes");
+		r2.setID("r2");
 		Road r3 = new Road();
-		r3.setID("ut-balra");
+		r3.setID("r3");
 		Road r4 = new Road();
-		r4.setID("ut-jobbra");
+		r4.setID("r4");
 
 		r1.setRoad(Directions.UP,r2);
 		r2.setRoad(Directions.LEFT, r3);
 		r2.setRoad(Directions.RIGHT, r4);
 
 		Car c = new Civil();
-		c.setID("civil");
+		c.setID("c");
 
 		r1.setCar(c);
 		c.setRoadUnderCar(r1);
@@ -239,18 +233,18 @@ public class Game extends ClassID {
 	public void TestMap4(){
 		Output.methodStarts(ID,"TestMap4 - Building interakcio");
 		Output.ignore();
-		Road r1 = new Road();
-		r1.setID("roadWithBank");
-		Robber t = new Robber();
-		t.setID("robber");
-		Bank b = new Bank();
-		b.setID("bank");
-		Road r2 = new Road();
-		r2.setID("roadWithHideout");
-		Hideout h = new Hideout();
-		h.setID("hideout");
-		r1.setBuilding(b);
-		r2.setBuilding(h);
+		Road roadWithBank = new Road();
+		roadWithBank.setID("roadWithBank");
+		Robber robber = new Robber();
+		robber.setID("robber");
+		Bank bank = new Bank();
+		bank.setID("bank");
+		Road roadWithHideout = new Road();
+		roadWithHideout.setID("roadWithHideout");
+		Hideout hideout = new Hideout();
+		hideout.setID("hideout");
+		roadWithBank.setBuilding(bank);
+		roadWithHideout.setBuilding(hideout);
 		Output.resume();
 
 		System.out.print("h = hideout interaction ; b = bank interaction: ");
@@ -261,11 +255,11 @@ public class Game extends ClassID {
 
 		}
 		if(line.equals("b")){
-			t.setRoadUnderCar(r1);
-			t.Update();
+			robber.setRoadUnderCar(roadWithBank);
+			robber.Update();
 		} else if(line.equals("h")){
-			t.setRoadUnderCar(r2);
-			t.Update();
+			robber.setRoadUnderCar(roadWithHideout);
+			robber.Update();
 		}
 
 		Output.methodEnds(ID,"TestMap4 - Building interakcio");
