@@ -324,7 +324,6 @@ public class Game extends ClassID {
          * Közlekedés / Stop és Piros tábla teszt
          */
 	public void TestMap5(){
-//		Output.methodStarts("TestMap5");
 		Output.methodStarts(ID,"TestMap5 - Piros lámpa/Stoptábla interakció");
 		Output.ignore();
 		//Utak létrehozása
@@ -373,15 +372,14 @@ public class Game extends ClassID {
 		Output.resume();
 
 
-//
-//		Output.methodEnds("TestMap5");
+
+		Output.methodEnds(ID,"TestMap5 - Piros lámpa/Stoptábla interakció");
 	}
 
         /**
          * Közlekedés / Exit tábla teszt
          */
 	public void TestMap6(){
-//		Output.methodStarts("TestMap5");
 		Output.methodStarts(ID,"TestMap6 - Exit tábla interakció");
 		Output.ignore();
 		//Utak létrehozása
@@ -439,8 +437,8 @@ public class Game extends ClassID {
 		c.Update();
 		
 	    
-//	
-//		Output.methodEnds("TestMap5");
+
+		Output.methodEnds(ID,"TestMap6 - Exit tábla interakció");
 	}
 
 	/*
