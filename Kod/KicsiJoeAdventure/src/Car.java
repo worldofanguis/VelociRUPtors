@@ -11,6 +11,13 @@ public abstract class Car extends ClassID {
 
 	}
 
+	/*
+	 * Function used for testing to set the roadUnderMe pointer
+	 */
+	public void setRoadUnderCar(Road road){
+		roadUnderMe = road;
+	}
+
 	public boolean canBeArrested(){
                 Output.methodStarts(ID, "canBeArrested()");
                 Output.methodEnds(ID,"canBeArrested()","false");

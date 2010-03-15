@@ -2,14 +2,14 @@
 
 public class Road extends ClassID {
 
-	private Building building;
+	private Building buildingOnMe;
 	private Car carOnMe;
 	private Road next[];
 	private TrafficController trafficController;
 
 	public Road(){
 		next = new Road[4];
-		building = null;
+		buildingOnMe = null;
 		carOnMe = null;
 		trafficController = null;
 	}
@@ -36,8 +36,14 @@ public class Road extends ClassID {
 
 	public Building hasBuilding(){
 		Output.methodStarts(ID,"hasBuilding()");
-		Output.methodEnds(ID,"hasBuilding()", building.toString());
-		return building;
+		Output.methodEnds(ID,"hasBuilding()", buildingOnMe.toString());
+		return buildingOnMe;
+	}
+
+	public void setBuilding(Building building){
+		Output.methodStarts(ID,"setCar(" + building.toString() + ")");
+		buildingOnMe = building;
+		Output.methodEnds(ID,"setCar(" + building.toString() + ")");	
 	}
 
 	public void setCar(Car car){

@@ -53,6 +53,6 @@ public class Robber extends Car {
 			building.whatBuilding(this);
 
 		Output.methodEnds(ID,"Update()","true");
-                return true;
+		return true;
 	}
 }

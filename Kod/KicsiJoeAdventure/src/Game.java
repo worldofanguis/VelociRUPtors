@@ -1,5 +1,6 @@
-
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 public class Game extends ClassID {
@@ -23,22 +24,31 @@ public class Game extends ClassID {
 	}
 
 	public void GameOver(boolean Success){
-                String p = (Success) ? new String("true") : new String("false");
-		Output.methodStarts(ID,"bankRobbed(" + p +")");
+        String p = (Success) ? new String("true") : new String("false");
+		Output.methodStarts(ID,"GameOver[Success](" + p +")");
 
-		Output.methodEnds(ID,"bankRobbed(" + p +")");
+		Output.methodEnds(ID,"GameOver[Success](" + p +")");
 	}
 
 	public void Initialization(){
 		Output.methodStarts(ID,"Initialization()");
 		loadMapFromFile("map.txt");
-
 		Output.methodEnds(ID,"Initialization()");
 	}
 
 	public boolean isBankRobbed(){
 		Output.methodStarts(ID,"isBankRobbed()");
-                String p = (bankIsRobbed) ? new String("true") : new String("false");
+
+		System.out.print("Is the bank robbed? y = yes, any other key = no: ");
+		String line = null;
+		try {
+			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
+		} catch (IOException ex) {
+
+		}
+		if(line.equals("y")) bankIsRobbed = true; else bankIsRobbed = false;
+
+		String p = (bankIsRobbed) ? new String("true") : new String("false");
 		Output.methodEnds(ID,"isBankRobbed()",p);
 		return bankIsRobbed;
 	}
@@ -48,14 +58,23 @@ public class Game extends ClassID {
 		
 		// loop start //
 		// new Road(); //
-		populateRoad(null);
+		Road r = new Road();
+		r.setID("road");
+		populateRoad(r/*ide majd a loopban lévő út jön*/);
 		// loop end //
 
 		Road hideout = new Road();
+		hideout.setID("hideout");
 		Road bank = new Road();
+		bank.setID("bank");
 
-		hideout.setCar((me = new Robber()));
-		bank.setCar(new Police());
+		me = new Robber();
+		me.setID("robber");
+		hideout.setCar(me);
+
+		Police p = new Police();
+		p.setID("police");
+		bank.setCar(p);
 		Output.methodEnds(ID,"loadMapFromFile(" + Filename + ")");
 	}
 
@@ -96,14 +115,61 @@ public class Game extends ClassID {
 //
 //		Output.methodEnds("TestMap3");
 	}
+
+	/*
+	 * Building interaction tesztelése
+	 */
 	public void TestMap4(){
-//		Output.methodStarts("TestMap4");
-//
-//		Output.methodEnds("TestMap4");
+		Output.methodStarts(ID,"TestMap4 - Building interakcio");
+		Output.ignore();
+		Road r1 = new Road();
+		r1.setID("roadWithBank");
+		Robber t = new Robber();
+		t.setID("robber");
+		Bank b = new Bank();
+		b.setID("bank");
+		Road r2 = new Road();
+		r2.setID("roadWithHideout");
+		Hideout h = new Hideout();
+		h.setID("hideout");
+		r1.setBuilding(b);
+		r2.setBuilding(h);
+		Output.resume();
+
+		System.out.print("h = hideout interaction ; b = bank interaction: ");
+		String line = null;
+		try {
+			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
+		} catch (IOException ex) {
+
+		}
+		if(line.equals("b")){
+			t.setRoadUnderCar(r1);
+			t.Update();
+		} else if(line.equals("h")){
+			t.setRoadUnderCar(r2);
+			t.Update();
+		}
+
+		Output.methodEnds(ID,"TestMap4 - Building interakcio");
 	}
 	public void TestMap5(){
 //		Output.methodStarts("TestMap5");
 //
 //		Output.methodEnds("TestMap5");
+	}
+	public void TestMap6(){
+//		Output.methodStarts("TestMap5");
+//
+//		Output.methodEnds("TestMap5");
+	}
+
+	/*
+	 * Inicializáció tesztelése
+	 */
+	public void TestMap7(){
+		Output.methodStarts(ID,"TestMap7 - Inicializalas");
+		Initialization();
+		Output.methodEnds(ID,"TestMap7");
 	}
 }
