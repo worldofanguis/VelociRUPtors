@@ -119,17 +119,25 @@ public class Police extends Car {
 		if(!policeModeActivated && Main.game.isBankRobbed())
 			policeModeActivated = true;
 
-		if(policeModeActivated){
-			Road nextRoad = null;
-			Car nextCar;
-			if((nextCar = nextRoad.hasCar()) != null){
-				if(nextCar.canBeArrested())
-					Arrest();
-			}
-		}
-                String p = (super.Update()) ? new String("true") : new String("false");
+		String p = (super.Update()) ? new String("true") : new String("false");
 		Output.methodEnds(ID,"Update()",p);
 		return super.Update();
 	}
+
+    /**
+     * Interakció az autóval, amely azon az úton van, ahova menni szeretne.
+     * (Ha riadó módban van, megpróbálja letartóztatni.
+     * A szkeletonban a felhasználó dönti el, milyen módban van az autó,
+     * ezért nem a belső változó, hanem az isBankRobbed() alapján döntünk.
+     */
+     public void Interaction(Car car){
+         Output.methodStarts(ID, "Interaction(" + car + ")");
+         if( Main.game.isBankRobbed() ){
+             if ( car.canBeArrested() )
+                 Arrest();
+         } else
+             tickCount = car.getSpeed();
+         Output.methodEnds(ID, "Interaction(" + car + ")");
+     }
 
 }

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Class Game:
  * Az egész játék vezérléséért felelős osztály.
  * Szkeletonként itt találhatóak a tesztpályák is.
@@ -61,7 +61,19 @@ public class Game extends ClassID {
          * @param add Az érték, amit hozzáadunk a pontszámhoz.
          */
         public void AddPoints(int add) {
+            Output.methodStarts(ID,"AddPoints("+add+")");
             points += add;
+            Output.methodEnds(ID,"AddPoints("+add+")");
+        }
+
+        /**
+         * Pontszám lekérdezése.
+         * @return Az aktuális pontszám.
+         */
+        public int getPoints() {
+            Output.methodStarts(ID, "getPoints()");
+            Output.methodEnds(ID, "" + points + "");
+            return points;
         }
 
         /**
@@ -104,7 +116,7 @@ public class Game extends ClassID {
 	public boolean isBankRobbed(){
 		Output.methodStarts(ID,"isBankRobbed()");
 
-		System.out.print("Is the bank robbed? y = yes, any other key = no: ");
+		System.out.print("Ki van rabolva a bank? y = igen, barmilyen mas billentyu = nem: ");
 		String line = null;
 		try {
 			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
@@ -200,7 +212,7 @@ public class Game extends ClassID {
          * Ütközések tesztpálya
          */
 	public void TestMap1(){
-            Output.methodStarts(ID,"Ütközések teszt");
+            Output.methodStarts(ID,"Utkozesek teszt");
             /* Pálya felépítése:
              * r3
              * r2
@@ -220,7 +232,7 @@ public class Game extends ClassID {
             r2.setRoad(Directions.UP,r3);
             Car c1 = new Civil();
             Car c2 = new Civil();
-            System.out.println("c1 auto nekiutkozik c2-nek. Melyik esetet teszteled? a: c1, c2 = Civil;\t b: c1= Rendor, c2=Rablo;\t c: c1=Rablo, c2=Civil");
+            System.out.println("c1 auto nekiutkozik c2-nek. Melyik esetet teszteled? a: c1= Rendor, c2=Rablo;\t b: c1=Rablo, c2=Civil");
             String line = null;
 		try {
 			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
@@ -228,12 +240,9 @@ public class Game extends ClassID {
 
 		}
 		if(line.equals("a")){
-                    c1 = new Civil();
-                    c2 = new Civil();
-		} else if(line.equals("b")){
                     c1 = new Police();
                     c2 = new Robber();
-		} else if(line.equals("c")){
+		} else if(line.equals("b")){
                     c1 = new Robber();
                     c2 = new Civil();
 		}
@@ -243,7 +252,9 @@ public class Game extends ClassID {
             r2.setCar(c2);
             Output.resume();
 
-            Output.methodEnds(ID,"Ütközések teszt");
+            c1.MoveTo(r2);
+
+            Output.methodEnds(ID,"Utkozesek teszt");
 	}
 
         /**

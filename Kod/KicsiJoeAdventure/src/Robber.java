@@ -79,6 +79,17 @@ public class Robber extends Car {
 		Output.methodEnds(ID,"Interaction("+lamp.toString()+")");
 	}
 
+    /**
+     * Interakció az autóval, amely azon az úton van, ahova menni szeretne.
+     * (Pontlevonás és átveszi a sebességét, hogy ne menjen neki többször)
+     */
+     public void Interaction(Car car){
+         Output.methodStarts(ID, "Interaction(" + car + ")");
+         Main.game.AddPoints(-5);
+         tickCount = car.getSpeed();
+         Output.methodEnds(ID, "Interaction(" + car + ")");
+     }
+
 	@Override
 	public boolean Update(){
 	    Output.methodStarts(ID,"Update()");

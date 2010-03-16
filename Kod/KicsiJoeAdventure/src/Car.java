@@ -65,7 +65,7 @@ public abstract class Car extends ClassID {
 		Output.methodStarts(ID,"getSpeed()");
 
 
-		Output.methodEnds(ID,"getSpeed()","tickCount");
+		Output.methodEnds(ID,"getSpeed()",""+tickCount+"");
 		return tickCount;
 	}
 
@@ -133,9 +133,14 @@ public abstract class Car extends ClassID {
          */
 	public void MoveTo(Road road){
 		Output.methodStarts(ID,"MoveTo("+road.toString()+")");
-		roadUnderMe.removeCar();
-		roadUnderMe = road;
-		road.setCar(this);
+        Car c = road.hasCar();
+        if ( c != null ) {
+            Interaction(c);
+        } else {
+            roadUnderMe.removeCar();
+            roadUnderMe = road;
+            road.setCar(this);
+        }
 		Output.methodEnds(ID,"MoveTo("+road.toString()+")");
 	}
 
@@ -173,10 +178,10 @@ public abstract class Car extends ClassID {
          * @param ar Lehetséges útirányok
          * @return true, ha több lehetséges továbbhaladási irány is van.
          */
-	protected boolean moreThan1AR(AvailableRoads ar){
+	protected boolean moreThan1AR(AvailableRoads ar2){
 		int arC = 0;
 		for(int i=0;i<4;i++){
-			if(ar.roads[i] != null)
+			if(ar2.roads[i] != null)
 				arC++;
 		}
 		return (arC > 1);
@@ -196,5 +201,6 @@ public abstract class Car extends ClassID {
 	public abstract void Interaction(Bank bank);
 	public abstract void Interaction(Hideout hideout);
 	public abstract void Interaction(Lamp lamp);
+    public abstract void Interaction(Car car);
 
 }

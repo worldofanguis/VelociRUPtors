@@ -86,4 +86,13 @@ public class Civil extends Car {
 
 	}
 
+    /**
+     * Interakció az autóval, amely azon az úton van, ahova menni szeretne.
+     * (Atveszi a sebesseget)
+     */
+     public void Interaction(Car car){
+         Output.methodStarts(ID, "Interaction(" + car + ")");
+         tickCount = car.getSpeed();
+         Output.methodEnds(ID, "Interaction(" + car + ")");
+     }
 }
