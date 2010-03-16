@@ -3,10 +3,6 @@
  * A játékos járművét képviselő osztály.
  */
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class Robber extends Car {
 
 	/**
@@ -100,7 +96,10 @@ public class Robber extends Car {
 		if((building = roadUnderMe.hasBuilding()) != null)
 			building.whatBuilding(this);
 
-		
+
+                /* Meghívja az ősosztály mozgatását.
+                 * Ez a későbbiekben nem így lesz (játékos irányít),
+                 * egyelőre teszteléshez így implementáltuk. */
 		super.Update();
 		Output.methodEnds(ID,"Update()","true");
 		return true;

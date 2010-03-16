@@ -1,5 +1,3 @@
-
-
 /**
  * Class Output:
  * A terminálon történő megjelenítést kezelő osztály.

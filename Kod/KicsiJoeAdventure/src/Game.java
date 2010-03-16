@@ -232,7 +232,7 @@ public class Game extends ClassID {
             r2.setRoad(Directions.UP,r3);
             Car c1 = new Civil();
             Car c2 = new Civil();
-            System.out.println("c1 auto nekiutkozik c2-nek. Melyik esetet teszteled? a: c1= Rendor, c2=Rablo;\t b: c1=Rablo, c2=Civil");
+            System.out.println("c1 auto nekiutkozik c2-nek. Melyik esetet teszteled?\n a: c1= Rendor, c2=Rablo;\t b: c1=Rablo, c2=Civil");
             String line = null;
 		try {
 			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
@@ -263,24 +263,25 @@ public class Game extends ClassID {
 	public void TestMap2(){
 //		Output.methodStarts("TestMap2");
 //
-	    Output.methodStarts(ID,"TestMap2 - Civilgenerálás és eltüntetés");
+	    Output.methodStarts(ID,"TestMap2 - Civilgeneralas es eltuntetes");
 
 	    //pálya felépítése
 	    /*
-	     * r2
+	     * ExitRoad
 	     * |
-	     * r1
+	     * GeneratorRoad
 	    */
-	    Road r1 = new Road();
-	    r1.setID("GeneratorRoad");
-	    Road r2 = new Road();
-	    r2.setID("ExitRoad");
+            Output.ignore();
+	    Road GeneratorRoad = new Road();
+	    GeneratorRoad.setID("GeneratorRoad");
+	    Road ExitRoad = new Road();
+	    ExitRoad.setID("ExitRoad");
 
 	    //pályaelemek összekötése
-	    r1.setRoad(Directions.UP, r2);
-
+	    GeneratorRoad.setRoad(Directions.UP, ExitRoad);
+            Output.resume();
 	    //civil gerenálása
-	    populateRoad(r1);
+	    populateRoad(GeneratorRoad);
 
 	    //civil update
 	   Iterator<Car> i = cars.iterator();
@@ -294,14 +295,14 @@ public class Game extends ClassID {
 
 
 //		Output.methodEnds("TestMap2");
-	   Output.methodEnds(ID, "TestMap2 - Civilgenerálás és eltüntetés");
+	   Output.methodEnds(ID, "TestMap2 - Civilgeneralas es eltuntetes");
 	}
 
-	/*
+	/**
 	 * Mozgatás teszt
 	 */
 	public void TestMap3(){
-		Output.methodStarts(ID,"TestMap3 - Mozgatás");
+		Output.methodStarts(ID,"TestMap3 - Mozgatas");
 		// pálya felépítése //
 		/*
 		 *  r3-r2-r4
@@ -336,10 +337,10 @@ public class Game extends ClassID {
 		// 2. lépés //
 		c.Update();
 
-		Output.methodEnds(ID,"TestMap3 - Mozgatás");
+		Output.methodEnds(ID,"TestMap3 - Mozgatas");
 	}
 
-	/*
+	/**
 	 * Building interaction tesztelése
 	 */
 	public void TestMap4(){
@@ -381,22 +382,29 @@ public class Game extends ClassID {
          * Közlekedés / Stop és Piros tábla teszt
          */
 	public void TestMap5(){
-		Output.methodStarts(ID,"TestMap5 - Piros lámpa/Stoptábla interakció");
-		Output.ignore();
+		Output.methodStarts(ID,"TestMap5 - Piros lampa/Stoptabla interakcio");
+		/*
+                 * Pálya:
+                 * thirdRoad
+                 * roadWithTC
+                 * startRoad
+                 */
+
+                Output.ignore();
 		//Utak létrehozása
-		Road r1 = new Road();
-		r1.setID("startRoad");
-		Road r2 = new Road();
-		r2.setID("roadWithTC");
-		Road r3 = new Road();
-		r3.setID("thirdRoad");
+		Road startRoad = new Road();
+		startRoad.setID("startRoad");
+		Road roadWithTC = new Road();
+		roadWithTC.setID("roadWithTC");
+		Road thirdRoad = new Road();
+		thirdRoad.setID("thirdRoad");
 		//Utak összekapcsolása
-		r1.setRoad(Directions.UP,r2);
-		r2.setRoad(Directions.UP, r3);
+		startRoad.setRoad(Directions.UP,roadWithTC);
+		roadWithTC.setRoad(Directions.UP, thirdRoad);
 		//Rabló elhelyezése
 		Car t = new Civil();
 		t.setID("civil");
-		t.setRoadUnderCar(r1);
+		t.setRoadUnderCar(startRoad);
 		//TrafficController létrehozása
 		Lamp l = new Lamp();
 		l.setID("Lamp");
@@ -413,9 +421,9 @@ public class Game extends ClassID {
 
 		}
 		if(line.equals("p")){
-			r2.setTrafficController(l);
+			roadWithTC.setTrafficController(l);
 		} else if(line.equals("s")){
-			r2.setTrafficController(s);
+			roadWithTC.setTrafficController(s);
 
 		}
 
@@ -430,28 +438,34 @@ public class Game extends ClassID {
 
 
 
-		Output.methodEnds(ID,"TestMap5 - Piros lámpa/Stoptábla interakció");
+		Output.methodEnds(ID,"TestMap5 - Piros lampa/Stoptabla interakcio");
 	}
 
         /**
          * Közlekedés / Exit tábla teszt
          */
 	public void TestMap6(){
-		Output.methodStarts(ID,"TestMap6 - Exit tábla interakció");
-		Output.ignore();
+		Output.methodStarts(ID,"TestMap6 - Exit tabla interakcio");
+		/*
+                 * Pálya:
+                 * FourthRoad
+                 * secondRoad - ExitRoad
+                 * startRoad
+                 */
+                Output.ignore();
 		//Utak létrehozása
-		Road r1 = new Road();
-		r1.setID("startRoad");
-		Road r2 = new Road();
-		r2.setID("secondRoad");
-		Road r3 = new Road();
-		r3.setID("ExitRoad");
-		Road r4 = new Road();
-		r4.setID("FourthRoad");
+		Road startRoad = new Road();
+		startRoad.setID("startRoad");
+		Road secondRoad = new Road();
+		secondRoad.setID("secondRoad");
+		Road ExitRoad = new Road();
+		ExitRoad.setID("ExitRoad");
+		Road FourthRoad = new Road();
+		FourthRoad.setID("FourthRoad");
 		//Utak összekapcsolása
-		r1.setRoad(Directions.UP,r2);
-		r2.setRoad(Directions.RIGHT, r3);
-		r2.setRoad(Directions.UP, r4);
+		startRoad.setRoad(Directions.UP,secondRoad);
+		secondRoad.setRoad(Directions.RIGHT, ExitRoad);
+		secondRoad.setRoad(Directions.UP, FourthRoad);
 
 		//Kocsi referencia létrehozása
 		Car c;
@@ -467,16 +481,16 @@ public class Game extends ClassID {
 		if(line.equals("c")){
 			c = new Civil();
 			c.setID("civil");
-			c.setRoadUnderCar(r1);
+			c.setRoadUnderCar(startRoad);
 		} else if(line.equals("r")){
 			c = new Robber();
 			c.setID("robber");
-			c.setRoadUnderCar(r1);
+			c.setRoadUnderCar(startRoad);
 		}
 		 else if(line.equals("p")){
 			c = new Police();
 			c.setID("police");
-			c.setRoadUnderCar(r1);
+			c.setRoadUnderCar(startRoad);
 		}
 		else{return;}
 		
@@ -484,7 +498,7 @@ public class Game extends ClassID {
 		//TrafficController létrehozása
 		ExitSign es = new ExitSign();
 		es.setID("ExitSign");
-		r3.setTrafficController(es);
+		ExitRoad.setTrafficController(es);
 		Output.resume();
 
 		c.Update();
@@ -498,7 +512,7 @@ public class Game extends ClassID {
 		Output.methodEnds(ID,"TestMap6 - Exit tábla interakció");
 	}
 
-	/*
+	/**
 	 * Inicializáció tesztelése
 	 */
 	public void TestMap7(){

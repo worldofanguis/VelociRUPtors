@@ -4,6 +4,9 @@
 
 public class ExitSign extends ClassID implements TrafficController {
 
+        /**
+         * Konstruktor
+         */
 	public ExitSign(){
 
 	}

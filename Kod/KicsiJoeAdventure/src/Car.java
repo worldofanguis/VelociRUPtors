@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 public abstract class Car extends ClassID {
 
         /**
-         * A tervezett haladási irány (lsd. Directions osztály)
+         * A tervezett haladási irány (lsd Directions osztály)
          */
 	protected int plannedDirection;
 
@@ -39,8 +39,9 @@ public abstract class Car extends ClassID {
 	}
 
 	/**
-	 * Teszteléshez szükséges függvény, a pálya felépítésekor az autó
-         * alá rakja az utat.
+	 * Az autó alá rakja a paraméterként kapott utat
+         * (pálya felépítésekor lehet szükség rá)
+         * @param road Az út, amelyikre ráhelyezzük.
 	 */
 	public void setRoadUnderCar(Road road){
 		roadUnderMe = road;
@@ -186,7 +187,13 @@ public abstract class Car extends ClassID {
 		}
 		return (arC > 1);
 	}
-	
+
+        /**
+         * Belső segédfüggvény annak eldöntésére, hogy az útszakasz
+         * zsákutca-e (nem vezet ki belőle további útszakasz)
+         * @param ar Lehetséges útirányok
+         * @return true, ha nincs továbbhaladási lehetőség
+         */
 	protected boolean DeadEnd(AvailableRoads ar){
 		int arC = 0;
 		for(int i=0;i<4;i++){
@@ -196,11 +203,46 @@ public abstract class Car extends ClassID {
 		return (arC == 0);
 	}
 
+        /**
+         * STOP tábla interakciós függvény, absztrakt,
+         * a leszármazottaknak kell implementálni
+         * @param sign STOP tábla akivel találkozik.
+         */
 	public abstract void Interaction(StopSign sign);
+
+        /**
+         * EXIT tábla interakciós függvény, absztrakt,
+         * a leszármazottaknak kell implementálni
+         * @param sign EXIT tábla akivel találkozik.
+         */
 	public abstract void Interaction(ExitSign sign);
+
+        /**
+         * Bank interakciós függvény, absztrakt,
+         * a leszármazottaknak kell implementálni
+         * @param bank Bank típusú épület akivel találkozik.
+         */
 	public abstract void Interaction(Bank bank);
+
+        /**
+         * Rejtekhely interakciós függvény, absztrakt,
+         * a leszármazottaknak kell implementálni
+         * @param hideout Rejtekhely típusú épület akivel találkozik.
+         */
 	public abstract void Interaction(Hideout hideout);
+
+        /**
+         * Lámpa interakaciós függvény, absztrakt,
+         * a leszármazottaknak kell implementálni
+         * @param lamp Lámpa akivel találkozik.
+         */
 	public abstract void Interaction(Lamp lamp);
-    public abstract void Interaction(Car car);
+
+        /**
+         * Jármű interakaciós függvény (ütközés), absztrakt,
+         * a leszármazottaknak kell implementálni
+         * @param car Az autó aki ott van, ahova menni szeretne.
+         */
+        public abstract void Interaction(Car car);
 
 }

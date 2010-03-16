@@ -6,7 +6,7 @@
 public class AvailableRoads extends ClassID {
 
         /**
-         * Tömb az utak referenciának.
+         * Tömb az utak referenciáinak.
          */
 	public Road roads[];
 

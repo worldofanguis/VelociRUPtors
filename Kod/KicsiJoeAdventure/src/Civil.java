@@ -74,13 +74,13 @@ public class Civil extends Car {
 		}
 		//Leelenőriozzük, hogy zöld-e//
 		if(lamp.isGreen(fromDirection)){
-		    Output.methodEnds(ID,"Interaction("+lamp.toString()+"):the lamp was Green.");
+		    Output.methodEnds(ID,"Interaction("+lamp.toString()+") // the lamp was Green.");
 		    return; //A lámpa nincs ránk hatással, az interakciónak vége.
 		}
 		else{
 		    //Csak eggyel növeljük
 		    tickCount++;
-		    Output.methodEnds(ID,"Interaction("+lamp.toString()+"):the lamp was Red.");
+		    Output.methodEnds(ID,"Interaction("+lamp.toString()+") // the lamp was Red.");
 		    return;
 		}
 

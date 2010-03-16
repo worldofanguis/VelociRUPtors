@@ -9,7 +9,7 @@ public class Bank extends ClassID implements Building {
          * Konstruktor. Az inicializálásnál megjelenő objektumnév: bank.
          */
 	public Bank(){
-		setID("Bank");
+		setID("bank");
 		Output.methodStarts(ID,"Bank()");
 		Output.methodEnds(ID,"Bank()");
 	}

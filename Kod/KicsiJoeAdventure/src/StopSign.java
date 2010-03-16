@@ -5,6 +5,9 @@
 
 public class StopSign extends ClassID implements TrafficController {
 
+        /**
+         * Konstruktor
+         */
 	public StopSign(){
 
 	}

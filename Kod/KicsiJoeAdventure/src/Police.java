@@ -1,4 +1,5 @@
 /**
+ * Class Police:
  * A rendőr járművét reprezentáló osztály.
  */
 
@@ -14,9 +15,9 @@ public class Police extends Car {
          */
 	public Police(){
             policeModeActivated = false;
-            setID("civil");
-            Output.methodStarts(ID,"Civil()");
-            Output.methodEnds(ID,"Civil()");
+            setID("p");
+            Output.methodStarts(ID,"Police()");
+            Output.methodEnds(ID,"Police()");
 	}
 
         /**
@@ -81,7 +82,9 @@ public class Police extends Car {
          */
 	public void Interaction(Lamp lamp){
 		Output.methodStarts(ID,"Interaction("+lamp.toString()+")");
-		if(policeModeActivated){
+		//A későbbieknek a belső változó alapján dönt, most
+                //meghívja a függvényt ahol a tesztelő van megkérdezve
+                if(Main.game.isBankRobbed()){
 			//Merről érkezünk a lámpához?//
 		    int fromDirection=0;
 		    switch (plannedDirection){
@@ -92,18 +95,18 @@ public class Police extends Car {
 		    }
 		    //Leelenőriozzük, hogy zöld-e//
 		    if(lamp.isGreen(fromDirection)){
-			Output.methodEnds(ID,"Interaction("+lamp.toString()+"):the lamp was Green.");
+			Output.methodEnds(ID,"Interaction("+lamp.toString()+") //A lampa zold.");
 			return; //A lámpa nincs ránk hatással, az interakciónak vége.
 		    }
 		    else{
 			//Csak eggyel növeljük
 			tickCount++;
-			Output.methodEnds(ID,"Interaction("+lamp.toString()+"):the lamp was Red.");
+			Output.methodEnds(ID,"Interaction("+lamp.toString()+") //A lampa piros volt.");
 			return;
 		    }
 		}
 		else{
-		   Output.methodEnds(ID,"Interaction("+lamp.toString()+"):Police Mode was on");
+		   Output.methodEnds(ID,"Interaction("+lamp.toString()+") //Riado modban van.");
 		}
 	}
 
@@ -132,6 +135,8 @@ public class Police extends Car {
      */
      public void Interaction(Car car){
          Output.methodStarts(ID, "Interaction(" + car + ")");
+         //A későbbieknek a belső változó alapján dönt, most
+         //meghívja a függvényt ahol a tesztelő van megkérdezve
          if( Main.game.isBankRobbed() ){
              if ( car.canBeArrested() )
                  Arrest();
