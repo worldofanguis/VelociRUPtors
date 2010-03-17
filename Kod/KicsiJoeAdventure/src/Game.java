@@ -504,8 +504,6 @@ public class Game extends ClassID {
 		c.Update();
 		c.Update();
 		c.Update();
-		c.Update();
-		c.Update();
 		
 	    
 

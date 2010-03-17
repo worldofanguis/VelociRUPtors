@@ -1,3 +1,8 @@
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /**
  * Class Police:
  * A rendőr járművét reprezentáló osztály.
@@ -51,7 +56,46 @@ public class Police extends Car {
          */
 	public void Interaction(ExitSign sign){
 		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
+		ar.roads[plannedDirection] = null;
 
+		if(moreThan1AR(ar)){	// több szabad irány van, választunk //
+			System.out.println("Merre akarsz menni? lehetosegek:");
+			if(ar.roads[0] != null) System.out.println("0 - balra");
+			if(ar.roads[1] != null) System.out.println("1 - fel");
+			if(ar.roads[2] != null) System.out.println("2 - jobbra");
+			if(ar.roads[3] != null) System.out.println("3 - le");
+
+
+			String line = null;
+			try {
+				 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
+			} catch (IOException ex) {
+
+			}
+			if(line.equals("0")) plannedDirection = Directions.LEFT.value;
+			else if(line.equals("1")) plannedDirection = Directions.UP.value;
+			else if(line.equals("2")) plannedDirection = Directions.RIGHT.value;
+			else if(line.equals("3")) plannedDirection = Directions.DOWN.value;
+			else System.out.println("ha-ha, de viccesnek tetszik lenni");
+		} else {	// csak 1 irány szabad //
+			for(int i=0;i<4;i++){
+				if(ar.roads[i] != null){
+					plannedDirection = i;
+					break;
+				}
+			}
+		}
+
+
+
+
+		//Közlekedésirányító ellenőrzése a plannedDirection-ön//
+		//Ez meghívja a megfelelő Interaction fv-t//
+		//Ha egy előző interakció megállította a kocsit, akkor ne nézze meg ezt.
+		TrafficController tc;
+		if(tickCount == 0)
+		    if((tc=ar.roads[plannedDirection].hasTrafficController()) != null)
+			tc.whatSign(this);
 		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 
