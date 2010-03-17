@@ -179,10 +179,10 @@ public abstract class Car extends ClassID {
          * @param ar Lehetséges útirányok
          * @return true, ha több lehetséges továbbhaladási irány is van.
          */
-	protected boolean moreThan1AR(AvailableRoads ar2){
+	protected boolean moreThan1AR(AvailableRoads ar){
 		int arC = 0;
 		for(int i=0;i<4;i++){
-			if(ar2.roads[i] != null)
+			if(ar.roads[i] != null)
 				arC++;
 		}
 		return (arC > 1);
