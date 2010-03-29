@@ -1,0 +1,35 @@
+[SETTINGS]
+MaxCivilNumber:
+RoadNumber:
+[MAP]
+0;0;1;0;0;
+0;2;0;3;0;
+0;0;0;0;0;
+9;0;0;0;0;
+
+
+
+<< ÉRTELMEZÉS >>
+Elsõ - út típusa:
+	0 - Üres út
+	1 - Bank
+	2 - Hideout
+	3 - Lámpa
+	.
+	.
+	.
+	8 - STOP
+	9 - EXIT
+[Kombinálható , vel]
+
+Második - Balra csatlakozás
+
+Harmadik - Fel csatlakozás
+
+Negyedik - Jobbra csatlakozás
+
+Ötödik - Le csatlakozás
+
+[Elválasztó mindenhol ; ]
+
+[KOMMENT # ]

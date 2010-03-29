@@ -1,0 +1,11 @@
+[START]
+ICAR - ID:0 Tipus:C MaxTick:1
+#még nem lép, most vár
+CAR - ID:0 RoadID:0 Tick:0
+#most lépett, resetelt 1-re
+CAR - ID:0 RoadID:1 Tick:1
+#még nem lép, most vár
+CAR - ID:0 RoadID:1 Tick:0
+most lépett jobbra, resetelt 1-re
+CAR - ID:0 RoadID:3 Tick:1
+[END]
