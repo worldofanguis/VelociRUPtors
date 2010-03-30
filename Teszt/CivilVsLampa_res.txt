@@ -1,0 +1,27 @@
+[START]
+ICAR - ID:0 Tipus:C MaxTick:1
+ILAMP - ID:0 Tick:0
+11 11 11 
+0  1  2  
+C    L   
+LAMP - ID:0 RoadID:1 IsRed:true Tick:3
+CAR - ID:0 RoadID:0 Tick:0
+LAMP - ID:0 RoadID:1 IsRed:true Tick:2
+CAR - ID:0 RoadID:0 Tick:1
+LAMP - ID:0 RoadID:1 IsRed:true Tick:1
+CAR - ID:0 RoadID:0 Tick:0
+LAMP - ID:0 RoadID:1 IsRed:true Tick:0
+CAR - ID:0 RoadID:0 Tick:1
+#itt vált pirosra a lámpa
+LAMP - ID:0 RoadID:1 IsRed:false Tick:4
+CAR - ID:0 RoadID:0 Tick:0
+LAMP - ID:0 RoadID:1 IsRed:false Tick:3
+CAR - ID:0 RoadID:1 Tick:1
+LAMP - ID:0 RoadID:1 IsRed:false Tick:2
+CAR - ID:0 RoadID:1 Tick:0
+LAMP - ID:0 RoadID:1 IsRed:false Tick:1
+CAR - ID:0 RoadID:2 Tick:1
+11 11 11 
+0  1  2  
+     lC  
+[END]

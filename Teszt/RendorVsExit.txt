@@ -1,0 +1,8 @@
+RandomEnabled(false)
+LoadMap(RendorVsExit_map.txt)
+PoliceGen(0,1)
+SetDirection(0,3)
+ShowMap()
+#1-et vár, 1-et lép, 1-et vár, 1-et lép - a 3-as helyett a 2-esre
+Tick(4)
+ShowMap()

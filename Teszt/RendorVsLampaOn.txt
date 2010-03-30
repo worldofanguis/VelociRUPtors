@@ -1,0 +1,13 @@
+RandomEnabled(false)
+LoadMap(RendorVsLampaOn_map.txt)
+PoliceGen(0,1)
+SetBankState(true)
+#a lámpa legyen piros
+SetLampColor(0,false)
+#4 tickenként váltson
+SetLampTick(0,4)
+ShowMap()
+#az autó magától eldönti merre kell menni, mivel csak egy út lehetséges
+#1-et vár, 1-et lép, egyet vár, egyet lép
+Tick(4)
+ShowMap()

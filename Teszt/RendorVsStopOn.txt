@@ -1,0 +1,8 @@
+RandomEnabled(false)
+LoadMap(RendorVsStopOff_map.txt)
+PoliceGen(0,1)
+ShowMap()
+#az autó magától eldönti merre kell menni, mivel csak egy út lehetséges
+#1-et vár, 1-et lép, 1-et vár, 1-et lép
+Tick(4)
+ShowMap()

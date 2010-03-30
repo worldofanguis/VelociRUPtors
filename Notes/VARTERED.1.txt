@@ -9,3 +9,19 @@ CAR - ID:0 RoadID:1 Tick:0
 #most lépett jobbra, resetelt 1-re
 CAR - ID:0 RoadID:3 Tick:1
 [END]
+
+
+
+SHOWMAP példa:
+Civil a 0-n, 1-esen stop
+0 - 1 - 2
+    |
+    3
+
+=  T  =  
+0  1  2  
+C    S   
+   ¦  
+   3  
+      
++
