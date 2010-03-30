@@ -1,3 +1,5 @@
 A Car osztályba felvettem egy selectedDirection nevû változót, ebben tároljuk el a kiválaszott útirányt, azaz, hogy a legközelebbi lehetõségnél merre próbáljunk mindig elõször bekanyarodni. Akapértelmezésben az értéke -1.
 új fvek:
 int forwardDirection() - visszaadja a legutóbbi plannedDirection-nel ellentétes irányt, azaz a "tovább elõre" irányt. (megj.: a Lamp osztályban már benne van, csak nincs elnevezve így)
+
+A rendõr Update függvénye fogja megváltoztatni a sebességét akkor, ha a bank ki van rabolva. A MaxTick-et valamiféle minimális Tick-re fogja beállítani, az aktuális Tickszámot is csökkenti ennyire, feltéve, hogy ezzel nem lassítja (azaz feltéve, hogy a jelenlegi Tick-je nagyobb ennél).

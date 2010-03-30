@@ -1,0 +1,7 @@
+RandomEnabled(false)
+LoadMap(TMove_map.txt)
+CivilGen(0,1)
+ShowMap()
+#1-et vár, 1-et lép, 1-et vár, 1-et lép
+Tick(4)
+ShowMap()
