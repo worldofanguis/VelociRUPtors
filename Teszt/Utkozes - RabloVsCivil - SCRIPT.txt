@@ -1,0 +1,7 @@
+RandomEnabled(false)
+LoadMap(Utkozes - RabloVsCivil - MAP.txt)
+RobberGen(0,0)
+CivilGen(1,1)
+ShowMap()
+Tick(4)
+ShowMap()

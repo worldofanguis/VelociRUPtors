@@ -1,0 +1,17 @@
+[SETTINGS]
+#Ne generáljon magától autókat
+MaxCivilNumber:0
+RoadNumber:4
+
+[MAP]
+# 3
+# |
+# 2
+# |
+# 1C
+# |
+# 0R
+0;-;1;-;-
+0;-;2;-;-
+0;-;3;-;-
+0;-;-;-;-

@@ -1,0 +1,33 @@
+[START]
+#ini [MaxTick:0 - kocsi minden tikkben lép]
+ICAR - ID:0 Tipus:C MaxTick:0
+IRABBIT - ID:0 TimeLeft:5
+#ShowMap
+@  
+2  
+   
+@  
+1  
+ N 
+@  
+0  
+C  
+#/ShowMap
+#tick
+CAR - ID:0 RoadID:1 Tick:0
+RABBIT - ID:0 RoadID:1 Tick:4
+#tick
+CAR - ID:0 RoadID:2 Tick:0
+RABBIT - ID:0 RoadID:1 Tick:3
+#ShowMap
+# @  
+# 2  
+# C  
+# @  
+# 1  
+#  N 
+# @  
+# 0  
+#    
+#/ShowMap
+[END]

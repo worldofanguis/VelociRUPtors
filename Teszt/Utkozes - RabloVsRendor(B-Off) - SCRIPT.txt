@@ -1,0 +1,7 @@
+RandomEnabled(false)
+LoadMap(Utkozes - RabloVsRendor(B-Off) - MAP.txt)
+RobberGen(0,0)
+PolicelGen(1,1)
+ShowMap()
+Tick(4)
+ShowMap()

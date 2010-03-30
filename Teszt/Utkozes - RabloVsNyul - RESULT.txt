@@ -1,0 +1,35 @@
+[START]
+#ini [MaxTick:0 - kocsi minden tikkben lép]
+ICAR - ID:0 Tipus:R MaxTick:0
+IRABBIT - ID:0 TimeLeft:5
+#ShowMap
+@  
+2  
+   
+@  
+1  
+ N 
+@  
+0  
+R  
+#/ShowMap
+#tick
+CAR - ID:0 RoadID:1 Tick:0
+#RoadID:-    -> A nyúl fel lett szedve
+#Tick:30     -> Ennyi ideig sérthetetlen a palyer, utána megszünik a nyuszi
+RABBIT - ID:0 RoadID:- Tick:30
+#tick
+CAR - ID:0 RoadID:2 Tick:0
+RABBIT - ID:0 RoadID:1 Tick:3
+#ShowMap
+# @  
+# 2  
+# R  
+# @  
+# 1  
+#    
+# @  
+# 0  
+#    
+#/ShowMap
+[END]

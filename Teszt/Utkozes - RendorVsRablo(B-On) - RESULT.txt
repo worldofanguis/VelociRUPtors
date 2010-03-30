@@ -1,0 +1,23 @@
+[START]
+ICAR - ID:0 Tipus:P RoadID:0 MaxTick:1
+ICAR - ID:1 Tipus:R RoadID:1 MaxTick:2
+#ShowMap
+@  
+3  
+   
+@  
+2  
+   
+@  
+1  
+R  
+@  
+0  
+P  
+#/ShowMap
+#tick
+CAR - ID:0 RoadID:0 Tick:0
+CAR - ID:1 RoadID:1 Tick:1
+#tick <- rendõr nekünk jött, GO
+[GAMEOVER]
+[END]

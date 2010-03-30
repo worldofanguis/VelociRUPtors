@@ -1,0 +1,9 @@
+RandomEnabled(false)
+LoadMap(Utkozes - CivilVsCivil - MAP.txt)
+#aki ütközni fog
+CivilGen(0,1)
+#akivel [fel kell hogy tartsa a hátsót]
+CivilGen(1,4)
+ShowMap()
+Tick(6)
+ShowMap()

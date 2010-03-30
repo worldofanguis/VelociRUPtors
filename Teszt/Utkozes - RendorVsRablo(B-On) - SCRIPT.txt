@@ -1,0 +1,7 @@
+RandomEnabled(false)
+LoadMap(Utkozes - RendorVsRablo(B-On) - MAP.txt)
+PolicelGen(0,1)
+RobberGen(1,2)
+ShowMap()
+Tick(4)
+ShowMap()

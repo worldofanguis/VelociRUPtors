@@ -1,0 +1,7 @@
+RandomEnabled(false)
+LoadMap(Utkozes - CivilVsNyul - MAP.txt)
+CivilGen(0,1)
+RabbitGen(1)
+ShowMap()
+Tick(2)
+ShowMap()

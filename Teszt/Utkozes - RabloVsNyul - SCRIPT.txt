@@ -1,0 +1,7 @@
+RandomEnabled(false)
+LoadMap(Utkozes - RabloVsNyul - MAP.txt)
+RabloGen(0,0)
+RabbitGen(1)
+ShowMap()
+Tick(2)
+ShowMap()

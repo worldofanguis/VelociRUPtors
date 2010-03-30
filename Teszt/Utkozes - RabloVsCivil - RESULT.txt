@@ -1,0 +1,30 @@
+[START]
+ICAR - ID:0 Tipus:R RoadID:0 MaxTick:0
+ICAR - ID:1 Tipus:C RoadID:1 MaxTick:1
+#ShowMap
+@  
+3  
+   
+@  
+2  
+   
+@  
+1  
+C  
+@  
+0  
+R  
+#/ShowMap
+#tick [R Tick:5 <-- ütközött]
+CAR - ID:0 RoadID:0 Tick:5
+CAR - ID:1 RoadID:1 Tick:0
+#tick
+CAR - ID:0 RoadID:0 Tick:4
+CAR - ID:1 RoadID:2 Tick:1
+#tick
+CAR - ID:0 RoadID:0 Tick:3
+CAR - ID:1 RoadID:2 Tick:0
+#tick
+CAR - ID:0 RoadID:0 Tick:2
+CAR - ID:1 RoadID:3 Tick:1
+[END]
