@@ -1,8 +1,8 @@
 RandomEnabled(false)
 LoadMap(map.txt)
-CarGen(0,1)
+CivilGen(0,1)
 ShowMap()
-#0-ás index menjen jobbra (ez a 2-es direction)
+#0-ás indexu autó menjen jobbra (ez a 2-es direction)
 SetDirection(0,2)
 #ez után 4 óraütés, mindig 1-et vár, egyet lép
 Tick(4)
