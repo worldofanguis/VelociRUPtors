@@ -1,0 +1,9 @@
+LoadMap(RabloVsBankOn_map.txt)
+RobberGen(0,1)
+#kirabolták már a bankot
+SetBankState(true)
+#de azért próbálkozik arrafelé
+SetDirection(0,3)
+ShowMap()
+Tick(6)
+ShowMap()

@@ -1,0 +1,9 @@
+LoadMap(RabloVsHideoutOff_map.txt)
+RobberGen(0,1)
+#még nem rabolták ki a bankot
+SetBankState(false)
+#lefele nyomja, de nem tud hazamenni
+SetDirection(0,3)
+ShowMap()
+Tick(6)
+ShowMap()

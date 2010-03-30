@@ -1,0 +1,7 @@
+LoadMap(CivilGenExit_map.txt)
+CivilGen(0,1)
+#csak ballagunk elore
+SetDirection(0,2)
+ShowMap()
+Tick(4)
+ShowMap()

@@ -1,0 +1,8 @@
+[SETTINGS]
+MaxCivilNumber:0
+RoadNumber:3
+[MAP]
+#0C- 1 - 2
+0;-;-;1;-
+0;0;-;2;-
+0;1;-;-;-
