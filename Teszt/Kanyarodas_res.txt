@@ -1,0 +1,19 @@
+[START]
+ICAR - ID:0 Tipus:C MaxTick:1
+11 11 
+0  1  
+C     
+   11 
+   2  
+      
+CAR - ID:0 RoadID:0 Tick:0
+CAR - ID:0 RoadID:1 Tick:1
+CAR - ID:0 RoadID:1 Tick:0
+CAR - ID:0 RoadID:2 Tick:1
+11 11 
+0  1  
+      
+   11 
+   3  
+   C  
+[END]

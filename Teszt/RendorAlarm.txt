@@ -1,0 +1,11 @@
+RandomEnabled(false)
+LoadMap(RendorAlarm_map.txt)
+PoliceGen(0,4)
+ShowMap()
+#4-et vár, majd 1-et lép, majd még egyet vár
+Tick(6)
+#kiraboljuk a bankot
+SetBankState(true)
+#a Tick-je 1-re vált, 1-et vár, 1-et lép
+Tick(2)
+ShowMap()
