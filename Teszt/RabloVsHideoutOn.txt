@@ -1,0 +1,9 @@
+LoadMap(RabloVsHideoutOn_map.txt)
+RobberGen(0,1)
+#már kirabolták a bankot
+SetBankState(true)
+#hazaér, nyer
+SetDirection(0,3)
+ShowMap()
+Tick(3)
+ShowMap()

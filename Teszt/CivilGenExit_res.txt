@@ -1,0 +1,20 @@
+[START]
+ICAR - ID:0 Tipus:C MaxTick:1
+#ShowMap mozgás elott
+@  @  @  
+0  1  2  
+C        
+#Elso ShowMap vege
+CAR - ID:0 RoadID:0 Tick:0
+CAR - ID:0 RoadID:1 Tick:1
+CAR - ID:0 RoadID:1 Tick:0
+CAR - ID:0 RoadID:2 Tick:1
+CAR - ID:0 RoadID:2 Tick:0
+#kilép
+CAR - ID:0 RoadID:2 Tick:0 -
+#ShowMap mozgas utan
+@  @  @  
+0  1  2  
+         
+#ShowMap vege
+[END]
