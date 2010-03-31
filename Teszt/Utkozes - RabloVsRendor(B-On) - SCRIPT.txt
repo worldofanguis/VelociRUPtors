@@ -1,5 +1,6 @@
 RandomEnabled(false)
 LoadMap(Utkozes - RabloVsRendor(B-On) - MAP.txt)
+SetBankState(true)
 RobberGen(0,0)
 PolicelGen(1,1)
 ShowMap()
