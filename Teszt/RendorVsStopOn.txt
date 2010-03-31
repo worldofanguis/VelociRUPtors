@@ -1,5 +1,5 @@
 RandomEnabled(false)
-LoadMap(RendorVsStopOff_map.txt)
+LoadMap(RendorVsStopOn_map.txt)
 PoliceGen(0,1)
 ShowMap()
 #az autó magától eldönti merre kell menni, mivel csak egy út lehetséges
