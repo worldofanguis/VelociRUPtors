@@ -10,7 +10,7 @@ public abstract class ClassID {
     /** 
      *Az objektum neve
      */
-    protected String ID;
+    protected Integer ID;
 
     /**
      * 
@@ -18,8 +18,8 @@ public abstract class ClassID {
      *
      * @param s A név.
      */
-    public void setID(String s) {
-        ID = new String(s);
+    public void setID(int id) {
+        ID = id;
     }
 
     /**
@@ -29,6 +29,6 @@ public abstract class ClassID {
      */
     @Override
     public String toString(){
-        return ID;
+        return new String(ID.toString());
     }
 }

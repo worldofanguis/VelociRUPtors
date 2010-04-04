@@ -20,18 +20,13 @@ public class Police extends Car {
          */
 	public Police(){
             policeModeActivated = false;
-            setID("p");
-            Output.methodStarts(ID,"Police()");
-            Output.methodEnds(ID,"Police()");
-	}
+ 	}
 
         /**
          * A rabló letartóztatása megtörtént, jelez a Game osztálynak.
          */
 	public void Arrest(){
-		Output.methodStarts(ID,"Arrest()");
 		Main.game.GameOver(false);
-		Output.methodEnds(ID,"Arrest()");
 	}
 
         /**
@@ -40,13 +35,10 @@ public class Police extends Car {
          * @param sign Az adott STOP tábla
          */
 	public void Interaction(StopSign sign){
-		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
-
 		if(policeModeActivated){
 		    tickCount+=5;
 		    MoveTo(ar.roads[plannedDirection]);
 
-		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 		}
 	}
 
@@ -55,7 +47,6 @@ public class Police extends Car {
          * @param sign Az adott EXIT tábla
          */
 	public void Interaction(ExitSign sign){
-		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
 		ar.roads[plannedDirection] = null;
 
 		if(moreThan1AR(ar)){	// több szabad irány van, választunk //
@@ -96,7 +87,6 @@ public class Police extends Car {
 		if(tickCount == 0)
 		    if((tc=ar.roads[plannedDirection].hasTrafficController()) != null)
 			tc.whatSign(this);
-		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 
         /**
@@ -104,9 +94,6 @@ public class Police extends Car {
          * @param bank Az adott bank.
          */
 	public void Interaction(Bank bank){
-		Output.methodStarts(ID,"Interaction("+bank.toString()+")");
-
-		Output.methodEnds(ID,"Interaction("+bank.toString()+")");
 	}
 
         /**
@@ -114,9 +101,6 @@ public class Police extends Car {
          * @param hideout Az adott rejtekhely.
          */
 	public void Interaction(Hideout hideout){
-		Output.methodStarts(ID,"Interaction("+hideout.toString()+")");
-
-		Output.methodEnds(ID,"Interaction("+hideout.toString()+")");
 	}
 
         /**
@@ -125,7 +109,6 @@ public class Police extends Car {
          * @param lamp Az adott lámpa.
          */
 	public void Interaction(Lamp lamp){
-		Output.methodStarts(ID,"Interaction("+lamp.toString()+")");
 		//A későbbieknek a belső változó alapján dönt, most
                 //meghívja a függvényt ahol a tesztelő van megkérdezve
                 if(Main.game.isBankRobbed()){
@@ -139,18 +122,17 @@ public class Police extends Car {
 		    }
 		    //Leelenőriozzük, hogy zöld-e//
 		    if(lamp.isGreen(fromDirection)){
-			Output.methodEnds(ID,"Interaction("+lamp.toString()+") //A lampa zold.");
 			return; //A lámpa nincs ránk hatással, az interakciónak vége.
 		    }
 		    else{
 			//Csak eggyel növeljük
 			tickCount++;
-			Output.methodEnds(ID,"Interaction("+lamp.toString()+") //A lampa piros volt.");
+//			Output.methodEnds(ID,"Interaction("+lamp.toString()+") //A lampa piros volt.");
 			return;
 		    }
 		}
 		else{
-		   Output.methodEnds(ID,"Interaction("+lamp.toString()+") //Riado modban van.");
+//		   Output.methodEnds(ID,"Interaction("+lamp.toString()+") //Riado modban van.");
 		}
 	}
 
@@ -162,12 +144,9 @@ public class Police extends Car {
          */
 	@Override
 	public boolean Update(){
-		Output.methodStarts(ID,"Update()");
 		if(!policeModeActivated && Main.game.isBankRobbed())
 			policeModeActivated = true;
 
-		String p = (super.Update()) ? new String("true") : new String("false");
-		Output.methodEnds(ID,"Update()",p);
 		return super.Update();
 	}
 
@@ -178,7 +157,6 @@ public class Police extends Car {
      * ezért nem a belső változó, hanem az isBankRobbed() alapján döntünk.
      */
      public void Interaction(Car car){
-         Output.methodStarts(ID, "Interaction(" + car + ")");
          //A későbbieknek a belső változó alapján dönt, most
          //meghívja a függvényt ahol a tesztelő van megkérdezve
          if( Main.game.isBankRobbed() ){
@@ -186,7 +164,11 @@ public class Police extends Car {
                  Arrest();
          } else
              tickCount = car.getSpeed();
-         Output.methodEnds(ID, "Interaction(" + car + ")");
      }
+
+	@Override
+	public char showMapChar() {
+		return 'P';
+	}
 
 }

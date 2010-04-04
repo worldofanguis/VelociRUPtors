@@ -5,11 +5,14 @@
  */
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.*;
 
-public class Game extends ClassID {
+public class Game {
 
         /**
          * A pályán található autók referenciái.
@@ -21,7 +24,9 @@ public class Game extends ClassID {
          */
 	private List<Lamp> lamps;
 
-	/**
+	private List<Road> roads;
+
+		/**
          * Értéke true, ha már kirabolták a bankot, egyébként false.
          */
         private boolean bankIsRobbed;
@@ -52,6 +57,7 @@ public class Game extends ClassID {
 	public Game(){
 		cars = new LinkedList<Car>();
 		lamps = new LinkedList<Lamp>();
+		roads = new LinkedList<Road>();
 		bankIsRobbed = false;
                 points = 0;
 	}
@@ -61,9 +67,7 @@ public class Game extends ClassID {
          * @param add Az érték, amit hozzáadunk a pontszámhoz.
          */
         public void AddPoints(int add) {
-            Output.methodStarts(ID,"AddPoints("+add+")");
             points += add;
-            Output.methodEnds(ID,"AddPoints("+add+")");
         }
 
         /**
@@ -71,8 +75,6 @@ public class Game extends ClassID {
          * @return Az aktuális pontszám.
          */
         public int getPoints() {
-            Output.methodStarts(ID, "getPoints()");
-            Output.methodEnds(ID, "" + points + "");
             return points;
         }
 
@@ -81,9 +83,7 @@ public class Game extends ClassID {
          * változik a játékállapot.
          */
 	public void bankRobbed(){
-		Output.methodStarts(ID,"bankRobbed()");
 		bankIsRobbed = true;
-		Output.methodEnds(ID,"bankRobbed()");
 	}
 
         /**
@@ -93,18 +93,13 @@ public class Game extends ClassID {
          */
 	public void GameOver(boolean Success){
             String p = (Success) ? new String("true") : new String("false");
-            Output.methodStarts(ID,"GameOver[Success](" + p +")");
-
-            Output.methodEnds(ID,"GameOver[Success](" + p +")");
-	}
+  	}
 
         /**
          * A játék kezdetkor a pálya elkészítése, az elemek elhelyezése.
          */
 	public void Initialization(){
-		Output.methodStarts(ID,"Initialization()");
 		loadMapFromFile("map.txt");
-		Output.methodEnds(ID,"Initialization()");
 	}
 
         /**
@@ -114,7 +109,6 @@ public class Game extends ClassID {
          * false, ha még nem rabolták ki a bankot.
          */
 	public boolean isBankRobbed(){
-		Output.methodStarts(ID,"isBankRobbed()");
 
 		System.out.print("Ki van rabolva a bank? y = igen, barmilyen mas billentyu = nem: ");
 		String line = null;
@@ -126,7 +120,6 @@ public class Game extends ClassID {
 		if(line.equals("y")) bankIsRobbed = true; else bankIsRobbed = false;
 
 		String p = (bankIsRobbed) ? new String("true") : new String("false");
-		Output.methodEnds(ID,"isBankRobbed()",p);
 		return bankIsRobbed;
 	}
 
@@ -137,29 +130,103 @@ public class Game extends ClassID {
          * @param Filename Azon .txt fájl elérési útvonala, amely alapján
          * felépítjük a pályát.
          */
-	public void loadMapFromFile(String Filename){
-		Output.methodStarts(ID,"loadMapFromFile(" + Filename + ")");
-		
-		// loop start //
-		// new Road(); //
-		Road r = new Road();
-		r.setID("r");
-		populateRoad(r/*ide majd a loopban lévő út jön*/);
-		// loop end //
+	public void loadMapFromFile(String Filename) {
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(new File(Filename)));
 
-		Road hideout = new Road();
-		hideout.setID("hideout");
-		Road bank = new Road();
-		bank.setID("bank");
+			String line;
+			int roadIndex = 0;
+			int ReadState = -1; // 0 = Settings ; 1 = Map //
 
-		me = new Robber();
-		me.setID("me");
-		hideout.setCar(me);
+			while((line = in.readLine()) != null){
+				if(line.startsWith("#") || line.isEmpty())
+					continue;
+				else if(line.compareTo("[SETTINGS]") == 0) {
+					ReadState = 0;
+					continue;
+				}
+				else if(line.compareTo(("[MAP]")) == 0) {
+					ReadState = 1;
+					continue;
+				}
+					
 
-		Police p = new Police();
-		p.setID("p");
-		bank.setCar(p);
-		Output.methodEnds(ID,"loadMapFromFile(" + Filename + ")");
+
+				switch(ReadState){
+					case 0:	{ // SETTINGS //
+						StringTokenizer st = new StringTokenizer(line,":");
+						String first = st.nextToken();
+						String second = st.nextToken();
+						if(first.compareTo("MaxCivilNumber") == 0){
+							maxCarsOnMap = Integer.parseInt(second);
+						}else if(first.compareTo("RoadNumber") == 0){
+							// Create the requied roads //
+							for(int i=0;i<Integer.parseInt(second);i++){
+								Road road = new Road();
+								road.setID(i);
+								roads.add(road);
+							}
+						}
+						break;
+					}
+					case 1:	{ // MAP //
+						StringTokenizer st = new StringTokenizer(line,";");
+						// Az úton lévő dolgok beállítása //
+						String token = st.nextToken();
+						switch(Integer.parseInt(token)){
+							case 0:	// default road //
+								break;
+							case 1:	// bank //
+								roads.get(roadIndex).setBuilding(new Bank());
+								break;
+							case 2:	// hideout //
+								roads.get(roadIndex).setBuilding(new Hideout());
+								break;
+							case 3:	// lamp //
+								roads.get(roadIndex).setTrafficController(new Lamp());
+								break;
+							case 8:	// stop //
+								roads.get(roadIndex).setTrafficController(new StopSign());
+								break;
+							case 9:	// exit //
+								roads.get(roadIndex).setTrafficController(new ExitSign());
+								break;
+							default:
+								System.out.println("ERROR - Unknown road type");
+						}
+						// Csatlakozások beállítása //
+
+						// Balra //
+						token = st.nextToken();
+						if(token.compareTo("-") != 0){
+							roads.get(roadIndex).setRoad(Directions.LEFT, roads.get(Integer.parseInt(token)));
+						}
+						// Fel //
+						token = st.nextToken();
+						if(token.compareTo("-") != 0){
+							roads.get(roadIndex).setRoad(Directions.UP, roads.get(Integer.parseInt(token)));
+						}
+						// Jobbra //
+						token = st.nextToken();
+						if(token.compareTo("-") != 0){
+							roads.get(roadIndex).setRoad(Directions.RIGHT, roads.get(Integer.parseInt(token)));
+						}
+						// Le //
+						token = st.nextToken();
+						if(token.compareTo("-") != 0){
+							roads.get(roadIndex).setRoad(Directions.DOWN, roads.get(Integer.parseInt(token)));
+						}
+
+						roadIndex++;
+						break;
+					}
+				}
+			}
+			// Set the starting road //
+			roadStart = roads.get(0);
+		}catch(Exception e){
+			System.out.println("Noob");
+		}
 	}
 
         /**
@@ -167,29 +234,13 @@ public class Game extends ClassID {
          * @param road Az út amelyet módosítunk.
          */
 	public void populateRoad(Road road){
-		Output.methodStarts(ID,"populateRoad("+road.toString()+")");
-
-		//létrehozzuk az autót
-		Car c = new Civil();
-		c.setID("populatedCivil");
-
-		//Betesszük a listába
-		cars.add(c);
-
-		//Autó rátétele a kocsira - 2 irányú asszociáció létrehozása
-		c.setRoadUnderCar(road);
-		road.setCar(c);
-
-
-		Output.methodEnds(ID,"populateRoad("+road.toString()+")");
+	
 	}
 
         /**
          * Eltávolítja az aktuális autót az autók listájáról.
          */
 	public void removeActualCar(){
-		Output.methodStarts(ID,"removeActualCar()");
-		Output.methodEnds(ID,"removeActualCar()");
 	}
 
         /**
@@ -197,325 +248,138 @@ public class Game extends ClassID {
          * így léptetve a játékot.
          */
 	public void Update(){
-		Output.methodStarts(ID,"Update()");
 
 		/* Car.Update() returns false
 		 * removeActualCar();
 		 */
-		 Output.methodEnds(ID,"Update()");
 	}
 
-
-	/* Test Maps */
-
-        /**
-         * Ütközések tesztpálya
-         */
-	public void TestMap1(){
-            Output.methodStarts(ID,"Utkozesek teszt");
-            /* Pálya felépítése:
-             * r3
-             * r2
-             * r1
-             *
-             * c1 autó r1-n, c2 autó r2-n
-             */
-            Output.ignore();
-            Road r3 = new Road();
-            r3.setID("r3");
-            Road r2 = new Road();
-            r2.setID("r2");
-            Road r1 = new Road();
-            r1.setID("r1");
-
-            r1.setRoad(Directions.UP,r2);
-            r2.setRoad(Directions.UP,r3);
-            Car c1 = new Civil();
-            Car c2 = new Civil();
-            System.out.println("c1 auto nekiutkozik c2-nek. Melyik esetet teszteled?\n a: c1= Rendor, c2=Rablo;\t b: c1=Rablo, c2=Civil");
-            String line = null;
-		try {
-			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
-		} catch (IOException ex) {
-
-		}
-		if(line.equals("a")){
-                    c1 = new Police();
-                    c2 = new Robber();
-		} else if(line.equals("b")){
-                    c1 = new Robber();
-                    c2 = new Civil();
-		}
-            c1.setID("c1");
-            c2.setID("c2");
-            r1.setCar(c1);
-            r2.setCar(c2);
-            Output.resume();
-
-            c1.MoveTo(r2);
-
-            Output.methodEnds(ID,"Utkozesek teszt");
-	}
-
-        /**
-         * Civilgenerálás és eltüntetés tesztpálya
-         */
-	public void TestMap2(){
-//		Output.methodStarts("TestMap2");
-//
-	    Output.methodStarts(ID,"TestMap2 - Civilgeneralas es eltuntetes");
-
-	    //pálya felépítése
-	    /*
-	     * ExitRoad
-	     * |
-	     * GeneratorRoad
-	    */
-            Output.ignore();
-	    Road GeneratorRoad = new Road();
-	    GeneratorRoad.setID("GeneratorRoad");
-	    Road ExitRoad = new Road();
-	    ExitRoad.setID("ExitRoad");
-
-	    //pályaelemek összekötése
-	    GeneratorRoad.setRoad(Directions.UP, ExitRoad);
-            Output.resume();
-	    //civil gerenálása
-	    populateRoad(GeneratorRoad);
-
-	    //civil update
-	   Iterator<Car> i = cars.iterator();
-	   while(i.hasNext()){
-	       Car temp = i.next();
-	       temp.Update();
-	       temp.Update();
-	   }
-	//A listából való törlés még nem megy//
-
-
-
-//		Output.methodEnds("TestMap2");
-	   Output.methodEnds(ID, "TestMap2 - Civilgeneralas es eltuntetes");
-	}
-
-	/**
-	 * Mozgatás teszt
-	 */
-	public void TestMap3(){
-		Output.methodStarts(ID,"TestMap3 - Mozgatas");
-		// pálya felépítése //
-		/*
-		 *  r3-r2-r4
-		 *     |
-		 *     r1
-		 *
+		/**
+		 * Ez az undorítóancsúnya függvény rajzolja ki a konzolra vagy egy fileba a pályát
 		 */
-		Output.ignore();
-		Road r1 = new Road();
-		r1.setID("r1");
-		Road r2 = new Road();
-		r2.setID("r2");
-		Road r3 = new Road();
-		r3.setID("r3");
-		Road r4 = new Road();
-		r4.setID("r4");
+	public void ShowMap(PrintStream stream){
+		roadStart.X = roadStart.Y = 0;
+		roadStart.Iterated = true;
 
-		r1.setRoad(Directions.UP,r2);
-		r2.setRoad(Directions.LEFT, r3);
-		r2.setRoad(Directions.RIGHT, r4);
+		AvailableRoads ar = roadStart.getNextRoads();
+		if(ar.roads[0] != null){
+			ShowMapSetRoad(ar.roads[0], roadStart, 0);
+		}
+		if(ar.roads[1] != null){
+			ShowMapSetRoad(ar.roads[1], roadStart, 1);
+		}
+		if(ar.roads[2] != null){
+			ShowMapSetRoad(ar.roads[2], roadStart, 2);
+		}
+		if(ar.roads[3] != null){
+			ShowMapSetRoad(ar.roads[3], roadStart, 3);
+		}
 
-		Car c = new Civil();
-		c.setID("c");
+		// When this point is reached, all road has its X,Y coord set //
 
-		r1.setCar(c);
-		c.setRoadUnderCar(r1);
-		Output.resume();
-		// pálya felépítése - vége //
+		int MinX = 0,MinY = 0;
+		int MaxX = 0,MaxY = 0;
 
-		// 1. lépés //
-		c.Update();
-		// 2. lépés //
-		c.Update();
+		ListIterator<Road> i = roads.listIterator();
 
-		Output.methodEnds(ID,"TestMap3 - Mozgatas");
+		Road current;
+		while(i.hasNext()){
+			current = i.next();
+			if(current.X < MinX) MinX = current.X;
+			if(current.Y < MinY) MinY = current.Y;
+
+			if(current.X > MaxX) MaxX = current.X;
+			if(current.Y > MaxY) MaxY = current.Y;
+		}
+
+		while(i.hasPrevious()){
+			current = i.previous();
+			current.X -= MinX;
+			current.Y -=MinY;
+		}
+
+		// And here we got every road with a positive X,Y coord //
+		char Map[][] = new char[(MaxY-MinY+1)*3][(MaxX-MinX+1)*3];
+		while(i.hasNext()){
+			current = i.next();
+			// Road SpecChar //
+			Map[current.Y*3][current.X*3] = '@';
+			Map[current.Y*3][current.X*3+1] = ' ';
+			// Road Building //
+			if(current.hasBuilding() != null)
+				Map[current.Y*3][current.X*3+2] = current.hasBuilding().showMapChar();
+			else
+				Map[current.Y*3][current.X*3+2] = ' ';
+			// Road ID //
+			char[] roadID = current.ID.toString().toCharArray();
+			for(int idi=0;idi<3;idi++){
+				if(idi < roadID.length)
+					Map[current.Y*3+1][current.X*3+idi] = roadID[idi];
+				else
+					Map[current.Y*3+1][current.X*3+idi] = ' ';
+			}
+			// Road Car //
+			if(current.hasCar() != null)
+				Map[current.Y*3+2][current.X*3] = current.hasCar().showMapChar();
+			else
+				Map[current.Y*3+2][current.X*3] = ' ';
+			// Road Pickup //
+			if(current.hasPickup() != null)
+				Map[current.Y*3+2][current.X*3+1] = current.hasPickup().showMapChar();
+			else
+				Map[current.Y*3+2][current.X*3+1] = ' ';
+			// Road TrafficController //
+			if(current.hasTrafficController() != null)
+				Map[current.Y*3+2][current.X*3+2] = current.hasTrafficController().showMapChar();
+			else
+				Map[current.Y*3+2][current.X*3+2] = ' ';
+		}
+		for(int ii=0;ii<(MaxY-MinY+1)*3;ii++)
+		stream.println(Map[ii]);
 	}
 
-	/**
-	 * Building interaction tesztelése
-	 */
-	public void TestMap4(){
-		Output.methodStarts(ID,"TestMap4 - Building interakcio");
-		Output.ignore();
-		Road roadWithBank = new Road();
-		roadWithBank.setID("roadWithBank");
-		Robber robber = new Robber();
-		robber.setID("robber");
-		Bank bank = new Bank();
-		bank.setID("bank");
-		Road roadWithHideout = new Road();
-		roadWithHideout.setID("roadWithHideout");
-		Hideout hideout = new Hideout();
-		hideout.setID("hideout");
-		roadWithBank.setBuilding(bank);
-		roadWithHideout.setBuilding(hideout);
-		Output.resume();
+			/**
+			 * ShowMap indítja el ezt a rekurzív fv-t
+			 * ami bejárja az utakat és kitölti az X,Y koordinátájuk
+			 */
+	public void ShowMapSetRoad(Road current,Road prev,int direction){
+		if(current.Iterated)
+			return;
 
-		System.out.print("h = hideout interaction ; b = bank interaction: ");
-		String line = null;
-		try {
-			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
-		} catch (IOException ex) {
-
-		}
-		if(line.equals("b")){
-			robber.setRoadUnderCar(roadWithBank);
-			robber.Update();
-		} else if(line.equals("h")){
-			robber.setRoadUnderCar(roadWithHideout);
-			robber.Update();
+		AvailableRoads ar = current.getNextRoads();
+		// Position this road //
+		switch(direction){
+			case 0:	// The prev road is right to us //
+				current.X = prev.X-1;
+				current.Y = prev.Y;
+				break;
+			case 1:	// The prev road is down to us //
+				current.X = prev.X;
+				current.Y = prev.Y-1;
+				break;
+			case 2:	// The prev Road is left to us //
+				current.X = prev.X+1;
+				current.Y = prev.Y;
+				break;
+			case 3:	// And up //
+				current.X = prev.X;
+				current.Y = prev.Y+1;
+				break;
 		}
 
-		Output.methodEnds(ID,"TestMap4 - Building interakcio");
-	}
+		current.Iterated = true;
 
-        /**
-         * Közlekedés / Stop és Piros tábla teszt
-         */
-	public void TestMap5(){
-		Output.methodStarts(ID,"TestMap5 - Piros lampa/Stoptabla interakcio");
-		/*
-                 * Pálya:
-                 * thirdRoad
-                 * roadWithTC
-                 * startRoad
-                 */
-
-                Output.ignore();
-		//Utak létrehozása
-		Road startRoad = new Road();
-		startRoad.setID("startRoad");
-		Road roadWithTC = new Road();
-		roadWithTC.setID("roadWithTC");
-		Road thirdRoad = new Road();
-		thirdRoad.setID("thirdRoad");
-		//Utak összekapcsolása
-		startRoad.setRoad(Directions.UP,roadWithTC);
-		roadWithTC.setRoad(Directions.UP, thirdRoad);
-		//Rabló elhelyezése
-		Car t = new Civil();
-		t.setID("civil");
-		t.setRoadUnderCar(startRoad);
-		//TrafficController létrehozása
-		Lamp l = new Lamp();
-		l.setID("Lamp");
-		StopSign s = new StopSign();
-		s.setID("StopSign");
-		Output.resume();
-
-		//A felhasználó döntése szerinti TC lerakása
-		System.out.print("p = piros lámpa interaction ; s = stoptábla interaction: ");
-		String line = null;
-		try {
-			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
-		} catch (IOException ex) {
-
+		if(ar.roads[0] != null){
+			ShowMapSetRoad(ar.roads[0], current, 0);
 		}
-		if(line.equals("p")){
-			roadWithTC.setTrafficController(l);
-		} else if(line.equals("s")){
-			roadWithTC.setTrafficController(s);
-
+		if(ar.roads[1] != null){
+			ShowMapSetRoad(ar.roads[1], current, 1);
 		}
-
-		//Végül kettőt lépni kell a kocsival
-		t.Update();
-		t.Update();
-		t.Update();
-		t.Update();
-		t.Update();
-		t.Update();
-		Output.resume();
-
-
-
-		Output.methodEnds(ID,"TestMap5 - Piros lampa/Stoptabla interakcio");
-	}
-
-        /**
-         * Közlekedés / Exit tábla teszt
-         */
-	public void TestMap6(){
-		Output.methodStarts(ID,"TestMap6 - Exit tabla interakcio");
-		/*
-                 * Pálya:
-                 * FourthRoad
-                 * secondRoad - ExitRoad
-                 * startRoad
-                 */
-                Output.ignore();
-		//Utak létrehozása
-		Road startRoad = new Road();
-		startRoad.setID("startRoad");
-		Road secondRoad = new Road();
-		secondRoad.setID("secondRoad");
-		Road ExitRoad = new Road();
-		ExitRoad.setID("ExitRoad");
-		Road FourthRoad = new Road();
-		FourthRoad.setID("FourthRoad");
-		//Utak összekapcsolása
-		startRoad.setRoad(Directions.UP,secondRoad);
-		secondRoad.setRoad(Directions.RIGHT, ExitRoad);
-		secondRoad.setRoad(Directions.UP, FourthRoad);
-
-		//Kocsi referencia létrehozása
-		Car c;
-			
-		
-		System.out.print("c = civil interaction ; r = rabló interaction; p = rendőr interakció: ");
-		String line = null;
-		try {
-			 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
-		} catch (IOException ex) {
-
+		if(ar.roads[2] != null){
+			ShowMapSetRoad(ar.roads[2], current, 2);
 		}
-		if(line.equals("c")){
-			c = new Civil();
-			c.setID("civil");
-			c.setRoadUnderCar(startRoad);
-		} else if(line.equals("r")){
-			c = new Robber();
-			c.setID("robber");
-			c.setRoadUnderCar(startRoad);
+		if(ar.roads[3] != null){
+			ShowMapSetRoad(ar.roads[3], current, 3);
 		}
-		 else if(line.equals("p")){
-			c = new Police();
-			c.setID("police");
-			c.setRoadUnderCar(startRoad);
-		}
-		else{return;}
-		
-		
-		//TrafficController létrehozása
-		ExitSign es = new ExitSign();
-		es.setID("ExitSign");
-		ExitRoad.setTrafficController(es);
-		Output.resume();
-
-		c.Update();
-		c.Update();
-		c.Update();
-		
-	    
-
-		Output.methodEnds(ID,"TestMap6 - Exit tábla interakció");
-	}
-
-	/**
-	 * Inicializáció tesztelése
-	 */
-	public void TestMap7(){
-		Output.methodStarts(ID,"TestMap7 - Inicializalas");
-		Initialization();
-		Output.methodEnds(ID,"TestMap7");
 	}
 }

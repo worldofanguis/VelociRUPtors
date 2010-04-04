@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 /**
  * A közlekedési lámpát reprezentáló osztály.
  */
@@ -28,10 +27,9 @@ public class Lamp extends ClassID implements TrafficController {
 		else if(Direction == 1){ p = "UP"; }
 		else if(Direction == 2){ p = "RIGHT"; }
         else if(Direction == 3){ p = "DOWN"; }
-		Output.methodStarts(ID,"isGreen(" + p + ")");
 
 		//visszatérési érték
-                boolean ret;
+        boolean ret;
 
 		//ret = state[Direction];
 
@@ -47,9 +45,8 @@ public class Lamp extends ClassID implements TrafficController {
 
 
 
-                String p2 = (ret) ? new String("true") : new String("false");
+        String p2 = (ret) ? new String("true") : new String("false");
 
-		Output.methodEnds(ID,"isGreen(" + p + ")",p2);
 		return ret;
 	}
 
@@ -57,9 +54,6 @@ public class Lamp extends ClassID implements TrafficController {
          * A lámpa állapotát frissítő függvény.
          */
 	public void Update(){
-		Output.methodStarts(ID,"Update()");
-
-		Output.methodEnds(ID,"Update()");
 	}
 
 	/**
@@ -68,9 +62,11 @@ public class Lamp extends ClassID implements TrafficController {
          * @param car Aki meghívta.
          */
         public void whatSign(Car car){
-		Output.methodStarts(ID, "whatSign("+car.toString()+")");
 		car.Interaction(this);
-		Output.methodEnds(ID, "whatSign("+car.toString()+")");
+	}
+
+	public char showMapChar() {
+		return 'L';
 	}
 
 }

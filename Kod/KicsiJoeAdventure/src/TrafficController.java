@@ -10,5 +10,5 @@ public interface TrafficController {
          * @param car Aki megszólította, akinek reagálni kell.
          */
 	public void whatSign(Car car);
-
+	public char showMapChar();
 }

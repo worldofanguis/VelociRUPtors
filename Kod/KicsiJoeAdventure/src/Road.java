@@ -15,6 +15,7 @@ public class Road extends ClassID {
          */
 	private Car carOnMe;
 
+	private Pickup pickup;
         /**
          * Az útszakaszhoz kapcsolódó utak referenciái.
          */
@@ -28,14 +29,15 @@ public class Road extends ClassID {
         /**
          * Konstruktor. Az inicializáláshoz kapott objektumnév: r.
          */
+
+	public int X,Y;
+	public boolean Iterated;
+
 	public Road(){
-            setID("r");
-            Output.methodStarts(ID, "Road()");
-		next = new Road[4];
+  		next = new Road[4];
 		buildingOnMe = null;
 		carOnMe = null;
 		trafficController = null;
-            Output.methodEnds(ID, "Road()");
 	}
 
         /**
@@ -43,11 +45,7 @@ public class Road extends ClassID {
          * @return A lehetséges útirányok egy AvailableRoads osztályban.
          */
 	public AvailableRoads getNextRoads(){
-		Output.methodStarts(ID,"getNextRoads()");
-                AvailableRoads ar = new AvailableRoads(next);
-                ar.setID("ar");
-		Output.methodEnds(ID,"getNextRoads()",ar.toString());
-		return ar;
+ 		return new AvailableRoads(next);
 	}
 
         /**
@@ -55,9 +53,6 @@ public class Road extends ClassID {
          * @return A rajta lévő autó referenciája.
          */
 	public Car hasCar(){
-		Output.methodStarts(ID,"hasCar()");
-        String p = (carOnMe != null) ? carOnMe.toString() : "null";
-		Output.methodEnds(ID,"hasCar()",p );
 		return carOnMe;
 	}
 
@@ -66,9 +61,6 @@ public class Road extends ClassID {
          * @return A rajta lévő forgalomirányító-készülék referenciája.
          */
 	public TrafficController hasTrafficController(){
-		Output.methodStarts(ID,"hasTrafficController()");
-        String p = (trafficController != null) ? trafficController.toString() : "null";
-		Output.methodEnds(ID,"hasTrafficController()", p);
         return trafficController;
 	}
 
@@ -76,11 +68,12 @@ public class Road extends ClassID {
          * Van mellette épület?
          * @return Az út melletti épület referenciája.
          */
-        public Building hasBuilding(){
-		Output.methodStarts(ID,"hasBuilding()");
-		String p = (buildingOnMe != null) ? buildingOnMe.toString() : "null";
-		Output.methodEnds(ID,"hasTrafficController()", p);
+    public Building hasBuilding(){
         return buildingOnMe;
+	}
+
+	public Pickup hasPickup(){
+		return pickup;
 	}
 
         /**
@@ -88,9 +81,7 @@ public class Road extends ClassID {
          * @param building Az út mellé helyezendő épület.
          */
 	public void setBuilding(Building building){
-		Output.methodStarts(ID,"setBuilding(" + building.toString() + ")");
 		buildingOnMe = building;
-		Output.methodEnds(ID,"setBuilding(" + building.toString() + ")");
 	}
 
         /**
@@ -98,25 +89,19 @@ public class Road extends ClassID {
          * @param car Az útra helyezendő autó referenciája.
          */
 	public void setCar(Car car){
-		Output.methodStarts(ID,"setCar(" + car.toString() + ")");
 		carOnMe = car;
         car.setRoadUnderCar(this);
-		Output.methodEnds(ID,"setCar(" + car.toString() + ")");
 	}
 
 	public void setTrafficController(TrafficController tc){
-		Output.methodStarts(ID,"setTrafficController(" + tc.toString() + ")");
 		trafficController = tc;
-		Output.methodEnds(ID,"setTrafficController(" + tc.toString() + ")");
 	}
 
         /**
          * Eltávolítja az útról az aktuálisan ott lévő autót.
          */
 	public void removeCar(){
-		Output.methodStarts(ID,"removeCar()");
 		carOnMe = null;
-		Output.methodEnds(ID,"removeCar()");
 	}
 
         /**
@@ -125,8 +110,6 @@ public class Road extends ClassID {
          * @param road A csatlakozó út
          */
 	public void setRoad(Directions Direction,Road road){
-		Output.methodStarts(ID,"setRoad("+road.toString()+")");
 		next[Direction.value] = road;
-		Output.methodEnds(ID,"setRoad("+road.toString()+")");
 	}
 }

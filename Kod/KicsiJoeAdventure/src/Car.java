@@ -53,8 +53,6 @@ public abstract class Car extends ClassID {
          * értéket ad vissza.
          */
 	public boolean canBeArrested(){
-                Output.methodStarts(ID, "canBeArrested()");
-                Output.methodEnds(ID,"canBeArrested()","false");
 		return false;
 	}
 
@@ -63,10 +61,6 @@ public abstract class Car extends ClassID {
          * @return Az autó aktuális sebessége (~mikor indul el újra).
          */
 	public int getSpeed(){
-		Output.methodStarts(ID,"getSpeed()");
-
-
-		Output.methodEnds(ID,"getSpeed()",""+tickCount+"");
 		return tickCount;
 	}
 
@@ -74,7 +68,6 @@ public abstract class Car extends ClassID {
          * Autó mozgatása.
          */
 	public void Move(){
-		Output.methodStarts(ID,"Move()");
 
 		// Mozgatás //
 		// plannedDirection beállítása //
@@ -124,7 +117,6 @@ public abstract class Car extends ClassID {
 		if(tickCount == 0)
 		    MoveTo(ar.roads[plannedDirection]);
 		// Mozgatás - vége //
-		Output.methodEnds(ID,"Move()");
 
 	}
 
@@ -133,7 +125,6 @@ public abstract class Car extends ClassID {
          * @param road Az út, amelyikre áthelyezzük.
          */
 	public void MoveTo(Road road){
-		Output.methodStarts(ID,"MoveTo("+road.toString()+")");
         Car c = road.hasCar();
         if ( c != null ) {
             Interaction(c);
@@ -142,7 +133,6 @@ public abstract class Car extends ClassID {
             roadUnderMe = road;
             road.setCar(this);
         }
-		Output.methodEnds(ID,"MoveTo("+road.toString()+")");
 	}
 
         /**
@@ -150,7 +140,6 @@ public abstract class Car extends ClassID {
          * @return A visszatérési érték true, ha az autó még a pályán van.
          */
 	public boolean Update(){
-		Output.methodStarts(ID,"Update()");
 
 		if(tickCount > 0) tickCount--;
 		
@@ -160,7 +149,6 @@ public abstract class Car extends ClassID {
 		   //ExitCar
 		   if(DeadEnd(ar)){
 		       roadUnderMe.removeCar();
-		       Output.methodEnds(ID,"Update()","false");
 		       return false;
 		   }
 		   //Mozgatás, ha lehetséges
@@ -168,7 +156,6 @@ public abstract class Car extends ClassID {
 		}
 		
 		// Mozgatás - vége //
-		Output.methodEnds(ID,"Update()","true");
 		return true;
 	}
 
@@ -243,6 +230,8 @@ public abstract class Car extends ClassID {
          * a leszármazottaknak kell implementálni
          * @param car Az autó aki ott van, ahova menni szeretne.
          */
-        public abstract void Interaction(Car car);
+    public abstract void Interaction(Car car);
+
+	public abstract char showMapChar();
 
 }

@@ -14,9 +14,6 @@ public class Robber extends Car {
          * Konstruktor. Az inicializálásnál megjelenő objektumnév: me.
          */
         public Robber(){
-            setID("me");
-            Output.methodStarts(ID,"Robber()");
-            Output.methodEnds(ID,"Robber()");
 	}
 
         /**
@@ -25,9 +22,7 @@ public class Robber extends Car {
          */
 	@Override
 	public boolean canBeArrested(){
-                Output.methodStarts(ID, "canBeArrested()");
-                Output.methodEnds(ID,"canBeArrested()","true");
-		return true;
+  		return true;
 	}
 
         /**
@@ -35,9 +30,6 @@ public class Robber extends Car {
          * @param sign Azon tábla referenciája, amelyikbe "belefutott".
          */
 	public void Interaction(StopSign sign){
-		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
-
-		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 
         /**
@@ -45,7 +37,6 @@ public class Robber extends Car {
          * @param sign Azon tábla referenciája, amelyikbe "belefutott".
          */
 	public void Interaction(ExitSign sign){
-		Output.methodStarts(ID,"Interaction("+sign.toString()+")");
 		ar.roads[plannedDirection] = null;
 
 		if(moreThan1AR(ar)){	// több szabad irány van, választunk //
@@ -86,7 +77,6 @@ public class Robber extends Car {
 		if(tickCount == 0)
 		    if((tc=ar.roads[plannedDirection].hasTrafficController()) != null)
 			tc.whatSign(this);
-		Output.methodEnds(ID,"Interaction("+sign.toString()+")");
 	}
 
         /**
@@ -94,9 +84,7 @@ public class Robber extends Car {
          * @param bank Azon bank referenciája, amelyikhez érkezett.
          */
 	public void Interaction(Bank bank){
-		Output.methodStarts(ID,"Interaction("+bank.toString()+")");
 		bank.robBank();
-		Output.methodEnds(ID,"Interaction("+bank.toString()+")");
 	}
 
         /**
@@ -104,9 +92,7 @@ public class Robber extends Car {
          * @param hideout A rejtekhely referenciája, amely mellé ért.
          */
 	public void Interaction(Hideout hideout){
-		Output.methodStarts(ID,"Interaction("+hideout.toString()+")");
 		hideout.arrivedToHideout();
-		Output.methodEnds(ID,"Interaction("+hideout.toString()+")");
 	}
 
         /**
@@ -114,9 +100,6 @@ public class Robber extends Car {
          * @param lamp Azon lámpa referenciája, amelyikbe "belefutott".
          */
 	public void Interaction(Lamp lamp){
-		Output.methodStarts(ID,"Interaction("+lamp.toString()+")");
-		
-		Output.methodEnds(ID,"Interaction("+lamp.toString()+")");
 	}
 
     /**
@@ -124,15 +107,12 @@ public class Robber extends Car {
      * (Pontlevonás és átveszi a sebességét, hogy ne menjen neki többször)
      */
      public void Interaction(Car car){
-         Output.methodStarts(ID, "Interaction(" + car + ")");
          Main.game.AddPoints(-5);
          tickCount = car.getSpeed();
-         Output.methodEnds(ID, "Interaction(" + car + ")");
      }
 
 	@Override
 	public boolean Update(){
-	    Output.methodStarts(ID,"Update()");
 
 		// Mozgás plannedDirection felé //
 		//Épület ellenőrzése - ez a legfontosabb, az ütközés ellenőrzés jöhet ez után
@@ -145,7 +125,11 @@ public class Robber extends Car {
                  * Ez a későbbiekben nem így lesz (játékos irányít),
                  * egyelőre teszteléshez így implementáltuk. */
 		super.Update();
-		Output.methodEnds(ID,"Update()","true");
 		return true;
+	}
+
+	@Override
+	public char showMapChar() {
+		return 'R';
 	}
 }

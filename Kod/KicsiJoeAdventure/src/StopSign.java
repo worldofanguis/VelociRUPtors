@@ -18,9 +18,11 @@ public class StopSign extends ClassID implements TrafficController {
          * @param car Az őt megszólító autó.
          */
 	public void whatSign(Car car){
-		Output.methodStarts(ID, "whatSign("+car.toString()+")");
 		car.Interaction(this);
-		Output.methodEnds(ID, "whatSign("+car.toString()+")");
+	}
+
+	public char showMapChar() {
+		return 'S';
 	}
 
 }
