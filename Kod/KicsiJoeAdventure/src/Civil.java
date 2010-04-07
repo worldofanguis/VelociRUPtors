@@ -8,8 +8,10 @@ public class Civil extends Car {
         /**
          * Konstruktor. Az inicializáláshoz kapott objektumnév: civil.
          */
-	public Civil(){
- 	}
+	Civil(int Speed) {
+		super();
+		tickCount = Speed;
+	}
 
         /**
          * STOP táblával történő interakció (meg kell állnia előtte).

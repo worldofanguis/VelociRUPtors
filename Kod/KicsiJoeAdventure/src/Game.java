@@ -29,7 +29,7 @@ public class Game {
 		/**
          * Értéke true, ha már kirabolták a bankot, egyébként false.
          */
-        private boolean bankIsRobbed;
+    private boolean bankIsRobbed;
 
         /**
          * A játékos autójának referenciája.
@@ -49,7 +49,10 @@ public class Game {
         /**
          * A játékos pontszáma
          */
-        private int points;
+    private int points;
+
+	public boolean randomEnabled;
+	private PrintStream outputStream;
 
         /**
          * Konstruktor, alaphelyzet (nem rabolták ki a bankot)
@@ -59,14 +62,17 @@ public class Game {
 		lamps = new LinkedList<Lamp>();
 		roads = new LinkedList<Road>();
 		bankIsRobbed = false;
-                points = 0;
+        points = 0;
+
+		randomEnabled = false;
+		outputStream = System.out;
 	}
 
         /**
          * Pontszám módosítása.
          * @param add Az érték, amit hozzáadunk a pontszámhoz.
          */
-        public void AddPoints(int add) {
+        public void addPoints(int add) {
             points += add;
         }
 
@@ -100,6 +106,14 @@ public class Game {
          */
 	public void Initialization(){
 		loadMapFromFile("map.txt");
+	}
+
+	public void addCar(Car c){
+		cars.add(c);
+	}
+
+	public void addLamp(Lamp l){
+		lamps.add(l);
 	}
 
         /**
@@ -226,6 +240,7 @@ public class Game {
 			roadStart = roads.get(0);
 		}catch(Exception e){
 			System.out.println("Noob");
+			e.printStackTrace();
 		}
 	}
 
@@ -380,6 +395,67 @@ public class Game {
 		}
 		if(ar.roads[3] != null){
 			ShowMapSetRoad(ar.roads[3], current, 3);
+		}
+	}
+
+	public void CommandInterpreter(String Command){
+		if(Command.startsWith("RandomEnabled(")){
+			if(Command.substring(14,Command.length()-1).equalsIgnoreCase("true")){
+				randomEnabled = true;
+			}else{
+				randomEnabled = false;
+			}
+		}else if(Command.startsWith("SetBankState(")){
+			if(Command.substring(13,Command.length()-1).equalsIgnoreCase("true")){
+				bankIsRobbed = true;
+			}else{
+				bankIsRobbed = false;
+			}
+		}else if(Command.startsWith("LoadMap(")){
+			loadMapFromFile(Command.substring(8,Command.length()-1));
+		}else if(Command.startsWith("SetOutput(")){
+			String s = Command.substring(10,Command.length()-1);
+			if(s.isEmpty())
+				outputStream = System.out;
+			else{
+				try{
+					outputStream = new PrintStream(new File(s));
+				}catch(Exception e){
+					System.out.println("FileNotFound");
+					outputStream = System.out;
+				}
+			}
+		}else if(Command.startsWith("SetDirection(")){
+			StringTokenizer st = new StringTokenizer(Command.substring(13,Command.length()-1),",");
+			cars.get(Integer.parseInt(st.nextToken())).setDirection(Integer.parseInt(st.nextToken()));
+		}else if(Command.startsWith("SetTick(")){
+			StringTokenizer st = new StringTokenizer(Command.substring(8,Command.length()-1),",");
+			cars.get(Integer.parseInt(st.nextToken())).setTick(Integer.parseInt(st.nextToken()));
+		}else if(Command.startsWith("CivilGen(")){
+			StringTokenizer st = new StringTokenizer(Command.substring(9,Command.length()-1),",");
+			roads.get(Integer.parseInt(st.nextToken())).setCar(new Civil(Integer.parseInt(st.nextToken())));
+		}else if(Command.startsWith("RobberGen(")){
+			StringTokenizer st = new StringTokenizer(Command.substring(10,Command.length()-1),",");
+			roads.get(Integer.parseInt(st.nextToken())).setCar(new Robber(Integer.parseInt(st.nextToken())));
+		}else if(Command.startsWith("PoliceGen(")){
+			StringTokenizer st = new StringTokenizer(Command.substring(10,Command.length()-1),",");
+			roads.get(Integer.parseInt(st.nextToken())).setCar(new Police(Integer.parseInt(st.nextToken())));
+		}else if(Command.startsWith("BunnyGen(")){
+			StringTokenizer st = new StringTokenizer(Command.substring(9,Command.length()-1),",");
+			roads.get(Integer.parseInt(st.nextToken())).setPickup(new Bunny());
+		}else if(Command.startsWith("ShowMap()")){
+			ShowMap(outputStream);
+		}else if(Command.startsWith("SetLampColor(")){
+			StringTokenizer st = new StringTokenizer(Command.substring(13,Command.length()-1),",");
+			lamps.get(Integer.parseInt(st.nextToken())).setColor(Boolean.parseBoolean(st.nextToken()));
+		}else if(Command.startsWith("SetLampTick(")){
+			StringTokenizer st = new StringTokenizer(Command.substring(12,Command.length()-1),",");
+			lamps.get(Integer.parseInt(st.nextToken())).setTick(Integer.parseInt(st.nextToken()));
+		}else if(Command.startsWith("Tick(")){
+			String s = Command.substring(5,Command.length()-1);
+			for(int i=0;i<Integer.parseInt(s);i++){
+				Update();
+			}
 		}
 	}
 }

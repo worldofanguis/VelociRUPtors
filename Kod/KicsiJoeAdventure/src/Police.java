@@ -18,9 +18,12 @@ public class Police extends Car {
         /**
          * Konstruktor. Az inicializálásban megjelenő objektumnév: p.
          */
-	public Police(){
-            policeModeActivated = false;
- 	}
+
+	Police(int Speed) {
+		super();
+		policeModeActivated = false;
+		tickCount = Speed;
+	}
 
         /**
          * A rabló letartóztatása megtörtént, jelez a Game osztálynak.

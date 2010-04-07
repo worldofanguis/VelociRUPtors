@@ -35,7 +35,8 @@ public abstract class Car extends ClassID {
 	protected AvailableRoads ar;
 
 	public Car(){
-            tickCount = 0;
+		Main.game.addCar(this);
+        tickCount = 0;
 	}
 
 	/**
@@ -188,6 +189,14 @@ public abstract class Car extends ClassID {
 				arC++;
 		}
 		return (arC == 0);
+	}
+
+	public void setDirection(int Direction){
+		plannedDirection = Direction;
+	}
+
+	public void setTick(int Tick){
+		tickCount = Tick;
 	}
 
         /**

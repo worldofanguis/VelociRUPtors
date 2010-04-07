@@ -13,7 +13,9 @@ public class Robber extends Car {
 	/**
          * Konstruktor. Az inicializálásnál megjelenő objektumnév: me.
          */
-        public Robber(){
+	Robber(int Speed) {
+		super();
+		tickCount = Speed;
 	}
 
         /**
@@ -107,7 +109,7 @@ public class Robber extends Car {
      * (Pontlevonás és átveszi a sebességét, hogy ne menjen neki többször)
      */
      public void Interaction(Car car){
-         Main.game.AddPoints(-5);
+         Main.game.addPoints(-5);
          tickCount = car.getSpeed();
      }
 

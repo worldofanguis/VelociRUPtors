@@ -97,6 +97,10 @@ public class Road extends ClassID {
 		trafficController = tc;
 	}
 
+	public void setPickup(Pickup p){
+		pickup = p;
+	}
+
         /**
          * Eltávolítja az útról az aktuálisan ott lévő autót.
          */

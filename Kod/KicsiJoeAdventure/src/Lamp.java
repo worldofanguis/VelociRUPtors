@@ -11,9 +11,13 @@ public class Lamp extends ClassID implements TrafficController {
          * A lámpa állapota az egyes útszakaszokhoz. (zöld = true)
          */
 	private boolean state[] = new boolean[4];
+	private int startTick;
+	private int currentTick;
 
 	public Lamp(){
-
+		Main.game.addLamp(this);
+		startTick = 5;		// def values //
+		currentTick = 5;
 	}
 
         /**
@@ -54,6 +58,10 @@ public class Lamp extends ClassID implements TrafficController {
          * A lámpa állapotát frissítő függvény.
          */
 	public void Update(){
+		if(--currentTick == 0){
+			// váltás //
+			currentTick = startTick;
+		}
 	}
 
 	/**
@@ -61,12 +69,23 @@ public class Lamp extends ClassID implements TrafficController {
          * Meghívja az őt megszólító lámpakezelő függvényét.
          * @param car Aki meghívta.
          */
-        public void whatSign(Car car){
+    public void whatSign(Car car){
 		car.Interaction(this);
 	}
 
 	public char showMapChar() {
 		return 'L';
+	}
+
+	public void setColor(boolean Green){
+		state[0] = Green;
+		state[1] = Green;
+		state[2] = Green;
+		state[3] = Green;
+	}
+
+	public void setTick(int Tick){
+		startTick = Tick;
 	}
 
 }
