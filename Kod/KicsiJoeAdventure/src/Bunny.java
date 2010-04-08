@@ -1,12 +1,16 @@
+/**
+ * Class Bunny:
+ * A húsvéti nyulat reprezentáló osztály.
+ * A rablónak letartóztatás-mentességet jelent.
+ */
+public class Bunny extends ClassID implements Pickup{
 
-public class Bunny implements Pickup{
+    public void whatPickup(Car car) {
 
-	public void whatPickup(Car car) {
-		
-	}
+    }
 
-	public char showMapChar() {
-		return 'N';
-	}
+    public char showMapChar() {
+            return 'N';
+    }
 
 }

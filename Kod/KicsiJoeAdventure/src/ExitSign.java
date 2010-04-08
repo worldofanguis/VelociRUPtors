@@ -2,25 +2,29 @@
  * EXIT táblát reprezentáló osztály.
  */
 
-public class ExitSign extends ClassID implements TrafficController {
+public class ExitSign implements TrafficController {
 
-        /**
-         * Konstruktor
-         */
-	public ExitSign(){
+    /**
+     * Konstruktor
+     */
+    public ExitSign(){
 
-	}
+    }
 
-	/**
-         * Mikor megszólítják, meghívja a hívó exit tábla interakciós függvényét magával.
-         * @param car Az őt meghívó jármű.
-         */
-        public void whatSign(Car car){
-		car.Interaction(this);
-	}
+    /**
+     * Mikor megszólítják, meghívja a hívó exit tábla interakciós függvényét magával.
+     * @param car Az őt meghívó jármű.
+     */
+    public void whatSign(Car car){
+        car.Interaction(this);
+    }
 
-	public char showMapChar() {
-		return 'E';
-	}
+    /**
+     *
+     * @return E mint EXIT tábla
+     */
+    public char showMapChar() {
+        return 'E';
+    }
 
 }

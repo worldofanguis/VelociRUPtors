@@ -3,26 +3,30 @@
  * A STOP táblát reprezentáló osztály.
  */
 
-public class StopSign extends ClassID implements TrafficController {
+public class StopSign implements TrafficController {
 
-        /**
-         * Konstruktor
-         */
-	public StopSign(){
+    /**
+     * Konstruktor
+     */
+    public StopSign(){
 
-	}
+    }
 
-        /**
-         * Ezzel a metódussal tudják megszólítani a járművek. Meghívja az ő
-         * stoptábla-kezelő függvényüket.
-         * @param car Az őt megszólító autó.
-         */
-	public void whatSign(Car car){
-		car.Interaction(this);
-	}
+    /**
+     * Ezzel a metódussal tudják megszólítani a járművek. Meghívja az ő
+     * stoptábla-kezelő függvényüket.
+     * @param car Az őt megszólító autó.
+     */
+    public void whatSign(Car car){
+            car.Interaction(this);
+    }
 
-	public char showMapChar() {
-		return 'S';
-	}
+    /**
+     *
+     * @return S mint STOP tábla
+     */
+    public char showMapChar() {
+            return 'S';
+    }
 
 }
