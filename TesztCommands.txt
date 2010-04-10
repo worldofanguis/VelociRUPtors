@@ -1,6 +1,7 @@
 RandomEnabled(false)
 LoadMap(..\..\TesztMap.txt)
 SetBankState(true)
+
 SetOutput(Out.txt)
 CivilGen(0,1)
 RobberGen(1,1)
@@ -11,4 +12,7 @@ SetLampColor(0,true)
 SetLampTick(0,3)
 ShowMap()
 Tick(2)
+ShowMap()
+
+ShowMap()
 ShowMap()

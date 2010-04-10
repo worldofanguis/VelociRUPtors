@@ -7,8 +7,6 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.*;
 
@@ -316,8 +314,10 @@ public class Game {
      * Ez az undorítóancsúnya függvény rajzolja ki a konzolra vagy egy fileba a pályát
      */
     public void ShowMap(PrintStream stream){
-        roadStart.X = roadStart.Y = 0;
-        roadStart.Iterated = true;
+       if(roadStart.Iterated == false){
+			roadStart.X = roadStart.Y = 0;
+			roadStart.Iterated = true;
+		}
 
         AvailableRoads ar = roadStart.getNextRoads();
         if(ar.roads[0] != null){
