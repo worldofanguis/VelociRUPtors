@@ -10,9 +10,24 @@ public class Bunny extends ClassID implements Pickup{
      */
     private int TickLeft;
 
+    /**
+     * Az út, amin leledzik.
+     */
+    private Road roadUnderMe;
+
     public Bunny(){
-        Main.game.addPickup(this);
+        ID = Main.game.addPickup(this);
         TickLeft = 5; //Valami
+        Main.game.outputStream.println("IBUNNY - ID"+ID+" TickLeft:"+TickLeft);
+    }
+
+    /**
+     * Beállítja, hogy melyik útszakaszon van a nyúl.
+     * @param r Az útszakasz, amire rakjuk.
+     */
+    public void setRoad(Road r)
+    {
+        roadUnderMe = r;
     }
 
     /**
@@ -33,10 +48,11 @@ public class Bunny extends ClassID implements Pickup{
      * @return false, ha már nem aktív
      */
     public boolean Update() {
+        boolean ret = true;
         if(--TickLeft == 0)
-            return false;
-        else
-            return true;
+            ret = false;
+        Main.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+roadUnderMe.ID+" TickLeft:"+TickLeft);
+        return ret;
     }
 
 }

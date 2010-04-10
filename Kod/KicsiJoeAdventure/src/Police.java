@@ -20,9 +20,8 @@ public class Police extends Car {
      * Determinisztikus teszteléskor paraméterként kapja meg a sebességét.
      */
     Police(int Speed) {
-        super();
+        super(Speed);
         policeModeActivated = false;
-        startSpeed = tickCount = Speed;
     }
 
         /**

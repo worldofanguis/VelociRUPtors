@@ -9,8 +9,7 @@ public class Civil extends Car {
      * A determinisztikus teszteseknél létrehozáskor kap sebességet.
      */
     Civil(int Speed) {
-        super();
-        startSpeed = tickCount = Speed;
+        super(Speed);
     }
 
     /**

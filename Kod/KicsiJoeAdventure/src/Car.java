@@ -34,10 +34,11 @@ public abstract class Car extends ClassID {
      */
     protected AvailableRoads ar;
 
-    public Car(){
-        Main.game.addCar(this);
-        tickCount = 0;
+    public Car(int Speed){
+        ID = Main.game.addCar(this);
+        tickCount = startSpeed = Speed;
         plannedDirection = 0;
+        Main.game.outputStream.println("ICAR - ID:"+ID+" Tipus:"+showMapChar()+" MaxTick:"+startSpeed);
     }
 
     /**
@@ -142,7 +143,7 @@ public abstract class Car extends ClassID {
         }
         
         String p = (ret) ? "" : "-"; //Kilépett
-        Output.print("CAR - ID:"+ID+" RoadID:"+roadUnderMe.ID+" Tick:"+tickCount+" "+p);
+        Main.game.outputStream.println("CAR - ID:"+ID+" RoadID:"+roadUnderMe.ID+" Tick:"+tickCount+" "+p);
         // Mozgatás - vége //
         return ret;
     }

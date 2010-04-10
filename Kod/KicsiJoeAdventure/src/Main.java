@@ -37,10 +37,13 @@ public class Main {
 			String line;
 			game = new Game();
 			try{
-				BufferedReader r = new BufferedReader(new FileReader(new File(Filename)));
-				while((line = r.readLine()) != null){
-				game.CommandInterpreter(line);
-				}
+                            game.outputStream.println("[START]");
+                            BufferedReader r = new BufferedReader(new FileReader(new File(Filename)));
+                            while((line = r.readLine()) != null){
+                            game.CommandInterpreter(line);
+                            }
+                            game.outputStream.println("[END]");
+                            game.outputStream.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}

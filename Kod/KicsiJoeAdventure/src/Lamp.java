@@ -18,10 +18,26 @@ public class Lamp extends ClassID implements TrafficController {
      */
     private int currentTick;
 
+    /**
+     * Az út, amin van.
+     */
+    private Road roadUnderMe;
+
     public Lamp(){
-            Main.game.addLamp(this);
-            startTick = 5;		// def values //
-            currentTick = 5;
+        state[0] = state[1] = state[2] = state[3] = false;
+        ID = Main.game.addLamp(this);
+        startTick = 5;		// def values //
+        currentTick = 5;
+        Main.game.outputStream.println("ILAMP - ID:"+ID+" Tick:"+startTick);
+    }
+
+    /**
+     * Beállítja, hogy melyik útszakaszon van a lámpa.
+     * @param r Az útszakasz, amire rakjuk.
+     */
+    public void setRoad(Road r)
+    {
+        roadUnderMe = r;
     }
 
     /**
@@ -38,9 +54,11 @@ public class Lamp extends ClassID implements TrafficController {
      */
     public void Update(){
         if(--currentTick == 0){
-            // váltás //
+            for (int i=0; i<4; i++)
+                state[i] = !(state[i]);
             currentTick = startTick;
         }
+        Main.game.outputStream.println("LAMP - ID:"+ID+" RoadID:"+roadUnderMe.ID+" IsRed:"+!(state[0])+" Tick:"+currentTick);
     }
 
     /**

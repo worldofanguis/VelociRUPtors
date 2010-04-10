@@ -16,8 +16,7 @@ public class Robber extends Car {
      * @param Speed A kezdeti sebesség
      */
     Robber(int Speed) {
-            super();
-            startSpeed = tickCount = Speed;
+            super(Speed);
     }
 
     /**

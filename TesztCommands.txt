@@ -1,8 +1,7 @@
+SetOutput(Out.txt)
 RandomEnabled(false)
 LoadMap(..\..\TesztMap.txt)
 SetBankState(true)
-
-SetOutput(Out.txt)
 CivilGen(0,1)
 RobberGen(1,1)
 PoliceGen(2,1)

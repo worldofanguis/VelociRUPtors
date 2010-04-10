@@ -15,22 +15,22 @@ public class Game {
     /**
      * A pályán található autók referenciái.
      */
-    private List<Car> cars;
+    private LinkedList<Car> cars;
 
     /**
      * A pályán található lámpák referenciái.
      */
-    private List<Lamp> lamps;
+    private LinkedList<Lamp> lamps;
 
     /**
      * A pályán található lámpák referenciái.
      */
-    private List<Pickup> pickups;
+    private LinkedList<Pickup> pickups;
 
     /**
      * A pálya útjainak listája.
      */
-    private List<Road> roads;
+    private LinkedList<Road> roads;
 
     /**
      * Értéke true, ha már kirabolták a bankot, egyébként false.
@@ -65,7 +65,7 @@ public class Game {
     /**
      * A program futásának kimenete
      */
-    private PrintStream outputStream;
+    public PrintStream outputStream;
 
     /**
      * Konstruktor, alaphelyzet (nem rabolták ki a bankot)
@@ -111,7 +111,7 @@ public class Game {
      * elkapta a játékost.
      */
     public void GameOver(boolean Success){
-
+        Main.game.outputStream.println("[GAMEOVER]");
     }
 
     /**
@@ -124,25 +124,31 @@ public class Game {
     /**
      * Autó hozzáadása a tárolt listához.
      * @param c A listába felvevendő autó
+     * @return Hányas indexű elem lett, amit beraktunk.
      */
-    public void addCar(Car c){
+    public int addCar(Car c){
         cars.add(c);
+        return cars.size()-1;
     }
 
     /**
      * Lámpa hozzáadása a tárolt listához
      * @param l A listába felvevendő lámpa
+     * @return Hányas indexű elem lett, amit beraktunk.
      */
-    public void addLamp(Lamp l){
+    public int addLamp(Lamp l){
         lamps.add(l);
+        return lamps.size()-1;
     }
 
     /**
      * Pickup hozzáadása a tárolt listához
      * @param p A listába felvevendő pickup
+     * @return Hányas indexű elem lett, amit beraktunk.
      */
-    public void addPickup(Pickup p){
+    public int addPickup(Pickup p){
         pickups.add(p);
+        return pickups.size()-1;
     }
 
     /**
@@ -211,6 +217,7 @@ public class Game {
                                 break;
                             case 3:	// lamp //
                                 roads.get(roadIndex).setTrafficController(new Lamp());
+                                ((Lamp)lamps.getLast()).setRoad(roads.get(roadIndex));
                                 break;
                             case 8:	// stop //
                                 roads.get(roadIndex).setTrafficController(new StopSign());
@@ -279,7 +286,11 @@ public class Game {
      */
     public void Update(){
         int i = 0;
-        int[] remove;
+
+        //Lámpák frissítése
+        for (i=0; i<lamps.size(); i++)
+            ( (Lamp)lamps.get(i) ).Update();
+
         for ( ; i< cars.size(); i++)
         {
             if ( !( ( (Car)cars.get(i) ).Update() ) )
@@ -289,10 +300,6 @@ public class Game {
             }
 
         }
-
-        //Lámpák frissítése
-        for (i=0; i<lamps.size(); i++)
-            ( (Lamp)lamps.get(i) ).Update();
 
         //Pickupok frissítése
         for ( ; i< pickups.size(); i++)
@@ -394,9 +401,8 @@ public class Game {
 
         }
 
-        Output.printMap(Map, MaxY-MinY);
-//        for(int ii=0;ii<(MaxY-MinY+1)*3;ii++)
-//            stream.println(Map[ii]);
+        for(int ii=0;ii<(MaxY-MinY+1)*3;ii++)
+            stream.println(Map[ii]);
     }
 
     /**
@@ -469,13 +475,13 @@ public class Game {
         }else if(Command.startsWith("SetOutput(")){
             String s = Command.substring(10,Command.length()-1);
             if(s.isEmpty())
-                Output.setStream(System.out);
+                outputStream = System.out;
             else{
                 try{
-                    Output.setStream( new PrintStream(new File(s)) );
+                    outputStream = new PrintStream(new File(s));
                 }catch(Exception e){
                     System.out.println("FileNotFound");
-                    Output.setStream(System.out);
+                    outputStream = System.out;
                 }
             }
         }else if(Command.startsWith("SetDirection(")){
@@ -492,7 +498,7 @@ public class Game {
             roads.get(Integer.parseInt(st.nextToken())).setCar(new Robber(Integer.parseInt(st.nextToken())));
         }else if(Command.startsWith("PoliceGen(")){
             StringTokenizer st = new StringTokenizer(Command.substring(10,Command.length()-1),",");
-                roads.get(Integer.parseInt(st.nextToken())).setCar(new Police(Integer.parseInt(st.nextToken())));
+            roads.get(Integer.parseInt(st.nextToken())).setCar(new Police(Integer.parseInt(st.nextToken())));
         }else if(Command.startsWith("BunnyGen(")){
             StringTokenizer st = new StringTokenizer(Command.substring(9,Command.length()-1),",");
             roads.get(Integer.parseInt(st.nextToken())).setPickup(new Bunny());
