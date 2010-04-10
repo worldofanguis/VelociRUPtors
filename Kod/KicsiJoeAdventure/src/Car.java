@@ -1,3 +1,6 @@
+
+import java.util.Random;
+
 /**
  * Class Car:
  * Absztrakt osztály az összes járműre vonatkozó tulajdonságokkal
@@ -70,6 +73,22 @@ public abstract class Car extends ClassID {
         // Mozgatás //
 
         // plannedDirection beállítása //
+        if (Main.game.randomEnabled)
+        {
+            //Random generálás engedélyezve.
+            Random random = new Random();
+            plannedDirection = random.nextInt(4);
+            while (ar.roads[plannedDirection] == null)
+                plannedDirection = random.nextInt(4);
+        } else {
+            // Random generálás nincs engedélyezve, feltételezzük,
+            //hogy a tesztelő olyat állított be időben be, ami jó
+            if ( ar.roads[plannedDirection] == null)
+            {
+                System.out.println("Rossz utiranybeallitas");
+                System.exit(1); //utána úgyis sírna nullexception miatt.
+            }
+        }
 
         //Közlekedésirányító ellenőrzése a plannedDirection-ön//
         //Ez meghívja a megfelelő Interaction fv-t//
@@ -106,23 +125,26 @@ public abstract class Car extends ClassID {
      * @return A visszatérési érték true, ha az autó még a pályán van.
      */
     public boolean Update(){
+        boolean ret = true;
         if(tickCount > 0) tickCount--;
 
         if(tickCount == 0){
            ar = roadUnderMe.getNextRoads();
 
-       //ExitCar
-       if(DeadEnd(ar)){
-           roadUnderMe.removeCar();
-           return false;
-       }
+           //ExitCar
+           if(DeadEnd(ar)){
+               roadUnderMe.removeCar();
+               ret = false;
+           }
 
-       //Mozgatás, ha lehetséges
-//       Move();
+           //Mozgatás, ha lehetséges
+           if(ret) Move();
         }
-
+        
+        String p = (ret) ? "" : "-"; //Kilépett
+        Output.print("CAR - ID:"+ID+" RoadID:"+roadUnderMe.ID+" Tick:"+tickCount+" "+p);
         // Mozgatás - vége //
-        return true;
+        return ret;
     }
 
     /**

@@ -394,8 +394,9 @@ public class Game {
 
         }
 
-        for(int ii=0;ii<(MaxY-MinY+1)*3;ii++)
-            stream.println(Map[ii]);
+        Output.printMap(Map, MaxY-MinY);
+//        for(int ii=0;ii<(MaxY-MinY+1)*3;ii++)
+//            stream.println(Map[ii]);
     }
 
     /**
@@ -468,13 +469,13 @@ public class Game {
         }else if(Command.startsWith("SetOutput(")){
             String s = Command.substring(10,Command.length()-1);
             if(s.isEmpty())
-                outputStream = System.out;
+                Output.setStream(System.out);
             else{
                 try{
-                    outputStream = new PrintStream(new File(s));
+                    Output.setStream( new PrintStream(new File(s)) );
                 }catch(Exception e){
                     System.out.println("FileNotFound");
-                    outputStream = System.out;
+                    Output.setStream(System.out);
                 }
             }
         }else if(Command.startsWith("SetDirection(")){

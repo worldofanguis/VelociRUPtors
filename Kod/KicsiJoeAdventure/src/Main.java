@@ -26,7 +26,6 @@ public class Main {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-                game.ShowMap(System.out);
     }
 
 }
