@@ -215,6 +215,12 @@ public abstract class Car extends ClassID {
     public abstract void Interaction(Car car);
 
     /**
+     * Felvehető nyúllal történő interakció.
+     * @param bunny A nyúl, akit fel lehet venni.
+     */
+    public abstract void Interaction(Bunny bunny);
+
+    /**
      * A pálya megjelenítésekor az autótípusokat egyedien
      * reprezentáló karaktersorozat egységes eléséhez szükséges függvény.
      * @return A karakter.

@@ -78,6 +78,14 @@ public class Civil extends Car {
      }
 
      /**
+      * Nem tudja felvenni a nyulat, békén hagyja.
+      * @param bunny
+      */
+     public void Interaction(Bunny bunny)
+     {
+     }
+
+     /**
       *
       * @return C mint Civil
       */

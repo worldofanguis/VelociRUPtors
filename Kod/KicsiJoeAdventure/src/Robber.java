@@ -88,6 +88,14 @@ public class Robber extends Car {
      }
 
      /**
+      * Nem tudja felvenni a nyulat, békén hagyja.
+      * @param bunny
+      */
+     public void Interaction(Bunny bunny)
+     {
+     }
+
+     /**
       * Frissítés
       * @return
       */

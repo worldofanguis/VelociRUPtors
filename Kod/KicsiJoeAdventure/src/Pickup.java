@@ -4,7 +4,13 @@
  * képviselő interfész.
  */
 public interface Pickup {
+
     /**
+     * Frissítő függvény.
+     */
+    public boolean Update();
+
+     /**
      * Egységes megszólító függvény, amelyet az egyes típusok
      * úgy implementálnak, hogy meghívják a paraméterként megjelenő
      * autó megfelelő interakciós függvényét.

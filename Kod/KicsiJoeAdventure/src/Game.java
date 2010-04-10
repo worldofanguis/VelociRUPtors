@@ -25,6 +25,11 @@ public class Game {
     private List<Lamp> lamps;
 
     /**
+     * A pályán található lámpák referenciái.
+     */
+    private List<Pickup> pickups;
+
+    /**
      * A pálya útjainak listája.
      */
     private List<Road> roads;
@@ -131,6 +136,14 @@ public class Game {
      */
     public void addLamp(Lamp l){
             lamps.add(l);
+    }
+
+    /**
+     * Pickup hozzáadása a tárolt listához
+     * @param p A listába felvevendő pickup
+     */
+    public void addPickup(Pickup p){
+            pickups.add(p);
     }
 
     /**
@@ -256,7 +269,9 @@ public class Game {
     /**
      * Eltávolítja az aktuális autót az autók listájáról.
      */
-    public void removeActualCar(){
+    public void removeActualCar(int index){
+        //ide nem tudom kell-e utat állítani, mert DeadEndben benne van
+        cars.remove(index);
     }
 
     /**
@@ -264,10 +279,33 @@ public class Game {
      * így léptetve a játékot.
      */
     public void Update(){
+        int i = 0;
+        int[] remove;
+        for ( ; i< cars.size(); i++)
+        {
+            if ( !( ( (Car)cars.get(i) ).Update() ) )
+            {
+                removeActualCar(i);
+                --i; //Ez azért kell, mert csökken az utána jövők indexe.
+            }
 
-            /* Car.Update() returns false
-             * removeActualCar();
-             */
+        }
+
+        //Lámpák frissítése
+        for (i=0; i<lamps.size(); i++)
+            ( (Lamp)lamps.get(i) ).Update();
+
+        //Pickupok frissítése
+        for ( ; i< pickups.size(); i++)
+        {
+            if ( !( ( (Pickup)pickups.get(i) ).Update() ) )
+            {
+                pickups.remove(i);
+                --i; //Ez azért kell, mert csökken az utána jövők indexe.
+                //Autóval valami?
+             }
+        }
+
     }
 
     /**

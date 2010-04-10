@@ -169,9 +169,17 @@ public class Police extends Car {
              tickCount = car.getSpeed();
      }
 
-	@Override
-	public char showMapChar() {
-		return 'P';
-	}
+     /**
+      * Nem tudja felvenni a nyulat, békén hagyja.
+      * @param bunny
+      */
+     public void Interaction(Bunny bunny)
+     {
+     }
+
+    @Override
+    public char showMapChar() {
+            return 'P';
+    }
 
 }

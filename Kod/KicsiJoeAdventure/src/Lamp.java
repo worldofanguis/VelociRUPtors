@@ -71,8 +71,13 @@ public class Lamp extends ClassID implements TrafficController {
         state[3] = Green;
     }
 
+    /**
+     * Beállítja a lámpa váltásáig hátralévő ciklusszámot.
+     * Determinisztikus prototípus tesztelés.
+     * @param Tick ciklusszám
+     */
     public void setTick(int Tick){
-        startTick = Tick;
+        startTick = currentTick = Tick;
     }
 
 }
