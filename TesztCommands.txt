@@ -1,5 +1,5 @@
 RandomEnabled(false)
-LoadMap(C:\Users\Ferdi\Desktop\Szoftver Labor4\VelociRUPtors\TesztMap.txt)
+LoadMap(..\..\TesztMap.txt)
 SetBankState(true)
 SetOutput(Out.txt)
 CivilGen(0,1)

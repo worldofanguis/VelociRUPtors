@@ -76,6 +76,7 @@ public class Game {
        cars = new LinkedList<Car>();
        lamps = new LinkedList<Lamp>();
        roads = new LinkedList<Road>();
+       pickups = new LinkedList<Pickup>();
        bankIsRobbed = false;
        points = 0;
        randomEnabled = false; //Random logika nem engedélyezett
@@ -135,7 +136,7 @@ public class Game {
      * @param l A listába felvevendő lámpa
      */
     public void addLamp(Lamp l){
-            lamps.add(l);
+        lamps.add(l);
     }
 
     /**
@@ -143,7 +144,7 @@ public class Game {
      * @param p A listába felvevendő pickup
      */
     public void addPickup(Pickup p){
-            pickups.add(p);
+        pickups.add(p);
     }
 
     /**

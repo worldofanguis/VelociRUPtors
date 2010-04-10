@@ -34,6 +34,7 @@ public abstract class Car extends ClassID {
     public Car(){
         Main.game.addCar(this);
         tickCount = 0;
+        plannedDirection = 0;
     }
 
     /**
@@ -117,7 +118,7 @@ public abstract class Car extends ClassID {
        }
 
        //Mozgatás, ha lehetséges
-       Move();
+//       Move();
         }
 
         // Mozgatás - vége //

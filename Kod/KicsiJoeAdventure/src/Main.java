@@ -19,7 +19,7 @@ public class Main {
         game = new Game();
 		String line;
 		try{
-			BufferedReader r = new BufferedReader(new FileReader(new File("E:\\VelociRUPtors\\VelociRUPtors\\TesztCommands.txt")));
+			BufferedReader r = new BufferedReader(new FileReader(new File("..\\..\\TesztCommands.txt")));
 			while((line = r.readLine()) != null){
 				game.CommandInterpreter(line);
 			}
