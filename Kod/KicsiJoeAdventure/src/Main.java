@@ -16,7 +16,7 @@ public class Main {
          * @param args
          */
     public static void main(String[] args) {
-		if(args.length == 0){
+		if(args.length != 1){
 			System.out.println("U FAIL!!! USE THE COMMAND LINE PARAMTER TO SPECIFY A TESTING SCRIPT!!!");
 			return;
 		}
