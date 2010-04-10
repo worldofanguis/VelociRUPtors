@@ -5,10 +5,15 @@
 
 public interface TrafficController {
 
-        /**
-         * Egységes megszólító függvény.
-         * @param car Aki megszólította, akinek reagálni kell.
-         */
-	public void whatSign(Car car);
-	public char showMapChar();
+    /**
+     * Egységes megszólító függvény.
+     * @param car Aki megszólította, akinek reagálni kell.
+     */
+    public void whatSign(Car car);
+
+    /**
+     * A pályakirajzoláskor a megkülönböztetéshez szükséges karakter.
+     * @return A készülékekre jellemző karakter
+     */
+    public char showMapChar();
 }

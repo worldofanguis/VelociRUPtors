@@ -4,128 +4,93 @@
  * és metódusokkal.
  */
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public abstract class Car extends ClassID {
 
-        /**
-         * A tervezett haladási irány (lsd Directions osztály)
-         */
-	protected int plannedDirection;
+    /**
+     * A tervezett haladási irány (lsd Directions osztály)
+     */
+    protected int plannedDirection;
 
-        /**
-         * Azon út referenciája, amelyiken található az autó.
-         */
-	protected Road roadUnderMe;
+    /**
+     * Azon út referenciája, amelyiken található az autó.
+     */
+    protected Road roadUnderMe;
 
-        /**
-         * A kezdetben generált véletlenszerű sebesség
-         */
-	protected int startSpeed;
+    /**
+     * A kezdetben generált véletlenszerű sebesség
+     */
+    protected int startSpeed;
 
-        /**
-         * A léptetéshez szükséges visszaszámláló
-         */
-	protected int tickCount;
-	/**
-         * Ebben tároljuk az elérhető utakat
-         */
-	protected AvailableRoads ar;
+    /**
+     * A léptetéshez szükséges visszaszámláló
+     */
+    protected int tickCount;
 
-	public Car(){
-		Main.game.addCar(this);
+    /**
+     * Ebben tároljuk az elérhető utakat
+     */
+    protected AvailableRoads ar;
+
+    public Car(){
+        Main.game.addCar(this);
         tickCount = 0;
-	}
+        plannedDirection = 0;
+    }
 
-	/**
-	 * Az autó alá rakja a paraméterként kapott utat
-         * (pálya felépítésekor lehet szükség rá)
-         * @param road Az út, amelyikre ráhelyezzük.
-	 */
-	public void setRoadUnderCar(Road road){
-		roadUnderMe = road;
-	}
+    /**
+     * Az autó alá rakja a paraméterként kapott utat
+     * (pálya felépítésekor lehet szükség rá)
+     * @param road Az út, amelyikre ráhelyezzük.
+     */
+    public void setRoadUnderCar(Road road){
+        roadUnderMe = road;
+    }
 
-        /**
-         * Le lehet-e tartóztatni? (Rosszfiú?)
-         * @return Alapértelmezésben (civil és rendőr miatt) false
-         * értéket ad vissza.
-         */
-	public boolean canBeArrested(){
-		return false;
-	}
+    /**
+     * Le lehet-e tartóztatni? (Rosszfiú?)
+     * @return Alapértelmezésben (civil és rendőr miatt) false
+     * értéket ad vissza.
+     */
+    public boolean canBeArrested(){
+        return false;
+    }
 
-        /**
-         * Az autó sebességét adja vissza.
-         * @return Az autó aktuális sebessége (~mikor indul el újra).
-         */
-	public int getSpeed(){
-		return tickCount;
-	}
+    /**
+     * Az autó sebességét adja vissza.
+     * @return Az autó aktuális sebessége (~mikor indul el újra).
+     */
+    public int getSpeed(){
+        return tickCount;
+    }
 
-        /**
-         * Autó mozgatása.
-         */
-	public void Move(){
+    /**
+     * Autó mozgatása.
+     */
+    public void Move(){
+        // Mozgatás //
 
-		// Mozgatás //
-		// plannedDirection beállítása //
-		
-		
-		if(moreThan1AR(ar)){	// több szabad irány van, választunk //
-			System.out.println("Merre akarsz menni? lehetosegek:");
-			if(ar.roads[0] != null) System.out.println("0 - balra");
-			if(ar.roads[1] != null) System.out.println("1 - fel");
-			if(ar.roads[2] != null) System.out.println("2 - jobbra");
-			if(ar.roads[3] != null) System.out.println("3 - le");
-			
+        // plannedDirection beállítása //
 
-			String line = null;
-			try {
-				 line = (new BufferedReader(new InputStreamReader(System.in))).readLine();
-			} catch (IOException ex) {
+        //Közlekedésirányító ellenőrzése a plannedDirection-ön//
+        //Ez meghívja a megfelelő Interaction fv-t//
+        //Ha egy előző interakció megállította a kocsit, akkor ne nézze meg ezt.
+        TrafficController tc;
+        if(tickCount == 0)
+            if((tc=ar.roads[plannedDirection].hasTrafficController()) != null)
+                tc.whatSign(this);
 
-			}
-			if(line.equals("0")) plannedDirection = Directions.LEFT.value;
-			else if(line.equals("1")) plannedDirection = Directions.UP.value;
-			else if(line.equals("2")) plannedDirection = Directions.RIGHT.value;
-			else if(line.equals("3")) plannedDirection = Directions.DOWN.value;
-			else System.out.println("ha-ha, de viccesnek tetszik lenni");
-		} else {	// csak 1 irány szabad //
-			for(int i=0;i<4;i++){
-				if(ar.roads[i] != null){
-					plannedDirection = i;
-					break;
-				}
-			}
-		}
+        // Mozgás plannedDirection felé, ha nem kell várnunk //
+        if(tickCount == 0)
+            MoveTo(ar.roads[plannedDirection]);
 
-		
+        // Mozgatás - vége //
+    }
 
-
-		//Közlekedésirányító ellenőrzése a plannedDirection-ön//
-		//Ez meghívja a megfelelő Interaction fv-t//
-		//Ha egy előző interakció megállította a kocsit, akkor ne nézze meg ezt.
-		TrafficController tc;
-		if(tickCount == 0)
-		    if((tc=ar.roads[plannedDirection].hasTrafficController()) != null)
-			tc.whatSign(this);
-
-
-		// Mozgás plannedDirection felé, ha nem kell várnunk //
-		if(tickCount == 0)
-		    MoveTo(ar.roads[plannedDirection]);
-		// Mozgatás - vége //
-
-	}
-
-        /**
-         * Az autót egy konkrét útra helyezi.
-         * @param road Az út, amelyikre áthelyezzük.
-         */
-	public void MoveTo(Road road){
+    /**
+     * Az autót egy konkrét útra helyezi.
+     * @param road Az út, amelyikre áthelyezzük.
+     */
+    public void MoveTo(Road road){
         Car c = road.hasCar();
         if ( c != null ) {
             Interaction(c);
@@ -134,113 +99,133 @@ public abstract class Car extends ClassID {
             roadUnderMe = road;
             road.setCar(this);
         }
-	}
+    }
 
-        /**
-         * A frissítő/léptető függvény
-         * @return A visszatérési érték true, ha az autó még a pályán van.
-         */
-	public boolean Update(){
+    /**
+     * A frissítő/léptető függvény
+     * @return A visszatérési érték true, ha az autó még a pályán van.
+     */
+    public boolean Update(){
+        if(tickCount > 0) tickCount--;
 
-		if(tickCount > 0) tickCount--;
-		
-		if(tickCount == 0){
-		   ar = roadUnderMe.getNextRoads();
-		   
-		   //ExitCar
-		   if(DeadEnd(ar)){
-		       roadUnderMe.removeCar();
-		       return false;
-		   }
-		   //Mozgatás, ha lehetséges
-		   Move(); 
-		}
-		
-		// Mozgatás - vége //
-		return true;
-	}
+        if(tickCount == 0){
+           ar = roadUnderMe.getNextRoads();
 
-        /**
-         * A teszteléshez szükséges segédfüggvény (akkor kérdezzük meg a
-         * felhasználót, hogy merre akar menni, ha több lehetséges útirány
-         * van).
-         * @param ar Lehetséges útirányok
-         * @return true, ha több lehetséges továbbhaladási irány is van.
-         */
-	protected boolean moreThan1AR(AvailableRoads ar){
-		int arC = 0;
-		for(int i=0;i<4;i++){
-			if(ar.roads[i] != null)
-				arC++;
-		}
-		return (arC > 1);
-	}
+       //ExitCar
+       if(DeadEnd(ar)){
+           roadUnderMe.removeCar();
+           return false;
+       }
 
-        /**
-         * Belső segédfüggvény annak eldöntésére, hogy az útszakasz
-         * zsákutca-e (nem vezet ki belőle további útszakasz)
-         * @param ar Lehetséges útirányok
-         * @return true, ha nincs továbbhaladási lehetőség
-         */
-	protected boolean DeadEnd(AvailableRoads ar){
-		int arC = 0;
-		for(int i=0;i<4;i++){
-			if(ar.roads[i] != null)
-				arC++;
-		}
-		return (arC == 0);
-	}
+       //Mozgatás, ha lehetséges
+//       Move();
+        }
 
-	public void setDirection(int Direction){
-		plannedDirection = Direction;
-	}
+        // Mozgatás - vége //
+        return true;
+    }
 
-	public void setTick(int Tick){
-		tickCount = Tick;
-	}
+    /**
+     * A teszteléshez szükséges segédfüggvény (akkor kérdezzük meg a
+     * felhasználót, hogy merre akar menni, ha több lehetséges útirány
+     * van).
+     * @param ar Lehetséges útirányok
+     * @return true, ha több lehetséges továbbhaladási irány is van.
+     */
+    protected boolean moreThan1AR(AvailableRoads ar){
+        int arC = 0;
+        for(int i=0;i<4;i++){
+                if(ar.roads[i] != null)
+                        arC++;
+        }
+        return (arC > 1);
+    }
 
-        /**
-         * STOP tábla interakciós függvény, absztrakt,
-         * a leszármazottaknak kell implementálni
-         * @param sign STOP tábla akivel találkozik.
-         */
-	public abstract void Interaction(StopSign sign);
+    /**
+     * Belső segédfüggvény annak eldöntésére, hogy az útszakasz
+     * zsákutca-e (nem vezet ki belőle további útszakasz)
+     * @param ar Lehetséges útirányok
+     * @return true, ha nincs továbbhaladási lehetőség
+     */
+    protected boolean DeadEnd(AvailableRoads ar){
+        int arC = 0;
+        for(int i=0;i<4;i++){
+                if(ar.roads[i] != null)
+                        arC++;
+        }
+        return (arC == 0);
+    }
 
-        /**
-         * EXIT tábla interakciós függvény, absztrakt,
-         * a leszármazottaknak kell implementálni
-         * @param sign EXIT tábla akivel találkozik.
-         */
-	public abstract void Interaction(ExitSign sign);
+    /**
+     * Az útirány konkrét beállítása a determinisztikus
+     * tesztesetekhez.
+     * @param Direction Az útirány
+     */
+    public void setDirection(int Direction){
+        plannedDirection = Direction;
+    }
 
-        /**
-         * Bank interakciós függvény, absztrakt,
-         * a leszármazottaknak kell implementálni
-         * @param bank Bank típusú épület akivel találkozik.
-         */
-	public abstract void Interaction(Bank bank);
+    /**
+     * A léptetésig hátralevő ciklusszám beállítása
+     * @param Tick A ciklusszám
+     */
+    public void setTick(int Tick){
+        tickCount = Tick;
+    }
 
-        /**
-         * Rejtekhely interakciós függvény, absztrakt,
-         * a leszármazottaknak kell implementálni
-         * @param hideout Rejtekhely típusú épület akivel találkozik.
-         */
-	public abstract void Interaction(Hideout hideout);
+    /**
+     * STOP tábla interakciós függvény, absztrakt,
+     * a leszármazottaknak kell implementálni
+     * @param sign STOP tábla akivel találkozik.
+     */
+    public abstract void Interaction(StopSign sign);
 
-        /**
-         * Lámpa interakaciós függvény, absztrakt,
-         * a leszármazottaknak kell implementálni
-         * @param lamp Lámpa akivel találkozik.
-         */
-	public abstract void Interaction(Lamp lamp);
+    /**
+     * EXIT tábla interakciós függvény, absztrakt,
+     * a leszármazottaknak kell implementálni
+     * @param sign EXIT tábla akivel találkozik.
+     */
+    public abstract void Interaction(ExitSign sign);
 
-        /**
-         * Jármű interakaciós függvény (ütközés), absztrakt,
-         * a leszármazottaknak kell implementálni
-         * @param car Az autó aki ott van, ahova menni szeretne.
-         */
+    /**
+     * Bank interakciós függvény, absztrakt,
+     * a leszármazottaknak kell implementálni
+     * @param bank Bank típusú épület akivel találkozik.
+     */
+    public abstract void Interaction(Bank bank);
+
+    /**
+     * Rejtekhely interakciós függvény, absztrakt,
+     * a leszármazottaknak kell implementálni
+     * @param hideout Rejtekhely típusú épület akivel találkozik.
+     */
+    public abstract void Interaction(Hideout hideout);
+
+    /**
+     * Lámpa interakaciós függvény, absztrakt,
+     * a leszármazottaknak kell implementálni
+     * @param lamp Lámpa akivel találkozik.
+     */
+    public abstract void Interaction(Lamp lamp);
+
+    /**
+     * Jármű interakaciós függvény (ütközés), absztrakt,
+     * a leszármazottaknak kell implementálni
+     * @param car Az autó aki ott van, ahova menni szeretne.
+     */
     public abstract void Interaction(Car car);
 
-	public abstract char showMapChar();
+    /**
+     * Felvehető nyúllal történő interakció.
+     * @param bunny A nyúl, akit fel lehet venni.
+     */
+    public abstract void Interaction(Bunny bunny);
+
+    /**
+     * A pálya megjelenítésekor az autótípusokat egyedien
+     * reprezentáló karaktersorozat egységes eléséhez szükséges függvény.
+     * @return A karakter.
+     */
+    public abstract char showMapChar();
 
 }

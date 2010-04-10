@@ -2,30 +2,25 @@
 
 /**
  * Class ClassID:
- * Segédosztály a szkeleton verzióhoz.
- * Minden osztály örököl tőle, így adható nekik "objektum név".
+ * Segédosztály a prototípus verzióhoz.
+ * A tesztkimenetekben megjelenő osztályok egyedi azonosító száma.
  */
 public abstract class ClassID {
-
     /** 
-     *Az objektum neve
+     *Az objektum azonsítója
      */
     protected Integer ID;
 
     /**
-     * 
-     *Az objektumnév beállítása
-     *
-     * @param s A név.
+     *Az azonosító beállítása
+     * @param id Az azonosító szám
      */
     public void setID(int id) {
         ID = id;
     }
 
     /**
-     * 
-     * Az objektumnév lekérdezése
-     *
+     * Az azonosító lekérdezése
      */
     @Override
     public String toString(){

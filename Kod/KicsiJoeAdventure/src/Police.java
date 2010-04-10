@@ -10,20 +10,20 @@ import java.io.InputStreamReader;
 
 public class Police extends Car {
 
-        /**
-         * A rendőr állapota. Értéke true, ha riadó módban van.
-         */
-	private boolean policeModeActivated;
+    /**
+     * A rendőr állapota. Értéke true, ha riadó módban van.
+     */
+    private boolean policeModeActivated;
 
-        /**
-         * Konstruktor. Az inicializálásban megjelenő objektumnév: p.
-         */
-
-	Police(int Speed) {
-		super();
-		policeModeActivated = false;
-		tickCount = Speed;
-	}
+    /**
+     * Konstruktor.
+     * Determinisztikus teszteléskor paraméterként kapja meg a sebességét.
+     */
+    Police(int Speed) {
+        super();
+        policeModeActivated = false;
+        startSpeed = tickCount = Speed;
+    }
 
         /**
          * A rabló letartóztatása megtörtént, jelez a Game osztálynak.
@@ -169,9 +169,17 @@ public class Police extends Car {
              tickCount = car.getSpeed();
      }
 
-	@Override
-	public char showMapChar() {
-		return 'P';
-	}
+     /**
+      * Nem tudja felvenni a nyulat, békén hagyja.
+      * @param bunny
+      */
+     public void Interaction(Bunny bunny)
+     {
+     }
+
+    @Override
+    public char showMapChar() {
+            return 'P';
+    }
 
 }
