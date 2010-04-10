@@ -19,13 +19,14 @@ public class Main {
         game = new Game();
 		String line;
 		try{
-			BufferedReader r = new BufferedReader(new FileReader(new File("C:\\Users\\Ferdi\\Desktop\\Szoftver Labor4\\VelociRUPtors\\TesztCommands.txt")));
+			BufferedReader r = new BufferedReader(new FileReader(new File("E:\\VelociRUPtors\\VelociRUPtors\\TesztCommands.txt")));
 			while((line = r.readLine()) != null){
 				game.CommandInterpreter(line);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+                game.ShowMap(System.out);
     }
 
 }

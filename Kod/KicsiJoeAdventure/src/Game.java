@@ -114,7 +114,7 @@ public class Game {
      * A játék kezdetkor a pálya elkészítése, az elemek elhelyezése.
      */
     public void Initialization(){
-        loadMapFromFile("map.txt");
+        //loadMapFromFile("map.txt");
     }
 
     /**
