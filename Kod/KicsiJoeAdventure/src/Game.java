@@ -273,8 +273,10 @@ public class Game {
 		 * Ez az undorítóancsúnya függvény rajzolja ki a konzolra vagy egy fileba a pályát
 		 */
 	public void ShowMap(PrintStream stream){
-		roadStart.X = roadStart.Y = 0;
-		roadStart.Iterated = true;
+		if(roadStart.Iterated == false){
+			roadStart.X = roadStart.Y = 0;
+			roadStart.Iterated = true;
+		}
 
 		AvailableRoads ar = roadStart.getNextRoads();
 		if(ar.roads[0] != null){
@@ -310,7 +312,7 @@ public class Game {
 		while(i.hasPrevious()){
 			current = i.previous();
 			current.X -= MinX;
-			current.Y -=MinY;
+			current.Y -= MinY;
 		}
 
 		// And here we got every road with a positive X,Y coord //
