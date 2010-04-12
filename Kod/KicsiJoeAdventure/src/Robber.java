@@ -1,7 +1,4 @@
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 /**
  * Class Robber:
@@ -9,6 +6,8 @@ import java.io.InputStreamReader;
  */
 
 public class Robber extends Car {
+
+	private Bunny pickedupbunny;
 
     /**
      * Konstruktor.
@@ -83,15 +82,16 @@ public class Robber extends Car {
      */
      public void Interaction(Car car){
          Main.game.addPoints(-5);
-         tickCount = car.getSpeed();
+         tickCount = 5;
      }
 
      /**
       * Nem tudja felvenni a nyulat, békén hagyja.
       * @param bunny
       */
-     public void Interaction(Bunny bunny)
-     {
+     public void Interaction(Bunny bunny){
+		 pickedupbunny = bunny;
+		 bunny.getRoad().setPickup(null);
      }
 
      /**

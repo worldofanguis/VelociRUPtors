@@ -18,7 +18,7 @@ public class Bunny extends ClassID implements Pickup{
     public Bunny(){
         ID = Main.game.addPickup(this);
         TickLeft = 5; //Valami
-        Main.game.outputStream.println("IBUNNY - ID"+ID+" TickLeft:"+TickLeft);
+        Main.game.outputStream.println("IBUNNY - ID:"+ID+" TickLeft:"+TickLeft);
     }
 
     /**
@@ -29,6 +29,10 @@ public class Bunny extends ClassID implements Pickup{
     {
         roadUnderMe = r;
     }
+
+	public Road getRoad(){
+		return roadUnderMe;
+	}
 
     /**
      * Meghívja a megfelelő interakciót.

@@ -165,7 +165,7 @@ public class Police extends Car {
              if ( car.canBeArrested() )
                  Arrest();
          } else
-             tickCount = car.getSpeed();
+             tickCount = 1;
      }
 
      /**

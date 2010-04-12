@@ -66,6 +66,7 @@ public class Game {
      * A program futásának kimenete
      */
     public PrintStream outputStream;
+	public String WorkingDirectory;
 
     /**
      * Konstruktor, alaphelyzet (nem rabolták ki a bankot)
@@ -167,7 +168,7 @@ public class Game {
      */
     public void loadMapFromFile(String Filename) {
         try {
-            BufferedReader in = new BufferedReader(new FileReader(new File(Filename)));
+            BufferedReader in = new BufferedReader(new FileReader(new File(WorkingDirectory,Filename)));
 
             String line;
             int roadIndex = 0;
@@ -291,7 +292,7 @@ public class Game {
         for (i=0; i<lamps.size(); i++)
             ( (Lamp)lamps.get(i) ).Update();
 
-        for ( ; i< cars.size(); i++)
+        for (i=0; i< cars.size(); i++)
         {
             if ( !( ( (Car)cars.get(i) ).Update() ) )
             {
@@ -302,7 +303,7 @@ public class Game {
         }
 
         //Pickupok frissítése
-        for ( ; i< pickups.size(); i++)
+        for (i=0; i< pickups.size(); i++)
         {
             if ( !( ( (Pickup)pickups.get(i) ).Update() ) )
             {
@@ -473,17 +474,17 @@ public class Game {
         }else if(Command.startsWith("LoadMap(")){
             loadMapFromFile(Command.substring(8,Command.length()-1));
         }else if(Command.startsWith("SetOutput(")){
-            String s = Command.substring(10,Command.length()-1);
-            if(s.isEmpty())
+//            String s = Command.substring(10,Command.length()-1);
+//            if(s.isEmpty())
                 outputStream = System.out;
-            else{
-                try{
-                    outputStream = new PrintStream(new File(s));
-                }catch(Exception e){
-                    System.out.println("FileNotFound");
-                    outputStream = System.out;
-                }
-            }
+//            else{
+//                try{
+//                    outputStream = new PrintStream(new File(WorkingDirectory,s));
+//                }catch(Exception e){
+//                    System.out.println("FileNotFound");
+//                    outputStream = System.out;
+//                }
+//            }
         }else if(Command.startsWith("SetDirection(")){
             StringTokenizer st = new StringTokenizer(Command.substring(13,Command.length()-1),",");
             cars.get(Integer.parseInt(st.nextToken())).setDirection(Integer.parseInt(st.nextToken()));
@@ -501,8 +502,17 @@ public class Game {
             roads.get(Integer.parseInt(st.nextToken())).setCar(new Police(Integer.parseInt(st.nextToken())));
         }else if(Command.startsWith("BunnyGen(")){
             StringTokenizer st = new StringTokenizer(Command.substring(9,Command.length()-1),",");
-            roads.get(Integer.parseInt(st.nextToken())).setPickup(new Bunny());
-        }else if(Command.startsWith("ShowMap()")){
+            Bunny bunny = new Bunny();
+            Road road = roads.get(Integer.parseInt(st.nextToken()));
+			road.setPickup(bunny);
+			bunny.setRoad(road);
+        }else if(Command.startsWith("RabbitGen(")){
+            StringTokenizer st = new StringTokenizer(Command.substring(10,Command.length()-1),",");
+			Bunny bunny = new Bunny();
+            Road road = roads.get(Integer.parseInt(st.nextToken()));
+			road.setPickup(bunny);
+			bunny.setRoad(road);
+		}else if(Command.startsWith("ShowMap()")){
             ShowMap(outputStream);
         }else if(Command.startsWith("SetLampColor(")){
             StringTokenizer st = new StringTokenizer(Command.substring(13,Command.length()-1),",");

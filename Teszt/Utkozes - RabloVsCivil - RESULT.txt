@@ -27,4 +27,18 @@ CAR - ID:1 RoadID:2 Tick:0
 #tick
 CAR - ID:0 RoadID:0 Tick:2
 CAR - ID:1 RoadID:3 Tick:1
+#ShowMap
+@  
+3  
+C  
+@  
+2  
+   
+@  
+1  
+   
+@  
+0  
+R  
+#/ShowMap
 [END]

@@ -1,4 +1,5 @@
 RandomEnabled(false)
+SetOutput(Utkozes - CivilVsCivil - OUTPUT.txt)
 LoadMap(Utkozes - CivilVsCivil - MAP.txt)
 #aki ütközni fog
 CivilGen(0,1)

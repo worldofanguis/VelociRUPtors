@@ -1,4 +1,5 @@
 RandomEnabled(false)
+SetOutput(Utkozes - RendorVsRablo(B-Off) - OUTPUT.txt)
 LoadMap(Utkozes - RendorVsRablo(B-Off) - MAP.txt)
 PoliceGen(0,1)
 RobberGen(1,4)

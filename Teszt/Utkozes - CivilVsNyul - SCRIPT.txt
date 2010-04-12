@@ -1,4 +1,5 @@
 RandomEnabled(false)
+SetOutput(Utkozes - CivilVsNyul - OUTPUT.txt)
 LoadMap(Utkozes - CivilVsNyul - MAP.txt)
 CivilGen(0,1)
 RabbitGen(1)

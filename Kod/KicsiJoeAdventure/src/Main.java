@@ -9,6 +9,7 @@ import java.io.FileReader;
  */
 
 public class Main {
+	private static String WorkingDirectory;
 	public static Game game;
 
         /**
@@ -36,17 +37,24 @@ public class Main {
 			String Filename = Command.substring(8,Command.length()-1);
 			String line;
 			game = new Game();
+			game.WorkingDirectory = WorkingDirectory;
 			try{
-                            game.outputStream.println("[START]");
-                            BufferedReader r = new BufferedReader(new FileReader(new File(Filename)));
-                            while((line = r.readLine()) != null){
-                            game.CommandInterpreter(line);
-                            }
-                            game.outputStream.println("[END]");
-                            game.outputStream.close();
+				game.outputStream.println("[START]");
+				BufferedReader r = new BufferedReader(new FileReader(new File(WorkingDirectory,Filename)));
+				while((line = r.readLine()) != null){
+					game.CommandInterpreter(line);
+				}
+				game.outputStream.println("[END]");
+
+				// ...OMG... //
+				if(game.outputStream != System.out)
+					game.outputStream.close();
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+		}
+		else if(Command.startsWith("SetWorkingDirectory(")){
+			WorkingDirectory = Command.substring(20,Command.length()-1);
 		}
 	}
 }

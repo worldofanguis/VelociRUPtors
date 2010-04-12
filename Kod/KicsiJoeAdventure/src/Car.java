@@ -83,12 +83,23 @@ public abstract class Car extends ClassID {
                 plannedDirection = random.nextInt(4);
         } else {
             // Random generálás nincs engedélyezve, feltételezzük,
-            //hogy a tesztelő olyat állított be időben be, ami jó
-            if ( ar.roads[plannedDirection] == null)
-            {
-                System.out.println("Rossz utiranybeallitas");
-                System.exit(1); //utána úgyis sírna nullexception miatt.
-            }
+            // hogy a tesztelő olyat állított be időben be, ami jó
+
+			// WTF? //
+//            if ( ar.roads[plannedDirection] == null)
+//            {
+//                System.out.println("Rossz utiranybeallitas");
+//                System.exit(1); //utána úgyis sírna nullexception miatt.
+//            }
+
+			if(ar.roads[0] != null)
+				plannedDirection = 0;
+			else if(ar.roads[1] != null)
+				plannedDirection = 1;
+			else if(ar.roads[2] != null)
+				plannedDirection = 2;
+			else if(ar.roads[3] != null)
+				plannedDirection = 3;
         }
 
         //Közlekedésirányító ellenőrzése a plannedDirection-ön//
@@ -119,6 +130,12 @@ public abstract class Car extends ClassID {
             roadUnderMe = road;
             road.setCar(this);
         }
+		Pickup p = road.hasPickup();
+		if( p != null ){
+			p.whatPickup(this);
+		}
+		if(tickCount == 0)
+			tickCount = startSpeed;
     }
 
     /**
@@ -142,8 +159,8 @@ public abstract class Car extends ClassID {
            if(ret) Move();
         }
         
-        String p = (ret) ? "" : "-"; //Kilépett
-        Main.game.outputStream.println("CAR - ID:"+ID+" RoadID:"+roadUnderMe.ID+" Tick:"+tickCount+" "+p);
+        String p = (ret) ? "" : " -"; //Kilépett
+        Main.game.outputStream.println("CAR - ID:"+ID+" RoadID:"+roadUnderMe.ID+" Tick:"+tickCount+p);
         // Mozgatás - vége //
         return ret;
     }
