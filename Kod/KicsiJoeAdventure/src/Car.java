@@ -74,33 +74,31 @@ public abstract class Car extends ClassID {
         // Mozgatás //
 
         // plannedDirection beállítása //
-        if (Main.game.randomEnabled)
-        {
-            //Random generálás engedélyezve.
-            Random random = new Random();
-            plannedDirection = random.nextInt(4);
-            while (ar.roads[plannedDirection] == null)
-                plannedDirection = random.nextInt(4);
-        } else {
-            // Random generálás nincs engedélyezve, feltételezzük,
-            // hogy a tesztelő olyat állított be időben be, ami jó
-
-			// WTF? //
-//            if ( ar.roads[plannedDirection] == null)
-//            {
-//                System.out.println("Rossz utiranybeallitas");
-//                System.exit(1); //utána úgyis sírna nullexception miatt.
-//            }
-
-			if(ar.roads[0] != null)
-				plannedDirection = 0;
-			else if(ar.roads[1] != null)
-				plannedDirection = 1;
-			else if(ar.roads[2] != null)
-				plannedDirection = 2;
-			else if(ar.roads[3] != null)
-				plannedDirection = 3;
-        }
+	if(moreThan1AR(ar)){	// több szabad irány van, választunk //
+	    if (Main.game.randomEnabled)
+	    {
+		//Random generálás engedélyezve.
+		Random random = new Random();
+		plannedDirection = random.nextInt(4);
+		while (ar.roads[plannedDirection] == null)
+		    plannedDirection = random.nextInt(4);
+	    } else {
+		// Random generálás nincs engedélyezve, feltételezzük,
+		//hogy a tesztelő olyat állított be időben be, ami jó
+		if ( ar.roads[plannedDirection] == null)
+		{
+		    System.out.println("Rossz utiranybeallitas");
+		    System.exit(1); //utána úgyis sírna nullexception miatt.
+		}
+	    }
+	} else {// csak 1 irány szabad //
+		for(int i=0;i<4;i++){
+			if(ar.roads[i] != null){
+				plannedDirection = i;
+				break;
+			}
+		}
+	}
 
         //Közlekedésirányító ellenőrzése a plannedDirection-ön//
         //Ez meghívja a megfelelő Interaction fv-t//
@@ -129,6 +127,7 @@ public abstract class Car extends ClassID {
             roadUnderMe.removeCar();
             roadUnderMe = road;
             road.setCar(this);
+	    tickCount = startSpeed;
         }
 		Pickup p = road.hasPickup();
 		if( p != null ){
@@ -146,7 +145,7 @@ public abstract class Car extends ClassID {
         boolean ret = true;
         if(tickCount > 0) tickCount--;
 
-        if(tickCount == 0){
+	else if(tickCount == 0){
            ar = roadUnderMe.getNextRoads();
 
            //ExitCar
