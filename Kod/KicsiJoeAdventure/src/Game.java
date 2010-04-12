@@ -291,7 +291,7 @@ public class Game {
         for (i=0; i<lamps.size(); i++)
             ( (Lamp)lamps.get(i) ).Update();
 
-        for ( ; i< cars.size(); i++)
+        for (i=0; i< cars.size(); i++)
         {
             if ( !( ( (Car)cars.get(i) ).Update() ) )
             {

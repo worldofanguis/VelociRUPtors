@@ -1,9 +1,10 @@
 [START]
+ILAMP - ID:0 Tick:5
 ICAR - ID:0 Tipus:C MaxTick:1
-ILAMP - ID:0 Tick:0
-11 11 11 
+@  @  @ 
 0  1  2  
 C    L   
+#A lámpa default 5 tickes, de beállítottuk 4-re.
 LAMP - ID:0 RoadID:1 IsRed:true Tick:3
 CAR - ID:0 RoadID:0 Tick:0
 LAMP - ID:0 RoadID:1 IsRed:true Tick:2
@@ -21,7 +22,7 @@ LAMP - ID:0 RoadID:1 IsRed:false Tick:2
 CAR - ID:0 RoadID:1 Tick:0
 LAMP - ID:0 RoadID:1 IsRed:false Tick:1
 CAR - ID:0 RoadID:2 Tick:1
-11 11 11 
+@  @  @ 
 0  1  2  
-     lC  
+     LC  
 [END]

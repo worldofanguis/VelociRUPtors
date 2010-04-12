@@ -53,7 +53,7 @@ public class Lamp extends ClassID implements TrafficController {
      * A lámpa állapotát frissítő függvény.
      */
     public void Update(){
-        if(--currentTick == 0){
+        if(currentTick-- == 0){
             for (int i=0; i<4; i++)
                 state[i] = !(state[i]);
             currentTick = startTick;

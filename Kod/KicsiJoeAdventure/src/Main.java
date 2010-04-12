@@ -16,13 +16,21 @@ public class Main {
          * @param args
          */
     public static void main(String[] args) {
+		String myfile = "C:\\Ároné\\km\\VelociRUPtors\\Kod\\KicsiJoeAdventure\\TesztScripts.txt";
 		if(args.length != 1){
-			System.out.println("U FAIL!!! USE THE COMMAND LINE PARAMTER TO SPECIFY A TESTING SCRIPT!!!");
-			return;
+			//System.out.println("U FAIL!!! USE THE COMMAND LINE PARAMTER TO SPECIFY A TESTING SCRIPT!!!");
+			//return;
+			
 		}
 		String line;
 		try{
-			BufferedReader br = new BufferedReader(new FileReader(new File(args[0])));
+		    BufferedReader br;
+		    if(args.length == 0){
+			br = new BufferedReader(new FileReader(new File(myfile)));
+		    }
+		    else{
+			br = new BufferedReader(new FileReader(new File(args[0])));
+		    }
 			while((line = br.readLine()) != null){
 				ExececuteTests(line);
 			}
