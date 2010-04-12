@@ -1,2 +1,2 @@
 @echo off
-java -jar dist\proto.jar TesztScripts.txt
+java -jar dist\proto.jar TestScripts.txt
