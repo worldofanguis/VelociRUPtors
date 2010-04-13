@@ -4,13 +4,13 @@ SetWorkingDirectory(..\..\Teszt\)
 Execute(RabloVsBankOff.txt)
 
 #Rabló vs. Bank (ki van rabolva)
-#Execute(RabloVsBankOn.txt)
+Execute(RabloVsBankOn.txt)
 
 #Rabló vs. Rejtekhely (nincs kirabolva)
-#Execute(RabloVsHideoutOff.txt)
+Execute(RabloVsHideoutOff.txt)
 
 #Rabló vs. Rejtekhely (ki van rabolva)
-#Execute(RabloVsHideoutOn.txt)
+Execute(RabloVsHideoutOn.txt)
 
 #Civil vs. Épület
 #Execute(CivilVsBank.txt)

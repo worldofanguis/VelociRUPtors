@@ -1,3 +1,4 @@
+SetOutput(RabloVsBankOn_out.txt)
 LoadMap(RabloVsBankOn_map.txt)
 RobberGen(0,1)
 #kirabolták már a bankot

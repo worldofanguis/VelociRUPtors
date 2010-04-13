@@ -4,8 +4,8 @@ ICAR - ID:0 Tipus:R MaxTick:1
 @  @  @  
 0  1  3  
 R        
-   @ H@  
-   2  4  
+@  @ H@  
+5  2  4  
          
 #Elso ShowMap vege
 CAR - ID:0 RoadID:0 Tick:0
@@ -18,8 +18,8 @@ CAR - ID:0 RoadID:4 Tick:1
 @  @  @  
 0  1  3  
          
-   @ H@  
-   2  4  
+@  @ H@  
+5  2  4  
       R  
 #ShowMap vege
 [END]

@@ -9,9 +9,9 @@ R
          
 #Elso ShowMap vege
 CAR - ID:0 RoadID:0 Tick:0
-CAR - ID:0 RoadID:1 Tick:1
-CAR - ID:0 RoadID:1 Tick:1
-CAR - ID:0 RoadID:1 Tick:1
+CAR - ID:0 RoadID:1 Tick:6
+CAR - ID:0 RoadID:1 Tick:5
+CAR - ID:0 RoadID:1 Tick:4
 #ShowMap mozgas utan
 @  @  @  
 0  1  3  

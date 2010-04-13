@@ -1,3 +1,4 @@
+SetOutput(RabloVsHideoutOff_out.txt)
 LoadMap(RabloVsHideoutOff_map.txt)
 RobberGen(0,1)
 #még nem rabolták ki a bankot

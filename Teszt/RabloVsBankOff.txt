@@ -4,7 +4,7 @@ RobberGen(0,1)
 #még nem rabolták ki a bankot
 SetBankState(false)
 #Eloszor mintha egyenesen mennenk
-SetDirection(0,0)
+SetDirection(0,2)
 #de valojaban ki akarja rabolni
 SetDirection(0,3)
 ShowMap()
