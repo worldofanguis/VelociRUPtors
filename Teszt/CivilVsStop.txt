@@ -1,4 +1,5 @@
 RandomEnabled(false)
+SetOutput(CivilVsStop_output.txt)
 LoadMap(CivilVsStop_map.txt)
 CivilGen(0,1)
 ShowMap()

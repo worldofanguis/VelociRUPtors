@@ -17,7 +17,8 @@ public class Main {
          * @param args
          */
     public static void main(String[] args) {
-		String myfile = "EpuletekEsGeneralas.txt";
+		String myfile = "BunnyTests.txt";
+
 		if(args.length != 1){
 			//System.out.println("U FAIL!!! USE THE COMMAND LINE PARAMTER TO SPECIFY A TESTING SCRIPT!!!");
 			//return;

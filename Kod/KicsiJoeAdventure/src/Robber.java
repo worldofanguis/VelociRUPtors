@@ -32,6 +32,24 @@ public class Robber extends Car {
             return true;
     }
 
+	public void MoveTo(Road road){
+        Car c = road.hasCar();
+        if ( c != null ) {
+            c.Interaction(this);
+        } else {
+            roadUnderMe.removeCar();
+            roadUnderMe = road;
+            road.setCar(this);
+        }
+		Pickup p = road.hasPickup();
+		if( p != null ){
+			p.whatPickup(this);
+		}
+
+		if(tickCount == 0)
+			tickCount = startSpeed;
+	}
+
     /**
      * STOP táblával történő interakció (nincs hatással rá)
      * @param sign Azon tábla referenciája, amelyikbe "belefutott".
@@ -84,10 +102,21 @@ public class Robber extends Car {
      * Interakció az autóval, amely azon az úton van, ahova menni szeretne.
      * (Pontlevonás és átveszi a sebességét, hogy ne menjen neki többször)
      */
-     public void Interaction(Car car){
-         Main.game.addPoints(-5);
-         tickCount = 5;
+     public void Interaction(Civil civil){
+		civil.tickCount = 1;
      }
+
+     public void Interaction(Police police){
+		if( Main.game.isBankRobbed() ){
+             if ( canBeArrested() )
+                 police.Arrest();
+		}else
+			police.tickCount = 1;
+     }
+	 
+	 public void Interaction(Robber robber){
+
+	 }
 
      /**
       * Nem tudja felvenni a nyulat, békén hagyja.
@@ -96,6 +125,7 @@ public class Robber extends Car {
      public void Interaction(Bunny bunny){
 		 pickedupbunny = bunny;
 		 bunny.getRoad().setPickup(null);
+		 bunny.PickedUp();
      }
 
      /**
@@ -110,9 +140,16 @@ public class Robber extends Car {
         if((building = ar.roads[plannedDirection].hasBuilding()) != null)
                 building.whatBuilding(this);
 
+
         if(tickCount == 0) {
            ar = roadUnderMe.getNextRoads();
         }
+
+	if(pickedupbunny!=null){
+	    if(!pickedupbunny.isActive){
+		//System.out.println("mekhalt");
+	    }
+	}
 
         Main.game.outputStream.println("CAR - ID:"+ID+" RoadID:"+roadUnderMe.ID+" Tick:"+tickCount);
         return true;

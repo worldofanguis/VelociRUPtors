@@ -1,0 +1,10 @@
+# ÜTKÖZÉSEK TESZTELÉSE #
+SetWorkingDirectory(..\..\Teszt\)
+
+Execute(Utkozes - CivilVsCivil - SCRIPT.txt)
+Execute(Utkozes - CivilVsNyul - SCRIPT.txt)
+Execute(Utkozes - RabloVsCivil - SCRIPT.txt)
+Execute(Utkozes - RabloVsNyul - SCRIPT.txt)
+Execute(Utkozes - RabloVsRendor(B-Off) - SCRIPT.txt)
+Execute(Utkozes - RabloVsRendor(B-On) - SCRIPT.txt)
+

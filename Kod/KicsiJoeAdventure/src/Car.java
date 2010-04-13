@@ -114,22 +114,7 @@ public abstract class Car extends ClassID {
      * Az autót egy konkrét útra helyezi.
      * @param road Az út, amelyikre áthelyezzük.
      */
-    public void MoveTo(Road road){
-        Car c = road.hasCar();
-        if ( c != null ) {
-            Interaction(c);
-        } else {
-            roadUnderMe.removeCar();
-            roadUnderMe = road;
-            road.setCar(this);
-        }
-	Pickup p = road.hasPickup();
-	if( p != null ){
-		p.whatPickup(this);
-	}
-	if(tickCount == 0)
-		tickCount = startSpeed;
-    }
+    public abstract void MoveTo(Road road);
 
     /**
      * A frissítő/léptető függvény
@@ -290,8 +275,9 @@ public abstract class Car extends ClassID {
      * a leszármazottaknak kell implementálni
      * @param car Az autó aki ott van, ahova menni szeretne.
      */
-    public abstract void Interaction(Car car);
-
+    public abstract void Interaction(Civil civil);
+	public abstract void Interaction(Robber robber);
+	public abstract void Interaction(Police police);
     /**
      * Felvehető nyúllal történő interakció.
      * @param bunny A nyúl, akit fel lehet venni.

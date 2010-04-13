@@ -1,4 +1,5 @@
 RandomEnabled(false)
+SetOutput(RendorVsLampaOff_output.txt)
 LoadMap(RendorVsLampaOff_map.txt)
 PoliceGen(0,1)
 #a lámpa legyen piros

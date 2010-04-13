@@ -117,6 +117,7 @@ public class Game {
      */
     public void GameOver(boolean Success){
         Main.game.outputStream.println("[GAMEOVER]");
+		System.exit(2);
     }
 
     /**
@@ -496,6 +497,9 @@ public class Game {
         }else if(Command.startsWith("SetTick(")){
             StringTokenizer st = new StringTokenizer(Command.substring(8,Command.length()-1),",");
             cars.get(Integer.parseInt(st.nextToken())).setTick(Integer.parseInt(st.nextToken()));
+	}else if(Command.startsWith("SetPickupTick(")){
+            StringTokenizer st = new StringTokenizer(Command.substring(14,Command.length()-1),",");
+            pickups.get(Integer.parseInt(st.nextToken())).setTick(Integer.parseInt(st.nextToken()));
         }else if(Command.startsWith("CivilGen(")){
             StringTokenizer st = new StringTokenizer(Command.substring(9,Command.length()-1),",");
             roads.get(Integer.parseInt(st.nextToken())).setCar(new Civil(Integer.parseInt(st.nextToken())));

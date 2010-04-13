@@ -1,4 +1,5 @@
 RandomEnabled(false)
+SetOutput(RendorVsLampaOn_output.txt)
 LoadMap(RendorVsLampaOn_map.txt)
 PoliceGen(0,1)
 SetBankState(true)

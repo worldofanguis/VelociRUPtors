@@ -24,4 +24,7 @@ public interface Pickup {
      * @return Karakter
      */
     public char showMapChar();
+    public void setTick(int tick);
+    public void PickedUp();
+
 }

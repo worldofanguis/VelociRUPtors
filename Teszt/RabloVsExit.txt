@@ -1,4 +1,5 @@
 RandomEnabled(false)
+SetOutput(RabloVsExit_output.txt)
 LoadMap(RabloVsExit_map.txt)
 RobberGen(0,1)
 SetDirection(0,3)

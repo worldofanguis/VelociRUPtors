@@ -1,0 +1,5 @@
+# ÜTKÖZÉSEK TESZTELÉSE #
+SetWorkingDirectory(..\..\Teszt\)
+
+Execute(Utkozes - RendorVsRablo(B-Off) - SCRIPT.txt)
+Execute(Utkozes - RendorVsRablo(B-On) - SCRIPT.txt)
