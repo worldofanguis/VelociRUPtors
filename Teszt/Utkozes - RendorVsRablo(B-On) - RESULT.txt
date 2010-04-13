@@ -1,6 +1,6 @@
 [START]
-ICAR - ID:0 Tipus:P RoadID:0 MaxTick:1
-ICAR - ID:1 Tipus:R RoadID:1 MaxTick:2
+ICAR - ID:0 Tipus:P MaxTick:1
+ICAR - ID:1 Tipus:R MaxTick:2
 #ShowMap
 @  
 3  
