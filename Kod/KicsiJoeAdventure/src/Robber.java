@@ -8,6 +8,8 @@
 public class Robber extends Car {
 
 	private Bunny pickedupbunny;
+        private int previousDirection;
+        private int waitingTime;
 
     /**
      * Konstruktor.
@@ -16,6 +18,8 @@ public class Robber extends Car {
      */
     Robber(int Speed) {
             super(Speed);
+            previousDirection = plannedDirection;
+            waitingTime = 5;
     }
 
     /**
@@ -103,14 +107,14 @@ public class Robber extends Car {
         // Mozgás plannedDirection felé //
         //Épület ellenőrzése - ez a legfontosabb, az ütközés ellenőrzés jöhet ez után
         Building building;
-        if((building = roadUnderMe.hasBuilding()) != null)
+        if((building = ar.roads[plannedDirection].hasBuilding()) != null)
                 building.whatBuilding(this);
 
+        if(tickCount == 0) {
+           ar = roadUnderMe.getNextRoads();
+        }
 
-        /* Meghívja az ősosztály mozgatását.
-         * Ez a későbbiekben nem így lesz (játékos irányít),
-         * egyelőre teszteléshez így implementáltuk. */
-        super.Update();
+        Main.game.outputStream.println("CAR - ID:"+ID+" RoadID:"+roadUnderMe.ID+" Tick:"+tickCount);
         return true;
     }
 
@@ -121,5 +125,38 @@ public class Robber extends Car {
     @Override
     public char showMapChar() {
             return 'R';
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void Move(){
+        Building building;
+        if ( ar.roads[plannedDirection] != null )
+            if((building = ar.roads[plannedDirection].hasBuilding()) != null){
+                building.whatBuilding(this);
+            }
+
+        /* ha a játékos olyan irányban akar tovább menni, ahova nem mehet,
+         * akkor a korábbi útirányon halad és amint lehet követi az újat.
+         */
+        // Mozgás plannedDirection felé, ha nem kell várnunk //
+        if(tickCount == 0)
+            if (ar.roads[plannedDirection] != null)
+                MoveTo(ar.roads[plannedDirection]);
+            else if (previousDirection != -1)
+                MoveTo(ar.roads[previousDirection]);
+
+        // Mozgatás - vége //
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void setDirection(int newDirection){
+        previousDirection = plannedDirection; //indexelés miatt
+        plannedDirection = newDirection;
     }
 }

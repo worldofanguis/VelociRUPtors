@@ -16,5 +16,5 @@ echo Rablo vs. Rejtekhely (ki van rabolva)
 echo Civil vs. Epulet
 
 
-echo Civil generalas es eltutetes
-
+echo Civil generalas es eltuntetes
+java -jar ..\Compare\dist\compare.jar ../../Teszt/CivilGenExit_out.txt ../../Teszt/CivilGenExit_res.txt

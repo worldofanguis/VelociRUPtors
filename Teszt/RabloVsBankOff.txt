@@ -3,7 +3,9 @@ LoadMap(RabloVsBankOff_map.txt)
 RobberGen(0,1)
 #még nem rabolták ki a bankot
 SetBankState(false)
-#ki akarja rabolni
+#Eloszor mintha egyenesen mennenk
+SetDirection(0,0)
+#de valojaban ki akarja rabolni
 SetDirection(0,3)
 ShowMap()
 #csak annyi, hogy látszon, megáll

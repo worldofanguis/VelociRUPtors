@@ -16,4 +16,4 @@ Execute(RabloVsBankOff.txt)
 #Execute(CivilVsBank.txt)
 
 #Civil generálás és eltüntetés
-#Execute(CivilGenExit.txt)
+Execute(CivilGenExit.txt)
