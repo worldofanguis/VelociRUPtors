@@ -37,7 +37,7 @@ public class Police extends Car {
          * @param sign Az adott STOP tábla
          */
 	public void Interaction(StopSign sign){
-		if(policeModeActivated){
+		if(!policeModeActivated){
 		    tickCount+=5;
 		    MoveTo(ar.roads[plannedDirection]);
 
@@ -113,7 +113,7 @@ public class Police extends Car {
 	public void Interaction(Lamp lamp){
 		//A későbbieknek a belső változó alapján dönt, most
                 //meghívja a függvényt ahol a tesztelő van megkérdezve
-                if(Main.game.isBankRobbed()){
+                if(!policeModeActivated){
 			//Merről érkezünk a lámpához?//
 		    int fromDirection=0;
 		    switch (plannedDirection){
@@ -146,8 +146,12 @@ public class Police extends Car {
          */
 	@Override
 	public boolean Update(){
-		if(!policeModeActivated && Main.game.isBankRobbed())
+		if(!policeModeActivated && Main.game.isBankRobbed()){
 			policeModeActivated = true;
+			if(tickCount > 1)   //itt az 1-es a leggyorsabb autó tickje, ajánlott lenne vmi konstans erre
+			    tickCount = 1;
+			startSpeed = 1;
+		}
 
 		return super.Update();
 	}

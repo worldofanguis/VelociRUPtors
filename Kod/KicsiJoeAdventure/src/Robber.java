@@ -43,7 +43,7 @@ public class Robber extends Car {
         ar.roads[plannedDirection] = null;
 
         //tervezett útirány beállítása
-
+	plannedDirection = getValidDirection();
         //Közlekedésirányító ellenőrzése a plannedDirection-ön//
         //Ez meghívja a megfelelő Interaction fv-t//
         //Ha egy előző interakció megállította a kocsit, akkor ne nézze meg ezt.

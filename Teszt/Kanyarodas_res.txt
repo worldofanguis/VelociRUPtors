@@ -14,6 +14,6 @@ CAR - ID:0 RoadID:2 Tick:1
 0  1  
       
    11 
-   3  
+   2  
    C  
 [END]

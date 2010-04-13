@@ -1,5 +1,5 @@
 RandomEnabled(false)
-LoadMap(..\..\Teszt/CivilVsLampa_map.txt)
+LoadMap(CivilVsLampa_map.txt)
 CivilGen(0,1)
 #a lámpa legyen piros
 SetLampColor(0,false)
