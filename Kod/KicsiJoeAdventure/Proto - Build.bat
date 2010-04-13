@@ -10,11 +10,7 @@ md build\classes
 md dist
 
 echo Updating the PATH...
-<<<<<<< HEAD
-PATH=D:\Program Files\Java\jdk1.6.0_14\bin;C:\Program Files\Java\jdk1.6.0_12;C:\Program Files\Java\jdk1.6.0_18\bin;C:\Program Files\Java\jdk1.6.0_16\bin
-=======
-PATH=D:\Program Files\Java\jdk1.6.0_14\bin\;C:\Program Files\Java\jdk1.6.0_12\bin\;C:\Program Files\Java\jdk1.6.0_18\bin\
->>>>>>> 191bc57e51c2589702d26b49e352b3ec06663d81
+PATH=D:\Program Files\Java\jdk1.6.0_14\bin;C:\Program Files\Java\jdk1.6.0_12\bin\;C:\Program Files\Java\jdk1.6.0_18\bin;C:\Program Files\Java\jdk1.6.0_16\bin
 
 echo Creating the class files...
 javac -d build\classes src\*.java

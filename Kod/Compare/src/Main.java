@@ -40,6 +40,7 @@ public class Main {
                     System.out.println("Kapott: " + lineR );
                     System.out.println("Vart: " + lineE );
                     good = false;
+                    //System.exit(-1);
                 }
             }
             if (good) System.out.println("OK");
@@ -59,10 +60,10 @@ public class Main {
         }
         
         //Ize a vegere hogy ne menekuljon el
-        try {
-            int i = System.in.read();
-        } catch (Exception e) {
-            System.out.println("well, duh");
-        }
+//        try {
+//            int i = System.in.read();
+//        } catch (Exception e) {
+//            System.out.println("well, duh");
+//        }
     }
 }

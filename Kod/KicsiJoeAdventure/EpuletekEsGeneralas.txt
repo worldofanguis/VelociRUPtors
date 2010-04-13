@@ -1,0 +1,19 @@
+SetWorkingDirectory(..\..\Teszt\)
+
+#Rabló vs. Bank (nincs kirabolva)
+Execute(RabloVsBankOff.txt)
+
+#Rabló vs. Bank (ki van rabolva)
+#Execute(RabloVsBankOn.txt)
+
+#Rabló vs. Rejtekhely (nincs kirabolva)
+#Execute(RabloVsHideoutOff.txt)
+
+#Rabló vs. Rejtekhely (ki van rabolva)
+#Execute(RabloVsHideoutOn.txt)
+
+#Civil vs. Épület
+#Execute(CivilVsBank.txt)
+
+#Civil generálás és eltüntetés
+#Execute(CivilGenExit.txt)

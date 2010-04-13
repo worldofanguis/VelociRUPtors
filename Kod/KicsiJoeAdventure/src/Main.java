@@ -17,7 +17,7 @@ public class Main {
          * @param args
          */
     public static void main(String[] args) {
-		String myfile = "C:\\Ároné\\km\\VelociRUPtors\\Kod\\KicsiJoeAdventure\\MovementTests.txt";
+		String myfile = "Utkozes Tesztek.txt";
 		if(args.length != 1){
 			//System.out.println("U FAIL!!! USE THE COMMAND LINE PARAMTER TO SPECIFY A TESTING SCRIPT!!!");
 			//return;
@@ -47,7 +47,6 @@ public class Main {
 			game = new Game();
 			game.WorkingDirectory = WorkingDirectory;
 			try{
-				game.outputStream.println("[START]");
 				BufferedReader r = new BufferedReader(new FileReader(new File(WorkingDirectory,Filename)));
 				while((line = r.readLine()) != null){
 					game.CommandInterpreter(line);
