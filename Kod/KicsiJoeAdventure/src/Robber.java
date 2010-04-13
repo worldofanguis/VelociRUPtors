@@ -28,6 +28,24 @@ public class Robber extends Car {
             return true;
     }
 
+	public void MoveTo(Road road){
+        Car c = road.hasCar();
+        if ( c != null ) {
+            c.Interaction(this);
+        } else {
+            roadUnderMe.removeCar();
+            roadUnderMe = road;
+            road.setCar(this);
+        }
+		Pickup p = road.hasPickup();
+		if( p != null ){
+			p.whatPickup(this);
+		}
+
+		if(tickCount == 0)
+			tickCount = startSpeed;
+	}
+
     /**
      * STOP táblával történő interakció (nincs hatással rá)
      * @param sign Azon tábla referenciája, amelyikbe "belefutott".
@@ -80,13 +98,21 @@ public class Robber extends Car {
      * Interakció az autóval, amely azon az úton van, ahova menni szeretne.
      * (Pontlevonás és átveszi a sebességét, hogy ne menjen neki többször)
      */
-     public void Interaction(Car car){
-		car.tickCount = 1;
+     public void Interaction(Civil civil){
+		civil.tickCount = 1;
      }
 
      public void Interaction(Police police){
-		police.Interaction(this);
+		if( Main.game.isBankRobbed() ){
+             if ( canBeArrested() )
+                 police.Arrest();
+		}else
+			police.tickCount = 1;
      }
+	 
+	 public void Interaction(Robber robber){
+
+	 }
 
      /**
       * Nem tudja felvenni a nyulat, békén hagyja.

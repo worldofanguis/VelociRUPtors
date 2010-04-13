@@ -7,5 +7,4 @@ Execute(Utkozes - RabloVsCivil - SCRIPT.txt)
 Execute(Utkozes - RabloVsNyul - SCRIPT.txt)
 Execute(Utkozes - RabloVsRendor(B-Off) - SCRIPT.txt)
 Execute(Utkozes - RabloVsRendor(B-On) - SCRIPT.txt)
-Execute(Utkozes - RendorVsRablo(B-Off) - SCRIPT.txt)
-Execute(Utkozes - RendorVsRablo(B-On) - SCRIPT.txt)
+

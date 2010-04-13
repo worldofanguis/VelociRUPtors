@@ -31,6 +31,25 @@ public class Police extends Car {
 		Main.game.GameOver(false);
 	}
 
+	public void MoveTo(Road road){
+        Car c = road.hasCar();
+        if ( c != null ) {
+            c.Interaction(this);
+        } else {
+            roadUnderMe.removeCar();
+            roadUnderMe = road;
+            road.setCar(this);
+        }
+		Pickup p = road.hasPickup();
+		if( p != null ){
+			p.whatPickup(this);
+		}
+
+		if(tickCount == 0)
+			tickCount = startSpeed;
+	}
+
+
         /**
          * STOP tábla interakció (riadó módban áthajthat, egyébként
          * meg kell állnia).
@@ -162,16 +181,23 @@ public class Police extends Car {
      * A szkeletonban a felhasználó dönti el, milyen módban van az autó,
      * ezért nem a belső változó, hanem az isBankRobbed() alapján döntünk.
      */
-     public void Interaction(Car car){
+    public void Interaction(Civil civil){
+		civil.tickCount = 1;
+    }
+
+    public void Interaction(Robber robber){
          //A későbbieknek a belső változó alapján dönt, most
          //meghívja a függvényt ahol a tesztelő van megkérdezve
          if( Main.game.isBankRobbed() ){
-             if ( car.canBeArrested() )
+             if ( robber.canBeArrested() )
                  Arrest();
          } else
-             tickCount = 1;
+             robber.tickCount = 5;
      }
 
+	public void Interaction(Police police){
+		police.tickCount = 1;
+    }
      /**
       * Nem tudja felvenni a nyulat, békén hagyja.
       * @param bunny

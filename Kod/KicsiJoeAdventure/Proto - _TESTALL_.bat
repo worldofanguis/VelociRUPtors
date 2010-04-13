@@ -1,2 +1,7 @@
 @echo off
-java -jar dist\proto.jar "Utkozes Tesztek.txt"
+"Proto - Build.bat"
+cd ..\Compare\
+"Compare build.bat"
+cd ..\KicsiJoeAdventure\
+"Proto - EpuletekEsGeneralas.bat"
+"Proto - Utkozes.bat"

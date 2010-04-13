@@ -1,6 +1,6 @@
 [START]
-ICAR - ID:0 Tipus:R RoadID:0 MaxTick:1
-ICAR - ID:1 Tipus:P RoadID:1 MaxTick:2
+ICAR - ID:0 Tipus:R MaxTick:1
+ICAR - ID:1 Tipus:P MaxTick:2
 #ShowMap
 @  
 3  
@@ -17,6 +17,6 @@ R
 #/ShowMap
 #tick
 CAR - ID:0 RoadID:0 Tick:0
-CAR - ID:1 RoadID:1 Tick:1
+CAR - ID:1 RoadID:1 Tick:0
 #tick <- ütköztünk a rendõrnek és elkaptak...
 [GAMEOVER]

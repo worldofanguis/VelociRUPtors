@@ -12,6 +12,25 @@ public class Civil extends Car {
         super(Speed);
     }
 
+	public void MoveTo(Road road){
+        Car c = road.hasCar();
+        if ( c != null ) {
+            c.Interaction(this);
+        } else {
+            roadUnderMe.removeCar();
+            roadUnderMe = road;
+            road.setCar(this);
+        }
+		Pickup p = road.hasPickup();
+		if( p != null ){
+			p.whatPickup(this);
+		}
+
+		if(tickCount == 0)
+			tickCount = startSpeed;
+	}
+
+
     /**
      * STOP táblával történő interakció (meg kell állnia előtte).
      * @param sign Az adott STOP tábla.
@@ -68,19 +87,22 @@ public class Civil extends Car {
         }
     }
 
-    /**
+	 /**
      * Interakció az autóval, amely azon az úton van, ahova menni szeretne.
      * (várakozik arra hogy elmenjen)
      */
-     public void Interaction(Car car){
-         car.tickCount = 1; // car.getSpeed();
-     }
+    public void Interaction(Civil civil){
+         civil.tickCount = 1;
+    }
 
-	 public void Interaction(Robber robber){
-		 Main.game.addPoints(-5);
-		 robber.tickCount = 5;
-	 }
+	public void Interaction(Robber robber){
+		Main.game.addPoints(-5);
+		robber.tickCount = 5;
+	}
 
+	public void Interaction(Police police){
+		police.tickCount = 1;
+	}
      /**
       * Nem tudja felvenni a nyulat, békén hagyja.
       * @param bunny
