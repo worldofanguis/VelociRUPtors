@@ -20,4 +20,3 @@ CAR - ID:0 RoadID:0 Tick:0
 CAR - ID:1 RoadID:1 Tick:1
 #tick <- ütköztünk a rendõrnek és elkaptak...
 [GAMEOVER]
-[END]

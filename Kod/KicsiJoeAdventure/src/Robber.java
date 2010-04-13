@@ -94,6 +94,10 @@ public class Robber extends Car {
 		 bunny.getRoad().setPickup(null);
      }
 
+	 public void Interaction(Police police){
+		 if(Main.game.isBankRobbed())
+			police.Arrest();
+	 }
      /**
       * Frissítés
       * @return

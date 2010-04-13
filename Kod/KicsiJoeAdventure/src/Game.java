@@ -117,6 +117,7 @@ public class Game {
      */
     public void GameOver(boolean Success){
         Main.game.outputStream.println("[GAMEOVER]");
+		System.exit(2);
     }
 
     /**
@@ -478,17 +479,17 @@ public class Game {
         }else if(Command.startsWith("LoadMap(")){
             loadMapFromFile(Command.substring(8,Command.length()-1));
         }else if(Command.startsWith("SetOutput(")){
-            String s = Command.substring(10,Command.length()-1);
-            if(s.isEmpty())
+//            String s = Command.substring(10,Command.length()-1);
+//            if(s.isEmpty())
                 outputStream = System.out;
-            else{
-                try{
-                    outputStream = new PrintStream(new File(WorkingDirectory,s));
-                }catch(Exception e){
-                    System.out.println("FileNotFound");
-                    outputStream = System.out;
-                }
-            }
+//            else{
+//                try{
+//                    outputStream = new PrintStream(new File(WorkingDirectory,s));
+//                }catch(Exception e){
+//                    System.out.println("FileNotFound");
+//                    outputStream = System.out;
+//                }
+//            }
             outputStream.println("[START]");
         }else if(Command.startsWith("SetDirection(")){
             StringTokenizer st = new StringTokenizer(Command.substring(13,Command.length()-1),",");

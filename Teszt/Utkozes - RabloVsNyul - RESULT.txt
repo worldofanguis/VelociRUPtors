@@ -17,10 +17,10 @@ R
 CAR - ID:0 RoadID:1 Tick:0
 #RoadID:-    -> A nyúl fel lett szedve
 #Tick:30     -> Ennyi ideig sérthetetlen a palyer, utána megszünik a nyuszi
-RABBIT - ID:0 RoadID:- Tick:30
+RABBIT - ID:0 RoadID:- Tick:29
 #tick
 CAR - ID:0 RoadID:2 Tick:0
-RABBIT - ID:0 RoadID:1 Tick:3
+RABBIT - ID:0 RoadID:1 Tick:28
 #ShowMap
 # @  
 # 2  
