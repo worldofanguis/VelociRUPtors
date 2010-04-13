@@ -73,8 +73,13 @@ public class Civil extends Car {
      * (várakozik arra hogy elmenjen)
      */
      public void Interaction(Car car){
-         tickCount = 1; // car.getSpeed();
+         car.tickCount = 1; // car.getSpeed();
      }
+
+	 public void Interaction(Robber robber){
+		 Main.game.addPoints(-5);
+		 robber.tickCount = 5;
+	 }
 
      /**
       * Nem tudja felvenni a nyulat, békén hagyja.

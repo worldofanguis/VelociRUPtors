@@ -81,8 +81,11 @@ public class Robber extends Car {
      * (Pontlevonás és átveszi a sebességét, hogy ne menjen neki többször)
      */
      public void Interaction(Car car){
-         Main.game.addPoints(-5);
-         tickCount = 5;
+		car.tickCount = 1;
+     }
+
+     public void Interaction(Police police){
+		police.Interaction(this);
      }
 
      /**
@@ -94,10 +97,6 @@ public class Robber extends Car {
 		 bunny.getRoad().setPickup(null);
      }
 
-	 public void Interaction(Police police){
-		 if(Main.game.isBankRobbed())
-			police.Arrest();
-	 }
      /**
       * Frissítés
       * @return

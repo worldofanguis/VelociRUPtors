@@ -117,7 +117,7 @@ public abstract class Car extends ClassID {
     public void MoveTo(Road road){
         Car c = road.hasCar();
         if ( c != null ) {
-            Interaction(c);
+            c.Interaction(this);
         } else {
             roadUnderMe.removeCar();
             roadUnderMe = road;
