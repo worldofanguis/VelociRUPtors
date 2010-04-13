@@ -9,6 +9,10 @@ public class Bunny extends ClassID implements Pickup{
      * Életbenmaradásig hátralévő óraciklusok száma.
      */
     private int TickLeft;
+    private int StartTick;
+    
+    private boolean isPicked = false;
+    public boolean isActive = true;
 
     /**
      * Az út, amin leledzik.
@@ -17,6 +21,7 @@ public class Bunny extends ClassID implements Pickup{
 
     public Bunny(){
         ID = Main.game.addPickup(this);
+	StartTick = 30;
         TickLeft = 30; //Valami
         Main.game.outputStream.println("IBUNNY - ID:"+ID+" TickLeft:"+TickLeft);
     }
@@ -30,16 +35,30 @@ public class Bunny extends ClassID implements Pickup{
         roadUnderMe = r;
     }
 
-	public Road getRoad(){
-		return roadUnderMe;
-	}
+    public Road getRoad(){
+	return roadUnderMe;
+    }
+
+    public void setTick(int tick)
+    {
+	StartTick =TickLeft = tick;
+    }
+
 
     /**
      * Meghívja a megfelelő interakciót.
      * @param car
      */
+
+
     public void whatPickup(Car car) {
-        car.Interaction(this);
+	car.Interaction(this);
+    }
+
+    public void PickedUp(){
+	isPicked = true;
+	TickLeft = StartTick;
+	roadUnderMe = null;
     }
 
     public char showMapChar() {
@@ -53,9 +72,16 @@ public class Bunny extends ClassID implements Pickup{
      */
     public boolean Update() {
         boolean ret = true;
-        if(--TickLeft == 0)
-            ret = false;
-        Main.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+roadUnderMe.ID+" TickLeft:"+TickLeft);
+        if(--TickLeft == 0){
+	    ret = false;
+	    isActive = false;
+	}
+            
+	if(!isPicked){
+	    Main.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+roadUnderMe.ID+" TickLeft:"+TickLeft);
+	}else{
+	    Main.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+" X"+" TickLeft:"+TickLeft);
+	}
         return ret;
     }
 

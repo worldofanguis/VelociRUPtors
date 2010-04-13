@@ -1,4 +1,5 @@
 RandomEnabled(false)
+SetOutput(TMove_output.txt)
 LoadMap(TMove_map.txt)
 CivilGen(0,1)
 ShowMap()

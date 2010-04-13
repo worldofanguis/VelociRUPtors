@@ -1,4 +1,5 @@
 RandomEnabled(false)
+SetOutput(Kanyarodas_output.txt)
 LoadMap(Kanyarodas_map.txt)
 CivilGen(0,1)
 ShowMap()

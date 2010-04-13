@@ -95,6 +95,7 @@ public class Robber extends Car {
      public void Interaction(Bunny bunny){
 		 pickedupbunny = bunny;
 		 bunny.getRoad().setPickup(null);
+		 bunny.PickedUp();
      }
 
      /**
@@ -108,6 +109,12 @@ public class Robber extends Car {
         Building building;
         if((building = roadUnderMe.hasBuilding()) != null)
                 building.whatBuilding(this);
+
+	if(pickedupbunny!=null){
+	    if(!pickedupbunny.isActive){
+		//System.out.println("mekhalt");
+	    }
+	}
 
 
         /* Meghívja az ősosztály mozgatását.
