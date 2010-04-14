@@ -138,7 +138,7 @@ public class Robber extends Car {
 
      /**
       * Frissítés
-      * @return
+      * @return false ha az objektumot el kell távolítani a rendszerből
       */
     @Override
     public boolean Update(){

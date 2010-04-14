@@ -286,10 +286,21 @@ public abstract class Car extends ClassID {
     /**
      * Jármű interakaciós függvény (ütközés), absztrakt,
      * a leszármazottaknak kell implementálni
-     * @param car Az autó aki ott van, ahova menni szeretne.
+     * @param civil Az autó aki ott van, ahova menni szeretne.
      */
     public abstract void Interaction(Civil civil);
+
+	/**
+     * Jármű interakaciós függvény (ütközés), absztrakt,
+     * a leszármazottaknak kell implementálni
+     * @param robber Az autó aki ott van, ahova menni szeretne.
+     */
 	public abstract void Interaction(Robber robber);
+	/**
+     * Jármű interakaciós függvény (ütközés), absztrakt,
+     * a leszármazottaknak kell implementálni
+     * @param police Az autó aki ott van, ahova menni szeretne.
+     */
 	public abstract void Interaction(Police police);
     /**
      * Felvehető nyúllal történő interakció.
