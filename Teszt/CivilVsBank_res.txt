@@ -1,25 +1,24 @@
 [START]
 ICAR - ID:0 Tipus:C MaxTick:1
-#ShowMap mozgás elott
+#ShowMap
 @  @  @  
 0  1  3  
 C        
-@  @ B@  
-5  2  4  
+   @ B   
+   2     
          
-#Elso ShowMap vege
+#/ShowMap
+#Mivel nem tud a kocsi bemenni bankhoz, megy tovább
 CAR - ID:0 RoadID:0 Tick:0
 CAR - ID:0 RoadID:1 Tick:1
 CAR - ID:0 RoadID:1 Tick:0
 CAR - ID:0 RoadID:3 Tick:1
-CAR - ID:0 RoadID:3 Tick:0
-CAR - ID:0 RoadID:4 Tick:1
-#ShowMap mozgas utan
+#ShowMap
 @  @  @  
 0  1  3  
-         
-@  @ B@  
-5  2  4  
       C  
-#ShowMap vege
+   @ B   
+   2     
+         
+#/ShowMap
 [END]

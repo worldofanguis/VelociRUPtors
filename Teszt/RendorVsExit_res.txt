@@ -1,19 +1,19 @@
 [START]
 ICAR - ID:0 Tipus:P MaxTick:1
-@  @  @ 
+@  @  @  
 0  1  2  
 P        
-   @ 
-   3  
-     E
+   @     
+   3     
+     E   
 CAR - ID:0 RoadID:0 Tick:0
 CAR - ID:0 RoadID:1 Tick:1
 CAR - ID:0 RoadID:1 Tick:0
 CAR - ID:0 RoadID:2 Tick:1
-@  @  @ 
+@  @  @  
 0  1  2  
       P  
-   @ 
-   3  
-     E
+   @     
+   3     
+     E   
 [END]

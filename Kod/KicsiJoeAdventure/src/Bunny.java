@@ -80,7 +80,7 @@ public class Bunny extends ClassID implements Pickup{
 	if(!isPicked){
 	    Main.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+roadUnderMe.ID+" TickLeft:"+TickLeft);
 	}else{
-	    Main.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+" X"+" TickLeft:"+TickLeft);
+	    Main.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+"-"+" TickLeft:"+TickLeft);
 	}
         return ret;
     }

@@ -16,7 +16,7 @@ public class Robber extends Car {
      */
     Robber(int Speed) {
             super(Speed);
-if(pickedupbunny != null)            return false;		return true;    }
+	}
 
     /**
      * Ha megkérdezik, hogy rosszfiú-e, be kell ismernie (kivéve, ha van
@@ -28,7 +28,6 @@ if(pickedupbunny != null)            return false;		return true;    }
 		if(pickedupbunny != null)
             return false;
 		return true;
-	else return false;
     }
 
 	public void MoveTo(Road road){
@@ -78,8 +77,10 @@ if(pickedupbunny != null)            return false;		return true;    }
      * @param bank Azon bank referenciája, amelyikhez érkezett.
      */
     public void Interaction(Bank bank){
-	tickCount = 5;	//Mielőtt továbbmenne, meg kell állnia egy kicsit.
-        bank.robBank();
+	if(!Main.game.isBankRobbed()){
+	    tickCount = 5;	//Mielőtt továbbmenne, meg kell állnia egy kicsit.
+	    bank.robBank();
+	}
 	//Az épület felé nem lehet menni.
 	ar.roads[plannedDirection] = null;
 	plannedDirection = getValidDirection();
@@ -90,7 +91,12 @@ if(pickedupbunny != null)            return false;		return true;    }
      * @param hideout A rejtekhely referenciája, amely mellé ért.
      */
     public void Interaction(Hideout hideout){
-        hideout.arrivedToHideout();
+	if(Main.game.isBankRobbed()){
+	    hideout.arrivedToHideout();
+	}
+	//Az épület felé nem lehet menni.
+	ar.roads[plannedDirection] = null;
+	plannedDirection = getValidDirection();
     }
 
     /**

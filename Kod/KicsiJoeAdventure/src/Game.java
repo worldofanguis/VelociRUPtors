@@ -371,39 +371,45 @@ public class Game {
 
         // Itt már minden útnak pozitív az X és Y koordinátája //
         char Map[][] = new char[(MaxY-MinY+1)*3][(MaxX-MinX+1)*3];
+		// Kitöltük a mappot default <space> ekkel //
+		for(int s=0;s<(MaxY-MinY+1)*3;s++)
+			for(int o=0;o<(MaxX-MinX+1)*3;o++)
+				Map[s][o] = ' ';
+
+		// És kezdődjön a móka //
         while(i.hasNext()){
             current = i.next();
             // Road SpecChar //
             Map[current.Y*3][current.X*3] = '@';
-            Map[current.Y*3][current.X*3+1] = ' ';
+//            Map[current.Y*3][current.X*3+1] = ' ';
             // Road Building //
             if(current.hasBuilding() != null)
                 Map[current.Y*3][current.X*3+2] = current.hasBuilding().showMapChar();
-            else
-                Map[current.Y*3][current.X*3+2] = ' ';
+//            else
+//              Map[current.Y*3][current.X*3+2] = ' ';
             // Road ID //
             char[] roadID = current.ID.toString().toCharArray();
             for(int idi=0;idi<3;idi++){
                 if(idi < roadID.length)
                     Map[current.Y*3+1][current.X*3+idi] = roadID[idi];
-                else
-                    Map[current.Y*3+1][current.X*3+idi] = ' ';
+//                else
+//                    Map[current.Y*3+1][current.X*3+idi] = ' ';
             }
             // Road Car //
             if(current.hasCar() != null)
                 Map[current.Y*3+2][current.X*3] = current.hasCar().showMapChar();
-            else
-                Map[current.Y*3+2][current.X*3] = ' ';
+//            else
+//                Map[current.Y*3+2][current.X*3] = ' ';
             // Road Pickup //
             if(current.hasPickup() != null)
                 Map[current.Y*3+2][current.X*3+1] = current.hasPickup().showMapChar();
-            else
-                Map[current.Y*3+2][current.X*3+1] = ' ';
+//            else
+//                Map[current.Y*3+2][current.X*3+1] = ' ';
             // Road TrafficController //
             if(current.hasTrafficController() != null)
                 Map[current.Y*3+2][current.X*3+2] = current.hasTrafficController().showMapChar();
-            else
-                Map[current.Y*3+2][current.X*3+2] = ' ';
+//            else
+//                Map[current.Y*3+2][current.X*3+2] = ' ';
 
         }
 
