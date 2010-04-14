@@ -1,7 +1,6 @@
 [START]
-CivilGen(0,1)
 ICAR - ID:0 Tipus:P MaxTick:1
-11 11 11 
+@  @  @ 
 0  1  2  
 P    S   
 #az autó magától eldönti merre kell menni, mivel csak egy út lehetséges
@@ -14,7 +13,7 @@ CAR - ID:0 RoadID:1 Tick:2
 CAR - ID:0 RoadID:1 Tick:1
 CAR - ID:0 RoadID:1 Tick:0
 CAR - ID:0 RoadID:2 Tick:1
-11 11 11 
+@  @  @ 
 0  1  2  
      SP  
 [END]

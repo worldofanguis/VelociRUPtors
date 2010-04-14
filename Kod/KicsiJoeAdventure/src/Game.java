@@ -328,9 +328,9 @@ public class Game {
      */
     public void ShowMap(PrintStream stream){
        if(roadStart.Iterated == false){
-			roadStart.X = roadStart.Y = 0;
-			roadStart.Iterated = true;
-		}
+		roadStart.X = roadStart.Y = 0;
+		roadStart.Iterated = true;
+	}
 
         AvailableRoads ar = roadStart.getNextRoads();
         if(ar.roads[0] != null){

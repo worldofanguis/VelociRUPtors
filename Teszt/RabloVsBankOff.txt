@@ -1,13 +1,14 @@
-SetOutput(RabloVsBankOff_out.txt)
+#SetOutput(RabloVsBankOff_out.txt)
 LoadMap(RabloVsBankOff_map.txt)
-RobberGen(0,1)
+RobberGen(0,2)
 #még nem rabolták ki a bankot
 SetBankState(false)
+ShowMap()
 #Eloszor mintha egyenesen mennenk
 SetDirection(0,2)
+Tick(3)
 #de valojaban ki akarja rabolni
 SetDirection(0,3)
-ShowMap()
+Tick(2)
 #csak annyi, hogy látszon, megáll
-Tick(4)
 ShowMap()

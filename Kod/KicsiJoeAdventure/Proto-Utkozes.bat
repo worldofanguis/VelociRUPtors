@@ -25,3 +25,5 @@ java -jar ..\Compare\dist\compare.jar "../../Teszt/Utkozes - RendorVsRablo(B-Off
 
 echo RendorVsRablo(Bank kirabolva)
 java -jar ..\Compare\dist\compare.jar "../../Teszt/Utkozes - RendorVsRablo(B-On) - OUTPUT.txt" "../../Teszt/Utkozes - RendorVsRablo(B-On) - RESULT.txt"
+
+pause

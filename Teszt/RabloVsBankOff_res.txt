@@ -1,23 +1,26 @@
 [START]
-ICAR - ID:0 Tipus:R MaxTick:1
+ICAR - ID:0 Tipus:R MaxTick:2
 #ShowMap mozgás elott
 @  @  @  
 0  1  3  
 R        
-@  @ B@  
-5  2  4  
+   @ B   
+   2     
          
 #Elso ShowMap vege
+CAR - ID:0 RoadID:0 Tick:1
 CAR - ID:0 RoadID:0 Tick:0
-CAR - ID:0 RoadID:1 Tick:6
+CAR - ID:0 RoadID:1 Tick:2
+#irányváltás most
+#az 5-ös tickbõl látszik,hogy kirabolta
 CAR - ID:0 RoadID:1 Tick:5
 CAR - ID:0 RoadID:1 Tick:4
 #ShowMap mozgas utan
 @  @  @  
 0  1  3  
    R     
-@  @ B@  
-5  2  4  
+   @ B   
+   2     
          
 #ShowMap vege
 [END]

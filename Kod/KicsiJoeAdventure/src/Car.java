@@ -54,6 +54,7 @@ public abstract class Car extends ClassID {
      */
     public void setRoadUnderCar(Road road){
         roadUnderMe = road;
+	ar = roadUnderMe.getNextRoads();
     }
 
     /**
@@ -79,22 +80,6 @@ public abstract class Car extends ClassID {
     public void Move(){
         // Mozgatás //
 
-        // plannedDirection beállítása //
-	// ha lehet, a selectedDirection irányába megyünk
-
-	//ha még nincs beállítva választott útirány, beállítunk
-	if(selectedDirection==-1){
-	    selectedDirection = getValidDirection();
-	}
-
-	// plannedDirection beállítása selectedDirection-ra, vagy ha arra nem lehet, válasszon
-	if(ar.roads[selectedDirection]== null){
-	    plannedDirection = getValidDirection();
-	}
-	else{
-	    plannedDirection = selectedDirection;
-	}
-
         //Közlekedésirányító ellenőrzése a plannedDirection-ön//
         //Ez meghívja a megfelelő Interaction fv-t//
         //Ha egy előző interakció megállította a kocsit, akkor ne nézze meg ezt.
@@ -116,18 +101,48 @@ public abstract class Car extends ClassID {
      */
     public abstract void MoveTo(Road road);
 
+    public void Interaction(Building building){
+	ar.roads[plannedDirection] = null;
+	plannedDirection = getValidDirection();
+    }
+
     /**
      * A frissítő/léptető függvény
      * @return A visszatérési érték true, ha az autó még a pályán van.
      */
     public boolean Update(){
         boolean ret = true;
-        if(tickCount > 0) tickCount--;
+	if(tickCount > 0){ tickCount--;
 
+	    
+
+	    //A Building interakció miatt a plannedDirection-t muszáj vagyunk már most beállítani
+	     // plannedDirection beállítása //
+	    // ha lehet, a selectedDirection irányába megyünk
+
+	    //ha még nincs beállítva választott útirány, beállítunk
+	    if(selectedDirection==-1){
+		selectedDirection = getValidDirection();
+	    }
+
+	    // plannedDirection beállítása selectedDirection-ra, vagy ha arra nem lehet, válasszon
+	    if(ar.roads[selectedDirection]== null){
+		plannedDirection = getValidDirection();
+	    }
+	    else{
+		plannedDirection = selectedDirection;
+	    }
+
+	    //Building interakció minden update-ben megpróbáljuk
+	    //A Car-ba kell beleírni, különben a Civilek, Rendőrök befordulnának ide
+	    //plusz így nem csak a rabló tud épületekkel interakcióba lépni
+	    Building building;
+	    if(ar.roads[plannedDirection]!=null && ((building = ar.roads[plannedDirection].hasBuilding()) != null)){
+		   building.whatBuilding(this); //ez majd meghívja a kocsi interakcióját
+	    }
+	}
 	else if(tickCount == 0){
-           ar = roadUnderMe.getNextRoads();
-
-           //ExitCar
+	//ExitCar
            if(DeadEnd(ar)){
                roadUnderMe.removeCar();
                ret = false;

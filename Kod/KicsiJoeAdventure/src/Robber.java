@@ -8,8 +8,8 @@
 public class Robber extends Car {
 
 	private Bunny pickedupbunny;
-        private int previousDirection;
-        private int waitingTime;
+       //private int previousDirection;
+       // private int waitingTime;
 
     /**
      * Konstruktor.
@@ -18,8 +18,8 @@ public class Robber extends Car {
      */
     Robber(int Speed) {
             super(Speed);
-            previousDirection = plannedDirection;
-            waitingTime = 5;
+           // previousDirection = plannedDirection;
+           // waitingTime = 5;
     }
 
     /**
@@ -29,7 +29,9 @@ public class Robber extends Car {
      */
     @Override
     public boolean canBeArrested(){
+	if(pickedupbunny==null)
             return true;
+	else return false;
     }
 
 	public void MoveTo(Road road){
@@ -38,7 +40,6 @@ public class Robber extends Car {
             c.Interaction(this);
         } else {
             roadUnderMe.removeCar();
-            roadUnderMe = road;
             road.setCar(this);
         }
 		Pickup p = road.hasPickup();
@@ -80,7 +81,11 @@ public class Robber extends Car {
      * @param bank Azon bank referenciája, amelyikhez érkezett.
      */
     public void Interaction(Bank bank){
+	tickCount = 5;	//Mielőtt továbbmenne, meg kell állnia egy kicsit.
         bank.robBank();
+	//Az épület felé nem lehet menni.
+	ar.roads[plannedDirection] = null;
+	plannedDirection = getValidDirection();
     }
 
     /**
@@ -136,22 +141,15 @@ public class Robber extends Car {
     public boolean Update(){
         // Mozgás plannedDirection felé //
         //Épület ellenőrzése - ez a legfontosabb, az ütközés ellenőrzés jöhet ez után
-        Building building;
-        if((building = ar.roads[plannedDirection].hasBuilding()) != null)
-                building.whatBuilding(this);
-
-
-        if(tickCount == 0) {
-           ar = roadUnderMe.getNextRoads();
-        }
-
+	
 	if(pickedupbunny!=null){
 	    if(!pickedupbunny.isActive){
 		//System.out.println("mekhalt");
+		pickedupbunny=null;
 	    }
 	}
 
-        Main.game.outputStream.println("CAR - ID:"+ID+" RoadID:"+roadUnderMe.ID+" Tick:"+tickCount);
+        super.Update();
         return true;
     }
 
@@ -167,7 +165,7 @@ public class Robber extends Car {
     /**
      *
      */
-    @Override
+    /*@Override
     public void Move(){
         Building building;
         if ( ar.roads[plannedDirection] != null )
@@ -179,21 +177,21 @@ public class Robber extends Car {
          * akkor a korábbi útirányon halad és amint lehet követi az újat.
          */
         // Mozgás plannedDirection felé, ha nem kell várnunk //
-        if(tickCount == 0)
+       /* if(tickCount == 0)
             if (ar.roads[plannedDirection] != null)
                 MoveTo(ar.roads[plannedDirection]);
-            else if (previousDirection != -1)
-                MoveTo(ar.roads[previousDirection]);
+           /* else if (previousDirection != -1)
+                MoveTo(ar.roads[previousDirection]);*/
 
         // Mozgatás - vége //
-    }
+    //}
 
     /**
      *
      */
-    @Override
+  /*  @Override
     public void setDirection(int newDirection){
         previousDirection = plannedDirection; //indexelés miatt
         plannedDirection = newDirection;
-    }
+    }*/
 }

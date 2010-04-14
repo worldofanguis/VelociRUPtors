@@ -18,7 +18,6 @@ public class Civil extends Car {
             c.Interaction(this);
         } else {
             roadUnderMe.removeCar();
-            roadUnderMe = road;
             road.setCar(this);
         }
 		Pickup p = road.hasPickup();
@@ -52,6 +51,8 @@ public class Civil extends Car {
      * @param bank Az adott bank.
      */
     public void Interaction(Bank bank){
+	ar.roads[plannedDirection] = null;
+	plannedDirection = getValidDirection();
     }
 
     /**
@@ -59,6 +60,8 @@ public class Civil extends Car {
      * @param hideout Az adott rejtekhely.
      */
     public void Interaction(Hideout hideout){
+	ar.roads[plannedDirection] = null;
+	plannedDirection = getValidDirection();
     }
 
     /**
