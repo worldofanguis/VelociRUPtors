@@ -1,0 +1,5 @@
+ILAMP - ID:0 Tick:5
+ICAR - ID:0 Tipus:C MaxTick:1
+ICAR - ID:1 Tipus:R MaxTick:1
+ICAR - ID:2 Tipus:P MaxTick:1
+IBUNNY - ID0 TickLeft:5

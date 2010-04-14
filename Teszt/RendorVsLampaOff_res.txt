@@ -1,5 +1,5 @@
 [START]
-ILAMP - ID:0 Tick:0
+ILAMP - ID:0 Tick:5
 ICAR - ID:0 Tipus:P MaxTick:1
 @  @  @ 
 0  1  2  

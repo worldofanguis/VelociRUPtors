@@ -1,4 +1,4 @@
-#SetOutput(RabloVsBankOff_out.txt)
+SetOutput(RabloVsBankOff_out.txt)
 LoadMap(RabloVsBankOff_map.txt)
 RobberGen(0,2)
 #még nem rabolták ki a bankot
