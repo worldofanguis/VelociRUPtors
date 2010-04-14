@@ -1,4 +1,5 @@
-LoadMap(\..\../Teszt/CivilVsBank_map.txt)
+SetOutput(CivilVsBank_out.txt)
+LoadMap(CivilVsBank_map.txt)
 CivilGen(0,1)
 #még nem rabolták ki a bankot, de ez igazából itt lényegtelen
 SetBankState(true)

@@ -13,8 +13,8 @@ java -jar ..\Compare\dist\compare.jar ../../Teszt/RabloVsHideoutOff_out.txt ../.
 echo Rablo vs. Rejtekhely (ki van rabolva)
 java -jar ..\Compare\dist\compare.jar ../../Teszt/RabloVsHideoutOn_out.txt ../../Teszt/RabloVsHideoutOn_res.txt
 
-echo Civil vs. Epulet
-
+echo Civil vs. Bank
+java -jar ..\Compare\dist\compare.jar ../../Teszt/CivilVsBank_out.txt ../../Teszt/CivilVsBank_res.txt
 
 echo Civil generalas es eltuntetes
 java -jar ..\Compare\dist\compare.jar ../../Teszt/CivilGenExit_out.txt ../../Teszt/CivilGenExit_res.txt
