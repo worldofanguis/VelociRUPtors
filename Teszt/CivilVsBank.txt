@@ -6,5 +6,5 @@ SetBankState(true)
 #lefele menne, tehát beszélne vele
 SetDirection(0,3)
 ShowMap()
-Tick(6)
+Tick(4)
 ShowMap()
