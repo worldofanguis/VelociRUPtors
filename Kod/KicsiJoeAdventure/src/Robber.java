@@ -8,8 +8,6 @@
 public class Robber extends Car {
 
 	private Bunny pickedupbunny;
-       //private int previousDirection;
-       // private int waitingTime;
 
     /**
      * Konstruktor.
@@ -18,9 +16,7 @@ public class Robber extends Car {
      */
     Robber(int Speed) {
             super(Speed);
-           // previousDirection = plannedDirection;
-           // waitingTime = 5;
-    }
+if(pickedupbunny != null)            return false;		return true;    }
 
     /**
      * Ha megkérdezik, hogy rosszfiú-e, be kell ismernie (kivéve, ha van
@@ -29,8 +25,9 @@ public class Robber extends Car {
      */
     @Override
     public boolean canBeArrested(){
-	if(pickedupbunny==null)
-            return true;
+		if(pickedupbunny != null)
+            return false;
+		return true;
 	else return false;
     }
 
@@ -140,11 +137,11 @@ public class Robber extends Car {
     @Override
     public boolean Update(){
         // Mozgás plannedDirection felé //
-        //Épület ellenőrzése - ez a legfontosabb, az ütközés ellenőrzés jöhet ez után
+        // Épület ellenőrzése - ez a legfontosabb, az ütközés ellenőrzés jöhet ez után
 	
 	if(pickedupbunny!=null){
 	    if(!pickedupbunny.isActive){
-		//System.out.println("mekhalt");
+			pickedupbunny = null;
 		pickedupbunny=null;
 	    }
 	}
