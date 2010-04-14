@@ -23,3 +23,5 @@ del /q manifest.mf
 cd ..
 cd ..
 echo Build finished
+
+pause

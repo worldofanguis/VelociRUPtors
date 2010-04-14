@@ -8,8 +8,8 @@
 public class Robber extends Car {
 
 	private Bunny pickedupbunny;
-        private int previousDirection;
-        private int waitingTime;
+    private int previousDirection;
+
 
     /**
      * Konstruktor.
@@ -19,7 +19,7 @@ public class Robber extends Car {
     Robber(int Speed) {
             super(Speed);
             previousDirection = plannedDirection;
-            waitingTime = 5;
+			pickedupbunny = null;
     }
 
     /**
@@ -29,7 +29,9 @@ public class Robber extends Car {
      */
     @Override
     public boolean canBeArrested(){
-            return true;
+		if(pickedupbunny != null)
+            return false;
+		return true;
     }
 
 	public void MoveTo(Road road){
@@ -80,7 +82,11 @@ public class Robber extends Car {
      * @param bank Azon bank referenciája, amelyikhez érkezett.
      */
     public void Interaction(Bank bank){
+		ar.roads[plannedDirection] = null;
+        //tervezett útirány beállítása
+		plannedDirection = getValidDirection();
         bank.robBank();
+		tickCount = 5;
     }
 
     /**
@@ -135,7 +141,7 @@ public class Robber extends Car {
     @Override
     public boolean Update(){
         // Mozgás plannedDirection felé //
-        //Épület ellenőrzése - ez a legfontosabb, az ütközés ellenőrzés jöhet ez után
+        // Épület ellenőrzése - ez a legfontosabb, az ütközés ellenőrzés jöhet ez után
         Building building;
         if((building = ar.roads[plannedDirection].hasBuilding()) != null)
                 building.whatBuilding(this);
@@ -147,7 +153,7 @@ public class Robber extends Car {
 
 	if(pickedupbunny!=null){
 	    if(!pickedupbunny.isActive){
-		//System.out.println("mekhalt");
+			pickedupbunny = null;
 	    }
 	}
 
