@@ -1,5 +1,4 @@
 [START]
-CivilGen(0,1)
 ICAR - ID:0 Tipus:C MaxTick:1
 @  @  @ 
 0  1  2  

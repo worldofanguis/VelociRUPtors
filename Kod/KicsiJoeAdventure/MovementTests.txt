@@ -1,0 +1,7 @@
+# Movement tesztelések #
+SetWorkingDirectory(..\..\Teszt\)
+
+Execute(Kanyarodas.txt)
+Execute(TMove.txt)
+Execute(RendorAlarm.txt)
+Execute(NyulTimeOut.txt)
