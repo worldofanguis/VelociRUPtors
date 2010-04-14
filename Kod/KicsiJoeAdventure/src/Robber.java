@@ -77,8 +77,10 @@ public class Robber extends Car {
      * @param bank Azon bank referenciája, amelyikhez érkezett.
      */
     public void Interaction(Bank bank){
-	tickCount = 5;	//Mielőtt továbbmenne, meg kell állnia egy kicsit.
-        bank.robBank();
+	if(!Main.game.isBankRobbed()){
+	    tickCount = 5;	//Mielőtt továbbmenne, meg kell állnia egy kicsit.
+	    bank.robBank();
+	}
 	//Az épület felé nem lehet menni.
 	ar.roads[plannedDirection] = null;
 	plannedDirection = getValidDirection();
@@ -89,7 +91,12 @@ public class Robber extends Car {
      * @param hideout A rejtekhely referenciája, amely mellé ért.
      */
     public void Interaction(Hideout hideout){
-        hideout.arrivedToHideout();
+	if(Main.game.isBankRobbed()){
+	    hideout.arrivedToHideout();
+	}
+	//Az épület felé nem lehet menni.
+	ar.roads[plannedDirection] = null;
+	plannedDirection = getValidDirection();
     }
 
     /**
