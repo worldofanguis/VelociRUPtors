@@ -23,3 +23,5 @@ del /q compare.mf
 cd ..
 cd ..
 echo Build finished
+
+pause
