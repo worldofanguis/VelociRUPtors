@@ -16,7 +16,7 @@ public class Robber extends Car {
      */
     Robber(int Speed) {
             super(Speed);
-if(pickedupbunny != null)            return false;		return true;    }
+	}
 
     /**
      * Ha megkérdezik, hogy rosszfiú-e, be kell ismernie (kivéve, ha van
@@ -28,7 +28,6 @@ if(pickedupbunny != null)            return false;		return true;    }
 		if(pickedupbunny != null)
             return false;
 		return true;
-	else return false;
     }
 
 	public void MoveTo(Road road){

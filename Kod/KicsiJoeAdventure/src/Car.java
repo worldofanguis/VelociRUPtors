@@ -112,35 +112,33 @@ public abstract class Car extends ClassID {
      */
     public boolean Update(){
         boolean ret = true;
-	if(tickCount > 0){ tickCount--;
 
-	    
+		//ha még nincs beállítva választott útirány, beállítunk
+		if(selectedDirection==-1){
+			selectedDirection = getValidDirection();
+		}
+		// plannedDirection beállítása selectedDirection-ra, vagy ha arra nem lehet, válasszon
+		if(ar.roads[selectedDirection]== null){
+			plannedDirection = getValidDirection();
+		}else{
+			plannedDirection = selectedDirection;
+		}
 
-	    //A Building interakció miatt a plannedDirection-t muszáj vagyunk már most beállítani
-	     // plannedDirection beállítása //
-	    // ha lehet, a selectedDirection irányába megyünk
+		if(tickCount > 0){
+			tickCount--;
+			//A Building interakció miatt a plannedDirection-t muszáj vagyunk már most beállítani
+			// plannedDirection beállítása //
+		    // ha lehet, a selectedDirection irányába megyünk
 
-	    //ha még nincs beállítva választott útirány, beállítunk
-	    if(selectedDirection==-1){
-		selectedDirection = getValidDirection();
-	    }
 
-	    // plannedDirection beállítása selectedDirection-ra, vagy ha arra nem lehet, válasszon
-	    if(ar.roads[selectedDirection]== null){
-		plannedDirection = getValidDirection();
-	    }
-	    else{
-		plannedDirection = selectedDirection;
-	    }
-
-	    //Building interakció minden update-ben megpróbáljuk
-	    //A Car-ba kell beleírni, különben a Civilek, Rendőrök befordulnának ide
-	    //plusz így nem csak a rabló tud épületekkel interakcióba lépni
-	    Building building;
-	    if(ar.roads[plannedDirection]!=null && ((building = ar.roads[plannedDirection].hasBuilding()) != null)){
-		   building.whatBuilding(this); //ez majd meghívja a kocsi interakcióját
-	    }
-	}
+			//Building interakció minden update-ben megpróbáljuk
+			//A Car-ba kell beleírni, különben a Civilek, Rendőrök befordulnának ide
+			//plusz így nem csak a rabló tud épületekkel interakcióba lépni
+			Building building;
+			if(ar.roads[plannedDirection]!=null && ((building = ar.roads[plannedDirection].hasBuilding()) != null)){
+			   building.whatBuilding(this); //ez majd meghívja a kocsi interakcióját
+			}
+		}
 	else if(tickCount == 0){
 	//ExitCar
            if(DeadEnd(ar)){
