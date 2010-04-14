@@ -1,5 +1,5 @@
 @echo off
-java -jar dist\proto.jar EpuletekEsGeneralas.txt
+java -jar dist\proto.jar ..\..\Teszt\TesztOsszeallitasok\EpuletekEsGeneralas.txt
 
 echo Rablo vs. Bank (nincs kirabolva)
 java -jar ..\Compare\dist\compare.jar ../../Teszt/RabloVsBankOff_out.txt ../../Teszt/RabloVsBankOff_res.txt

@@ -1,6 +1,6 @@
 @echo off
-java -jar dist\proto.jar UtkozesTesztek.txt
-java -jar dist\proto.jar UtkozesTesztek2.txt
+java -jar dist\proto.jar ..\..\Teszt\TesztOsszeallitasok\UtkozesTesztek.txt
+java -jar dist\proto.jar ..\..\Teszt\TesztOsszeallitasok\UtkozesTesztek2.txt
 
 echo CivilVsCivil
 java -jar ..\Compare\dist\compare.jar "../../Teszt/Utkozes - CivilVsCivil - OUTPUT.txt" "../../Teszt/Utkozes - CivilVsCivil - RESULT.txt"

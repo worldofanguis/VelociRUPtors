@@ -1,5 +1,5 @@
 @echo off
-java -jar dist\proto.jar MovementTests.txt
+java -jar dist\proto.jar ..\..\Teszt\TesztOsszeallitasok\MovementTests.txt
 
 echo Kanyarodas
 java -jar ..\Compare\dist\compare.jar "../../Teszt/Kanyarodas_output.txt" "../../Teszt/Kanyarodas_res.txt"
