@@ -1,6 +1,6 @@
 [START]
 ICAR - ID:0 Tipus:C MaxTick:1
-@  @  @ 
+@  @  @  
 0  1  2  
 C    S   
 #az autó magától eldönti merre kell menni, mivel csak egy út lehetséges
@@ -13,7 +13,7 @@ CAR - ID:0 RoadID:1 Tick:2
 CAR - ID:0 RoadID:1 Tick:1
 CAR - ID:0 RoadID:1 Tick:0
 CAR - ID:0 RoadID:2 Tick:1
-@  @  @ 
+@  @  @  
 0  1  2  
      SC  
 [END]
