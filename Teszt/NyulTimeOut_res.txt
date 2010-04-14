@@ -1,0 +1,51 @@
+[START]
+#ini [MaxTick:0 - kocsi minden tikkben lép]
+ICAR - ID:0 Tipus:R MaxTick:3
+IBUNNY - ID:0 TickLeft:30
+#ShowMap
+@  
+2  
+   
+@  
+1  
+ N 
+@  
+0  
+R  
+#/ShowMap
+#tick
+CAR - ID:0 RoadID:0 Tick:2
+BUNNY - ID:0 RoadID:1 TickLeft:3
+#tick
+CAR - ID:0 RoadID:0 Tick:1
+BUNNY - ID:0 RoadID:1 TickLeft:2
+#tick
+CAR - ID:0 RoadID:0 Tick:0
+BUNNY - ID:0 RoadID:1 TickLeft:1
+#tick
+CAR - ID:0 RoadID:1 Tick:3
+BUNNY - ID:0 RoadID:- TickLeft:3
+#tick
+CAR - ID:0 RoadID:1 Tick:2
+BUNNY - ID:0 RoadID:- TickLeft:2
+#tick
+CAR - ID:0 RoadID:1 Tick:1
+BUNNY - ID:0 RoadID:- TickLeft:1
+#tick
+CAR - ID:0 RoadID:1 Tick:0
+BUNNY - ID:0 RoadID:- TickLeft:0
+#tick
+CAR - ID:0 RoadID:2 Tick:3
+#ShowMap
+@  
+2  
+R  
+@  
+1  
+   
+@  
+0  
+   
+#    
+#/ShowMap
+[END]

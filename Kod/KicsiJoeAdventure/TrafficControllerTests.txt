@@ -1,0 +1,10 @@
+# TrafficController tesztelések #
+SetWorkingDirectory(..\..\Teszt\)
+
+Execute(CivilVsStop.txt)
+Execute(CivilVsLampa.txt)
+Execute(RabloVsExit.txt)
+Execute(RendorVsExit.txt)
+Execute(RendorVsStopOff.txt)
+Execute(RendorVsLampaOff.txt)
+Execute(RendorVsLampaOn.txt)

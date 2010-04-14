@@ -1,10 +1,10 @@
 SetWorkingDirectory(..\..\Teszt\)
 
 #Rabló vs. Bank (nincs kirabolva)
-Execute(RabloVsBankOff.txt)
+#Execute(RabloVsBankOff.txt)
 
 #Rabló vs. Bank (ki van rabolva)
-#Execute(RabloVsBankOn.txt)
+Execute(RabloVsBankOn.txt)
 
 #Rabló vs. Rejtekhely (nincs kirabolva)
 #Execute(RabloVsHideoutOff.txt)
