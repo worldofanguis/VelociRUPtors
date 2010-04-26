@@ -46,16 +46,22 @@ public class Road extends ClassID {
      * pozícionálva.
      */
     public boolean Iterated;
+	private boolean IncomingRoads[];
 
     /**
      * Konstruktor
      */
     public Road(){
         next = new Road[4];
+		IncomingRoads = new boolean[4];
         buildingOnMe = null;
         carOnMe = null;
         trafficController = null;
         Iterated = false;
+
+		// false ra állítjuk őket defaultként (már nem mintha alapból nem lennének azok ... //
+		for(int i=0;i<4;i++)
+			IncomingRoads[i] = false;
     }
 
     /**
@@ -65,6 +71,10 @@ public class Road extends ClassID {
     public AvailableRoads getNextRoads(){
             return new AvailableRoads(next);
     }
+
+	public boolean[] getIncomingRoads(){
+		return IncomingRoads;
+	}
 
     /**
      * Van-e rajta autó?
@@ -145,5 +155,6 @@ public class Road extends ClassID {
      */
     public void setRoad(Directions Direction,Road road){
         next[Direction.value] = road;
+		IncomingRoads[Direction.value] = true;
     }
 }
