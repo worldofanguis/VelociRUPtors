@@ -6,7 +6,8 @@ public class Lamp extends ClassID implements TrafficController {
     /**
      * A lámpa állapota az egyes útszakaszokhoz. (zöld = true)
      */
-    private boolean state[] = new boolean[4];
+    private boolean state[];
+	private boolean activeSides[];
 
     /**
      * Lámpa váltási időközének alapértéke
@@ -24,7 +25,10 @@ public class Lamp extends ClassID implements TrafficController {
     private Road roadUnderMe;
 
     public Lamp(){
-        state[0] = state[1] = state[2] = state[3] = false;
+		state = new boolean[4];
+		for(int i=0;i<4;i++)
+			state[i] = false;
+
         ID = Main.game.addLamp(this);
         startTick = 5;		// def values //
         currentTick = 5;
@@ -49,10 +53,17 @@ public class Lamp extends ClassID implements TrafficController {
         return state[Direction]; //?
     }
 
+	public boolean[] getActiveSides(){
+		return activeSides;
+	}
+
     /**
      * A lámpa állapotát frissítő függvény.
      */
     public void Update(){
+		// firssítjük a becsatlakozásokat... elég lenne csak 1 amikor már kész a pálya, de hát most mit tegyünk ... //
+		activeSides = roadUnderMe.getIncomingRoads();
+		// TODO: Ez befolyásolja a váltogatást ? //
         if(currentTick-- == 0){
             for (int i=0; i<4; i++)
                 state[i] = !(state[i]);
