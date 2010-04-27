@@ -1,19 +1,10 @@
-package View;
+import java.awt.Image;
 
-/**
- * @author Ferdi
- * @version 1.0
- * @created 27-ápr.-2010 18:17:20
- */
 public class HideoutView {
 
 	private Image Texture;
 
 	public HideoutView(){
-
-	}
-
-	public void finalize() throws Throwable {
 
 	}
 
