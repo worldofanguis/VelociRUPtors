@@ -11,6 +11,7 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class Game {
+    private View view;
 
     /**
      * A pályán található autók referenciái.
@@ -84,6 +85,10 @@ public class Game {
        points = 0;
        randomEnabled = false; //Random logika nem engedélyezett
        outputStream = System.out; //Kimeneti csatorna
+    }
+
+    public void setView(View v){
+	view = v;
     }
 
     /**

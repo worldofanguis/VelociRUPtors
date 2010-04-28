@@ -1,4 +1,10 @@
-public class View {
+
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Panel;
+
+public class View extends Panel
+{
 
 	private PoliceView policelView;
 	private CivilView civilView;
@@ -21,12 +27,19 @@ public class View {
 	public BunnyView m_BunnyView;
 	public LampView m_LampView;
 
+	
+	//Erre a bufferre rajzolunk ha változás van
+	private Image backBuffer;
+	Graphics bufferGraphics;
 	public View(){
-
+	    if(backBuffer==null){
+		backBuffer = createImage(800,500);
+	    }
+	    bufferGraphics = backBuffer.getGraphics();
 	}
 
 	public void Draw(){
-
+	    
 	}
 
 	/**
