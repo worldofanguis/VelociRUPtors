@@ -1,7 +1,6 @@
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Panel;
+import java.awt.*;
+import java.net.URL;
 
 public class View extends Panel
 {
@@ -27,15 +26,73 @@ public class View extends Panel
 	public BunnyView m_BunnyView;
 	public LampView m_LampView;
 
+        //Interakcióhoz szükséges elemek
+        public Button ng;
+        public Button eg;
+        public Label score;
+        public Label time;
 	
 	//Erre a bufferre rajzolunk ha változás van
 	private Image backBuffer;
 	Graphics bufferGraphics;
+
+        //Rajzvászon
+        private MapCanvas canvas;
+
+        /*
+         * képek tárolása. Lehetne hashes lista,
+         * most csak példa
+         */
+        Image ut;
+        Image auto;
+
 	public View(){
-	    if(backBuffer==null){
-		backBuffer = createImage(800,500);
-	    }
-	    bufferGraphics = backBuffer.getGraphics();
+            imageLoading();
+
+	    /* Ablak elemei */
+            setLayout( new BorderLayout() );
+
+            Panel p1 = new Panel();
+            p1.setLayout(new FlowLayout());
+            ng = new Button("New Game");
+            eg = new Button("Exit Game");
+
+
+            p1.add(ng);
+            p1.add(eg);
+            Label l1 = new Label("Time: ");
+            time = new Label("");
+            time.setSize(100, 20);
+            Label l2 = new Label("Score: ");
+            score = new Label("4444");
+            score.setSize(100, 20);
+
+            p1.add(l1);
+            p1.add(time);
+            p1.add(l2);
+            p1.add(score);
+            time.setText("999");
+
+            add("North",p1);
+
+            canvas = new MapCanvas();
+            add("Center",canvas);
+
+            Panel p2 = new Panel(new FlowLayout());
+            //Ideiglenesen lógó helyett
+            Canvas c = new Canvas();
+            c.setSize(100,50);
+
+            TextField txt = new TextField("Alap üzenet", 20);
+            txt.setEditable( false );
+
+            p2.add(c);
+            p2.add(txt);
+
+            add("South",p2);
+            /* Ablak elemei */
+
+
 	}
 
 	public void Draw(){
@@ -121,5 +178,56 @@ public class View extends Panel
 	public void Draw(ExitSign e){
 
 	}
+
+
+
+        /**
+         * Külön osztály annak, ahova rajzoljuk a pályát
+         * a paint függvénye miatt, mert az hívódik meg ha kell implicit.
+         * Át kell valahogy adni neki pályát.
+         */
+    class MapCanvas extends Canvas {
+        private MapCanvas() {
+            setBackground(Color.red);
+        }
+
+        public void paint(Graphics g) {
+            bufferGraphics = g;
+            if(backBuffer==null){
+                    backBuffer = createImage(800,500);
+                }
+            bufferGraphics = backBuffer.getGraphics();
+
+//            for (int i = 0; i<800; i+=50)
+//                for (int j = 0; j<500; j+=50)
+//                    bufferGraphics.drawImage(ut, i, j, null);
+//
+//            for (int i = 0; i<800; i+=50)
+//                for (int j = 0; j<500; j+=50)
+//                    if ( ((i - j) % 20) == 0 )
+//                        bufferGraphics.drawImage(auto, i, j, null);
+
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            URL url = this.getClass().getResource("vmi.jpg");
+            Image img = toolkit.getImage(url);
+
+            bufferGraphics.drawImage(img, 0, 0, null);
+
+            g.drawImage(backBuffer, 0, 0, null);
+        }
+    }
+
+    /**
+     * Betölteni a képeket
+     */
+    private void imageLoading() {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+        URL url = this.getClass().getResource("../img/road.png");
+        ut = toolkit.getImage(url);
+
+        url = this.getClass().getResource("../img/civil.png");
+        auto = toolkit.getImage(url);
+    }
 
 }

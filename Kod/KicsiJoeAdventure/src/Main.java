@@ -1,4 +1,7 @@
 
+import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,7 +22,27 @@ public class Main {
     public static void main(String[] args) {
 		String myfile = "EpuletekEsGeneralas.txt";
 
-		new Controller();
+//		new Controller();
+
+                /*
+                 * Controllerbe kell majd
+                 */
+                View view = new View();
+                Frame frame = new Frame("Próba");
+                frame.addWindowListener( new WindowAdapter()
+                    {
+                         public void windowClosing(WindowEvent e)
+                         {
+                          System.exit(-1);
+                         }
+                    }
+                );
+                frame.add(view);
+                frame.setSize(800,600);
+                frame.setResizable(false);
+                frame.setVisible(true);
+                /* /controller */
+
 		/*if(args.length != 1){
 			//System.out.println("U FAIL!!! USE THE COMMAND LINE PARAMTER TO SPECIFY A TESTING SCRIPT!!!");
 			//return;
