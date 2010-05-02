@@ -109,4 +109,7 @@ public class Lamp extends ClassID implements TrafficController {
         startTick = currentTick = Tick;
     }
 
+    public void Draw(){
+	Controller.game.getView().Draw(this);
+    }
 }
