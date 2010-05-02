@@ -28,7 +28,7 @@ public class Police extends Car {
          * A rabló letartóztatása megtörtént, jelez a Game osztálynak.
          */
 	public void Arrest(){
-		Main.game.GameOver(false);
+		Controller.game.GameOver(false);
 	}
 
 	public void MoveTo(Road road){
@@ -168,7 +168,7 @@ public class Police extends Car {
          */
 	@Override
 	public boolean Update(){
-		if(!policeModeActivated && Main.game.isBankRobbed()){
+		if(!policeModeActivated && Controller.game.isBankRobbed()){
 			policeModeActivated = true;
 			if(tickCount > 1)   //itt az 1-es a leggyorsabb autó tickje, ajánlott lenne vmi konstans erre
 			    tickCount = 1;
@@ -191,7 +191,7 @@ public class Police extends Car {
     public void Interaction(Robber robber){
          //A későbbieknek a belső változó alapján dönt, most
          //meghívja a függvényt ahol a tesztelő van megkérdezve
-         if( Main.game.isBankRobbed() ){
+         if( Controller.game.isBankRobbed() ){
              if ( robber.canBeArrested() )
                  Arrest();
          } else

@@ -99,7 +99,7 @@ public class Civil extends Car {
     }
 
 	public void Interaction(Robber robber){
-		Main.game.addPoints(-5);
+		Controller.game.addPoints(-5);
 		robber.tickCount = 5;
 	}
 

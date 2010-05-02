@@ -29,10 +29,10 @@ public class Lamp extends ClassID implements TrafficController {
 		for(int i=0;i<4;i++)
 			state[i] = false;
 
-        ID = Main.game.addLamp(this);
+        ID = Controller.game.addLamp(this);
         startTick = 5;		// def values //
         currentTick = 5;
-        Main.game.outputStream.println("ILAMP - ID:"+ID+" Tick:"+startTick);
+        Controller.game.outputStream.println("ILAMP - ID:"+ID+" Tick:"+startTick);
     }
 
     /**
@@ -69,7 +69,7 @@ public class Lamp extends ClassID implements TrafficController {
                 state[i] = !(state[i]);
             currentTick = startTick;
         }
-        Main.game.outputStream.println("LAMP - ID:"+ID+" RoadID:"+roadUnderMe.ID+" IsRed:"+!(state[0])+" Tick:"+currentTick);
+        Controller.game.outputStream.println("LAMP - ID:"+ID+" RoadID:"+roadUnderMe.ID+" IsRed:"+!(state[0])+" Tick:"+currentTick);
     }
 
     /**
@@ -109,4 +109,7 @@ public class Lamp extends ClassID implements TrafficController {
         startTick = currentTick = Tick;
     }
 
+    public void Draw(){
+	Controller.game.getView().Draw(this);
+    }
 }

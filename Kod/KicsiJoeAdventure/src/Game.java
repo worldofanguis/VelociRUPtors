@@ -86,9 +86,19 @@ public class Game {
        randomEnabled = false; //Random logika nem engedélyezett
        outputStream = System.out; //Kimeneti csatorna
     }
+    public View getView(){
+	return view;
+    }
+
+    public void WriteLampTest(){
+	Lamp c = new Lamp();
+	c.Draw();
+
+    }
 
     public void setView(View v){
 	view = v;
+	v.Draw();
     }
 
     /**
@@ -121,7 +131,7 @@ public class Game {
      * elkapta a játékost.
      */
     public void GameOver(boolean Success){
-        Main.game.outputStream.println("[GAMEOVER]");
+        Controller.game.outputStream.println("[GAMEOVER]");
 		System.exit(2);
     }
 
@@ -134,7 +144,7 @@ public class Game {
 
     /**
      * Autó hozzáadása a tárolt listához.
-     * @param c A listába felvevendő autó
+     * @param logoCanvas A listába felvevendő autó
      * @return Hányas indexű elem lett, amit beraktunk.
      */
     public int addCar(Car c){

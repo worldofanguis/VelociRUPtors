@@ -25,8 +25,8 @@ public class Hideout implements Building {
      * Ez gondoskodik a játékállapot ellenőrzéséről.
      */
     public void arrivedToHideout(){
-        if(Main.game.isBankRobbed())
-            Main.game.GameOver(true);
+        if(Controller.game.isBankRobbed())
+            Controller.game.GameOver(true);
     }
 
     /**

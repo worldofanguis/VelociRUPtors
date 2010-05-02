@@ -40,11 +40,11 @@ public abstract class Car extends ClassID {
     protected AvailableRoads ar;
 
     public Car(int Speed){
-        ID = Main.game.addCar(this);
+        ID = Controller.game.addCar(this);
         tickCount = startSpeed = Speed;
         plannedDirection = 0;
 	selectedDirection = -1;
-        Main.game.outputStream.println("ICAR - ID:"+ID+" Tipus:"+showMapChar()+" MaxTick:"+startSpeed);
+        Controller.game.outputStream.println("ICAR - ID:"+ID+" Tipus:"+showMapChar()+" MaxTick:"+startSpeed);
     }
 
     /**
@@ -151,7 +151,7 @@ public abstract class Car extends ClassID {
         }
         
         String p = (ret) ? "" : " -"; //Kilépett
-        Main.game.outputStream.println("CAR - ID:"+ID+" RoadID:"+roadUnderMe.ID+" Tick:"+tickCount+p);
+        Controller.game.outputStream.println("CAR - ID:"+ID+" RoadID:"+roadUnderMe.ID+" Tick:"+tickCount+p);
         // Mozgatás - vége //
         return ret;
     }
@@ -199,7 +199,7 @@ public abstract class Car extends ClassID {
     public int getValidDirection(){
 	int retDirection = 0;
 	if(moreThan1AR(ar)){	// több szabad irány van, választunk //
-		if (Main.game.randomEnabled)
+		if (Controller.game.randomEnabled)
 		{
 		    //Random generálás engedélyezve.
 		    Random random = new Random();

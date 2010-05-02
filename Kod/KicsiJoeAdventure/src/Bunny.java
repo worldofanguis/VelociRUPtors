@@ -20,10 +20,10 @@ public class Bunny extends ClassID implements Pickup{
     private Road roadUnderMe;
 
     public Bunny(){
-        ID = Main.game.addPickup(this);
+        ID = Controller.game.addPickup(this);
 	StartTick = 30;
         TickLeft = 30; //Valami
-        Main.game.outputStream.println("IBUNNY - ID:"+ID+" TickLeft:"+TickLeft);
+        Controller.game.outputStream.println("IBUNNY - ID:"+ID+" TickLeft:"+TickLeft);
     }
 
     /**
@@ -78,9 +78,9 @@ public class Bunny extends ClassID implements Pickup{
 	}
             
 	if(!isPicked){
-	    Main.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+roadUnderMe.ID+" TickLeft:"+TickLeft);
+	    Controller.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+roadUnderMe.ID+" TickLeft:"+TickLeft);
 	}else{
-	    Main.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+"-"+" TickLeft:"+TickLeft);
+	    Controller.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+"-"+" TickLeft:"+TickLeft);
 	}
         return ret;
     }

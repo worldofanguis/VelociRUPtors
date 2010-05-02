@@ -23,7 +23,7 @@ public class Bank implements Building {
      * Jelez a Game osztálynak, hogy kirabolták a bankot.
      */
     public void robBank(){
-        Main.game.bankRobbed();
+        Controller.game.bankRobbed();
     }
 
     public char showMapChar() {

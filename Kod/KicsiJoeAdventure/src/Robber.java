@@ -77,7 +77,7 @@ public class Robber extends Car {
      * @param bank Azon bank referenciája, amelyikhez érkezett.
      */
     public void Interaction(Bank bank){
-	if(!Main.game.isBankRobbed()){
+	if(!Controller.game.isBankRobbed()){
 	    tickCount = 5;	//Mielőtt továbbmenne, meg kell állnia egy kicsit.
 	    bank.robBank();
 	}
@@ -91,7 +91,7 @@ public class Robber extends Car {
      * @param hideout A rejtekhely referenciája, amely mellé ért.
      */
     public void Interaction(Hideout hideout){
-	if(Main.game.isBankRobbed()){
+	if(Controller.game.isBankRobbed()){
 	    hideout.arrivedToHideout();
 	}
 	//Az épület felé nem lehet menni.
@@ -115,7 +115,7 @@ public class Robber extends Car {
      }
 
      public void Interaction(Police police){
-		if( Main.game.isBankRobbed() ){
+		if( Controller.game.isBankRobbed() ){
              if ( canBeArrested() )
                  police.Arrest();
 		}else
