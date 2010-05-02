@@ -1,5 +1,6 @@
 
 import java.awt.Frame;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
@@ -13,6 +14,7 @@ import java.io.FileReader;
 
 public class Main {
 	private static String WorkingDirectory;
+	public static Game game;
 
         /**
          * A program indulása.
@@ -20,6 +22,26 @@ public class Main {
          */
     public static void main(String[] args) {
 		String myfile = "EpuletekEsGeneralas.txt";
+
+//		new Controller();
+
+                /*
+                 * Controllerbe kell majd
+                 */
+                View view = new View();
+                Frame frame = new Frame("Próba");
+                frame.addWindowListener( new WindowAdapter()
+                    {
+                         public void windowClosing(WindowEvent e)
+                         {
+                          System.exit(-1);
+                         }
+                    }
+                );
+                frame.add(view);
+                frame.setSize(800,600);
+                frame.setResizable(false);
+                frame.setVisible(true);
                 new Controller();
                 /* /controller */
 
@@ -50,16 +72,22 @@ public class Main {
 		if(Command.startsWith("Execute(")){
 			String Filename = Command.substring(8,Command.length()-1);
 			String line;
+			game = new Game();
+			game.WorkingDirectory = WorkingDirectory;
 			Controller.game = new Game();
 			Controller.game.WorkingDirectory = WorkingDirectory;
 			try{
 				BufferedReader r = new BufferedReader(new FileReader(new File(WorkingDirectory,Filename)));
 				while((line = r.readLine()) != null){
+					game.CommandInterpreter(line);
 					Controller.game.CommandInterpreter(line);
 				}
+				game.outputStream.println("[END]");
 				Controller.game.outputStream.println("[END]");
 
 				// ...OMG... //
+				if(game.outputStream != System.out)
+					game.outputStream.close();
 				if(Controller.game.outputStream != System.out)
 					Controller.game.outputStream.close();
 			}catch(Exception e){
