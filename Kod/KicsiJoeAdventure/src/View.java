@@ -78,20 +78,20 @@ public class View extends Panel
                 }
             bufferGraphics = backBuffer.getGraphics();
             
-	    //            for (int i = 0; i<800; i+=50)
+//	                for (int i = 0; i<800; i+=50)
 //                for (int j = 0; j<500; j+=50)
-//                    bufferGraphics.drawImage(ut, i, j, null);
+//                    bufferGraphics.drawImage(ut, i, j, this);
 //
 //            for (int i = 0; i<800; i+=50)
 //                for (int j = 0; j<500; j+=50)
 //                    if ( ((i - j) % 20) == 0 )
-//                        bufferGraphics.drawImage(auto, i, j, null);
+//                        bufferGraphics.drawImage(auto, i, j, this);
 
             Toolkit toolkit = Toolkit.getDefaultToolkit();
             URL url = this.getClass().getResource("vmi.jpg");
             Image img = toolkit.getImage(url);
 
-            bufferGraphics.drawImage(img, 0, 0, null);
+            bufferGraphics.drawImage(img, 0, 0, this);
 	}
 
 	/**
@@ -210,10 +210,10 @@ public class View extends Panel
     private void imageLoading() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-        URL url = this.getClass().getResource("../img/road.png");
+        URL url = this.getClass().getResource("..//img//road.png");
         ut = toolkit.getImage(url);
 
-        url = this.getClass().getResource("../img/civil.png");
+        url = this.getClass().getResource("..//img//civil.png");
         auto = toolkit.getImage(url);
     }
 
