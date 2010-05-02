@@ -1,10 +1,11 @@
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.net.URL;
+import javax.swing.JPanel;
 
-public class View extends Panel
+public class View extends JPanel
 {
-
 	private PoliceView policelView;
 	private CivilView civilView;
 	private RobberView robberView;
@@ -17,26 +18,24 @@ public class View extends Panel
 	private LampView lampView;
 	
 	//Erre a bufferre rajzolunk ha változás van
-	private Image backBuffer = null;
-	Graphics bufferGraphics = null;
+	private BufferedImage backBuffer;
+	Graphics2D bufferGraphics;
 
-        /*
-         * képek tárolása. Lehetne hashes lista,
-         * most csak példa
-         */
-        Image ut;
-        Image auto;
+	Image ut;
+	Image auto;
 
-	public View(){
-            imageLoading();  
+	public View() {
+		imageLoading();
+		backBuffer = new BufferedImage(800, 600, BufferedImage.TYPE_INT_RGB);
+		//ezzel fog rajzolni a panel a képre
+		bufferGraphics =  (Graphics2D) backBuffer.getGraphics();
+		setPreferredSize(new Dimension(800,600));
+
+		//bufferGraphics.setColor(Color.GREEN);
+		//bufferGraphics.fillRect(20, 20, 500, 500);
 	}
 
 	public void Draw(){
-	    if(backBuffer == null)
-		backBuffer = this.createImage(800, 500);
-	    bufferGraphics =backBuffer.getGraphics();
-	    bufferGraphics.fillRect(20, 20, 500, 500);
-		
 		//	                for (int i = 0; i<800; i+=50)
 //                for (int j = 0; j<500; j+=50)
 //                    bufferGraphics.drawImage(ut, i, j, this);
@@ -52,27 +51,10 @@ public class View extends Panel
 	    //bufferGraphics.drawImage(img, 0, 0, this);
 	}
 	
-	public void paint(Graphics g) {
-            bufferGraphics = g;
-            if(backBuffer==null){
-                    backBuffer = createImage(800,500);
-                }
-            bufferGraphics = backBuffer.getGraphics();
-
-            Draw();
-            
-            g.drawImage(backBuffer, 0, 0, null);
-        }
-
-        public void update(Graphics g)
-        {
-              paint(g);
-        }
-
-        public void display()
-        {
-            repaint();
-        }
+	@Override
+	public void paint(Graphics g){
+        g.drawImage(backBuffer,0,0,null);
+    }
 
 	/**
 	 * 
@@ -103,10 +85,9 @@ public class View extends Panel
 	 * @param l
 	 */
 	public void Draw(Lamp l){
+//		bufferGraphics.drawImage(ut, 10, 10, this);
 	    bufferGraphics.setColor(Color.red);
 	    bufferGraphics.drawString("LAMMPPPP", 40, 40);
-	    display();
-
 	}
 
 	/**
@@ -160,6 +141,8 @@ public class View extends Panel
      * Betölteni a képeket
      */
     private void imageLoading() {
+		//ut = load("..\\img\\road.png");
+		//auto = load("..\\img\\civil.png");
         Toolkit toolkit = Toolkit.getDefaultToolkit();
 
         URL url = this.getClass().getResource("../img/road.png");
@@ -168,4 +151,25 @@ public class View extends Panel
         url = this.getClass().getResource("../img/civil.png");
         auto = toolkit.getImage(url);
     }
+
+   public Image load(String nev){
+        Image image = null;
+        boolean betoltve = false;
+        while(!betoltve){
+            try {
+                URL url = this.getClass().getResource(nev);
+                image = Toolkit.getDefaultToolkit().getImage(url);
+//                image = ImageIO.read(new File("src/img/"+nev.toLowerCase()+".PNG"));
+                if(image.getWidth(null)!=0 && image.getWidth(null)!=-1){
+                    betoltve = true;
+                }else{
+                    Thread.sleep(10);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return image;
+    }
+
 }

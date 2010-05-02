@@ -1,113 +1,106 @@
 
 import java.awt.BorderLayout;
-import java.awt.Button;
-import java.awt.Canvas;
 import java.awt.FlowLayout;
-import java.awt.Frame;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Label;
-import java.awt.Panel;
-import java.awt.TextField;
 import java.awt.event.*;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author User
- */
-public class Controller{
-    private View view;
-    public static Game game = new Game();
-    //private Timer timer;
-    private Frame frame;
-     //Ideiglenesen lógó helyett
-     LogoCanvas logoCanvas = new LogoCanvas();
-     
-    
-    
-    Controller(){	
-	view = new View();
-	frame = new GameFrame();
-
-	frame.setTitle("Kicsi Joe Adventures");
-	frame.setSize(800,600);
-	
-	frame.setLayout( new BorderLayout() );
-
-            Panel p1 = new Panel();
-            p1.setLayout(new FlowLayout());
-            Button newGameButton = new Button("New Game");
-            Button exitGameButton = new Button("Exit Game");
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 
-            p1.add(newGameButton);
-            p1.add(exitGameButton);
-            Label l1 = new Label("Time: ");
-            Label time = new Label("");
-            time.setSize(100, 20);
-            Label l2 = new Label("Score: ");
-            Label score = new Label("4444");
-            score.setSize(100, 20);
+public class Controller extends JFrame implements ActionListener,KeyListener{
+    private View gameView;
+    public static Game game;
+	private JTextField txt;
+	private JButton newGameButton;
+	private JButton exitGameButton;
 
-            p1.add(l1);
-            p1.add(time);
-            p1.add(l2);
-            p1.add(score);
-            time.setText("999");
+	//private Timer timer;
 
-            frame.add("North",p1);
+    Controller(){
+		game = new Game();
+		gameView = new View();
 
-	    frame.add("Center", view);
+		setTitle("Kicsi Joe Adventures");
+		setSize(800,600);
 
-            Panel p2 = new Panel(new FlowLayout());
-           
+		setLayout( new BorderLayout() );
 
-            TextField txt = new TextField("Alap üzenet", 20);
-            txt.setEditable( false );
-	    logoCanvas.setSize(100,50);
-            p2.add(logoCanvas);
-            p2.add(txt);
+		JPanel p1 = new JPanel();
+		p1.setLayout(new FlowLayout());
+		newGameButton = new JButton("New Game");
+		exitGameButton = new JButton("Exit Game");
 
-            frame.add("South",p2);
+		newGameButton.addActionListener(this);
+		exitGameButton.addActionListener(this);
 
-	    frame.addWindowListener(new gameWindowListener());
-	    frame.addKeyListener(new gameKeyListener());
-	    frame.show();
-            /* Ablak elemei */
-	
-	    game.setView(view);
-	    game.WriteLampTest();
+		p1.add(newGameButton);
+		p1.add(exitGameButton);
+		JLabel l1 = new JLabel("Time: ");
+		JLabel time = new JLabel("");
+		time.setSize(100, 20);
+		JLabel l2 = new JLabel("Score: ");
+		JLabel score = new JLabel("4444");
+		score.setSize(100, 20);
+
+		p1.add(l1);
+		p1.add(time);
+		p1.add(l2);
+		p1.add(score);
+		time.setText("999");
+
+		add("North",p1);
+
+	    add("Center", gameView);
+
+		JPanel p2 = new JPanel(new FlowLayout());
+
+
+		txt = new JTextField("Alap üzenet", 20);
+		txt.setEditable( false );
+	   
+		p2.add(txt);
+
+		add("South",p2);
+
+		addKeyListener(this);
+
+		pack();
+        setResizable(false);
+        setVisible(true);
+		requestFocus();
+//	    game.setView(gameView);
+//	    game.WriteLampTest();
+
+		run();
     }
 
-    class gameWindowListener extends WindowAdapter{
-	@Override
-	    public void windowClosing(WindowEvent e){
-		e.getWindow().dispose();
-	    }
-    }
-    class gameKeyListener extends KeyAdapter{
-	public void keyPressed(KeyEvent e){
-	    game.WriteLampTest();
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == exitGameButton)
+			System.exit(1);
+		else if(e.getSource() == newGameButton)
+			; // newgame
 	}
 
-    }
-    
-    class GameFrame extends Frame{
-	public void paint(Graphics g){
-	    logoCanvas.invalidate();
-	    view.invalidate();
+	public void keyTyped(KeyEvent e) {
+		txt.setText("keytyped");
 	}
-    }
 
-    class LogoCanvas extends Canvas{
-	public void paint(Graphics g){
-	    g.drawString("LOGO", 10, 10);
+	public void keyPressed(KeyEvent e) {
+		txt.setText("keypressed");
+		gameView.Draw((Lamp)null);
 	}
-    }
 
+	public void keyReleased(KeyEvent e) {
+		txt.setText("keyreleased");
+	}
 
+	private void run() {
+		while(true) {
+			// MAIN LOOP //
+
+			gameView.repaint();
+		}
+	}
 }
