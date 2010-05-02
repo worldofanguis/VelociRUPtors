@@ -23,7 +23,6 @@ public class Controller extends JFrame implements ActionListener,KeyListener{
 		gameView = new View();
 
 		setTitle("Kicsi Joe Adventures");
-		setSize(800,600);
 
 		setLayout( new BorderLayout() );
 
@@ -101,6 +100,7 @@ public class Controller extends JFrame implements ActionListener,KeyListener{
 			// MAIN LOOP //
 
 			gameView.repaint();
+                        Thread.yield();
 		}
 	}
 }

@@ -26,34 +26,30 @@ public class View extends JPanel
 
 	public View() {
 		imageLoading();
-		backBuffer = new BufferedImage(800, 600, BufferedImage.TYPE_INT_RGB);
+		backBuffer = new BufferedImage(800, 500, BufferedImage.TYPE_INT_RGB);
 		//ezzel fog rajzolni a panel a képre
 		bufferGraphics =  (Graphics2D) backBuffer.getGraphics();
-		setPreferredSize(new Dimension(800,600));
+		setPreferredSize(new Dimension(800,500));
 
 		//bufferGraphics.setColor(Color.GREEN);
 		//bufferGraphics.fillRect(20, 20, 500, 500);
 	}
 
 	public void Draw(){
-		//	                for (int i = 0; i<800; i+=50)
-//                for (int j = 0; j<500; j+=50)
-//                    bufferGraphics.drawImage(ut, i, j, this);
-//
-//            for (int i = 0; i<800; i+=50)
-//                for (int j = 0; j<500; j+=50)
-//                    if ( ((i - j) % 20) == 0 )
-//                        bufferGraphics.drawImage(auto, i, j, this);
+            for (int i = 0; i<800; i+=45)
+                for (int j = 0; j<500; j+=45)
+                    bufferGraphics.drawImage(ut, i, j, this);
 
-            // Toolkit toolkit = Toolkit.getDefaultToolkit();
-            // URL url = this.getClass().getResource("vmi.jpg");
-            // Image img = toolkit.getImage(url);
-	    //bufferGraphics.drawImage(img, 0, 0, this);
+            for (int i = 0; i<800; i+=45)
+                for (int j = 0; j<500; j+=45)
+                    if ( ((i - j) % 20) == 0 )
+                        bufferGraphics.drawImage(auto, i, j, this);
 	}
 	
 	@Override
 	public void paint(Graphics g){
-        g.drawImage(backBuffer,0,0,null);
+            Draw();
+            g.drawImage(backBuffer,0,0,null);
     }
 
 	/**
@@ -141,15 +137,8 @@ public class View extends JPanel
      * Betölteni a képeket
      */
     private void imageLoading() {
-		//ut = load("..\\img\\road.png");
-		//auto = load("..\\img\\civil.png");
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-
-        URL url = this.getClass().getResource("../img/road.png");
-        ut = toolkit.getImage(url);
-
-        url = this.getClass().getResource("../img/civil.png");
-        auto = toolkit.getImage(url);
+        ut = load("img/road.png");
+        auto = load("img/civil.png");
     }
 
    public Image load(String nev){
