@@ -1,5 +1,5 @@
 
-import java.awt.Frame;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
@@ -29,6 +29,45 @@ public class Main {
                  */
                 View view = new View();
                 Frame frame = new Frame("Próba");
+                frame.setLayout( new BorderLayout() );
+
+                Panel p1 = new Panel();
+                p1.setLayout(new FlowLayout());
+                Button ng = new Button("New Game");
+                Button eg = new Button("Exit Game");
+
+                p1.add(ng);
+                p1.add(eg);
+                Label l1 = new Label("Time: ");
+                Label time = new Label("");
+                time.setSize(100, 20);
+                Label l2 = new Label("Score: ");
+                Label score = new Label("4444");
+                score.setSize(100, 20);
+
+                p1.add(l1);
+                p1.add(time);
+                p1.add(l2);
+                p1.add(score);
+                time.setText("999");
+
+                frame.add("North",p1);
+                view.display();
+                frame.add("Center",view);
+
+                Panel p2 = new Panel(new FlowLayout());
+                //Ideiglenesen lógó helyett
+                Canvas c = new Canvas();
+                c.setSize(100,50);
+
+                TextField txt = new TextField("Alap üzenet", 20);
+                txt.setEditable( false );
+
+                p2.add(c);
+                p2.add(txt);
+
+                frame.add("South",p2);
+
                 frame.addWindowListener( new WindowAdapter()
                     {
                          public void windowClosing(WindowEvent e)
@@ -37,7 +76,7 @@ public class Main {
                          }
                     }
                 );
-                frame.add(view);
+                
                 frame.setSize(800,600);
                 frame.setResizable(false);
                 frame.setVisible(true);
