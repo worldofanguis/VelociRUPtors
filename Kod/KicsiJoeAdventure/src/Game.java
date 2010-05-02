@@ -86,19 +86,19 @@ public class Game {
        randomEnabled = false; //Random logika nem engedélyezett
        outputStream = System.out; //Kimeneti csatorna
     }
-
-    public void setView(View v){
-	view = v;
-    }
-
-     public View getView(){
+    public View getView(){
 	return view;
     }
 
     public void WriteLampTest(){
 	Lamp c = new Lamp();
-	view.Draw(c);
+	c.Draw();
 
+    }
+
+    public void setView(View v){
+	view = v;
+	v.Draw();
     }
 
     /**
@@ -144,7 +144,7 @@ public class Game {
 
     /**
      * Autó hozzáadása a tárolt listához.
-     * @param c A listába felvevendő autó
+     * @param logoCanvas A listába felvevendő autó
      * @return Hányas indexű elem lett, amit beraktunk.
      */
     public int addCar(Car c){
