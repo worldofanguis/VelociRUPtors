@@ -1,14 +1,14 @@
 import img.ImageLib;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public class CivilView {
 
 	private Image Texture;
-    private BufferedImage backbuffer;
+    private Graphics2D g;
 
-	public CivilView(BufferedImage buffer){
-        backbuffer = buffer;
+	public CivilView(Graphics2D graphics){
+        g = graphics;
         Texture = ImageLib.Load("civil.png");
 	}
 

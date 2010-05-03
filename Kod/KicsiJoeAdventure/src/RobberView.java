@@ -1,14 +1,14 @@
 import img.ImageLib;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public class RobberView {
 
 	private Image Texture;
-    private BufferedImage backbuffer;
+    private Graphics2D g;
 
-	public RobberView(BufferedImage buffer){
-        backbuffer = buffer;
+	public RobberView(Graphics2D graphics){
+        g = graphics;
         Texture = ImageLib.Load("robber.png");
 	}
 

@@ -1,14 +1,14 @@
 import img.ImageLib;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public class ExitView {
 
 	private Image Texture;
-    private BufferedImage backbuffer;
+    private Graphics2D g;
 
-	public ExitView(BufferedImage buffer){
-        backbuffer = buffer;
+	public ExitView(Graphics2D graphics){
+        g = graphics;
         Texture = ImageLib.Load("exit_a50.png");
 	}
 

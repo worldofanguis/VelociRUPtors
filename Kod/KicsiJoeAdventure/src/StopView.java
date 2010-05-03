@@ -1,14 +1,14 @@
 import img.ImageLib;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public class StopView {
 
 	private Image Texture;
-    private BufferedImage backbuffer;
+    private Graphics2D g;
 
-	public StopView(BufferedImage buffer){
-        backbuffer = buffer;
+	public StopView(Graphics2D graphics){
+        g = graphics;
         Texture = ImageLib.Load("stop_a50.png");
 	}
 

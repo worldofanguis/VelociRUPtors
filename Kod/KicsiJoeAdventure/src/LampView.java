@@ -1,16 +1,16 @@
 import img.ImageLib;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public class LampView {
 
 	private Image Texture;
     private Image RedLight;
     private Image GreenLight;
-    private BufferedImage backbuffer;
+    private Graphics2D g;
 
-	public LampView(BufferedImage buffer){
-        backbuffer = buffer;
+	public LampView(Graphics2D graphics){
+        g = graphics;
         Texture = ImageLib.Load("lamp_basic_none.png");
         RedLight = ImageLib.Load("lamp_light_red.png");
         GreenLight = ImageLib.Load("lamp_light_red.png");

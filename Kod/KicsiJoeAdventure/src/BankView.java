@@ -1,15 +1,15 @@
 
 import img.ImageLib;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public class BankView {
 
 	private Image Texture;
-    private BufferedImage backbuffer;
+    private Graphics2D g;
 
-	public BankView(BufferedImage buffer){
-        backbuffer = buffer;
+	public BankView(Graphics2D graphics){
+        g = graphics;
         Texture = ImageLib.Load("bank.png");
 	}
 

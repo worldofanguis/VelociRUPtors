@@ -1,14 +1,14 @@
 import img.ImageLib;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public class HideoutView {
 
 	private Image Texture;
-    private BufferedImage backbuffer;
+    private Graphics2D g;
 
-	public HideoutView(BufferedImage buffer){
-        backbuffer = buffer;
+	public HideoutView(Graphics2D graphics){
+        g = graphics;
         Texture = ImageLib.Load("hideout.png");
 	}
 

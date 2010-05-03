@@ -1,15 +1,17 @@
 import img.ImageLib;
+import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public class RoadView {
 
 	private Image Texture;
-    private BufferedImage backbuffer;
+	private Image ArrowUp;
+    private Graphics2D g;
 
-	public RoadView(BufferedImage buffer){
-        backbuffer = buffer;
+	public RoadView(Graphics2D graphics){
+        g = graphics;
         Texture = ImageLib.Load("road.png");
+		ArrowUp = ImageLib.Load("arrow_up.png");
 	}
 
 	/**
@@ -17,7 +19,7 @@ public class RoadView {
 	 * @param r
 	 */
 	public void Draw(Road r){
-        
+        //g
 	}
 
 }

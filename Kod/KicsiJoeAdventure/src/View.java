@@ -140,16 +140,16 @@ public class View extends JPanel
      * Betölteni a képeket
      */
     private void loadViews() {
-        policelView = new PoliceView(backBuffer);
-        civilView = new CivilView(backBuffer);
-        robberView = new RobberView(backBuffer);
-        roadView = new RoadView(backBuffer);
-        bankView = new BankView(backBuffer);
-        hideoutView = new HideoutView(backBuffer);
-        stopView = new StopView(backBuffer);
-        exitView = new ExitView(backBuffer);
-        bunnyView = new BunnyView(backBuffer);
-        lampView = new LampView(backBuffer);
+        policelView = new PoliceView(bufferGraphics);
+        civilView = new CivilView(bufferGraphics);
+        robberView = new RobberView(bufferGraphics);
+        roadView = new RoadView(bufferGraphics);
+        bankView = new BankView(bufferGraphics);
+        hideoutView = new HideoutView(bufferGraphics);
+        stopView = new StopView(bufferGraphics);
+        exitView = new ExitView(bufferGraphics);
+        bunnyView = new BunnyView(bufferGraphics);
+        lampView = new LampView(bufferGraphics);
     }
 
 }
