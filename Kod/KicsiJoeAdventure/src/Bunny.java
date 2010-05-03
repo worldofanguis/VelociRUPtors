@@ -30,13 +30,12 @@ public class Bunny extends ClassID implements Pickup{
      * Beállítja, hogy melyik útszakaszon van a nyúl.
      * @param r Az útszakasz, amire rakjuk.
      */
-    public void setRoad(Road r)
-    {
+    public void setRoad(Road r){
         roadUnderMe = r;
     }
 
-    public Road getRoad(){
-	return roadUnderMe;
+    public Road getRoadUnderMe(){
+		return roadUnderMe;
     }
 
     public void setTick(int tick)

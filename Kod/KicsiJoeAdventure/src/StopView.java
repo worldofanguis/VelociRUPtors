@@ -17,7 +17,8 @@ public class StopView {
 	 * @param s
 	 */
 	public void Draw(StopSign s){
-
+		Road r = s.getRoadUnderMe();
+		g.drawImage(Texture, r.X*Texture.getWidth(null), r.Y*Texture.getHeight(null),null);
 	}
 
 }

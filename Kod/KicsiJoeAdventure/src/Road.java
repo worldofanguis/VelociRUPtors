@@ -114,6 +114,7 @@ public class Road extends ClassID {
      */
     public void setBuilding(Building building){
         buildingOnMe = building;
+		building.setRoad(this);
     }
 
     /**
@@ -122,7 +123,7 @@ public class Road extends ClassID {
      */
     public void setCar(Car car){
         carOnMe = car;
-        car.setRoadUnderCar(this);
+        car.setRoad(this);
     }
 
     /**
@@ -131,6 +132,7 @@ public class Road extends ClassID {
      */
     public void setTrafficController(TrafficController tc){
         trafficController = tc;
+		tc.setRoad(this);
     }
 
     /**
@@ -139,6 +141,7 @@ public class Road extends ClassID {
      */
     public void setPickup(Pickup p){
         pickup = p;
+		p.setRoad(this);
     }
 
     /**
@@ -157,4 +160,8 @@ public class Road extends ClassID {
         next[Direction.value] = road;
 		IncomingRoads[Direction.value] = true;
     }
+
+	public void Draw(){
+		Controller.view.Draw(this);
+	}
 }

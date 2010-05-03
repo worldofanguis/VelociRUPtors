@@ -18,7 +18,8 @@ public class BunnyView {
 	 * @param b
 	 */
 	public void Draw(Bunny b){
-
+		Road r = b.getRoadUnderMe();
+		g.drawImage(Texture, r.X*Texture.getWidth(null), r.Y*Texture.getHeight(null),null);
 	}
 
 }

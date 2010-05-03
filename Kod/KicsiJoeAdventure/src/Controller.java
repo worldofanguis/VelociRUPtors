@@ -1,5 +1,6 @@
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import javax.swing.JButton;
@@ -12,12 +13,15 @@ import javax.swing.JTextField;
 public class Controller extends JFrame implements ActionListener,KeyListener,WindowListener{
     public static Game game;
     public static View view;
-	private JTextField txt;
+	public static JTextField txt;
+
 	private JButton newGameButton;
 	private JButton exitGameButton;
 
     Controller(){
 		game = new Game();
+		game.Initialization();
+
 		view = new View();
 
 		setTitle("Kicsi Joe Adventures");
@@ -76,8 +80,10 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == exitGameButton)
 			System.exit(1);
-		else if(e.getSource() == newGameButton)
-			; // newgame
+		else if(e.getSource() == newGameButton){
+
+		}
+			
 
         this.requestFocus();
 	}
@@ -101,6 +107,7 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
                 if(Time > 10) {
                     Time = 0;
                     game.Update();
+					game.Draw();
                 }
                 view.repaint();
                 Thread.sleep(100);

@@ -4,6 +4,7 @@
  */
 
 public class StopSign implements TrafficController {
+	private Road roadUnderMe;
 
     /**
      * Konstruktor
@@ -32,5 +33,13 @@ public class StopSign implements TrafficController {
     public void Draw() {
         Controller.view.Draw(this);
     }
+
+	public void setRoad(Road r) {
+		roadUnderMe = r;
+	}
+
+	public Road getRoadUnderMe() {
+		return roadUnderMe;
+	}
 
 }

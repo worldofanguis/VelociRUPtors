@@ -27,6 +27,9 @@ public interface Pickup {
     public void setTick(int tick);
     public void PickedUp();
 
+	public void setRoad(Road r);
+	public Road getRoadUnderMe();
+
     public void Draw();
 
 }

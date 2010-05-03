@@ -2,7 +2,6 @@
 import img.ImageLib;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.net.URL;
 import javax.swing.JPanel;
 
 public class View extends JPanel
@@ -22,34 +21,18 @@ public class View extends JPanel
 	private BufferedImage backBuffer;
 	Graphics2D bufferGraphics;
 
-	Image ut;
-	Image auto;
-
 	public View() {
-		loadViews();
-		backBuffer = new BufferedImage(800, 500, BufferedImage.TYPE_INT_RGB);
+		backBuffer = new BufferedImage(800,500,BufferedImage.TYPE_INT_RGB);
 		//ezzel fog rajzolni a panel a képre
 		bufferGraphics =  (Graphics2D) backBuffer.getGraphics();
 		setPreferredSize(new Dimension(800,500));
 
-		//bufferGraphics.setColor(Color.GREEN);
-		//bufferGraphics.fillRect(20, 20, 500, 500);
+		// Create the view classes //
+		loadViews();
 	}
 
-//	public void Draw(){
-//            for (int i = 0; i<800; i+=45)
-//                for (int j = 0; j<500; j+=45)
-//                    bufferGraphics.drawImage(ut, i, j, this);
-//
-//            for (int i = 0; i<800; i+=45)
-//                for (int j = 0; j<500; j+=45)
-//                    if ( ((i - j) % 20) == 0 )
-//                        bufferGraphics.drawImage(auto, i, j, this);
-//	}
-	
 	@Override
 	public void paint(Graphics g){
-//            Draw();
         g.drawImage(backBuffer,0,0,null);
     }
 

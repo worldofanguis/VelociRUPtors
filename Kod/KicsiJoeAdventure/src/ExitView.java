@@ -17,7 +17,8 @@ public class ExitView {
 	 * @param e
 	 */
 	public void Draw(ExitSign e){
-
+		Road r = e.getRoadUnderMe();
+		g.drawImage(Texture, r.X*Texture.getWidth(null), r.Y*Texture.getHeight(null),null);
 	}
 
 }

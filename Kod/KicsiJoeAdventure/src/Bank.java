@@ -5,6 +5,7 @@
 
 public class Bank implements Building {
 
+	private Road roadUnderMe;
     /**
      * Konstruktor.
      */
@@ -28,6 +29,14 @@ public class Bank implements Building {
 
     public char showMapChar() {
         return 'B';
+    }
+
+	public Road getRoadUnderMe(){
+		return roadUnderMe;
+	}
+
+	public void setRoad(Road r){
+        roadUnderMe = r;
     }
 
     public void Draw() {

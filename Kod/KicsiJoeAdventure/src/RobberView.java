@@ -16,8 +16,9 @@ public class RobberView {
 	 * 
 	 * @param r
 	 */
-	public void Draw(Robber r){
-
+	public void Draw(Robber robber){
+		Road r = robber.getRoadUnderMe();
+		g.drawImage(Texture, r.X*Texture.getWidth(null), r.Y*Texture.getHeight(null),null);
 	}
 
 }

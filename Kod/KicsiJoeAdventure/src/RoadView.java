@@ -19,7 +19,7 @@ public class RoadView {
 	 * @param r
 	 */
 	public void Draw(Road r){
-        //g
+        g.drawImage(Texture, r.X*Texture.getWidth(null), r.Y*Texture.getHeight(null),null);
 	}
 
 }

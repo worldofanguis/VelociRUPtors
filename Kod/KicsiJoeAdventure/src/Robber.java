@@ -132,7 +132,7 @@ public class Robber extends Car {
       */
      public void Interaction(Bunny bunny){
 		 pickedupbunny = bunny;
-		 bunny.getRoad().setPickup(null);
+		 bunny.getRoadUnderMe().setPickup(null);
 		 bunny.PickedUp();
      }
 

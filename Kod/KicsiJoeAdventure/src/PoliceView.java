@@ -17,6 +17,8 @@ public class PoliceView {
 	 * @param p
 	 */
 	public void Draw(Police p){
+		Road r = p.getRoadUnderMe();
+		g.drawImage(Texture, r.X*Texture.getWidth(null), r.Y*Texture.getHeight(null),null);
 
 	}
 

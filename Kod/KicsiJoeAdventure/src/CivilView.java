@@ -17,7 +17,8 @@ public class CivilView {
 	 * @param c
 	 */
 	public void Draw(Civil c){
-
+		Road r = c.getRoadUnderMe();
+		g.drawImage(Texture, r.X*Texture.getWidth(null), r.Y*Texture.getHeight(null),null);
 	}
 
 }

@@ -52,11 +52,14 @@ public abstract class Car extends ClassID {
      * (pálya felépítésekor lehet szükség rá)
      * @param road Az út, amelyikre ráhelyezzük.
      */
-    public void setRoadUnderCar(Road road){
+    public void setRoad(Road road){
         roadUnderMe = road;
-	ar = roadUnderMe.getNextRoads();
+		ar = roadUnderMe.getNextRoads();
     }
 
+	public Road getRoadUnderMe() {
+		return roadUnderMe;
+	}
     /**
      * Le lehet-e tartóztatni? (Rosszfiú?)
      * @return Alapértelmezésben (civil és rendőr miatt) false

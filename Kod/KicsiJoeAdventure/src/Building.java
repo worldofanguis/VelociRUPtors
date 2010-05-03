@@ -18,5 +18,8 @@ public interface Building{
      */
     public char showMapChar();
 
+	public void setRoad(Road r);
+	public Road getRoadUnderMe();
+
     public void Draw();
 }

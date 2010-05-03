@@ -4,6 +4,7 @@
  */
 
 public class Hideout implements Building {
+	private Road roadUnderMe;
 
     /**
      * Konstruktor. Az inicializálásnál megjelenő objektumnév: hideout.
@@ -40,5 +41,13 @@ public class Hideout implements Building {
     public void Draw() {
         Controller.view.Draw(this);
     }
+
+	public void setRoad(Road r) {
+		roadUnderMe = r;
+	}
+
+	public Road getRoadUnderMe() {
+		return roadUnderMe;
+	}
 
 }

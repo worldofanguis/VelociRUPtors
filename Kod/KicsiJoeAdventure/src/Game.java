@@ -72,7 +72,8 @@ public class Game {
      */
     public String WorkingDirectory;
 
-    private View gameView;
+	private int MaxX;
+	private int MaxY;
 
     /**
      * Konstruktor, alaphelyzet (nem rabolták ki a bankot)
@@ -118,15 +119,15 @@ public class Game {
      * elkapta a játékost.
      */
     public void GameOver(boolean Success){
-        Controller.game.outputStream.println("[GAMEOVER]");
-		System.exit(2);
+        Controller.txt.setText("GameOver");
     }
 
     /**
      * A játék kezdetkor a pálya elkészítése, az elemek elhelyezése.
      */
     public void Initialization(){
-        //loadMapFromFile("map.txt");
+        loadMapFromFile("map.txt");
+		CreateMap();
     }
 
     /**
@@ -300,7 +301,6 @@ public class Game {
         //Lámpák frissítése
         for (i=0; i<lamps.size(); i++) {
             ( (Lamp)lamps.get(i) ).Update();
-            ( (Lamp)lamps.get(i) ).Draw();
         }
             
 
@@ -308,8 +308,6 @@ public class Game {
             if ( !( ( (Car)cars.get(i) ).Update() ) ) {
                 removeActualCar(i);
                 --i; //Ez azért kell, mert csökken az utána jövők indexe.
-            }else{
-                ((Car)cars.get(i)).Draw();
             }
 
         }
@@ -320,12 +318,28 @@ public class Game {
                 pickups.remove(i);
                 --i; //Ez azért kell, mert csökken az utána jövők indexe.
                 //Autóval valami?
-             }else{
-				((Pickup)pickups.get(i)).Draw();
 			 }
         }
 
     }
+
+	public void Draw(){
+		int i;
+
+		for (i=0; i<roads.size(); i++) {
+			Road r = roads.get(i);
+            r.Draw();
+
+			if(r.hasBuilding() != null)
+				r.hasBuilding().Draw();
+			if(r.hasPickup() != null)
+				r.hasPickup().Draw();
+			if(r.hasCar() != null)
+				r.hasCar().Draw();
+			if(r.hasTrafficController() != null)
+				r.hasTrafficController().Draw();
+        }
+	}
 
     public void CreateMap(){
        if(roadStart.Iterated == false){
@@ -350,7 +364,8 @@ public class Game {
         // Ezen a ponton minden útnak már be van állítva az X és Y koordinátája //
 
         int MinX = 0,MinY = 0;
-        int MaxX = 0,MaxY = 0;
+        MaxX = 0;
+		MaxY = 0;
 
         ListIterator<Road> i = roads.listIterator();
 
@@ -367,9 +382,19 @@ public class Game {
         while(i.hasPrevious()){
             current = i.previous();
             current.X -= MinX;
-            current.Y -=MinY;
+            current.Y -= MinY;
         }
+
+		MaxX = (MaxX-MinX)+1;
+		MaxY = (MaxY-MinY)+1;
     }
+
+	public int getMapWidth(){
+		return MaxX;
+	}
+	public int getMapHeight(){
+		return MaxY;
+	}
 
     /**
      * ShowMap indítja el ezt a rekurzív fv-t

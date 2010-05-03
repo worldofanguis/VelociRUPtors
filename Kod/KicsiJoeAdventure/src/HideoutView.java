@@ -17,7 +17,8 @@ public class HideoutView {
 	 * @param h
 	 */
 	public void Draw(Hideout h){
-
+		Road r = h.getRoadUnderMe();
+		g.drawImage(Texture, r.X*Texture.getWidth(null), r.Y*Texture.getHeight(null),null);
 	}
 
 }

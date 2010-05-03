@@ -21,6 +21,8 @@ public class LampView {
 	 * @param l
 	 */
 	public void Draw(Lamp l){
+		Road r = l.getRoadUnderMe();
+		g.drawImage(Texture, r.X*Texture.getWidth(null), r.Y*Texture.getHeight(null),null);
 
 	}
 

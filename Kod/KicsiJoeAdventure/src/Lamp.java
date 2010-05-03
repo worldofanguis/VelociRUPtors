@@ -32,16 +32,7 @@ public class Lamp extends ClassID implements TrafficController {
         ID = Controller.game.addLamp(this);
         startTick = 5;		// def values //
         currentTick = 5;
-        Controller.game.outputStream.println("ILAMP - ID:"+ID+" Tick:"+startTick);
-    }
-
-    /**
-     * Beállítja, hogy melyik útszakaszon van a lámpa.
-     * @param r Az útszakasz, amire rakjuk.
-     */
-    public void setRoad(Road r)
-    {
-        roadUnderMe = r;
+//        Controller.game.outputStream.println("ILAMP - ID:"+ID+" Tick:"+startTick);
     }
 
     /**
@@ -69,7 +60,7 @@ public class Lamp extends ClassID implements TrafficController {
                 state[i] = !(state[i]);
             currentTick = startTick;
         }
-        Controller.game.outputStream.println("LAMP - ID:"+ID+" RoadID:"+roadUnderMe.ID+" IsRed:"+!(state[0])+" Tick:"+currentTick);
+//        Controller.game.outputStream.println("LAMP - ID:"+ID+" RoadID:"+roadUnderMe.ID+" IsRed:"+!(state[0])+" Tick:"+currentTick);
     }
 
     /**
@@ -112,4 +103,12 @@ public class Lamp extends ClassID implements TrafficController {
     public void Draw(){
         Controller.view.Draw(this);
     }
+
+    public void setRoad(Road r) {
+        roadUnderMe = r;
+    }
+
+	public Road getRoadUnderMe() {
+		return roadUnderMe;
+	}
 }
