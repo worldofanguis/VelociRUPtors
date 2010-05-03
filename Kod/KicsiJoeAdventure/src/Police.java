@@ -214,4 +214,9 @@ public class Police extends Car {
             return 'P';
     }
 
+    @Override
+    public void Draw() {
+        Controller.view.Draw(this);
+    }
+
 }

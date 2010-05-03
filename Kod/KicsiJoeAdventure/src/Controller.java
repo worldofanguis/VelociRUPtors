@@ -9,18 +9,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class Controller extends JFrame implements ActionListener,KeyListener{
-    private View gameView;
+public class Controller extends JFrame implements ActionListener,KeyListener,WindowListener{
     public static Game game;
+    public static View view;
 	private JTextField txt;
 	private JButton newGameButton;
 	private JButton exitGameButton;
 
-	//private Timer timer;
-
     Controller(){
 		game = new Game();
-		gameView = new View();
+		view = new View();
 
 		setTitle("Kicsi Joe Adventures");
 
@@ -51,28 +49,28 @@ public class Controller extends JFrame implements ActionListener,KeyListener{
 
 		add("North",p1);
 
-	    add("Center", gameView);
+	    add("Center", view);
 
 		JPanel p2 = new JPanel(new FlowLayout());
 
 
 		txt = new JTextField("Alap üzenet", 20);
 		txt.setEditable( false );
+        txt.setFocusable(false);
 	   
 		p2.add(txt);
 
 		add("South",p2);
 
 		addKeyListener(this);
+        addWindowListener(this);
 
 		pack();
         setResizable(false);
         setVisible(true);
-		requestFocus();
-//	    game.setView(gameView);
-//	    game.WriteLampTest();
+		this.requestFocus();
 
-		run();
+        run();
     }
 
 	public void actionPerformed(ActionEvent e) {
@@ -80,6 +78,8 @@ public class Controller extends JFrame implements ActionListener,KeyListener{
 			System.exit(1);
 		else if(e.getSource() == newGameButton)
 			; // newgame
+
+        this.requestFocus();
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -88,7 +88,6 @@ public class Controller extends JFrame implements ActionListener,KeyListener{
 
 	public void keyPressed(KeyEvent e) {
 		txt.setText("keypressed");
-		gameView.Draw((Lamp)null);
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -96,11 +95,35 @@ public class Controller extends JFrame implements ActionListener,KeyListener{
 	}
 
 	private void run() {
+        int Time = 0;
 		while(true) {
-			// MAIN LOOP //
-
-			gameView.repaint();
-                        Thread.yield();
+            try {
+                if(Time > 10) {
+                    Time = 0;
+                    game.Update();
+                }
+                view.repaint();
+                Thread.sleep(100);
+                Time++;
+            } catch (InterruptedException ex) {
+                
+            }
 		}
 	}
+
+    public void windowOpened(WindowEvent e) {
+    }
+    public void windowClosing(WindowEvent e) {
+        System.exit(1);
+    }
+    public void windowClosed(WindowEvent e) {
+    }
+    public void windowIconified(WindowEvent e) {
+    }
+    public void windowDeiconified(WindowEvent e) {
+    }
+    public void windowActivated(WindowEvent e) {
+    }
+    public void windowDeactivated(WindowEvent e) {
+    }
 }

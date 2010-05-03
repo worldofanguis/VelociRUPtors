@@ -16,4 +16,6 @@ public interface TrafficController {
      * @return A készülékekre jellemző karakter
      */
     public char showMapChar();
+
+    public void Draw();
 }

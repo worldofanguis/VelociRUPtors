@@ -122,4 +122,9 @@ public class Civil extends Car {
     public char showMapChar() {
         return 'C';
     }
+
+    @Override
+    public void Draw() {
+        Controller.view.Draw(this);
+    }
 }

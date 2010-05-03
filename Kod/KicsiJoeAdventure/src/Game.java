@@ -11,7 +11,6 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class Game {
-    private View view;
 
     /**
      * A pályán található autók referenciái.
@@ -73,6 +72,8 @@ public class Game {
      */
     public String WorkingDirectory;
 
+    private View gameView;
+
     /**
      * Konstruktor, alaphelyzet (nem rabolták ki a bankot)
      */
@@ -85,20 +86,6 @@ public class Game {
        points = 0;
        randomEnabled = false; //Random logika nem engedélyezett
        outputStream = System.out; //Kimeneti csatorna
-    }
-    public View getView(){
-	return view;
-    }
-
-    public void WriteLampTest(){
-	Lamp c = new Lamp();
-	c.Draw();
-
-    }
-
-    public void setView(View v){
-	view = v;
-	v.Draw();
     }
 
     /**
@@ -309,15 +296,18 @@ public class Game {
         int i = 0;
 
         //Lámpák frissítése
-        for (i=0; i<lamps.size(); i++)
+        for (i=0; i<lamps.size(); i++) {
             ( (Lamp)lamps.get(i) ).Update();
+            ( (Lamp)lamps.get(i) ).Draw();
+        }
+            
 
-        for (i=0; i< cars.size(); i++)
-        {
-            if ( !( ( (Car)cars.get(i) ).Update() ) )
-            {
+        for (i=0; i< cars.size(); i++) {
+            if ( !( ( (Car)cars.get(i) ).Update() ) ) {
                 removeActualCar(i);
                 --i; //Ez azért kell, mert csökken az utána jövők indexe.
+            }else{
+                ((Car)cars.get(i)).Draw();
             }
 
         }
@@ -557,5 +547,4 @@ public class Game {
             }
         }
     }
-
 }

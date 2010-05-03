@@ -85,4 +85,8 @@ public class Bunny extends ClassID implements Pickup{
         return ret;
     }
 
+    public void Draw() {
+        Controller.view.Draw(this);
+    }
+
 }

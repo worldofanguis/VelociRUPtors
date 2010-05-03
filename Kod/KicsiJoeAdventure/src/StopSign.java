@@ -29,4 +29,8 @@ public class StopSign implements TrafficController {
             return 'S';
     }
 
+    public void Draw() {
+        Controller.view.Draw(this);
+    }
+
 }

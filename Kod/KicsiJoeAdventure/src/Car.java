@@ -315,4 +315,6 @@ public abstract class Car extends ClassID {
      */
     public abstract char showMapChar();
 
+    public abstract void Draw();
+
 }

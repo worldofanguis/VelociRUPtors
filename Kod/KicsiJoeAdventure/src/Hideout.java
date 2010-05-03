@@ -37,4 +37,8 @@ public class Hideout implements Building {
         return 'H';
     }
 
+    public void Draw() {
+        Controller.view.Draw(this);
+    }
+
 }

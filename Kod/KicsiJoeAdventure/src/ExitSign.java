@@ -27,4 +27,8 @@ public class ExitSign implements TrafficController {
         return 'E';
     }
 
+    public void Draw() {
+        Controller.view.Draw(this);
+    }
+
 }

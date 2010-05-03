@@ -110,6 +110,6 @@ public class Lamp extends ClassID implements TrafficController {
     }
 
     public void Draw(){
-	Controller.game.getView().Draw(this);
+        Controller.view.Draw(this);
     }
 }

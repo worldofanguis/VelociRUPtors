@@ -1,4 +1,5 @@
 
+import img.ImageLib;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
@@ -25,7 +26,7 @@ public class View extends JPanel
 	Image auto;
 
 	public View() {
-		imageLoading();
+		loadViews();
 		backBuffer = new BufferedImage(800, 500, BufferedImage.TYPE_INT_RGB);
 		//ezzel fog rajzolni a panel a képre
 		bufferGraphics =  (Graphics2D) backBuffer.getGraphics();
@@ -35,21 +36,21 @@ public class View extends JPanel
 		//bufferGraphics.fillRect(20, 20, 500, 500);
 	}
 
-	public void Draw(){
-            for (int i = 0; i<800; i+=45)
-                for (int j = 0; j<500; j+=45)
-                    bufferGraphics.drawImage(ut, i, j, this);
-
-            for (int i = 0; i<800; i+=45)
-                for (int j = 0; j<500; j+=45)
-                    if ( ((i - j) % 20) == 0 )
-                        bufferGraphics.drawImage(auto, i, j, this);
-	}
+//	public void Draw(){
+//            for (int i = 0; i<800; i+=45)
+//                for (int j = 0; j<500; j+=45)
+//                    bufferGraphics.drawImage(ut, i, j, this);
+//
+//            for (int i = 0; i<800; i+=45)
+//                for (int j = 0; j<500; j+=45)
+//                    if ( ((i - j) % 20) == 0 )
+//                        bufferGraphics.drawImage(auto, i, j, this);
+//	}
 	
 	@Override
 	public void paint(Graphics g){
-            Draw();
-            g.drawImage(backBuffer,0,0,null);
+//            Draw();
+        g.drawImage(backBuffer,0,0,null);
     }
 
 	/**
@@ -57,7 +58,7 @@ public class View extends JPanel
 	 * @param bank
 	 */
 	public void Draw(Bank bank){
-
+        bankView.Draw(bank);
 	}
 
 	/**
@@ -65,7 +66,7 @@ public class View extends JPanel
 	 * @param hideout
 	 */
 	public void Draw(Hideout hideout){
-
+        hideoutView.Draw(hideout);
 	}
 
 	/**
@@ -73,7 +74,7 @@ public class View extends JPanel
 	 * @param s
 	 */
 	public void Draw(StopSign s){
-
+        stopView.Draw(s);
 	}
 
 	/**
@@ -81,9 +82,10 @@ public class View extends JPanel
 	 * @param l
 	 */
 	public void Draw(Lamp l){
+        lampView.Draw(l);
 //		bufferGraphics.drawImage(ut, 10, 10, this);
-	    bufferGraphics.setColor(Color.red);
-	    bufferGraphics.drawString("LAMMPPPP", 40, 40);
+//	    bufferGraphics.setColor(Color.red);
+//	    bufferGraphics.drawString("LAMMPPPP", 40, 40);
 	}
 
 	/**
@@ -91,7 +93,7 @@ public class View extends JPanel
 	 * @param r
 	 */
 	public void Draw(Road r){
-
+        roadView.Draw(r);
 	}
 
 	/**
@@ -99,6 +101,7 @@ public class View extends JPanel
 	 * @param c
 	 */
 	public void Draw(Civil c){
+        civilView.Draw(c);
 	}
 
 	/**
@@ -106,7 +109,7 @@ public class View extends JPanel
 	 * @param p
 	 */
 	public void Draw(Police p){
-
+        policelView.Draw(p);
 	}
 
 	/**
@@ -114,7 +117,7 @@ public class View extends JPanel
 	 * @param r
 	 */
 	public void Draw(Robber r){
-
+        robberView.Draw(r);
 	}
 
 	/**
@@ -122,7 +125,7 @@ public class View extends JPanel
 	 * @param b
 	 */
 	public void Draw(Bunny b){
-
+        bunnyView.Draw(b);
 	}
 
 	/**
@@ -130,35 +133,23 @@ public class View extends JPanel
 	 * @param e
 	 */
 	public void Draw(ExitSign e){
-
+        exitView.Draw(e);
 	}  
 
     /**
      * Betölteni a képeket
      */
-    private void imageLoading() {
-        ut = load("img/road.png");
-        auto = load("img/civil.png");
-    }
-
-   public Image load(String nev){
-        Image image = null;
-        boolean betoltve = false;
-        while(!betoltve){
-            try {
-                URL url = this.getClass().getResource(nev);
-                image = Toolkit.getDefaultToolkit().getImage(url);
-//                image = ImageIO.read(new File("src/img/"+nev.toLowerCase()+".PNG"));
-                if(image.getWidth(null)!=0 && image.getWidth(null)!=-1){
-                    betoltve = true;
-                }else{
-                    Thread.sleep(10);
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        return image;
+    private void loadViews() {
+        policelView = new PoliceView(backBuffer);
+        civilView = new CivilView(backBuffer);
+        robberView = new RobberView(backBuffer);
+        roadView = new RoadView(backBuffer);
+        bankView = new BankView(backBuffer);
+        hideoutView = new HideoutView(backBuffer);
+        stopView = new StopView(backBuffer);
+        exitView = new ExitView(backBuffer);
+        bunnyView = new BunnyView(backBuffer);
+        lampView = new LampView(backBuffer);
     }
 
 }

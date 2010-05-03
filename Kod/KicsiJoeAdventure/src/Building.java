@@ -17,4 +17,6 @@ public interface Building{
      * @return A reprezentáló karakter
      */
     public char showMapChar();
+
+    public void Draw();
 }

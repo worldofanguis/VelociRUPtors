@@ -27,4 +27,6 @@ public interface Pickup {
     public void setTick(int tick);
     public void PickedUp();
 
+    public void Draw();
+
 }

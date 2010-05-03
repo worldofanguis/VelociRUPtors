@@ -30,4 +30,8 @@ public class Bank implements Building {
         return 'B';
     }
 
+    public void Draw() {
+        Controller.view.Draw(this);
+    }
+
 }

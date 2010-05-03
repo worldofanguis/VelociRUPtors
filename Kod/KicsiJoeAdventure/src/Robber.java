@@ -165,6 +165,11 @@ public class Robber extends Car {
             return 'R';
     }
 
+    @Override
+    public void Draw() {
+        Controller.view.Draw(this);
+    }
+
     /**
      *
      */
