@@ -238,10 +238,12 @@ public class Game {
 								me = new Robber(100);	// start speed;
 								roads.get(roadIndex).setCar(me);
 								cars.add(me);
+								break;
 							case 7:	// police starthely //
 								Police p = new Police((int)(Math.random()%(MinPoliceSpeed-MaxPoliceSpeed))+MaxPoliceSpeed);	// start speed;
 								roads.get(roadIndex).setCar(p);
 								cars.add(p);
+								break;
                             case 8:	// stop //
                                 roads.get(roadIndex).setTrafficController(new StopSign());
                                 break;
@@ -283,6 +285,9 @@ public class Game {
             roadStart = roads.get(0);
 			// Calc the road coords //
 			CreateMap();
+
+			for(int i=0;i<cars.size();i++)
+				cars.get(i).updateAR();
         } catch(Exception e){
            System.out.println("Noob");
            e.printStackTrace();

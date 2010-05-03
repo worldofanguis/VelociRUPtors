@@ -254,6 +254,9 @@ public abstract class Car extends ClassID {
         tickCount = Tick;
     }
 
+	public void updateAR(){
+		ar = roadUnderMe.getNextRoads();
+	}
 
     /**
      * STOP tábla interakciós függvény, absztrakt,
