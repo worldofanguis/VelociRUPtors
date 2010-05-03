@@ -17,8 +17,14 @@ public class StopView {
 	 * @param s
 	 */
 	public void Draw(StopSign s){
+		// Since we are drawn last, we must redraw the car (if any) and the pickup (if any) //
 		Road r = s.getRoadUnderMe();
 		g.drawImage(Texture, r.X*Texture.getWidth(null), r.Y*Texture.getHeight(null),null);
+
+		if(r.hasPickup() != null)
+			r.hasPickup().Draw();
+		if(r.hasCar() != null)
+			r.hasCar().Draw();
 	}
 
 }

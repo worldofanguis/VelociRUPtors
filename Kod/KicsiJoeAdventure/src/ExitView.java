@@ -19,6 +19,11 @@ public class ExitView {
 	public void Draw(ExitSign e){
 		Road r = e.getRoadUnderMe();
 		g.drawImage(Texture, r.X*Texture.getWidth(null), r.Y*Texture.getHeight(null),null);
+		
+		if(r.hasPickup() != null)
+			r.hasPickup().Draw();
+		if(r.hasCar() != null)
+			r.hasCar().Draw();
 	}
 
 }

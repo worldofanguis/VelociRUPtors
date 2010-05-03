@@ -199,6 +199,10 @@ public abstract class Car extends ClassID {
         selectedDirection = Direction;
     }
 
+	public int getPlannedDirection(){
+		return plannedDirection;
+	}
+
     public int getValidDirection(){
 	int retDirection = 0;
 	if(moreThan1AR(ar)){	// több szabad irány van, választunk //
