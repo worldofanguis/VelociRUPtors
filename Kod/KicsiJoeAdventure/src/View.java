@@ -29,6 +29,8 @@ public class View extends JPanel
 
 		// Create the view classes //
 		loadViews();
+		bufferGraphics.setColor(Color.green);
+		bufferGraphics.fillRect(0, 0, 800, 500);
 	}
 
 	@Override

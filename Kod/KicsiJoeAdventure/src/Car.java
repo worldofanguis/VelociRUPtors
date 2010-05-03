@@ -43,7 +43,7 @@ public abstract class Car extends ClassID {
         ID = Controller.game.addCar(this);
         tickCount = startSpeed = Speed;
         plannedDirection = 0;
-	selectedDirection = -1;
+		selectedDirection = -1;
         Controller.game.outputStream.println("ICAR - ID:"+ID+" Tipus:"+showMapChar()+" MaxTick:"+startSpeed);
     }
 

@@ -76,6 +76,9 @@ public class Road extends ClassID {
 		return IncomingRoads;
 	}
 
+	public void setIncomingRoad(int Direction){
+		IncomingRoads[Direction] = true;
+	}
     /**
      * Van-e rajta autó?
      * @return A rajta lévő autó referenciája.
@@ -158,7 +161,7 @@ public class Road extends ClassID {
      */
     public void setRoad(Directions Direction,Road road){
         next[Direction.value] = road;
-		IncomingRoads[Direction.value] = true;
+		road.setIncomingRoad((Direction.value+2)%4);
     }
 
 	public void Draw(){
