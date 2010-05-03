@@ -12,6 +12,11 @@ import java.util.*;
 
 public class Game {
 
+	private final int MaxCivilSpeed = 5;
+	private final int MinCivilSpeed = 10;
+	private final int MaxPoliceSpeed = 3;
+	private final int MinPoliceSpeed = 10;
+
     /**
      * A pályán található autók referenciái.
      */
@@ -205,6 +210,7 @@ public class Game {
                         // Create the requied roads //
                             for(int i=0;i<Integer.parseInt(second);i++){
                                 Road road = new Road();
+								populateRoad(road);
                                 road.setID(i);
                                 roads.add(road);
                             }
@@ -228,6 +234,14 @@ public class Game {
                                 roads.get(roadIndex).setTrafficController(new Lamp());
                                 ((Lamp)lamps.getLast()).setRoad(roads.get(roadIndex));
                                 break;
+							case 6:	// rabló starthely //
+								me = new Robber(100);	// start speed;
+								roads.get(roadIndex).setCar(me);
+								cars.add(me);
+							case 7:	// police starthely //
+								Police p = new Police((int)(Math.random()%(MinPoliceSpeed-MaxPoliceSpeed))+MaxPoliceSpeed);	// start speed;
+								roads.get(roadIndex).setCar(p);
+								cars.add(p);
                             case 8:	// stop //
                                 roads.get(roadIndex).setTrafficController(new StopSign());
                                 break;
@@ -280,7 +294,13 @@ public class Game {
      * @param road Az út amelyet módosítunk.
      */
     public void populateRoad(Road road){
-
+		if(cars.size() < maxCarsOnMap){
+			if(Math.random() < 0.1){
+				Civil c = new Civil((int)(Math.random()%(MinCivilSpeed-MaxCivilSpeed))+MaxCivilSpeed);
+				road.setCar(c);
+				cars.add(c);
+			}
+		}
     }
 
     /**
@@ -321,6 +341,8 @@ public class Game {
 			 }
         }
 
+		// Civilek beengedése 10% hogy belép 1 ha van hely //
+		populateRoad(roadStart);
     }
 
 	public void Draw(){
