@@ -171,35 +171,14 @@ public class Robber extends Car {
     }
 
     /**
-     *
+     * Rablónál nem beállítás van hanem változtatás.
+     * @param change
      */
-    /*@Override
-    public void Move(){
-        Building building;
-        if ( ar.roads[plannedDirection] != null )
-            if((building = ar.roads[plannedDirection].hasBuilding()) != null){
-                building.whatBuilding(this);
-            }
-
-        /* ha a játékos olyan irányban akar tovább menni, ahova nem mehet,
-         * akkor a korábbi útirányon halad és amint lehet követi az újat.
-         */
-        // Mozgás plannedDirection felé, ha nem kell várnunk //
-       /* if(tickCount == 0)
-            if (ar.roads[plannedDirection] != null)
-                MoveTo(ar.roads[plannedDirection]);
-           /* else if (previousDirection != -1)
-                MoveTo(ar.roads[previousDirection]);*/
-
-        // Mozgatás - vége //
-    //}
-
-    /**
-     *
-     */
-  /*  @Override
-    public void setDirection(int newDirection){
-        previousDirection = plannedDirection; //indexelés miatt
-        plannedDirection = newDirection;
-    }*/
+    @Override
+    public void setTick(int change) {
+        startSpeed += change;
+        tickCount += change;
+        if (tickCount <0 )
+            tickCount = 0;
+    }
 }

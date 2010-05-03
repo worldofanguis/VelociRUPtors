@@ -24,6 +24,7 @@ public class Bank implements Building {
      * Jelez a Game osztálynak, hogy kirabolták a bankot.
      */
     public void robBank(){
+        Controller.msg("Bankrablás");
         Controller.game.bankRobbed();
     }
 

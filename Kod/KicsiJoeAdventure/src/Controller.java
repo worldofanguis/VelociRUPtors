@@ -15,6 +15,8 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
     public static View view;
 	public static JTextField txt;
 
+
+
 	private JButton newGameButton;
 	private JButton exitGameButton;
 
@@ -89,15 +91,33 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
 	}
 
 	public void keyTyped(KeyEvent e) {
-		txt.setText("keytyped");
-	}
+          	}
 
 	public void keyPressed(KeyEvent e) {
-		txt.setText("keypressed");
+            int key = e.getKeyCode();
+            if ( key == KeyEvent.VK_LEFT) {
+                game.setRobberDirection(Directions.LEFT);
+                txt.setText("left");
+            }
+            else if ( key == KeyEvent.VK_UP) {
+                game.setRobberDirection(Directions.UP);
+                txt.setText("up");
+            }
+            else if ( key == KeyEvent.VK_DOWN) {
+                game.setRobberDirection(Directions.DOWN);
+                txt.setText("down");
+            }
+            else if ( key == KeyEvent.VK_RIGHT) {
+                game.setRobberDirection(Directions.RIGHT);
+                txt.setText("right");
+            } else if ( key == KeyEvent.VK_A) { //gyorsít
+                txt.setText("sebesseg: "+game.setRobberVelocity(-1));
+            } else if ( key == KeyEvent.VK_S) { //lassít
+                txt.setText("sebesseg: "+game.setRobberVelocity(1));
+            }
 	}
 
 	public void keyReleased(KeyEvent e) {
-		txt.setText("keyreleased");
 	}
 
 	private void run() {
@@ -132,5 +152,9 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
     public void windowActivated(WindowEvent e) {
     }
     public void windowDeactivated(WindowEvent e) {
+    }
+
+    static void msg(String string) {
+        txt.setText(string);
     }
 }

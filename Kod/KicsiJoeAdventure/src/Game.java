@@ -90,7 +90,7 @@ public class Game {
        pickups = new LinkedList<Pickup>();
        bankIsRobbed = false;
        points = 0;
-       randomEnabled = false; //Random logika nem engedélyezett
+       randomEnabled = true; //Random logika nem engedélyezett
        outputStream = System.out; //Kimeneti csatorna
     }
 
@@ -234,16 +234,16 @@ public class Game {
                                 roads.get(roadIndex).setTrafficController(new Lamp());
                                 ((Lamp)lamps.getLast()).setRoad(roads.get(roadIndex));
                                 break;
-							case 6:	// rabló starthely //
-								me = new Robber(100);	// start speed;
-								roads.get(roadIndex).setCar(me);
-								cars.add(me);
-								break;
-							case 7:	// police starthely //
-								Police p = new Police((int)(Math.random()%(MinPoliceSpeed-MaxPoliceSpeed))+MaxPoliceSpeed);	// start speed;
-								roads.get(roadIndex).setCar(p);
-								cars.add(p);
-								break;
+                            case 6:	// rabló starthely //
+                                    me = new Robber(10);	// start speed;
+                                    roads.get(roadIndex).setCar(me);
+                                    cars.add(me);
+                                    break;
+                            case 7:	// police starthely //
+                                    Police p = new Police((int)(Math.random()%(MinPoliceSpeed-MaxPoliceSpeed))+MaxPoliceSpeed);	// start speed;
+                                    roads.get(roadIndex).setCar(p);
+                                    cars.add(p);
+                                    break;
                             case 8:	// stop //
                                 roads.get(roadIndex).setTrafficController(new StopSign());
                                 break;
@@ -547,5 +547,14 @@ public class Game {
                 Update();
             }
         }
+    }
+
+    void setRobberDirection(Directions dir) {
+        me.setDirection(dir.value);
+    }
+
+    int setRobberVelocity(int i) {
+       me.setTick(i);
+       return (me.startSpeed);
     }
 }
