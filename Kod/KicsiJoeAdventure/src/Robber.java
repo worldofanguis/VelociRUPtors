@@ -78,7 +78,7 @@ public class Robber extends Car {
      */
     public void Interaction(Bank bank){
 	if(!Controller.game.isBankRobbed()){
-	    tickCount = 5;	//Mielőtt továbbmenne, meg kell állnia egy kicsit.
+	    tickCount = Controller.game.StopTime;	//Mielőtt továbbmenne, meg kell állnia egy kicsit.
 	    bank.robBank();
 	}
 	//Az épület felé nem lehet menni.
@@ -143,16 +143,29 @@ public class Robber extends Car {
     @Override
     public boolean Update(){
         // Mozgás plannedDirection felé //
+        if ( selectedDirection == -1 || ar.roads[selectedDirection]== null )
+           ; //plannedDirection nem változik
+        else
+            plannedDirection = selectedDirection;
+
         // Épület ellenőrzése - ez a legfontosabb, az ütközés ellenőrzés jöhet ez után
-	
+	Building building;
+        if(ar.roads[plannedDirection]!=null && ((building = ar.roads[plannedDirection].hasBuilding()) != null)){
+           building.whatBuilding(this); //ez majd meghívja a kocsi interakcióját
+        }
+
 	if(pickedupbunny!=null){
 	    if(!pickedupbunny.isActive){
-			pickedupbunny = null;
-		pickedupbunny=null;
+                pickedupbunny = null;
 	    }
 	}
 
-        super.Update();
+        if(tickCount > 0)
+            tickCount--;
+
+        if (tickCount == 0 && ar.roads[plannedDirection]!=null)
+            Move();
+
         return true;
     }
 
@@ -177,6 +190,8 @@ public class Robber extends Car {
     @Override
     public void setTick(int change) {
         startSpeed += change;
+        if ( startSpeed < Controller.game.MaxRobberSpeed)
+            startSpeed = Controller.game.MaxRobberSpeed;
         tickCount += change;
         if (tickCount <0 )
             tickCount = 0;

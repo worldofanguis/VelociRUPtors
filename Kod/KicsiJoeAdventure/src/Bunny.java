@@ -21,9 +21,7 @@ public class Bunny extends ClassID implements Pickup{
 
     public Bunny(){
         ID = Controller.game.addPickup(this);
-	StartTick = 30;
-        TickLeft = 30; //Valami
-        Controller.game.outputStream.println("IBUNNY - ID:"+ID+" TickLeft:"+TickLeft);
+	TickLeft = StartTick = Controller.game.BunnyTick;
     }
 
     /**

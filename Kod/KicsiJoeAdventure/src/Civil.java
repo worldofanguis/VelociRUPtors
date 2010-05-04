@@ -27,6 +27,7 @@ public class Civil extends Car {
 
 		if(tickCount == 0)
 			tickCount = startSpeed;
+                selectedDirection = -1;
 	}
 
 
@@ -35,7 +36,7 @@ public class Civil extends Car {
      * @param sign Az adott STOP tábla.
      */
     public void Interaction(StopSign sign){
-        tickCount+=5;
+        tickCount+=Controller.game.StopTime;
         MoveTo(ar.roads[plannedDirection]);
     }
 

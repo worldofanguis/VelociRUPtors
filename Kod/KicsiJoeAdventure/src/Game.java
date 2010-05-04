@@ -11,11 +11,15 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class Game {
+        private final int MaxPickUp = 2;
+        public final int BunnyTick = 200;
+	private final int MaxCivilSpeed = 40;
+	private final int MinCivilSpeed = 80;
+	public final int MaxPoliceSpeed = 15;
+	private final int MinPoliceSpeed = 80;
+        public final int MaxRobberSpeed = 10;
+        public final int StopTime = 50;
 
-	private final int MaxCivilSpeed = 5;
-	private final int MinCivilSpeed = 10;
-	private final int MaxPoliceSpeed = 3;
-	private final int MinPoliceSpeed = 10;
 
     /**
      * A pályán található autók referenciái.
@@ -80,6 +84,7 @@ public class Game {
 	private int MaxX;
 	private int MaxY;
 
+
     /**
      * Konstruktor, alaphelyzet (nem rabolták ki a bankot)
      */
@@ -124,7 +129,9 @@ public class Game {
      * elkapta a játékost.
      */
     public void GameOver(boolean Success){
-        Controller.txt.setText("GameOver");
+        String s = (Success)?"You won!":"You lost.";
+        Controller.msg("Game over - "+s);
+        Controller.finish();
     }
 
     /**
@@ -210,7 +217,7 @@ public class Game {
                         // Create the requied roads //
                             for(int i=0;i<Integer.parseInt(second);i++){
                                 Road road = new Road();
-								populateRoad(road);
+				populateRoad(road);
                                 road.setID(i);
                                 roads.add(road);
                             }
@@ -225,9 +232,13 @@ public class Game {
                             case 0:	// default road //
                                 break;
                             case 1:	// bank //
+                                if (roads.get(roadIndex).hasCar() != null )
+                                        roads.get(roadIndex).removeCar();
                                 roads.get(roadIndex).setBuilding(new Bank());
                                 break;
                             case 2:	// hideout //
+                                if (roads.get(roadIndex).hasCar() != null )
+                                        roads.get(roadIndex).removeCar();
                                 roads.get(roadIndex).setBuilding(new Hideout());
                                 break;
                             case 3:	// lamp //
@@ -236,13 +247,15 @@ public class Game {
                                 break;
                             case 6:	// rabló starthely //
                                     me = new Robber(10);	// start speed;
+                                    if (roads.get(roadIndex).hasCar() != null )
+                                        roads.get(roadIndex).removeCar();
                                     roads.get(roadIndex).setCar(me);
-                                    cars.add(me);
                                     break;
                             case 7:	// police starthely //
                                     Police p = new Police((int)(Math.random()%(MinPoliceSpeed-MaxPoliceSpeed))+MaxPoliceSpeed);	// start speed;
+                                    if (roads.get(roadIndex).hasCar() != null )
+                                        roads.get(roadIndex).removeCar();
                                     roads.get(roadIndex).setCar(p);
-                                    cars.add(p);
                                     break;
                             case 8:	// stop //
                                 roads.get(roadIndex).setTrafficController(new StopSign());
@@ -288,6 +301,7 @@ public class Game {
 
 			for(int i=0;i<cars.size();i++)
 				cars.get(i).updateAR();
+                        pickUpGen();
         } catch(Exception e){
            System.out.println("Noob");
            e.printStackTrace();
@@ -303,7 +317,6 @@ public class Game {
 			if(Math.random() < 0.1){
 				Civil c = new Civil((int)(Math.random()%(MinCivilSpeed-MaxCivilSpeed))+MaxCivilSpeed);
 				road.setCar(c);
-				cars.add(c);
 			}
 		}
     }
@@ -348,6 +361,7 @@ public class Game {
 
 		// Civilek beengedése 10% hogy belép 1 ha van hely //
 		populateRoad(roadStart);
+                pickUpGen();
     }
 
 	public void Draw(){
@@ -471,84 +485,6 @@ public class Game {
         }
     }
 
-    /**
-     * Parancsértelmező a prototípus tesztjeihez.
-     * @param Command Parancs
-     */
-    public void CommandInterpreter(String Command){
-        if(Command.startsWith("RandomEnabled(")){
-            if(Command.substring(14,Command.length()-1).equalsIgnoreCase("true")){
-                randomEnabled = true;
-            }else{
-                randomEnabled = false;
-            }
-        }else if(Command.startsWith("SetBankState(")){
-            if(Command.substring(13,Command.length()-1).equalsIgnoreCase("true")){
-                bankIsRobbed = true;
-            }else{
-                bankIsRobbed = false;
-            }
-        }else if(Command.startsWith("LoadMap(")){
-            loadMapFromFile(Command.substring(8,Command.length()-1));
-        }else if(Command.startsWith("SetOutput(")){
-            String s = Command.substring(10,Command.length()-1);
-            if(s.isEmpty())
-                outputStream = System.out;
-            else{
-                try{
-                    outputStream = new PrintStream(new File(WorkingDirectory,s));
-                }catch(Exception e){
-                    System.out.println("FileNotFound");
-                    outputStream = System.out;
-                }
-            }
-            outputStream.println("[START]");
-        }else if(Command.startsWith("SetDirection(")){
-            StringTokenizer st = new StringTokenizer(Command.substring(13,Command.length()-1),",");
-            cars.get(Integer.parseInt(st.nextToken())).setDirection(Integer.parseInt(st.nextToken()));
-        }else if(Command.startsWith("SetTick(")){
-            StringTokenizer st = new StringTokenizer(Command.substring(8,Command.length()-1),",");
-            cars.get(Integer.parseInt(st.nextToken())).setTick(Integer.parseInt(st.nextToken()));
-	}else if(Command.startsWith("SetPickupTick(")){
-            StringTokenizer st = new StringTokenizer(Command.substring(14,Command.length()-1),",");
-            pickups.get(Integer.parseInt(st.nextToken())).setTick(Integer.parseInt(st.nextToken()));
-        }else if(Command.startsWith("CivilGen(")){
-            StringTokenizer st = new StringTokenizer(Command.substring(9,Command.length()-1),",");
-            roads.get(Integer.parseInt(st.nextToken())).setCar(new Civil(Integer.parseInt(st.nextToken())));
-        }else if(Command.startsWith("RobberGen(")){
-            StringTokenizer st = new StringTokenizer(Command.substring(10,Command.length()-1),",");
-            roads.get(Integer.parseInt(st.nextToken())).setCar(new Robber(Integer.parseInt(st.nextToken())));
-        }else if(Command.startsWith("PoliceGen(")){
-            StringTokenizer st = new StringTokenizer(Command.substring(10,Command.length()-1),",");
-            roads.get(Integer.parseInt(st.nextToken())).setCar(new Police(Integer.parseInt(st.nextToken())));
-        }else if(Command.startsWith("BunnyGen(")){
-            StringTokenizer st = new StringTokenizer(Command.substring(9,Command.length()-1),",");
-            Bunny bunny = new Bunny();
-            Road road = roads.get(Integer.parseInt(st.nextToken()));
-			road.setPickup(bunny);
-			bunny.setRoad(road);
-        }else if(Command.startsWith("RabbitGen(")){
-            StringTokenizer st = new StringTokenizer(Command.substring(10,Command.length()-1),",");
-			Bunny bunny = new Bunny();
-            Road road = roads.get(Integer.parseInt(st.nextToken()));
-			road.setPickup(bunny);
-			bunny.setRoad(road);
-		}else if(Command.startsWith("ShowMap()")){
-			; //ShowMap(outputStream);
-        }else if(Command.startsWith("SetLampColor(")){
-            StringTokenizer st = new StringTokenizer(Command.substring(13,Command.length()-1),",");
-            lamps.get(Integer.parseInt(st.nextToken())).setColor(Boolean.parseBoolean(st.nextToken()));
-        }else if(Command.startsWith("SetLampTick(")){
-            StringTokenizer st = new StringTokenizer(Command.substring(12,Command.length()-1),",");
-            lamps.get(Integer.parseInt(st.nextToken())).setTick(Integer.parseInt(st.nextToken()));
-        }else if(Command.startsWith("Tick(")){
-            String s = Command.substring(5,Command.length()-1);
-            for(int i=0;i<Integer.parseInt(s);i++){
-                Update();
-            }
-        }
-    }
-
     void setRobberDirection(Directions dir) {
         me.setDirection(dir.value);
     }
@@ -556,5 +492,18 @@ public class Game {
     int setRobberVelocity(int i) {
        me.setTick(i);
        return (me.startSpeed);
+    }
+
+    private void pickUpGen() {
+        for (int i = 1; i < roads.size(); i++ ) {
+            if ( roads.get(i).hasBuilding() == null) {
+                if ( pickups.size() < MaxPickUp ) {
+                    if(Math.random() < 0.1){
+                        Bunny b = new Bunny();
+                        roads.get(i).setPickup(b);
+                    }
+                }
+            }
+        }
     }
 }

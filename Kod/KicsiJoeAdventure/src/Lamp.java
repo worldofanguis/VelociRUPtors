@@ -30,8 +30,8 @@ public class Lamp extends ClassID implements TrafficController {
 			state[i] = false;
 
         ID = Controller.game.addLamp(this);
-        startTick = 5;		// def values //
-        currentTick = 5;
+        startTick = 50;		// def values //
+        currentTick = 50;
 //        Controller.game.outputStream.println("ILAMP - ID:"+ID+" Tick:"+startTick);
     }
 

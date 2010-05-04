@@ -1,6 +1,7 @@
 
 import img.ImageLib;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
@@ -137,4 +138,50 @@ public class View extends JPanel
         lampView = new LampView(bufferGraphics);
     }
 
+}
+
+class DirG extends Canvas {
+    private BufferedImage backBuffer;
+    private Graphics2D bufferGraphics;
+    private Image Texture;
+    private AffineTransform trans;
+    public DirG() {
+        backBuffer = new BufferedImage(45,45,BufferedImage.TYPE_INT_RGB);
+
+        bufferGraphics =  (Graphics2D) backBuffer.getGraphics();
+        setPreferredSize(new Dimension(45,45));
+
+        bufferGraphics.setColor(Color.black);
+        bufferGraphics.fillRect(0, 0, 45, 45);
+
+        Texture = ImageLib.Load("arrow_up.png");
+        trans = new AffineTransform();
+    }
+
+    public void Draw(int i) {
+        bufferGraphics.setColor(Color.black);
+        bufferGraphics.fillRect(0, 0, 45, 45);
+        trans.setToIdentity();
+	trans.setToTranslation(0,0);
+        switch(i) {
+            case 0:
+                trans.rotate(-(Math.PI/2),((double)Texture.getWidth(null))/2.0,((double)Texture.getHeight(null))/2.0);
+                break;
+            case 1:
+
+                break;
+            case 2:
+                trans.rotate((Math.PI/2),((double)Texture.getWidth(null))/2.0,((double)Texture.getHeight(null))/2.0);
+                break;
+            case 3:
+                trans.rotate(Math.PI,((double)Texture.getWidth(null))/2.0,((double)Texture.getHeight(null))/2.0);
+                break;
+        }
+        bufferGraphics.drawImage(Texture,trans,null);
+        repaint();
+    }
+
+    public void paint(Graphics g) {
+        g.drawImage(backBuffer, 0, 0, null);
+    }
 }

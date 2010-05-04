@@ -43,8 +43,7 @@ public abstract class Car extends ClassID {
         ID = Controller.game.addCar(this);
         tickCount = startSpeed = Speed;
         plannedDirection = 0;
-		selectedDirection = -1;
-        Controller.game.outputStream.println("ICAR - ID:"+ID+" Tipus:"+showMapChar()+" MaxTick:"+startSpeed);
+	selectedDirection = -1;
     }
 
     /**
@@ -123,8 +122,10 @@ public abstract class Car extends ClassID {
 		// plannedDirection beállítása selectedDirection-ra, vagy ha arra nem lehet, válasszon
 		if(ar.roads[selectedDirection]== null){
 			plannedDirection = getValidDirection();
+                        selectedDirection = plannedDirection; //hogy ne válasszon újra
 		}else{
 			plannedDirection = selectedDirection;
+                        
 		}
 
 		if(tickCount > 0){
@@ -153,10 +154,7 @@ public abstract class Car extends ClassID {
            if(ret) Move();
         }
         
-        String p = (ret) ? "" : " -"; //Kilépett
-        Controller.game.outputStream.println("CAR - ID:"+ID+" RoadID:"+roadUnderMe.ID+" Tick:"+tickCount+p);
-        // Mozgatás - vége //
-        return ret;
+            return ret;
     }
 
     /**

@@ -1,5 +1,5 @@
 [SETTINGS]
-MaxCivilNumber:5
+MaxCivilNumber:3
 RoadNumber:82
 
 [MAP]

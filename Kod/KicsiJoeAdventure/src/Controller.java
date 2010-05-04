@@ -1,6 +1,5 @@
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import javax.swing.JButton;
@@ -17,16 +16,23 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
 
 
 
+
+
 	private JButton newGameButton;
 	private JButton exitGameButton;
+        private JLabel time;
+        private JLabel score;
+        private DirG dirg;
+
+        private int sec;
+        private int points;
+
+        private static boolean run;
 
     Controller(){
-		game = new Game();
-		game.Initialization();
-
-		view = new View();
-
-		setTitle("Kicsi Joe Adventures");
+		init();
+                view = new View();
+                setTitle("Kicsi Joe Adventures");
 
 		setLayout( new BorderLayout() );
 
@@ -41,17 +47,20 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
 		p1.add(newGameButton);
 		p1.add(exitGameButton);
 		JLabel l1 = new JLabel("Time: ");
-		JLabel time = new JLabel("");
+		time = new JLabel("00:00");
 		time.setSize(100, 20);
 		JLabel l2 = new JLabel("Score: ");
-		JLabel score = new JLabel("4444");
+		score = new JLabel(""+points+"");
 		score.setSize(100, 20);
 
 		p1.add(l1);
 		p1.add(time);
 		p1.add(l2);
 		p1.add(score);
-		time.setText("999");
+
+                dirg = new DirG();
+
+                p1.add(dirg);
 
 		add("North",p1);
 
@@ -83,6 +92,13 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
 		if(e.getSource() == exitGameButton)
 			System.exit(1);
 		else if(e.getSource() == newGameButton){
+                    init();
+                    game.Draw();
+                    view.repaint();
+                    time.setText("00:00");
+                    score.setText(""+points);
+                    txt.setText("");
+                    addKeyListener(this);
 
 		}
 			
@@ -97,19 +113,19 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
             int key = e.getKeyCode();
             if ( key == KeyEvent.VK_LEFT) {
                 game.setRobberDirection(Directions.LEFT);
-                txt.setText("left");
+                dirg.Draw(0);
             }
             else if ( key == KeyEvent.VK_UP) {
                 game.setRobberDirection(Directions.UP);
-                txt.setText("up");
+                dirg.Draw(1);
             }
             else if ( key == KeyEvent.VK_DOWN) {
                 game.setRobberDirection(Directions.DOWN);
-                txt.setText("down");
+                dirg.Draw(3);
             }
             else if ( key == KeyEvent.VK_RIGHT) {
                 game.setRobberDirection(Directions.RIGHT);
-                txt.setText("right");
+                dirg.Draw(2);
             } else if ( key == KeyEvent.VK_A) { //gyorsít
                 txt.setText("sebesseg: "+game.setRobberVelocity(-1));
             } else if ( key == KeyEvent.VK_S) { //lassít
@@ -122,20 +138,31 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
 
 	private void run() {
         int Time = 0;
-		while(true) {
+        int temp = 0;
+        while(true) {
+		while(run) {
             try {
                 if(Time > 10) {
                     Time = 0;
                     game.Update();
-					game.Draw();
+                    game.Draw();
                 }
                 view.repaint();
-                Thread.sleep(100);
+                if ( temp == 1000) {
+                    temp = 0;
+                    sec++;
+                    points--;
+                    time.setText(""+((sec/60 <10)?"0":"")+sec/60+":"+((sec%60<10)?"0":"")+(sec%60));
+                    score.setText(""+points);
+                }
+                Thread.sleep(1);
                 Time++;
+                temp++;
             } catch (InterruptedException ex) {
                 
             }
 		}
+        }
 	}
 
     public void windowOpened(WindowEvent e) {
@@ -157,4 +184,18 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
     static void msg(String string) {
         txt.setText(string);
     }
+
+    static void finish() {
+        run = false;
+    }
+
+    private void init() {
+        game = new Game();
+	game.Initialization();
+        //view = new View();
+        sec = 0;
+        points = 10000;
+        run = true;
+    }
 }
+

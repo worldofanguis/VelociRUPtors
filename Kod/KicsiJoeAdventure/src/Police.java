@@ -46,6 +46,8 @@ public class Police extends Car {
 
 		if(tickCount == 0)
 			tickCount = startSpeed;
+
+                selectedDirection = -1;
 	}
 
 
@@ -56,7 +58,7 @@ public class Police extends Car {
          */
 	public void Interaction(StopSign sign){
 		if(!policeModeActivated){
-		    tickCount+=5;
+		    tickCount+=Controller.game.StopTime;
 		    MoveTo(ar.roads[plannedDirection]);
 
 		}
@@ -170,9 +172,9 @@ public class Police extends Car {
 	public boolean Update(){
 		if(!policeModeActivated && Controller.game.isBankRobbed()){
 			policeModeActivated = true;
-			if(tickCount > 1)   //itt az 1-es a leggyorsabb autó tickje, ajánlott lenne vmi konstans erre
-			    tickCount = 1;
-			startSpeed = 1;
+			if(tickCount > Controller.game.MaxPoliceSpeed)
+			    tickCount = Controller.game.MaxPoliceSpeed;
+			startSpeed = Controller.game.MaxPoliceSpeed;
 		}
 
 		return super.Update();
