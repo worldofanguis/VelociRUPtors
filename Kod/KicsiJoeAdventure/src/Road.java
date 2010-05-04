@@ -144,7 +144,8 @@ public class Road extends ClassID {
      */
     public void setPickup(Pickup p){
         pickup = p;
-		p.setRoad(this);
+        if (p  != null)
+            p.setRoad(this);
     }
 
     /**

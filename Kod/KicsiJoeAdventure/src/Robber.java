@@ -134,6 +134,7 @@ public class Robber extends Car {
 		 pickedupbunny = bunny;
 		 bunny.getRoadUnderMe().setPickup(null);
 		 bunny.PickedUp();
+                 //Controller.bunnyChanged(true);
      }
 
      /**
@@ -157,6 +158,7 @@ public class Robber extends Car {
 	if(pickedupbunny!=null){
 	    if(!pickedupbunny.isActive){
                 pickedupbunny = null;
+                //Controller.bunnyChanged(false);
 	    }
 	}
 

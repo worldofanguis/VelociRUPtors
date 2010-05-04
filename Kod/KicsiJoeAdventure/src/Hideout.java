@@ -27,7 +27,7 @@ public class Hideout implements Building {
      */
     public void arrivedToHideout(){
         if(Controller.game.isBankRobbed()) {
-            Controller.msg("Sikeres visszatérés");
+            Controller.msg("Hideout reached in time");
             Controller.game.GameOver(true);
         }
     }

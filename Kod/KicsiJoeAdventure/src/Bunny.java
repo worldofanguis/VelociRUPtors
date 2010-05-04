@@ -3,7 +3,7 @@
  * A húsvéti nyulat reprezentáló osztály.
  * A rablónak letartóztatás-mentességet jelent.
  */
-public class Bunny extends ClassID implements Pickup{
+public class Bunny implements Pickup{
 
     /**
      * Életbenmaradásig hátralévő óraciklusok száma.
@@ -20,7 +20,7 @@ public class Bunny extends ClassID implements Pickup{
     private Road roadUnderMe;
 
     public Bunny(){
-        ID = Controller.game.addPickup(this);
+        Controller.game.addPickup(this);
 	TickLeft = StartTick = Controller.game.BunnyTick;
     }
 
@@ -72,12 +72,6 @@ public class Bunny extends ClassID implements Pickup{
         if(--TickLeft == 0){
 	    ret = false;
 	    isActive = false;
-	}
-            
-	if(!isPicked){
-	    Controller.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+roadUnderMe.ID+" TickLeft:"+TickLeft);
-	}else{
-	    Controller.game.outputStream.println("BUNNY - ID:"+ID+" RoadID:"+"-"+" TickLeft:"+TickLeft);
 	}
         return ret;
     }

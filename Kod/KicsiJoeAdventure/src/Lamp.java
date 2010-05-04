@@ -60,7 +60,6 @@ public class Lamp extends ClassID implements TrafficController {
                 state[i] = !(state[i]);
             currentTick = startTick;
         }
-//        Controller.game.outputStream.println("LAMP - ID:"+ID+" RoadID:"+roadUnderMe.ID+" IsRed:"+!(state[0])+" Tick:"+currentTick);
     }
 
     /**

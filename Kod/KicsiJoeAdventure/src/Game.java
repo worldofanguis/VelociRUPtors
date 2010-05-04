@@ -12,7 +12,7 @@ import java.util.*;
 
 public class Game {
         private final int MaxPickUp = 2;
-        public final int BunnyTick = 200;
+        public final int BunnyTick = 50;
 	private final int MaxCivilSpeed = 40;
 	private final int MinCivilSpeed = 80;
 	public final int MaxPoliceSpeed = 15;
@@ -353,6 +353,9 @@ public class Game {
         //Pickupok frissítése
         for (i=0; i< pickups.size(); i++) {
             if ( !( ( (Pickup)pickups.get(i) ).Update() ) ) {
+                Road road;
+                if ( (road = pickups.get(i).getRoadUnderMe()) != null)
+                    road.setPickup(null);
                 pickups.remove(i);
                 --i; //Ez azért kell, mert csökken az utána jövők indexe.
                 //Autóval valami?
@@ -495,15 +498,12 @@ public class Game {
     }
 
     private void pickUpGen() {
-        for (int i = 1; i < roads.size(); i++ ) {
-            if ( roads.get(i).hasBuilding() == null) {
                 if ( pickups.size() < MaxPickUp ) {
-                    if(Math.random() < 0.1){
+                    int roadN = (int)(Math.random()*roads.size());
+                    if ( roads.get(roadN).hasBuilding() == null) {
                         Bunny b = new Bunny();
-                        roads.get(i).setPickup(b);
+                        roads.get(roadN).setPickup(b);
                     }
                 }
-            }
-        }
     }
 }

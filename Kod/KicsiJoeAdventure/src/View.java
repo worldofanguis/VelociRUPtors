@@ -69,9 +69,6 @@ public class View extends JPanel
 	 */
 	public void Draw(Lamp l){
         lampView.Draw(l);
-//		bufferGraphics.drawImage(ut, 10, 10, this);
-//	    bufferGraphics.setColor(Color.red);
-//	    bufferGraphics.drawString("LAMMPPPP", 40, 40);
 	}
 
 	/**
@@ -151,15 +148,15 @@ class DirG extends Canvas {
         bufferGraphics =  (Graphics2D) backBuffer.getGraphics();
         setPreferredSize(new Dimension(45,45));
 
-        bufferGraphics.setColor(Color.black);
+        bufferGraphics.setColor(Color.decode("#eeeeee"));
         bufferGraphics.fillRect(0, 0, 45, 45);
 
-        Texture = ImageLib.Load("arrow_up.png");
+        Texture = ImageLib.Load("arrow_up_black.png");
         trans = new AffineTransform();
     }
 
     public void Draw(int i) {
-        bufferGraphics.setColor(Color.black);
+        bufferGraphics.setColor(Color.decode("#eeeeee"));
         bufferGraphics.fillRect(0, 0, 45, 45);
         trans.setToIdentity();
 	trans.setToTranslation(0,0);
@@ -183,5 +180,53 @@ class DirG extends Canvas {
 
     public void paint(Graphics g) {
         g.drawImage(backBuffer, 0, 0, null);
+    }
+}
+
+abstract class Icon extends Canvas {
+    protected BufferedImage backBuffer;
+    protected Graphics2D bufferGraphics;
+    protected Image base, active;
+    protected boolean state;
+    public Icon() {
+        state = false;
+        backBuffer = new BufferedImage(45,45,BufferedImage.TYPE_INT_RGB);
+
+        bufferGraphics =  (Graphics2D) backBuffer.getGraphics();
+        setPreferredSize(new Dimension(45,45));
+
+        bufferGraphics.setColor(Color.decode("#eeeeee"));
+        bufferGraphics.fillRect(0, 0, 45, 45);
+        bufferGraphics.drawImage(base,0,0,null);
+    }
+    public void paint(Graphics g) {
+        g.drawImage(backBuffer, 0, 0, null);
+    }
+    public void Draw(boolean st){
+        bufferGraphics.setColor(Color.decode("#eeeeee"));
+        bufferGraphics.fillRect(0, 0, 45, 45);
+        if (st)
+            bufferGraphics.drawImage(active,0,0,this);
+        else
+           bufferGraphics.drawImage(base,0,0,this);
+        state = st;
+        repaint();
+    }
+
+}
+
+class bankState extends Icon {
+    public bankState() {
+        super();
+        base = ImageLib.Load("bank_base.png");
+        active = ImageLib.Load("bank_active.png");
+    }
+}
+
+class bunnyState extends Icon {
+    public bunnyState() {
+        super();
+        base = ImageLib.Load("bunny_base.png");
+        active = ImageLib.Load("bunny_active.png");
     }
 }

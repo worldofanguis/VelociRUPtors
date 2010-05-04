@@ -14,15 +14,13 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
     public static View view;
 	public static JTextField txt;
 
-
-
-
-
-	private JButton newGameButton;
+    	private JButton newGameButton;
 	private JButton exitGameButton;
         private JLabel time;
         private JLabel score;
         private DirG dirg;
+        private static bankState bankst;
+        private static bunnyState bunnyst;
 
         private int sec;
         private int points;
@@ -59,8 +57,12 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
 		p1.add(score);
 
                 dirg = new DirG();
+                bankst = new bankState();
+                bunnyst = new bunnyState();
 
                 p1.add(dirg);
+                p1.add(bankst);
+                p1.add(bunnyst);
 
 		add("North",p1);
 
@@ -69,7 +71,7 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
 		JPanel p2 = new JPanel(new FlowLayout());
 
 
-		txt = new JTextField("Alap üzenet", 20);
+		txt = new JTextField("Default", 20);
 		txt.setEditable( false );
         txt.setFocusable(false);
 	   
@@ -97,8 +99,8 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
                     view.repaint();
                     time.setText("00:00");
                     score.setText(""+points);
-                    txt.setText("");
-                    addKeyListener(this);
+                    msg("");
+                    //addKeyListener(this);
 
 		}
 			
@@ -192,10 +194,17 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
     private void init() {
         game = new Game();
 	game.Initialization();
-        //view = new View();
         sec = 0;
         points = 10000;
         run = true;
+    }
+
+    static void bankChanged() {
+        bankst.Draw(true);
+    }
+
+    static void bunnyChanged(boolean b) {
+        bunnyst.Draw(b);
     }
 }
 
