@@ -82,8 +82,7 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
      * Futtatás.
      */
     Controller(){
-		init();
-        view = new View();
+		view = new View();
         setTitle("Kicsi Joe Adventures");
 
 		setLayout( new BorderLayout() );
@@ -105,7 +104,7 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
 		time = new JLabel("00:00");
 		time.setSize(100, 20);
 		JLabel l2 = new JLabel("Score: ");
-		score = new JLabel(""+Controller.game.getPoints()+"");
+		score = new JLabel(); // ""+Controller.game.getPoints()+"");
 		score.setSize(100, 20);
 		p1.add(l1);
 		p1.add(time);
@@ -145,6 +144,8 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
         setVisible(true);
 		this.requestFocus();
 
+		init();
+		score.setText(""+Controller.game.getPoints()+"");
         //Mehet
         run();
     }
@@ -283,6 +284,8 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
         game.Initialization();
         sec = 0;
         Controller.game.addPoints(10000);
+		bankst.Draw(false);
+		bunnyst.Draw(false);
         run = true;
     }
 
