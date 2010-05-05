@@ -27,15 +27,15 @@ public class View extends JPanel
 	Graphics2D bufferGraphics;
 
 	public View() {
-		backBuffer = new BufferedImage(800,500,BufferedImage.TYPE_INT_RGB);
+		backBuffer = new BufferedImage(800,600,BufferedImage.TYPE_INT_RGB);
 		//ezzel fog rajzolni a panel a képre
 		bufferGraphics =  (Graphics2D) backBuffer.getGraphics();
-		setPreferredSize(new Dimension(800,500));
+		setPreferredSize(new Dimension(800,600));
 
 		// Create the view classes //
 		loadViews();
 		bufferGraphics.setColor(Color.green);
-		bufferGraphics.fillRect(0, 0, 800, 500);
+		bufferGraphics.fillRect(0,0,800,600);
 	}
 
 	@Override

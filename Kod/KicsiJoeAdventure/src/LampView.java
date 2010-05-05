@@ -54,7 +54,7 @@ public class LampView {
 			trans.setToIdentity();
 			trans.setToTranslation(r.X*Texture.getWidth(null),r.Y*Texture.getHeight(null));
 			trans.rotate(-(Math.PI/2),((double)Texture.getWidth(null))/2.0,((double)Texture.getHeight(null))/2.0);
-			if(!l.isGreen(0))
+			if(l.isGreen(0))
 				g.drawImage(GreenLight,trans,null);
 			else
 				g.drawImage(RedLight,trans,null);
@@ -62,7 +62,7 @@ public class LampView {
 		if(activeSides[1] != false){
 			trans.setToIdentity();
 			trans.setToTranslation(r.X*Texture.getWidth(null),r.Y*Texture.getHeight(null));
-			if(!l.isGreen(1))
+			if(l.isGreen(1))
 				g.drawImage(GreenLight,trans,null);
 			else
 				g.drawImage(RedLight,trans,null);
@@ -71,7 +71,7 @@ public class LampView {
 			trans.setToIdentity();
 			trans.setToTranslation(r.X*Texture.getWidth(null),r.Y*Texture.getHeight(null));
 			trans.rotate(Math.PI/2,((double)Texture.getWidth(null))/2.0,((double)Texture.getHeight(null))/2.0);
-			if(!l.isGreen(2))
+			if(l.isGreen(2))
 				g.drawImage(GreenLight,trans,null);
 			else
 				g.drawImage(RedLight,trans,null);
@@ -80,7 +80,7 @@ public class LampView {
 			trans.setToIdentity();
 			trans.setToTranslation(r.X*Texture.getWidth(null),r.Y*Texture.getHeight(null));
 			trans.rotate(Math.PI,((double)Texture.getWidth(null))/2.0,((double)Texture.getHeight(null))/2.0);
-			if(!l.isGreen(3))
+			if(l.isGreen(3))
 				g.drawImage(GreenLight,trans,null);
 			else
 				g.drawImage(RedLight,trans,null);
