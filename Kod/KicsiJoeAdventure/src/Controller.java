@@ -216,7 +216,7 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
         while(true) {
 		while(run) {
             try {
-                if(Time > 0) {
+                if(Time > 10) {
                     Time = 0;
                     game.Update();
                     game.Draw();
