@@ -11,12 +11,6 @@ public interface TrafficController {
      */
     public void whatSign(Car car);
 
-    /**
-     * A pályakirajzoláskor a megkülönböztetéshez szükséges karakter.
-     * @return A készülékekre jellemző karakter
-     */
-    public char showMapChar();
-
 	public void setRoad(Road r);
 	public Road getRoadUnderMe();
 

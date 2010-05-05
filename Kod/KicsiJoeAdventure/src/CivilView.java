@@ -1,23 +1,41 @@
+/**
+ * Civil autó kirajzolásáért felelős osztály.
+ */
 import img.ImageLib;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 
 public class CivilView {
-
+    /**
+     * Kép
+     */
 	private Image Texture;
+
+    /**
+     * Hova rajzol
+     */
     private Graphics2D g;
+
+    /**
+     * Transzformációs mátrix
+     */
 	private AffineTransform trans;
 
+    /**
+     * Konstruktor beállítja képet, vásznat, mátrixot.
+     * @param graphics
+     */
 	public CivilView(Graphics2D graphics){
         g = graphics;
         Texture = ImageLib.Load("civil.png");
-
 		trans = new AffineTransform();
 	}
 
 	/**
-	 * 
+	 * Tényleges kirajzolás
+     * A tényleges útirányak megfelelően forgatja be a kocsit (alaphelyzet:
+     * felfele néz)
 	 * @param c
 	 */
 	public void Draw(Civil c){

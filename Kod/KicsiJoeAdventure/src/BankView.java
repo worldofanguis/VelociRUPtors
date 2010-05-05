@@ -1,21 +1,34 @@
-
+/**
+ * A bank megjelenítéséért felelős osztály
+ */
 import img.ImageLib;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
 public class BankView {
 
+    /**
+     * A bankot ábrázoló kép
+     */
 	private Image Texture;
+
+    /**
+     * Amire rajzolunk
+     */
     private Graphics2D g;
 
+    /**
+     * Konstruktor, beállítja a képet
+     * @param graphics erre rajzolunk
+     */
 	public BankView(Graphics2D graphics){
         g = graphics;
         Texture = ImageLib.Load("bank.png");
 	}
 
 	/**
-	 * 
-	 * @param b
+	 * Megfelelően kirajzolja a bankot
+	 * @param b A bankpéldány amit ki kell rajzolni
 	 */
 	public void Draw(Bank b){
 		Road r = b.getRoadUnderMe();

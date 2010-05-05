@@ -32,22 +32,26 @@ public class Hideout implements Building {
         }
     }
 
-    /**
-     *
-     * @return H mint Hideout
-     */
-    public char showMapChar() {
-        return 'H';
-    }
 
+    /**
+     * Rajzoltat
+     */
     public void Draw() {
         Controller.view.Draw(this);
     }
 
+    /**
+     * Beállítja az utat
+     * @param r
+     */
 	public void setRoad(Road r) {
 		roadUnderMe = r;
 	}
 
+    /**
+     * Lekérdezi az utat
+     * @return
+     */
 	public Road getRoadUnderMe() {
 		return roadUnderMe;
 	}

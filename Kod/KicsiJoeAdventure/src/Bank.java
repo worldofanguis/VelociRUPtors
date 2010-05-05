@@ -5,7 +5,11 @@
 
 public class Bank implements Building {
 
+    /**
+     * Az út, amelyen a bank van.
+     */
 	private Road roadUnderMe;
+
     /**
      * Konstruktor.
      */
@@ -29,18 +33,25 @@ public class Bank implements Building {
         Controller.game.bankRobbed();
     }
 
-    public char showMapChar() {
-        return 'B';
-    }
-
+    /**
+     * Ki van alatta?
+     * @return Az alatta levő út referenciája
+     */
 	public Road getRoadUnderMe(){
 		return roadUnderMe;
 	}
 
+    /**
+     * Ráhelyezzük az adott útra
+     * @param r Az adott út
+     */
 	public void setRoad(Road r){
         roadUnderMe = r;
     }
 
+    /**
+     * Kirajzoltatjuk a példányt.
+     */
     public void Draw() {
         Controller.view.Draw(this);
     }

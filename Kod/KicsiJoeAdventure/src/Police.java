@@ -38,6 +38,7 @@ public class Police extends Car {
         } else {
             roadUnderMe.removeCar();
             road.setCar(this);
+            selectedDirection = -1;
         }
 		Pickup p = road.hasPickup();
 		if( p != null ){
@@ -46,8 +47,6 @@ public class Police extends Car {
 
 		if(tickCount == 0)
 			tickCount = startSpeed;
-
-                selectedDirection = -1;
 	}
 
 
@@ -187,7 +186,7 @@ public class Police extends Car {
      * ezért nem a belső változó, hanem az isBankRobbed() alapján döntünk.
      */
     public void Interaction(Civil civil){
-		civil.tickCount = 1;
+		civil.tickCount = Controller.game.MinCivilSpeed;
     }
 
     public void Interaction(Robber robber){
@@ -197,11 +196,11 @@ public class Police extends Car {
              if ( robber.canBeArrested() )
                  Arrest();
          } else
-             robber.tickCount = 5;
+             robber.tickCount = Controller.game.MaxCivilSpeed;
      }
 
 	public void Interaction(Police police){
-		police.tickCount = 1;
+		police.tickCount = Controller.game.MinCivilSpeed;
     }
      /**
       * Nem tudja felvenni a nyulat, békén hagyja.
@@ -211,10 +210,7 @@ public class Police extends Car {
      {
      }
 
-    @Override
-    public char showMapChar() {
-            return 'P';
-    }
+
 
     @Override
     public void Draw() {

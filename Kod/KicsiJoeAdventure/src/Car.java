@@ -7,7 +7,7 @@ import java.util.Random;
  * és metódusokkal.
  */
 
-public abstract class Car extends ClassID {
+public abstract class Car {
 
     /**
      * A tervezett továbbhaladási irány (lsd Directions osztály)
@@ -39,11 +39,15 @@ public abstract class Car extends ClassID {
      */
     protected AvailableRoads ar;
 
+    /**
+     * Konstruktor
+     * @param Speed Alapsebesség
+     */
     public Car(int Speed){
-        ID = Controller.game.addCar(this);
+        Controller.game.addCar(this);
         tickCount = startSpeed = Speed;
         plannedDirection = 0;
-	selectedDirection = -1;
+        selectedDirection = -1;
     }
 
     /**
@@ -56,6 +60,10 @@ public abstract class Car extends ClassID {
 		ar = roadUnderMe.getNextRoads();
     }
 
+    /**
+     * Az alatta levő út lekérdezése.
+     * @return Az út
+     */
 	public Road getRoadUnderMe() {
 		return roadUnderMe;
 	}
@@ -103,9 +111,13 @@ public abstract class Car extends ClassID {
      */
     public abstract void MoveTo(Road road);
 
+    /**
+     * Épület interakció, csak rablónak kell máshogy ezért az alap itt van.
+     * @param building AZ épület
+     */
     public void Interaction(Building building){
-	ar.roads[plannedDirection] = null;
-	plannedDirection = getValidDirection();
+        ar.roads[plannedDirection] = null;
+        plannedDirection = getValidDirection();
     }
 
     /**
@@ -122,7 +134,7 @@ public abstract class Car extends ClassID {
 		// plannedDirection beállítása selectedDirection-ra, vagy ha arra nem lehet, válasszon
 		if(ar.roads[selectedDirection]== null){
 			plannedDirection = getValidDirection();
-                        selectedDirection = plannedDirection; //hogy ne válasszon újra
+            selectedDirection = plannedDirection; //hogy ne válasszon újra
 		}else{
 			plannedDirection = selectedDirection;
                         
@@ -143,8 +155,8 @@ public abstract class Car extends ClassID {
 			   building.whatBuilding(this); //ez majd meghívja a kocsi interakcióját
 			}
 		}
-	else if(tickCount == 0){
-	//ExitCar
+        else if(tickCount == 0){
+        //ExitCar
            if(DeadEnd(ar)){
                roadUnderMe.removeCar();
                ret = false;
@@ -154,7 +166,7 @@ public abstract class Car extends ClassID {
            if(ret) Move();
         }
         
-            return ret;
+       return ret;
     }
 
     /**
@@ -167,8 +179,8 @@ public abstract class Car extends ClassID {
     protected boolean moreThan1AR(AvailableRoads ar){
         int arC = 0;
         for(int i=0;i<4;i++){
-                if(ar.roads[i] != null)
-                        arC++;
+            if(ar.roads[i] != null)
+                arC++;
         }
         return (arC > 1);
     }
@@ -182,8 +194,8 @@ public abstract class Car extends ClassID {
     protected boolean DeadEnd(AvailableRoads ar){
         int arC = 0;
         for(int i=0;i<4;i++){
-                if(ar.roads[i] != null)
-                        arC++;
+            if(ar.roads[i] != null)
+                arC++;
         }
         return (arC == 0);
     }
@@ -197,50 +209,55 @@ public abstract class Car extends ClassID {
         selectedDirection = Direction;
     }
 
+    /**
+     * Tényleges haladási irány lekérdezése
+     * @return azirány
+     */
 	public int getPlannedDirection(){
 		return plannedDirection;
 	}
 
+    /**
+     * Generál az autónak egy jó útirányt, amerre tényleg lehet menni.
+     * @return Az útirány
+     */
     public int getValidDirection(){
-	int retDirection = 0;
-	if(moreThan1AR(ar)){	// több szabad irány van, választunk //
-		if (Controller.game.randomEnabled)
-		{
-		    //Random generálás engedélyezve.
-		    Random random = new Random();
-		    retDirection = random.nextInt(4);
-		    while (ar.roads[retDirection] == null)
-			retDirection = random.nextInt(4);
-		} else {
-		    // Random generálás nincs engedélyezve, feltételezzük,
-		    //hogy a tesztelő olyat állított be időben be, ami jó
-		    if ( ar.roads[retDirection] == null)
-		    {
-//			System.out.println("Rossz utiranybeallitas");
-//			System.exit(1); //utána úgyis sírna nullexception miatt.
-
-			//ha több irányba is mehetünk, de amerre akarunk, nem lehet -> T elágazás
-			//nem rabló esetén ilyenkor balról kezdve az óramutató járásával megegyező irányban keresünk járható utat
-			//rabló esetén lehetne valami cselesebbet,
-			//pl nekimegyünk, megállunk egy időre, stb,
-			//de egyelőre legyen ott is így, úgyse csináltunk neki külön
-			//tesztet, meg hát 2 kredit.
-			for(int i=retDirection=0; i<4;i++){
-			    if(ar.roads[retDirection++]!=null)
-				return --retDirection;
-			}
-			System.out.println("Nincs út semerre, már ki kellett volna, hogy lépjen a kocsi, valami csúnyaság van");
-			System.exit(1); //utána úgyis sírna nullexception miatt.
-		    }
-		}
-	    } else {// csak 1 irány szabad //
-		    for(int i=0;i<4;i++){
-			    if(ar.roads[i] != null){
-				    retDirection = i;
-				    break;
-			    }
-		    }
-	    }
+        int retDirection = 0;
+        if(moreThan1AR(ar)){	// több szabad irány van, választunk //
+            if (Controller.game.randomEnabled)
+            {
+                //Random generálás engedélyezve.
+                Random random = new Random();
+                retDirection = random.nextInt(4);
+                while (ar.roads[retDirection] == null)
+                retDirection = random.nextInt(4);
+            } else {
+                // Random generálás nincs engedélyezve, feltételezzük,
+                //hogy a tesztelő olyat állított be időben be, ami jó
+                if ( ar.roads[retDirection] == null)
+                {
+                //ha több irányba is mehetünk, de amerre akarunk, nem lehet -> T elágazás
+                //nem rabló esetén ilyenkor balról kezdve az óramutató járásával megegyező irányban keresünk járható utat
+                //rabló esetén lehetne valami cselesebbet,
+                //pl nekimegyünk, megállunk egy időre, stb,
+                //de egyelőre legyen ott is így, úgyse csináltunk neki külön
+                //tesztet, meg hát 2 kredit.
+                for(int i=retDirection=0; i<4;i++){
+                    if(ar.roads[retDirection++]!=null)
+                    return --retDirection;
+                }
+                System.out.println("Nincs út semerre, már ki kellett volna, hogy lépjen a kocsi, valami csúnyaság van");
+                System.exit(1); //utána úgyis sírna nullexception miatt.
+                }
+            }
+        } else {// csak 1 irány szabad //
+            for(int i=0;i<4;i++){
+                if(ar.roads[i] != null){
+                    retDirection = i;
+                    break;
+                }
+            }
+        }
 	return retDirection;
     }
 
@@ -252,6 +269,9 @@ public abstract class Car extends ClassID {
         tickCount = Tick;
     }
 
+    /**
+     * Frissíti, hogy merre vannak elérhető utak
+     */
 	public void updateAR(){
 		ar = roadUnderMe.getNextRoads();
 	}
@@ -317,12 +337,8 @@ public abstract class Car extends ClassID {
     public abstract void Interaction(Bunny bunny);
 
     /**
-     * A pálya megjelenítésekor az autótípusokat egyedien
-     * reprezentáló karaktersorozat egységes eléséhez szükséges függvény.
-     * @return A karakter.
+     * Kirajzoltatás.
      */
-    public abstract char showMapChar();
-
     public abstract void Draw();
 
 }

@@ -1,3 +1,6 @@
+/**
+* A grafikus megjelenítésért felelős osztály
+*/
 
 import img.ImageLib;
 import java.awt.*;
@@ -7,6 +10,7 @@ import javax.swing.JPanel;
 
 public class View extends JPanel
 {
+	//Elemek egyedi rajzolásáért felelős osztályok
 	private PoliceView policelView;
 	private CivilView civilView;
 	private RobberView robberView;
@@ -137,6 +141,9 @@ public class View extends JPanel
 
 }
 
+/**
+* Útirány megjelenítéséhez
+*/
 class DirG extends Canvas {
     private BufferedImage backBuffer;
     private Graphics2D bufferGraphics;
@@ -197,7 +204,6 @@ abstract class Icon extends Canvas {
 
         bufferGraphics.setColor(Color.decode("#eeeeee"));
         bufferGraphics.fillRect(0, 0, 45, 45);
-        bufferGraphics.drawImage(base,0,0,null);
     }
     public void paint(Graphics g) {
         g.drawImage(backBuffer, 0, 0, null);
@@ -220,6 +226,7 @@ class bankState extends Icon {
         super();
         base = ImageLib.Load("bank_base.png");
         active = ImageLib.Load("bank_active.png");
+		bufferGraphics.drawImage(base,0,0,null);
     }
 }
 
@@ -228,5 +235,6 @@ class bunnyState extends Icon {
         super();
         base = ImageLib.Load("bunny_base.png");
         active = ImageLib.Load("bunny_active.png");
+		bufferGraphics.drawImage(base,0,0,null);
     }
 }

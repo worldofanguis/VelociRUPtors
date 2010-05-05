@@ -1,3 +1,6 @@
+/**
+ * STOP tábla kirajzolásáért felelős osztály.
+ */
 import img.ImageLib;
 import java.awt.Graphics2D;
 import java.awt.Image;

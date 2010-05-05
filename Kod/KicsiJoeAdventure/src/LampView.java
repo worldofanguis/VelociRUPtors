@@ -1,3 +1,6 @@
+/**
+ * Kámpakirajzolásáért felelős osztály
+ */
 import img.ImageLib;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -5,10 +8,29 @@ import java.awt.geom.AffineTransform;
 
 public class LampView {
 
+    /**
+     * Alapkép
+     */
 	private Image Texture;
+
+    /**
+     * piros fény
+     */
     private Image RedLight;
+
+    /**
+     * zöld fény
+     */
     private Image GreenLight;
+
+    /**
+     * amire
+     */
     private Graphics2D g;
+
+    /**
+     * transzformációs mx
+     */
 	private AffineTransform trans;
 
 	public LampView(Graphics2D graphics){
@@ -16,12 +38,12 @@ public class LampView {
         Texture = ImageLib.Load("lamp_basic_none.png");
         RedLight = ImageLib.Load("lamp_light_red.png");
         GreenLight = ImageLib.Load("lamp_light_green.png");
-
 		trans = new AffineTransform();
 	}
 
 	/**
-	 * 
+	 * Tényleges kirajtzolása
+     * A lámpa egy útszakaszon a legnagyobb prioritású elem
 	 * @param l
 	 */
 	public void Draw(Lamp l){

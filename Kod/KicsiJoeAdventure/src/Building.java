@@ -12,14 +12,19 @@ public interface Building{
     public void whatBuilding(Car car);
 
     /**
-     * A térkép megjelenítésekor az adott épület-típust
-     * reprezentáló karakter eléréséhez szükséges függvény
-     * @return A reprezentáló karakter
+     * Az épület alatti út beállítása
+     * @param r beállítandó út
      */
-    public char showMapChar();
-
 	public void setRoad(Road r);
+
+    /**
+     * Az épület alatti út lekérdezése
+     * @return az út
+     */
 	public Road getRoadUnderMe();
 
+    /**
+     * Kirajzolás
+     */
     public void Draw();
 }

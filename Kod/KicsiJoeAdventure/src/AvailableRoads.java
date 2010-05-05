@@ -6,14 +6,14 @@
 public class AvailableRoads{
 
     /**
-     * Tömb az utak referenciáinak.
-     */
+	* Tömb az utak referenciáinak.
+	*/
     public Road roads[];
 
     /**
-     * Konstruktor, az adott úthoz hozza létre a lehetséges irányokat.
-     * @param road A kapcsolódó utak.
-     */
+	 * Konstruktor, az adott úthoz hozza létre a lehetséges irányokat.
+	 * @param road A kapcsolódó utak.
+	 */
     public AvailableRoads(Road[] road){
         roads = new Road[4];
 

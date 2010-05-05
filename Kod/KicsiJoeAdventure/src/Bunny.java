@@ -9,9 +9,20 @@ public class Bunny implements Pickup{
      * Életbenmaradásig hátralévő óraciklusok száma.
      */
     private int TickLeft;
+
+    /**
+     * Alap életciklus
+     */
     private int StartTick;
     
+    /**
+     * Fel van-e véve
+     */
     private boolean isPicked = false;
+
+    /**
+     * Aktív-e
+     */
     public boolean isActive = true;
 
     /**
@@ -19,9 +30,12 @@ public class Bunny implements Pickup{
      */
     private Road roadUnderMe;
 
+    /**
+     * Konstruktor, hozzáadja magát pickup listához és beállítja ticket.
+     */
     public Bunny(){
         Controller.game.addPickup(this);
-	TickLeft = StartTick = Controller.game.BunnyTick;
+        TickLeft = StartTick = Controller.game.BunnyTick;
     }
 
     /**
@@ -32,13 +46,22 @@ public class Bunny implements Pickup{
         roadUnderMe = r;
     }
 
+    /**
+     * Lekérdezi melyik úton vagyunk
+     * @return Az út amin vagyunk
+     */
     public Road getRoadUnderMe(){
 		return roadUnderMe;
     }
 
+    /**
+     * Ciklusidő beállítása
+     * [azt hiszem nincs szükség már rá]
+     * @param tick idő
+     */
     public void setTick(int tick)
     {
-	StartTick =TickLeft = tick;
+        StartTick =TickLeft = tick;
     }
 
 
@@ -46,20 +69,17 @@ public class Bunny implements Pickup{
      * Meghívja a megfelelő interakciót.
      * @param car
      */
-
-
     public void whatPickup(Car car) {
-	car.Interaction(this);
+        car.Interaction(this);
     }
 
+    /**
+     * Autó hívja meg, ha felvette.
+     */
     public void PickedUp(){
-	isPicked = true;
-	TickLeft = StartTick;
-	roadUnderMe = null;
-    }
-
-    public char showMapChar() {
-            return 'N';
+        isPicked = true;
+        TickLeft = StartTick;
+        roadUnderMe = null;
     }
 
     /**
@@ -70,12 +90,15 @@ public class Bunny implements Pickup{
     public boolean Update() {
         boolean ret = true;
         if(--TickLeft == 0){
-	    ret = false;
-	    isActive = false;
-	}
+            ret = false;
+            isActive = false;
+        }
         return ret;
     }
 
+    /**
+     * Kirajzoltatja magát
+     */
     public void Draw() {
         Controller.view.Draw(this);
     }

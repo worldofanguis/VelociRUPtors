@@ -11,12 +11,13 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class Game {
-        private final int MaxPickUp = 2;
-        public final int BunnyTick = 50;
-	private final int MaxCivilSpeed = 40;
-	private final int MinCivilSpeed = 80;
+    //Játékot korlátozó konstansok
+        public final int MaxPickUp = 2;
+        public final int BunnyTick = 500;
+	public final int MaxCivilSpeed = 40;
+	public final int MinCivilSpeed = 80;
 	public final int MaxPoliceSpeed = 15;
-	private final int MinPoliceSpeed = 80;
+	public final int MinPoliceSpeed = 80;
         public final int MaxRobberSpeed = 10;
         public final int StopTime = 50;
 
@@ -218,7 +219,7 @@ public class Game {
                             for(int i=0;i<Integer.parseInt(second);i++){
                                 Road road = new Road();
 				populateRoad(road);
-                                road.setID(i);
+
                                 roads.add(road);
                             }
                         }
@@ -246,7 +247,7 @@ public class Game {
                                 ((Lamp)lamps.getLast()).setRoad(roads.get(roadIndex));
                                 break;
                             case 6:	// rabló starthely //
-                                    me = new Robber(10);	// start speed;
+                                    me = new Robber((MinPoliceSpeed+MaxRobberSpeed)/2);	// start speed;
                                     if (roads.get(roadIndex).hasCar() != null )
                                         roads.get(roadIndex).removeCar();
                                     roads.get(roadIndex).setCar(me);

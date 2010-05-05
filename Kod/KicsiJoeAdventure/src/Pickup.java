@@ -18,12 +18,6 @@ public interface Pickup {
      */
     public void whatPickup(Car car);
 
-    /**
-     * A pályán történő megjelenítéshez szükséges egyedi
-     * karakter.
-     * @return Karakter
-     */
-    public char showMapChar();
     public void setTick(int tick);
     public void PickedUp();
 

@@ -3,6 +3,10 @@
  */
 
 public class ExitSign implements TrafficController {
+
+    /**
+     * Az út amin van
+     */
 	private Road roadUnderMe;
 
     /**
@@ -21,21 +25,24 @@ public class ExitSign implements TrafficController {
     }
 
     /**
-     *
-     * @return E mint EXIT tábla
+     * Rajzoltat
      */
-    public char showMapChar() {
-        return 'E';
-    }
-
     public void Draw() {
         Controller.view.Draw(this);
     }
 
+    /**
+     * Beállítja alatta utat
+     * @param r
+     */
 	public void setRoad(Road r) {
 		roadUnderMe = r;
 	}
 
+    /**
+     * Lekérdezze alatta utat
+     * @return
+     */
 	public Road getRoadUnderMe() {
 		return roadUnderMe;
 	}

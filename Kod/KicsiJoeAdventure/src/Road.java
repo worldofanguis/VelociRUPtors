@@ -3,7 +3,7 @@
  * Egy útszakaszt megtestesítő osztály.
  */
 
-public class Road extends ClassID {
+public class Road {
 
     /**
      * Az út mellett található épület referenciája.

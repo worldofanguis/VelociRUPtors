@@ -1,12 +1,16 @@
 /**
  * A közlekedési lámpát reprezentáló osztály.
  */
-public class Lamp extends ClassID implements TrafficController {
+public class Lamp implements TrafficController {
 
     /**
      * A lámpa állapota az egyes útszakaszokhoz. (zöld = true)
      */
     private boolean state[];
+
+    /**
+     * Aktív oldalak
+     */
 	private boolean activeSides[];
 
     /**
@@ -29,10 +33,9 @@ public class Lamp extends ClassID implements TrafficController {
 		for(int i=0;i<4;i++)
 			state[i] = false;
 
-        ID = Controller.game.addLamp(this);
+        Controller.game.addLamp(this);
         startTick = 50;		// def values //
         currentTick = 50;
-//        Controller.game.outputStream.println("ILAMP - ID:"+ID+" Tick:"+startTick);
     }
 
     /**
@@ -44,6 +47,10 @@ public class Lamp extends ClassID implements TrafficController {
         return state[Direction]; //?
     }
 
+    /**
+     * Aktív oldalak lekérdezése
+     * @return
+     */
 	public boolean[] getActiveSides(){
 		return activeSides;
 	}
@@ -72,14 +79,6 @@ public class Lamp extends ClassID implements TrafficController {
     }
 
     /**
-     *
-     * @return L mint Lámpa
-     */
-    public char showMapChar() {
-            return 'L';
-    }
-
-    /**
      * Lámpaszín beállítása.
      * @param Green true, ha zöld.
      */
@@ -99,14 +98,25 @@ public class Lamp extends ClassID implements TrafficController {
         startTick = currentTick = Tick;
     }
 
+    /**
+     * Kirajzoltat
+     */
     public void Draw(){
         Controller.view.Draw(this);
     }
 
+    /**
+     * Beállítja utat
+     * @param r
+     */
     public void setRoad(Road r) {
         roadUnderMe = r;
     }
 
+    /**
+     * Lekérdezi utat
+     * @return
+     */
 	public Road getRoadUnderMe() {
 		return roadUnderMe;
 	}

@@ -6,12 +6,16 @@
 public class Civil extends Car {
     /**
      * Konstruktor.
-     * A determinisztikus teszteseknél létrehozáskor kap sebességet.
+     * Létrehozáskor kap sebességet.
      */
     Civil(int Speed) {
         super(Speed);
     }
 
+    /**
+     * Útszakaszra mozgat, ha ne áll ott autó
+     * @param road ahova menne
+     */
 	public void MoveTo(Road road){
         Car c = road.hasCar();
         if ( c != null ) {
@@ -19,15 +23,15 @@ public class Civil extends Car {
         } else {
             roadUnderMe.removeCar();
             road.setCar(this);
+             selectedDirection = -1;
         }
 		Pickup p = road.hasPickup();
 		if( p != null ){
 			p.whatPickup(this);
 		}
 
-		if(tickCount == 0)
+		if(tickCount == 0) 
 			tickCount = startSpeed;
-                selectedDirection = -1;
 	}
 
 
@@ -52,8 +56,8 @@ public class Civil extends Car {
      * @param bank Az adott bank.
      */
     public void Interaction(Bank bank){
-	ar.roads[plannedDirection] = null;
-	plannedDirection = getValidDirection();
+        ar.roads[plannedDirection] = null;
+        plannedDirection = getValidDirection();
     }
 
     /**
@@ -61,8 +65,8 @@ public class Civil extends Car {
      * @param hideout Az adott rejtekhely.
      */
     public void Interaction(Hideout hideout){
-	ar.roads[plannedDirection] = null;
-	plannedDirection = getValidDirection();
+        ar.roads[plannedDirection] = null;
+        plannedDirection = getValidDirection();
     }
 
     /**
@@ -99,14 +103,23 @@ public class Civil extends Car {
          civil.tickCount = 1;
     }
 
+    /**
+     * Interakció rablóval, pontlevonás
+     * @param robber Tőle vonunk le pontot.
+     */
 	public void Interaction(Robber robber){
-		Controller.game.addPoints(-5);
-		robber.tickCount = 5;
+		Controller.game.addPoints(-50);
+		robber.tickCount = Controller.game.MaxCivilSpeed;
 	}
 
+    /**
+     * Rendőr ütközés.
+     * @param police
+     */
 	public void Interaction(Police police){
-		police.tickCount = 1;
+		police.tickCount = Controller.game.MaxPoliceSpeed;
 	}
+
      /**
       * Nem tudja felvenni a nyulat, békén hagyja.
       * @param bunny
@@ -114,15 +127,6 @@ public class Civil extends Car {
      public void Interaction(Bunny bunny)
      {
      }
-
-     /**
-      *
-      * @return C mint Civil
-      */
-    @Override
-    public char showMapChar() {
-        return 'C';
-    }
 
     @Override
     public void Draw() {
