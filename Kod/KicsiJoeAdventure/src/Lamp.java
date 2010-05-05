@@ -9,11 +9,6 @@ public class Lamp implements TrafficController {
     private boolean state[];
 
     /**
-     * Aktív oldalak
-     */
-	private boolean activeSides[];
-
-    /**
      * Lámpa váltási időközének alapértéke
      */
     private int startTick;
@@ -30,12 +25,14 @@ public class Lamp implements TrafficController {
 
     public Lamp(){
 		state = new boolean[4];
-		for(int i=0;i<4;i++)
-			state[i] = false;
+		state[0] = false;
+		state[1] = true;
+		state[2] = false;
+		state[3] = true;
 
         Controller.game.addLamp(this);
-        startTick = 50;		// def values //
-        currentTick = 50;
+        startTick = 300;		// def values //
+        currentTick = 300;
     }
 
     /**
@@ -52,15 +49,13 @@ public class Lamp implements TrafficController {
      * @return
      */
 	public boolean[] getActiveSides(){
-		return activeSides;
+		return roadUnderMe.getIncomingRoads();
 	}
 
     /**
      * A lámpa állapotát frissítő függvény.
      */
     public void Update(){
-		// firssítjük a becsatlakozásokat... elég lenne csak 1 amikor már kész a pálya, de hát most mit tegyünk ... //
-		activeSides = roadUnderMe.getIncomingRoads();
 		// TODO: Ez befolyásolja a váltogatást ? //
         if(currentTick-- == 0){
             for (int i=0; i<4; i++)

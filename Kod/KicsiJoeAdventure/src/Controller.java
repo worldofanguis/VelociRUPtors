@@ -278,6 +278,7 @@ public class Controller extends JFrame implements ActionListener,KeyListener,Win
      * (őket kell újra a new game esetén)
      */
     private void init() {
+		game = null;
         game = new Game();
         game.Initialization();
         sec = 0;
