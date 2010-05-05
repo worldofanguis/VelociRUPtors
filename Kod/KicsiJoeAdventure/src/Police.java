@@ -140,10 +140,10 @@ public class Police extends Car {
 			//Merről érkezünk a lámpához?//
 		    int fromDirection=0;
 		    switch (plannedDirection){
-			case 0: fromDirection = 2; //ha balra megyünk, jobbról jövünk
-			case 1: fromDirection = 3;
-			case 2: fromDirection = 0;
-			case 3: fromDirection = 1;
+			case 0: fromDirection = 2; break;//ha balra megyünk, jobbról jövünk
+			case 1: fromDirection = 3; break;
+			case 2: fromDirection = 0; break;
+			case 3: fromDirection = 1; break;
 		    }
 		    //Leelenőriozzük, hogy zöld-e//
 		    if(lamp.isGreen(fromDirection)){

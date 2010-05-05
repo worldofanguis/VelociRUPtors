@@ -112,6 +112,7 @@ public class Robber extends Car {
      */
      public void Interaction(Civil civil){
 		civil.tickCount = 1;
+		Controller.game.addPoints(-10);
      }
 
      public void Interaction(Police police){
