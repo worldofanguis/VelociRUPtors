@@ -41,7 +41,7 @@ public class ExitSign implements TrafficController {
 
     /**
      * Lekérdezze alatta utat
-     * @return
+     * @return roadUnderMe
      */
 	public Road getRoadUnderMe() {
 		return roadUnderMe;
