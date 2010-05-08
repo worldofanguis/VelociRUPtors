@@ -50,7 +50,7 @@ public class Hideout implements Building {
 
     /**
      * Lekérdezi az utat
-     * @return
+     * @return roadUnderMe
      */
 	public Road getRoadUnderMe() {
 		return roadUnderMe;

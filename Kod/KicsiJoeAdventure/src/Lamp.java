@@ -46,7 +46,7 @@ public class Lamp implements TrafficController {
 
     /**
      * Aktív oldalak lekérdezése
-     * @return
+     * @return IncomingRoads[]
      */
 	public boolean[] getActiveSides(){
 		return roadUnderMe.getIncomingRoads();
@@ -110,7 +110,7 @@ public class Lamp implements TrafficController {
 
     /**
      * Lekérdezi utat
-     * @return
+     * @return roadUnderMe
      */
 	public Road getRoadUnderMe() {
 		return roadUnderMe;

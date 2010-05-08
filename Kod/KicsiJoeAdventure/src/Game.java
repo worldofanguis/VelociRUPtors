@@ -145,7 +145,7 @@ public class Game {
 
     /**
      * Autó hozzáadása a tárolt listához.
-     * @param logoCanvas A listába felvevendő autó
+     * @param c A listába felvevendő autó
      * @return Hányas indexű elem lett, amit beraktunk.
      */
     public int addCar(Car c){
@@ -314,11 +314,17 @@ public class Game {
      * @param road Az út amelyet módosítunk.
      */
     public void populateRoad(Road road){
-		if(cars.size() < maxCarsOnMap){
-			if(Math.random() < 0.1){
-				Civil c = new Civil((int)(Math.random()%(MinCivilSpeed-MaxCivilSpeed))+MaxCivilSpeed);
-				road.setCar(c);
+		try{
+			if(road.hasCar() != null)
+				return;
+			if(cars.size() < maxCarsOnMap){
+				if(Math.random() < 0.1){
+					Civil c = new Civil((int)(Math.random()%(MinCivilSpeed-MaxCivilSpeed))+MaxCivilSpeed);
+					road.setCar(c);
+				}
 			}
+		}catch(Exception ex){
+			
 		}
     }
 

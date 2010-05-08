@@ -21,7 +21,7 @@ public class RobberView {
 
 	/**
 	 * 
-	 * @param r
+	 * @param robber
 	 */
 	public void Draw(Robber robber){
 		Road r = robber.getRoadUnderMe();
